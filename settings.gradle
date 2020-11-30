@@ -1,0 +1,5 @@
+include ':lib_net'
+include ':lib_refresh_layout'
+include ':lib_common'
+include ':app'
+rootProject.name = "BaseDemo"

@@ -1,0 +1,10 @@
+<resources>
+    <string name="no_data">No Data</string>
+    <string name="search_error">there is no such recipe name</string>
+    <string name="no_internet">Please check your internet connection</string>
+    <string name="network_error">Network error, could get data,please try again!</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >4 characters</string>
+    <string name="invalid_username_and_password">please check your username and password</string>
+
+</resources>
