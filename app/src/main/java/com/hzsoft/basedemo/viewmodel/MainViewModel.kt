@@ -1,4 +1,4 @@
-package com.hzsoft.basedemo
+package com.hzsoft.basedemo.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,6 +20,7 @@ import javax.inject.Inject
  */
 class MainViewModel
 @Inject constructor(private val dataRepositoryRepository: DataRepositorySource) : ViewModel() {
+
     val recipesLiveDataPrivate = MutableLiveData<Resource<List<Demo>>>()
     val recipesLiveData: LiveData<Resource<List<Demo>>> get() = recipesLiveDataPrivate
 

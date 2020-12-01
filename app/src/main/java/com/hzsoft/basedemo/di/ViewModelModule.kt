@@ -2,7 +2,7 @@ package com.hzsoft.basedemo.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hzsoft.basedemo.MainViewModel
+import com.hzsoft.basedemo.viewmodel.MainViewModel
 import com.hzsoft.lib.common.mvvm.factory.ViewModelFactory
 import dagger.Binds
 import dagger.Module

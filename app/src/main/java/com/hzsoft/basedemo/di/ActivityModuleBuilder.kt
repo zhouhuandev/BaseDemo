@@ -1,6 +1,6 @@
 package com.hzsoft.basedemo.di
 
-import com.hzsoft.basedemo.MainActivity
+import com.hzsoft.basedemo.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

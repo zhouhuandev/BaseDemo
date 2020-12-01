@@ -2,6 +2,7 @@ package com.hzsoft.basedemo
 
 import com.hzsoft.basedemo.di.AppComponent
 import com.hzsoft.basedemo.di.DaggerAppComponent
+import com.hzsoft.basedemo.di.holder.NetComponentHolder
 import com.hzsoft.basedemo.di.provider.NetComponentProvider
 import com.hzsoft.lib.common.BaseApplication
 import com.hzsoft.lib.net.config.NetConfig
@@ -54,6 +55,6 @@ class MyApp : BaseApplication(), HasAndroidInjector, NetComponentProvider {
     }
 
     override fun provideNetComponent(): NetComponent {
-        return appComponent.netComponentFactory().create()
+        return appComponent.netComponentFactory().create(this)
     }
 }

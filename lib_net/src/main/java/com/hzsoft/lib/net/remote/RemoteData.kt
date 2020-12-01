@@ -1,11 +1,11 @@
-package com.task.data.remote
+package com.hzsoft.lib.net.remote
 
 import com.hzsoft.lib.net.dto.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.error.NETWORD_ERROR
 import com.hzsoft.lib.net.remote.service.RecipesService
-import com.hzsoft.lib.net.remote.RetrofitManager
 import com.hzsoft.lib.net.utils.NetworkConnectivity
+import com.task.data.remote.RemoteDataSource
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject

@@ -7,10 +7,12 @@ import com.hzsoft.lib.net.config.Encoding
 import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.config.contentTypeValue
 import com.hzsoft.lib.net.dto.BaseResponse
-import com.hzsoft.lib.net.error.*
-import com.hzsoft.lib.net.error.UNKNOWN
+import com.hzsoft.lib.net.error.ApiException
+import com.hzsoft.lib.net.error.NULL_DATA
+import com.hzsoft.lib.net.error.PARSE_ERROR
+import com.hzsoft.lib.net.error.SUCCESS
 import com.hzsoft.lib.net.error.mapper.ErrorManager
-import com.task.data.error.mapper.ErrorMapper
+import com.hzsoft.lib.net.error.mapper.ErrorMapper
 import com.wx.jetpack.core.utils.fromJson
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

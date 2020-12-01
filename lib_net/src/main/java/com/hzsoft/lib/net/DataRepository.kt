@@ -3,7 +3,7 @@ package com.hzsoft.lib.net
 import com.hzsoft.lib.net.dto.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.LocalData
-import com.task.data.remote.RemoteData
+import com.hzsoft.lib.net.remote.RemoteData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
