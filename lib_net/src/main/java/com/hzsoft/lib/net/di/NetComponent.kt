@@ -1,5 +1,6 @@
 package com.hzsoft.lib.net.di
 
+import android.content.Context
 import dagger.Subcomponent
 
 
@@ -14,4 +15,6 @@ interface NetComponent {
     interface Factory {
         fun create(): NetComponent
     }
+
+    fun inject(context: Context)
 }

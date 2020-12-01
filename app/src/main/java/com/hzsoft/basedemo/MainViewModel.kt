@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.hzsoft.lib.net.DataRepositorySource
 import com.hzsoft.lib.net.dto.Demo
 import com.hzsoft.lib.net.dto.Resource
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,8 +18,8 @@ import javax.inject.Inject
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class RecipesListViewModel @Inject
-constructor(private val dataRepositoryRepository: DataRepositorySource) : ViewModel() {
+class MainViewModel
+@Inject constructor(private val dataRepositoryRepository: DataRepositorySource) : ViewModel() {
     val recipesLiveDataPrivate = MutableLiveData<Resource<List<Demo>>>()
     val recipesLiveData: LiveData<Resource<List<Demo>>> get() = recipesLiveDataPrivate
 

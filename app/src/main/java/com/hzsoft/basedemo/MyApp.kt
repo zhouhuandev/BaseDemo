@@ -6,6 +6,10 @@ import com.hzsoft.basedemo.di.provider.NetComponentProvider
 import com.hzsoft.lib.common.BaseApplication
 import com.hzsoft.lib.net.config.NetConfig
 import com.hzsoft.lib.net.di.NetComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
 /**
  * Describe:
@@ -14,13 +18,19 @@ import com.hzsoft.lib.net.di.NetComponent
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class MyApp : BaseApplication(), NetComponentProvider {
+class MyApp : BaseApplication(), HasAndroidInjector, NetComponentProvider {
 
     companion object {
         lateinit var instance: MyApp
 
         fun getContext() = instance.applicationContext
     }
+
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
+
 
     lateinit var appComponent: AppComponent
 

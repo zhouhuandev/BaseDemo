@@ -2,6 +2,7 @@ package com.hzsoft.basedemo.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.hzsoft.basedemo.MainViewModel
 import com.hzsoft.lib.common.mvvm.factory.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -17,23 +18,9 @@ abstract class ViewModelModule {
     @Binds
     internal abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 
-    // @Binds
-    // @IntoMap
-    // @ViewModelKey(RecipesListViewModel::class)
-    // abstract fun bindUserViewModel(viewModel: RecipesListViewModel): ViewModel
-    //
-    // @Binds
-    // @IntoMap
-    // @ViewModelKey(SplashViewModel::class)
-    // abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
-    //
-    // @Binds
-    // @IntoMap
-    // @ViewModelKey(DetailsViewModel::class)
-    // internal abstract fun bindSplashViewModel(viewModel: DetailsViewModel): ViewModel
-    //
-    // @Binds
-    // @IntoMap
-    // @ViewModelKey(LoginViewModel::class)
-    // internal abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    internal abstract fun bindMainActivityViewModel(viewModel: MainViewModel): ViewModel
+
 }
