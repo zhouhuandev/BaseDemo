@@ -1,10 +1,16 @@
 <resources>
-    <string name="no_data">No Data</string>
-    <string name="search_error">there is no such recipe name</string>
-    <string name="no_internet">Please check your internet connection</string>
-    <string name="network_error">Network error, could get data,please try again!</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >4 characters</string>
-    <string name="invalid_username_and_password">please check your username and password</string>
+
+    <string name="NO_CACHE">服务器响应码304，但是客户端没有缓存！</string>
+    <string name="UNAUTHORIZED">操作未授权</string>
+    <string name="FORBIDDEN">请求被拒绝</string>
+    <string name="NOT_FOUND">资源不存在</string>
+    <string name="REQUEST_TIMEOUT">服务器执行超时</string>
+    <string name="INTERNAL_SERVER_ERROR">服务器内部错误</string>
+    <string name="SERVICE_UNAVAILABLE">服务器不可用</string>
+    <string name="NETWORD_ERROR">网络错误，请重试</string>
+    <string name="NULL_DATA">服务器没有返回任何数据</string>
+    <string name="PARSE_ERROR">数据解析错误</string>
+    <string name="UNKNOWN">未知错误</string>
+    <string name="TIMEOUT_ERROR">网络不给力哦！</string>
 
 </resources>

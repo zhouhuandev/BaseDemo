@@ -1,27 +1,35 @@
 package com.task.data.error.mapper
 
-import android.content.Context
+import com.hzsoft.lib.common.BaseApplication
 import com.hzsoft.lib.net.R
 import com.hzsoft.lib.net.error.*
 import javax.inject.Inject
 
+/**
+ * Describe:
+ * <p>错误信息实现</p>
+ *
+ * @author zhouhuan
+ * @Date 2020/12/1
+ */
 class ErrorMapper @Inject constructor() : ErrorMapperInterface {
 
-    fun getErrorString(context: Context, errorId: Int): String {
-        return context.getString(errorId)
-    }
-
     override fun getErrorString(errorId: Int): String {
-        return ""
+        return BaseApplication.instance!!.getString(errorId)
     }
 
     override val errorsMap: Map<Int, String>
         get() = mapOf(
-            Pair(NO_INTERNET_CONNECTION, getErrorString(R.string.no_internet)),
-            Pair(NETWORK_ERROR, getErrorString(R.string.network_error)),
-            Pair(PASS_WORD_ERROR, getErrorString(R.string.invalid_password)),
-            Pair(USER_NAME_ERROR, getErrorString(R.string.invalid_username)),
-            Pair(CHECK_YOUR_FIELDS, getErrorString(R.string.invalid_username_and_password)),
-            Pair(SEARCH_ERROR, getErrorString(R.string.search_error))
-        ).withDefault { getErrorString(R.string.network_error) }
+            Pair(NO_CACHE, getErrorString(R.string.NO_CACHE)),
+            Pair(UNAUTHORIZED, getErrorString(R.string.UNAUTHORIZED)),
+            Pair(FORBIDDEN, getErrorString(R.string.FORBIDDEN)),
+            Pair(NOT_FOUND, getErrorString(R.string.NOT_FOUND)),
+            Pair(REQUEST_TIMEOUT, getErrorString(R.string.REQUEST_TIMEOUT)),
+            Pair(INTERNAL_SERVER_ERROR, getErrorString(R.string.INTERNAL_SERVER_ERROR)),
+            Pair(SERVICE_UNAVAILABLE, getErrorString(R.string.SERVICE_UNAVAILABLE)),
+            Pair(PARSE_ERROR, getErrorString(R.string.PARSE_ERROR)),
+            Pair(NETWORD_ERROR, getErrorString(R.string.NETWORD_ERROR)),
+            Pair(TIMEOUT_ERROR, getErrorString(R.string.TIMEOUT_ERROR)),
+            Pair(NULL_DATA, getErrorString(R.string.NULL_DATA)),
+        ).withDefault { getErrorString(UNKNOWN) }
 }

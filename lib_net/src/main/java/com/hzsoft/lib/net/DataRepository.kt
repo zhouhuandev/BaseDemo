@@ -1,5 +1,6 @@
 package com.hzsoft.lib.net
 
+import com.hzsoft.lib.net.dto.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.LocalData
 import com.task.data.remote.RemoteData
@@ -11,14 +12,20 @@ import kotlin.coroutines.CoroutineContext
 
 
 /**
- *
+ * 数据仓库进行分发
+ * * 服务端
+ * * 本地
  * @author zhouhuan
  * @time 2020/12/1 0:21
  */
-class DataRepository @Inject constructor(private val remoteRepository: RemoteData, private val localRepository: LocalData, private val ioDispatcher: CoroutineContext) :
+class DataRepository @Inject constructor(
+    private val remoteRepository: RemoteData,
+    private val localRepository: LocalData,
+    private val ioDispatcher: CoroutineContext
+) :
     DataRepositorySource {
 
-    override suspend fun requestRecipes(): Flow<String> {
+    override suspend fun requestRecipes(): Flow<Resource<List<Demo>>> {
         return flow {
             emit(remoteRepository.requestRecipes())
         }.flowOn(ioDispatcher)

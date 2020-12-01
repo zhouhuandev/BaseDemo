@@ -49,7 +49,6 @@ android {
 dependencies {
 
     api project(":lib_refresh_layout")
-    api project(":lib_net")
 
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api 'androidx.core:core-ktx:1.3.2'
