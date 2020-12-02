@@ -35,8 +35,8 @@ import javax.inject.Singleton
  * @author zhouhuan
  * @Date 2020/12/1
  */
-@Singleton
-class RetrofitManager @Inject constructor() {
+
+class RetrofitManager {
     private val okHttpBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
     private val retrofit: Retrofit
 

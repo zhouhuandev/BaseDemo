@@ -7,7 +7,6 @@ import com.hzsoft.lib.net.remote.RemoteData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
@@ -18,7 +17,7 @@ import kotlin.coroutines.CoroutineContext
  * @author zhouhuan
  * @time 2020/12/1 0:21
  */
-class DataRepository @Inject constructor(
+class DataRepository  constructor(
     private val remoteRepository: RemoteData,
     private val localRepository: LocalData,
     private val ioDispatcher: CoroutineContext

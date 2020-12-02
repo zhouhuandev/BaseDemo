@@ -3,32 +3,22 @@ package com.hzsoft.basedemo.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.hzsoft.basedemo.R
-import com.hzsoft.basedemo.di.holder.NetComponentHolder
 import com.hzsoft.basedemo.viewmodel.MainViewModel
-import com.hzsoft.lib.common.mvvm.factory.ViewModelFactory
 import com.hzsoft.lib.net.dto.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.utils.observe
 import com.wx.jetpack.core.utils.toJson
-import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
-    @Inject
-    lateinit var mainViewModel: MainViewModel
+    val mainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        NetComponentHolder.netComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        mainViewModel = viewModelFactory.create(mainViewModel::class.java)
         mainViewModel.getRecipes()
         observe(mainViewModel.recipesLiveData, ::handleRecipesList)
     }

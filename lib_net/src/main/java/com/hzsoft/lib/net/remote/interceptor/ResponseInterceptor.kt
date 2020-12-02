@@ -6,18 +6,17 @@ import com.hzsoft.lib.common.utils.showToast
 import com.hzsoft.lib.net.config.Encoding
 import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.config.contentTypeValue
-import com.hzsoft.lib.net.dto.BaseResponse
 import com.hzsoft.lib.net.error.ApiException
 import com.hzsoft.lib.net.error.NULL_DATA
 import com.hzsoft.lib.net.error.PARSE_ERROR
 import com.hzsoft.lib.net.error.SUCCESS
 import com.hzsoft.lib.net.error.mapper.ErrorManager
 import com.hzsoft.lib.net.error.mapper.ErrorMapper
-import com.wx.jetpack.core.utils.fromJson
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Response
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import java.nio.charset.Charset
 
 /**
@@ -49,18 +48,18 @@ class ResponseInterceptor : Interceptor {
             if (TextUtils.isEmpty(body) || "null".equals(body, ignoreCase = true)) {
                 throw ApiException(NULL_DATA, errorManager.getError(NULL_DATA).description)
             }
-            // TODO: 2020/12/1 处理返回的结构体
-            val fromJson = body.fromJson<BaseResponse<String>>()
-            val status = fromJson!!.status
-            if (SUCCESS == status) {
+            val jsonObject = JSONObject(body)
+            val status = jsonObject.getString("status").toInt()
+            val message = jsonObject.getString("message")
+            if (0 == status) {
                 response.newBuilder()
                     .body(ResponseBody.create(contentTypeValue.toMediaTypeOrNull(), body))
                     .build()
             } else {
-                throw ApiException(status, fromJson.message ?: "")
+                throw ApiException(status, message ?: "")
             }
         } catch (e: Exception) {
-            throw ApiException(PARSE_ERROR, errorManager.getError(PARSE_ERROR).description)
+            throw ApiException(PARSE_ERROR, errorManager.getError(PARSE_ERROR).description, e)
         }
     }
 

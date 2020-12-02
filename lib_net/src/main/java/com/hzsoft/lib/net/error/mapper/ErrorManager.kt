@@ -10,7 +10,7 @@ import com.hzsoft.lib.net.error.Error
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class ErrorManager @Inject constructor(private val errorMapper: ErrorMapper) : ErrorFactory {
+class ErrorManager constructor(private val errorMapper: ErrorMapper) : ErrorFactory {
     override fun getError(errorCode: Int): Error {
         return Error(code = errorCode, description = errorMapper.errorsMap.getValue(errorCode))
     }

@@ -13,10 +13,10 @@ import javax.inject.Inject
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class ErrorMapper @Inject constructor() : ErrorMapperInterface {
+class ErrorMapper constructor() : ErrorMapperInterface {
 
     override fun getErrorString(errorId: Int): String {
-        return BaseApplication.instance!!.getString(errorId)
+        return BaseApplication.instance.getString(errorId)
     }
 
     override val errorsMap: Map<Int, String>

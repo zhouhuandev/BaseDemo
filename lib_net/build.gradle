@@ -52,10 +52,6 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.9.0'
     api 'com.squareup.okhttp3:logging-interceptor:4.8.1'
 
-    kapt 'com.google.dagger:dagger-compiler:2.29.1'
-    kapt 'com.google.dagger:dagger-android-processor:2.29.1'
-
-    api "com.squareup.moshi:moshi:1.9.3"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.9.3"
 
     //coroutines

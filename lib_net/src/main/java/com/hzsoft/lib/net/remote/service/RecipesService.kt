@@ -1,5 +1,6 @@
 package com.hzsoft.lib.net.remote.service
 
+import com.hzsoft.lib.net.dto.BaseResponse
 import com.hzsoft.lib.net.dto.Demo
 import retrofit2.Response
 import retrofit2.http.GET
@@ -11,5 +12,5 @@ import retrofit2.http.GET
  */
 interface RecipesService {
     @GET("recipes.json")
-    suspend fun fetchRecipes(): Response<List<Demo>>
+    suspend fun fetchRecipes(): Response<BaseResponse<List<Demo>>>
 }

@@ -9,7 +9,7 @@ import javax.inject.Inject
  * Created by AhmedEltaher
  */
 
-class Network @Inject constructor(val context: Context) : NetworkConnectivity {
+class Network constructor(val context: Context) : NetworkConnectivity {
 
     override fun isConnected(): Boolean {
         val info = getNetworkInfo()

@@ -9,5 +9,6 @@ package com.hzsoft.lib.net.error
  */
 class ApiException constructor(
     var code: Int,
-    override var message: String = ""
-) : Exception(message)
+    override var message: String = "",
+    var e: Throwable? = null
+) : Exception(message, e)

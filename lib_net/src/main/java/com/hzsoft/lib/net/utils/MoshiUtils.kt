@@ -85,6 +85,7 @@ object MoshiUtils {
     inline fun <reified T> toJson(t: T) = getAdapter<T>().toJson(t) ?: ""
 
     fun <T> getAdapter(type: Type): JsonAdapter<T> = moshiBuild.adapter(type)
+
     inline fun <reified T> getAdapter(): JsonAdapter<T> =
         moshiBuild.adapter(object : TypeToken<T>() {}.type)
 

@@ -1,5 +1,6 @@
 package com.hzsoft.lib.net.remote
 
+import com.hzsoft.lib.net.dto.BaseResponse
 import com.hzsoft.lib.net.dto.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.error.NETWORD_ERROR
@@ -8,7 +9,6 @@ import com.hzsoft.lib.net.utils.NetworkConnectivity
 import com.task.data.remote.RemoteDataSource
 import retrofit2.Response
 import java.io.IOException
-import javax.inject.Inject
 
 
 /**
@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @author zhouhuan
  * @time 2020/12/1 0:08
  */
-class RemoteData @Inject
+class RemoteData
 constructor(
     private val serviceGenerator: RetrofitManager,
     private val networkConnectivity: NetworkConnectivity
@@ -24,8 +24,8 @@ constructor(
     override suspend fun requestRecipes(): Resource<List<Demo>> {
         val recipesService = serviceGenerator.create(RecipesService::class.java)
         return when (val response = processCall(recipesService::fetchRecipes)) {
-            is List<*> -> {
-                Resource.Success(data = response as ArrayList<Demo>)
+            is BaseResponse<*> -> {
+                Resource.Success(data = response.data as ArrayList<Demo>)
             }
             else -> {
                 Resource.DataError(errorCode = response as Int)

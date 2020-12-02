@@ -8,7 +8,7 @@ import javax.inject.Inject
  * @author zhouhuan
  * @time 2020/11/30
  */
-class LocalData @Inject constructor() {
+class LocalData constructor() {
     fun doLogin(): Resource<String> {
         return Resource.Success("String")
     }

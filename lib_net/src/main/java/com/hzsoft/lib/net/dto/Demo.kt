@@ -14,8 +14,8 @@ import kotlinx.android.parcel.Parcelize
  * @author zhouhuan
  * @Date 2020/12/1
  */
+@JsonClass(generateAdapter = true)
 @Parcelize
-@JsonClass(generateAdapter = false)
 data class Demo(
     @Json(name = "calories")
     val calories: String?,

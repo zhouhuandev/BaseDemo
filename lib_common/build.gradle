@@ -66,13 +66,12 @@ dependencies {
     api 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.2'
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
 
-    api 'com.google.dagger:dagger:2.29.1'
-    api "com.google.dagger:dagger-android:2.29.1"
-    api "com.google.dagger:dagger-android-support:2.29.1"
-
     api "com.github.bumptech.glide:glide:4.11.0"
-    annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
+    kapt "com.github.bumptech.glide:compiler:4.11.0"
 
     api "com.alibaba:arouter-api:1.5.0"
     kapt "com.alibaba:arouter-compiler:1.2.2"
+
+    api "com.squareup.moshi:moshi:1.9.3"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.9.3"
 }
