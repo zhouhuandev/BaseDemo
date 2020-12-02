@@ -2,9 +2,9 @@ package com.hzsoft.lib.net.remote
 
 import com.hzsoft.lib.net.BuildConfig
 import com.hzsoft.lib.net.config.NetConfig
-import com.hzsoft.lib.net.remote.moshiFactories.MyStandardJsonAdapters
 import com.hzsoft.lib.net.remote.interceptor.RequestInterceptor
 import com.hzsoft.lib.net.remote.interceptor.ResponseInterceptor
+import com.hzsoft.lib.net.remote.moshiFactories.MyStandardJsonAdapters
 import com.hzsoft.lib.net.utils.SSLContextUtil
 import com.squareup.moshi.Moshi
 import com.task.data.remote.moshiFactories.MyKotlinJsonAdapterFactory
@@ -13,8 +13,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Describe:

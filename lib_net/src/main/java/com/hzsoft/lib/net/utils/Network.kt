@@ -3,7 +3,6 @@ package com.hzsoft.lib.net.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import javax.inject.Inject
 
 /**
  * Created by AhmedEltaher

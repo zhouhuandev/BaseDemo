@@ -4,7 +4,6 @@ import com.hzsoft.lib.common.BaseApplication
 import com.hzsoft.lib.net.R
 import com.hzsoft.lib.net.error.*
 import com.task.data.error.mapper.ErrorMapperInterface
-import javax.inject.Inject
 
 /**
  * Describe:
@@ -31,6 +30,6 @@ class ErrorMapper constructor() : ErrorMapperInterface {
             Pair(PARSE_ERROR, getErrorString(R.string.PARSE_ERROR)),
             Pair(NETWORD_ERROR, getErrorString(R.string.NETWORD_ERROR)),
             Pair(TIMEOUT_ERROR, getErrorString(R.string.TIMEOUT_ERROR)),
-            Pair(NULL_DATA, getErrorString(R.string.NULL_DATA)),
+            Pair(NULL_DATA, getErrorString(R.string.NULL_DATA))
         ).withDefault { getErrorString(UNKNOWN) }
 }

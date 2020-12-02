@@ -1,6 +1,5 @@
 package com.hzsoft.lib.net.error.mapper
 
-import javax.inject.Inject
 import com.hzsoft.lib.net.error.Error
 
 /**

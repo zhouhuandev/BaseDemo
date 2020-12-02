@@ -1,7 +1,6 @@
 package com.hzsoft.lib.net.local
 
 import com.hzsoft.lib.net.dto.Resource
-import javax.inject.Inject
 
 /**
  * 本地数据
