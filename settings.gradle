@@ -1,3 +1,4 @@
+include ':lib_domain'
 include ':lib_net'
 include ':lib_refresh_layout'
 include ':lib_common'

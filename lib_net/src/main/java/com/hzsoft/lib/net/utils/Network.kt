@@ -5,9 +5,10 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 
 /**
- * Created by AhmedEltaher
+ * 检测当前请求的网络状态信息
+ * @author zhouhuan
+ * @time 2020/12/2 21:08
  */
-
 class Network constructor(val context: Context) : NetworkConnectivity {
 
     override fun isConnected(): Boolean {

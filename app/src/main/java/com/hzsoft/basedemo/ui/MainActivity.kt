@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.viewmodel.MainViewModel
-import com.hzsoft.lib.net.dto.Demo
+import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.utils.observe
 import com.wx.jetpack.core.utils.toJson
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         observe(mainViewModel.recipesLiveData, ::handleRecipesList)
     }
 
-    private fun handleRecipesList(status: Resource<List<Demo>>) {
+    private fun handleRecipesList(status: Resource<List<com.hzsoft.lib.domain.entity.Demo>>) {
         when (status) {
             is Resource.Success -> status.data?.let { bindListData(recipes = it) }
             is Resource.DataError -> {
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindListData(recipes: List<Demo>) {
+    private fun bindListData(recipes: List<com.hzsoft.lib.domain.entity.Demo>) {
         textView.text = recipes.toJson()
     }
 

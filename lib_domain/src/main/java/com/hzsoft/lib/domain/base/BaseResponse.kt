@@ -1,4 +1,4 @@
-package com.hzsoft.lib.net.dto
+package com.hzsoft.lib.domain.base
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

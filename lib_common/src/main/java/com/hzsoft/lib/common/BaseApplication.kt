@@ -26,5 +26,7 @@ open class BaseApplication : Application() {
     companion object {
         lateinit var instance: BaseApplication
             private set
+
+        fun getContext() = instance.applicationContext
     }
 }

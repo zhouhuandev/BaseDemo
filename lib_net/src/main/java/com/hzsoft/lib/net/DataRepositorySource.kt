@@ -1,6 +1,6 @@
 package com.hzsoft.lib.net
 
-import com.hzsoft.lib.net.dto.Demo
+import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource
 import kotlinx.coroutines.flow.Flow
 

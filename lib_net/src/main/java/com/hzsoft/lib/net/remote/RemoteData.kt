@@ -1,7 +1,6 @@
 package com.hzsoft.lib.net.remote
 
-import com.hzsoft.lib.net.dto.BaseResponse
-import com.hzsoft.lib.net.dto.Demo
+import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.error.NETWORD_ERROR
 import com.hzsoft.lib.net.remote.service.RecipesService
@@ -12,20 +11,23 @@ import java.io.IOException
 
 
 /**
- * 服务端数据提供者
+ * 服务端数据提供者实现
  * @author zhouhuan
  * @time 2020/12/1 0:08
  */
 class RemoteData
 constructor(
-    private val serviceGenerator: RetrofitManager,
+    private val retrofitManager: RetrofitManager,
     private val networkConnectivity: NetworkConnectivity
 ) : RemoteDataSource {
+
     override suspend fun requestRecipes(): Resource<List<Demo>> {
-        val recipesService = serviceGenerator.create(RecipesService::class.java)
+        //创建接口服务
+        val recipesService = retrofitManager.create<RecipesService>()
+
         return when (val response = processCall(recipesService::fetchRecipes)) {
-            is BaseResponse<*> -> {
-                Resource.Success(data = response.data as ArrayList<Demo>)
+            is com.hzsoft.lib.domain.base.BaseResponse<*> -> {
+                Resource.Success(data = response.data as ArrayList<com.hzsoft.lib.domain.entity.Demo>)
             }
             else -> {
                 Resource.DataError(errorCode = response as Int)

@@ -1,9 +1,13 @@
 package com.hzsoft.lib.net
 
-import com.hzsoft.lib.net.dto.Demo
+import com.hzsoft.lib.common.BaseApplication
+import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.LocalData
 import com.hzsoft.lib.net.remote.RemoteData
+import com.hzsoft.lib.net.remote.RetrofitManager
+import com.hzsoft.lib.net.utils.Network
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -17,10 +21,12 @@ import kotlin.coroutines.CoroutineContext
  * @author zhouhuan
  * @time 2020/12/1 0:21
  */
-class DataRepository  constructor(
-    private val remoteRepository: RemoteData,
-    private val localRepository: LocalData,
-    private val ioDispatcher: CoroutineContext
+class DataRepository constructor(
+    private val remoteRepository: RemoteData = RemoteData(
+        RetrofitManager(), Network(BaseApplication.getContext())
+    ),
+    private val localRepository: LocalData = LocalData(),
+    private val ioDispatcher: CoroutineContext = Dispatchers.IO
 ) :
     DataRepositorySource {
 

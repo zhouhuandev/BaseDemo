@@ -1,6 +1,6 @@
 package com.task.data.remote
 
-import com.hzsoft.lib.net.dto.Demo
+import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource
 
 /**
