@@ -1,6 +1,5 @@
 package com.hzsoft.lib.common.base
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -70,11 +69,4 @@ abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment() {
             .observe(this, Observer { mActivity.onBackPressed() })
     }
 
-    open fun startActivity(clz: Class<*>?, bundle: Bundle?) {
-        val intent = Intent(activity, clz)
-        if (bundle != null) {
-            intent.putExtras(bundle)
-        }
-        startActivity(intent)
-    }
 }

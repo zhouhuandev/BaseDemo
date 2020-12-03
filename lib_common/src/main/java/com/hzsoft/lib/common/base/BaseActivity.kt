@@ -1,6 +1,7 @@
 package com.hzsoft.lib.common.base
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.TextUtils
@@ -298,10 +299,29 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         }
         mLoadingTransView?.visibility = if (show) View.VISIBLE else View.GONE
         mLoadingTransView?.loading(show)
+
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     open fun <T> onEvent(event: BaseActivityEvent<T>) {
     }
 
+    open fun startActivity(clz: Class<*>?, bundle: Bundle?) {
+        val intent = Intent(this, clz)
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        startActivity(intent)
+    }
+
+    /**
+     * 跳转方式
+     * 使用方法 startActivity<TargetActivity> { putExtra("param1", "data1") }
+     */
+    inline fun <reified T> startActivity(block: Intent.() -> Unit) {
+        val intent = Intent(this, T::class.java)
+        intent.block()
+        startActivity(intent)
+    }
 }

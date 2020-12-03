@@ -1,6 +1,5 @@
 package com.hzsoft.lib.common.base
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -67,14 +66,6 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
             .observe(this, Observer { finish() })
         mViewModel.mUIChangeLiveData.getOnBackPressedEvent()
             .observe(this, Observer { onBackPressed() })
-    }
-
-    open fun startActivity(clz: Class<*>?, bundle: Bundle?) {
-        val intent = Intent(this, clz)
-        if (bundle != null) {
-            intent.putExtras(bundle)
-        }
-        startActivity(intent)
     }
 
 }

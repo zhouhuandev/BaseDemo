@@ -1,5 +1,6 @@
 package com.hzsoft.lib.common.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -343,5 +344,23 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     open fun <T> onEvent(event: BaseFragmentEvent<T>) {
+    }
+
+    open fun startActivity(clz: Class<*>?, bundle: Bundle?) {
+        val intent = Intent(activity, clz)
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        startActivity(intent)
+    }
+    
+    /**
+     * 跳转方式
+     * 使用方法 startActivity<TargetActivity> { putExtra("param1", "data1") }
+     */
+    inline fun <reified T> startActivity(block: Intent.() -> Unit) {
+        val intent = Intent(context, T::class.java)
+        intent.block()
+        startActivity(intent)
     }
 }
