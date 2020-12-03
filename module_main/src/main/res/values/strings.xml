@@ -1,0 +1,6 @@
+<resources>
+    <string name="module_main">module_main</string>
+
+    <string name="title_home">首页</string>
+    <string name="title_me">我的</string>
+</resources>

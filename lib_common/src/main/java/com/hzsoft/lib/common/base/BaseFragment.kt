@@ -39,10 +39,11 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     protected lateinit var mActivity: RxAppCompatActivity
     protected lateinit var mView: View
-    protected lateinit var mTxtTitle: TextView
-    protected lateinit var tvToolbarRight: TextView
-    protected lateinit var ivToolbarRight: ImageView
-    protected lateinit var mToolbar: Toolbar
+
+    protected var mTxtTitle: TextView? = null
+    protected var tvToolbarRight: TextView? = null
+    protected var ivToolbarRight: ImageView? = null
+    protected var mToolbar: Toolbar? = null
 
     protected var mNetErrorView: NetErrorView? = null
     protected var mNoDataView: NoDataView? = null
@@ -150,6 +151,8 @@ abstract class BaseFragment : Fragment(), BaseView {
     protected fun initTooBar(view: View) {
         mToolbar = view.findViewById(R.id.toolbar_root)
         mTxtTitle = view.findViewById(R.id.toolbar_title)
+        tvToolbarRight = view.findViewById(R.id.tv_toolbar_right)
+        ivToolbarRight = view.findViewById(R.id.iv_toolbar_right)
         if (mToolbar != null) {
             mActivity.setSupportActionBar(mToolbar)
             mActivity.supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -157,24 +160,24 @@ abstract class BaseFragment : Fragment(), BaseView {
                 //设置是否添加显示NavigationIcon.如果要用
                 mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
                 //设置NavigationIcon的icon.可以是Drawable ,也可以是ResId
-                mToolbar.setNavigationIcon(getToolBarLeftIcon())
-                mToolbar.setNavigationOnClickListener { mActivity.onBackPressed() }
+                mToolbar?.setNavigationIcon(getToolBarLeftIcon())
+                mToolbar?.setNavigationOnClickListener { mActivity.onBackPressed() }
             }
             //当标题栏右边的文字不为空时进行填充文字信息
             if (tvToolbarRight != null && !TextUtils.isEmpty(getToolBarRightTxt())) {
-                tvToolbarRight.setText(getToolBarRightTxt())
-                tvToolbarRight.visibility = View.VISIBLE
-                tvToolbarRight.setOnClickListener(getToolBarRightTxtClick())
+                tvToolbarRight?.setText(getToolBarRightTxt())
+                tvToolbarRight?.visibility = View.VISIBLE
+                tvToolbarRight?.setOnClickListener(getToolBarRightTxtClick())
             }
             //当标题右边的图标不为 默认0时进行填充图标
             if (ivToolbarRight != null && getToolBarRightImg() != 0) {
-                ivToolbarRight.setImageResource(getToolBarRightImg())
-                ivToolbarRight.visibility = View.VISIBLE
-                ivToolbarRight.setOnClickListener(getToolBarRightImgClick())
+                ivToolbarRight?.setImageResource(getToolBarRightImg())
+                ivToolbarRight?.visibility = View.VISIBLE
+                ivToolbarRight?.setOnClickListener(getToolBarRightImgClick())
             }
         }
         if (mTxtTitle != null) {
-            mTxtTitle.text = getTootBarTitle()
+            mTxtTitle?.text = getTootBarTitle()
         }
     }
 
@@ -246,7 +249,7 @@ abstract class BaseFragment : Fragment(), BaseView {
         mActivity.finish()
     }
 
-    fun enableToolbar(): Boolean {
+    open fun enableToolbar(): Boolean {
         return false
     }
 
@@ -290,7 +293,7 @@ abstract class BaseFragment : Fragment(), BaseView {
         showNetWorkErrView(false)
     }
 
-    fun showInitLoadView(show: Boolean) {
+    open fun showInitLoadView(show: Boolean) {
         if (mLoadingInitView == null) {
             val view = mViewStubInitLoading.inflate()
             mLoadingInitView = view.findViewById(R.id.view_init_loading)
@@ -299,7 +302,7 @@ abstract class BaseFragment : Fragment(), BaseView {
         mLoadingInitView?.loading(show)
     }
 
-    fun showNetWorkErrView(show: Boolean) {
+    open fun showNetWorkErrView(show: Boolean) {
         if (mNetErrorView == null) {
             val view = mViewStubError.inflate()
             mNetErrorView = view.findViewById(R.id.view_net_error)
@@ -314,7 +317,7 @@ abstract class BaseFragment : Fragment(), BaseView {
         mNetErrorView?.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    fun showNoDataView(show: Boolean) {
+    open fun showNoDataView(show: Boolean) {
         if (mNoDataView == null) {
             val view = mViewStubNoData.inflate()
             mNoDataView = view.findViewById(R.id.view_no_data)
@@ -322,14 +325,14 @@ abstract class BaseFragment : Fragment(), BaseView {
         mNoDataView?.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    fun showNoDataView(show: Boolean, resid: Int) {
+    open fun showNoDataView(show: Boolean, resid: Int) {
         showNoDataView(show)
         if (show) {
             mNoDataView?.setNoDataView(resid)
         }
     }
 
-    fun showTransLoadingView(show: Boolean) {
+    open fun showTransLoadingView(show: Boolean) {
         if (mLoadingTransView == null) {
             val view = mViewStubTransLoading.inflate()
             mLoadingTransView = view.findViewById(R.id.view_trans_loading)
@@ -339,6 +342,6 @@ abstract class BaseFragment : Fragment(), BaseView {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun <T> onEvent(event: BaseFragmentEvent<T>) {
+    open fun <T> onEvent(event: BaseFragmentEvent<T>) {
     }
 }

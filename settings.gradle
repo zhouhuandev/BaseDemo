@@ -1,6 +1,9 @@
+include ':moudule_me'
+include ':moudule_home'
+include ':module_main'
 include ':lib_domain'
 include ':lib_net'
 include ':lib_refresh_layout'
 include ':lib_common'
-include ':app'
+include ':module_app'
 rootProject.name = "BaseDemo"

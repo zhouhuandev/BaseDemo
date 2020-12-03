@@ -1,0 +1,102 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
+
+android {
+
+    signingConfigs {
+        release {
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+            storeFile file(KEY_PATH)
+            storePassword KAY_PASS
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.hzsoft.basedemo"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                PACKAGE_NAME           : applicationId,
+                JPUSH_PKGNAME          : applicationId,
+                JPUSH_APPKEY           : "", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL          : "developer-default", //暂时填写默认值即可.
+
+                BAIDU_SPEECH_APP_ID    : "",//百度语音技术APPID
+                BAIDU_SPEECH_API_KEY   : "",//百度语音技术APPKEY
+                BAIDU_SPEECH_SECRET_KEY: "",//百度语音技术SECRET_KEY
+                BAIDU_LBSAPI_API_KEY   : "",//百度地图KEY
+                BAIDU_TUISONG_API_KEY  : "",//百度推送
+                GAODE_APIKEY           : "",//高德APPKEY
+
+                EASEMOB_APPKEY         : "#chaohu",//环信APPKEY
+
+                UMENG_APPKEY           : "",//友盟APPKEY
+                UMENG_CHANNEL          : "",//友盟
+        ]
+        signingConfig signingConfigs.release
+    }
+
+    //打包改名
+    android.applicationVariants.all { variant ->
+        def appName = rootProject.name
+        def buildType = variant.buildType.name
+        def outputTime = new Date().format("yyyy_MMdd_HHmm", TimeZone.getTimeZone("GMT+08:00"))
+        def versionName = variant.versionName
+        def versionCode = variant.versionCode
+        variant.outputs.each { output ->
+            if ("release" == buildType) {
+                if (output.outputFileName.endsWith('.apk')) {
+                    output.outputFileName = "${versionName}\\${appName}_${versionCode}_V${versionName}_${outputTime}.apk"
+                }
+            } else {
+                if (output.outputFileName.endsWith('.apk')) {
+                    output.outputFileName = "${appName}_${versionCode}_V${versionName}_debug.apk"
+                }
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    //@Parcelize标记需要设置experimental = true
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+
+    implementation project(":lib_common")
+    if (!isModule.toBoolean()) {
+        implementation project(':module_main')
+        implementation project(':moudule_home')
+        implementation project(':moudule_me')
+    }
+}

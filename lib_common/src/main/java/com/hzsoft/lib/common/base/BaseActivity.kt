@@ -38,10 +38,10 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
 
     protected lateinit var mContext: Context
 
-    protected lateinit var mTxtTitle: TextView
-    protected lateinit var tvToolbarRight: TextView
-    protected lateinit var ivToolbarRight: ImageView
-    protected lateinit var mToolbar: Toolbar
+    protected var mTxtTitle: TextView? = null
+    protected var tvToolbarRight: TextView? = null
+    protected var ivToolbarRight: ImageView? = null
+    protected var mToolbar: Toolbar? = null
 
     protected var mNetErrorView: NetErrorView? = null
     protected var mNoDataView: NoDataView? = null
@@ -97,26 +97,26 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
             setSupportActionBar(mToolbar)
             //是否显示标题
             supportActionBar!!.setDisplayShowTitleEnabled(false)
-            mToolbar.setNavigationOnClickListener { onBackPressed() }
+            mToolbar?.setNavigationOnClickListener { onBackPressed() }
 
             if (enableToolBarLeft()) {
                 //设置是否添加显示NavigationIcon.如果要用
                 supportActionBar!!.setDisplayHomeAsUpEnabled(true)
                 //设置NavigationIcon的icon.可以是Drawable ,也可以是ResId
-                mToolbar.setNavigationIcon(getToolBarLeftIcon())
-                mToolbar.setNavigationOnClickListener { onBackPressed() }
+                mToolbar?.setNavigationIcon(getToolBarLeftIcon())
+                mToolbar?.setNavigationOnClickListener { onBackPressed() }
             }
             //当标题栏右边的文字不为空时进行填充文字信息
             if (tvToolbarRight != null && !TextUtils.isEmpty(getToolBarRightTxt())) {
-                tvToolbarRight.setText(getToolBarRightTxt())
-                tvToolbarRight.visibility = View.VISIBLE
-                tvToolbarRight.setOnClickListener(getToolBarRightTxtClick())
+                tvToolbarRight?.setText(getToolBarRightTxt())
+                tvToolbarRight?.visibility = View.VISIBLE
+                tvToolbarRight?.setOnClickListener(getToolBarRightTxtClick())
             }
             //当标题右边的图标不为 默认0时进行填充图标
             if (ivToolbarRight != null && getToolBarRightImg() != 0) {
-                ivToolbarRight.setImageResource(getToolBarRightImg())
-                ivToolbarRight.visibility = View.VISIBLE
-                ivToolbarRight.setOnClickListener(getToolBarRightImgClick())
+                ivToolbarRight?.setImageResource(getToolBarRightImg())
+                ivToolbarRight?.visibility = View.VISIBLE
+                ivToolbarRight?.setOnClickListener(getToolBarRightImgClick())
             }
         }
     }
@@ -124,12 +124,12 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     override fun onTitleChanged(title: CharSequence, color: Int) {
         super.onTitleChanged(title, color)
         if (mTxtTitle != null && !TextUtils.isEmpty(title)) {
-            mTxtTitle.text = title
+            mTxtTitle?.text = title
         }
         //可以再次覆盖设置title
         val tootBarTitle = getTootBarTitle()
         if (mTxtTitle != null && !TextUtils.isEmpty(tootBarTitle)) {
-            mTxtTitle.text = tootBarTitle
+            mTxtTitle?.text = tootBarTitle
         }
     }
 
@@ -210,7 +210,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         finish()
     }
 
-    fun enableToolbar(): Boolean {
+    open fun enableToolbar(): Boolean {
         return true
     }
 
@@ -250,7 +250,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         showNetWorkErrView(true)
     }
 
-    fun showInitLoadView(show: Boolean) {
+    open fun showInitLoadView(show: Boolean) {
         if (mLoadingInitView == null) {
             val view = mViewStubInitLoading.inflate()
             mLoadingInitView = view.findViewById(R.id.view_init_loading)
@@ -260,7 +260,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     }
 
 
-    fun showNetWorkErrView(show: Boolean) {
+    open fun showNetWorkErrView(show: Boolean) {
         if (mNetErrorView == null) {
             val view = mViewStubError.inflate()
             mNetErrorView = view.findViewById(R.id.view_net_error)
@@ -276,7 +276,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     }
 
 
-    fun showNoDataView(show: Boolean) {
+    open fun showNoDataView(show: Boolean) {
         if (mNoDataView == null) {
             val view = mViewStubNoData.inflate()
             mNoDataView = view.findViewById(R.id.view_no_data)
@@ -284,14 +284,14 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         mNoDataView?.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    fun showNoDataView(show: Boolean, resid: Int) {
+    open fun showNoDataView(show: Boolean, resid: Int) {
         showNoDataView(show)
         if (show) {
             mNoDataView?.setNoDataView(resid)
         }
     }
 
-    fun showTransLoadingView(show: Boolean) {
+    open fun showTransLoadingView(show: Boolean) {
         if (mLoadingTransView == null) {
             val view = mViewStubTransLoading.inflate()
             mLoadingTransView = view.findViewById(R.id.view_trans_loading)
@@ -301,7 +301,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun <T> onEvent(event: BaseActivityEvent<T>) {
+    open fun <T> onEvent(event: BaseActivityEvent<T>) {
     }
 
 }
