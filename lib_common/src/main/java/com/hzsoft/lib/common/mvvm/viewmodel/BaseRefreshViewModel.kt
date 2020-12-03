@@ -11,18 +11,6 @@ import com.hzsoft.lib.common.event.SingleLiveEvent
  */
 abstract class BaseRefreshViewModel<T>(application: Application) : BaseViewModel(application) {
     protected var mList = MutableLiveData<MutableList<T>>()
-    var orientation = MutableLiveData<Boolean>()
-    var enableLoadMore = MutableLiveData<Boolean>()
-    var enableRefresh = MutableLiveData<Boolean>()
-
-    init {
-        enableLoadMore.value = enableLoadMore()
-        enableRefresh.value = enableRefresh()
-    }
-
-    open fun enableLoadMore(): Boolean = true
-
-    open fun enableRefresh(): Boolean = true
 
     protected var mUIChangeRefreshLiveData: UIChangeRefreshLiveData? = null
 
@@ -46,14 +34,23 @@ abstract class BaseRefreshViewModel<T>(application: Application) : BaseViewModel
             get() = createLiveData(mStopLoadMoreLiveEvent).also({ mStopLoadMoreLiveEvent = it })
     }
 
+    /**
+     * ViewModel 层发布停止刷新事件
+     */
     open fun postStopRefreshEvent() {
         mUIChangeRefreshLiveData?.stopRefresLiveEvent?.call()
     }
 
+    /**
+     * ViewModel 层发布自动刷新事件
+     */
     open fun postAutoRefreshEvent() {
         mUIChangeRefreshLiveData?.autoRefresLiveEvent?.call()
     }
 
+    /**
+     * ViewModel 层发布停止加载更多
+     */
     open fun postStopLoadMoreEvent() {
         mUIChangeRefreshLiveData?.stopLoadMoreLiveEvent?.call()
     }

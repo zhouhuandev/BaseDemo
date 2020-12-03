@@ -1,19 +1,19 @@
 package com.hzsoft.lib.common.base
 
-import android.content.Context
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.fly.tour.common.util.log.KLog
 import com.hzsoft.lib.common.R
-import com.hzsoft.lib.common.event.common.BaseActivityEvent
-import com.hzsoft.lib.common.manager.ActivityManager
+import com.hzsoft.lib.common.event.common.BaseFragmentEvent
 import com.hzsoft.lib.common.mvvm.view.BaseView
 import com.hzsoft.lib.common.utils.NetUtil
 import com.hzsoft.lib.common.wight.LoadingInitView
@@ -27,17 +27,18 @@ import org.greenrobot.eventbus.ThreadMode
 
 /**
  * 基础页面
+ *
  * @author zhouhuan
- * @time 2020/12/2
+ * @Data 2020/12/3
  */
-abstract class BaseActivity : RxAppCompatActivity(), BaseView {
+abstract class BaseFragment : Fragment(), BaseView {
 
     companion object {
-        protected val TAG = BaseActivity::class.java.getSimpleName()
+        protected val TAG = BaseFragment::class.java.getSimpleName()
     }
 
-    protected lateinit var mContext: Context
-
+    protected lateinit var mActivity: RxAppCompatActivity
+    protected lateinit var mView: View
     protected lateinit var mTxtTitle: TextView
     protected lateinit var tvToolbarRight: TextView
     protected lateinit var ivToolbarRight: ImageView
@@ -54,57 +55,110 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     private lateinit var mViewStubTransLoading: ViewStub
     private lateinit var mViewStubNoData: ViewStub
     private lateinit var mViewStubError: ViewStub
-    private val isrefresh = false
+    private var isViewCreated = false
+    private var isViewVisable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        setContentView(R.layout.activity_root)
-        mContext = this
-        initCommonView()
+        mActivity = (activity as RxAppCompatActivity?)!!
         ARouter.getInstance().inject(this)
-        initListener()
-        initData()
         EventBus.getDefault().register(this)
-        ActivityManager.getInstance()?.addActivity(this)
-        KLog.e(TAG, "onCreate: 当前进入的Activity: $localClassName")
+        KLog.e(TAG, "onCreate: 当前进入的Fragment: $targetFragment")
     }
 
-    protected open fun initCommonView() {
-        mViewStubToolbar = findViewById(R.id.view_stub_toolbar)
-        mViewStubContent = findViewById(R.id.view_stub_content)
-        mViewStubContent = findViewById(R.id.view_stub_content)
-        mViewStubInitLoading = findViewById(R.id.view_stub_init_loading)
-        mViewStubTransLoading = findViewById(R.id.view_stub_trans_loading)
-        mViewStubError = findViewById(R.id.view_stub_error)
-        mViewStubNoData = findViewById(R.id.view_stub_nodata)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        mView = inflater.inflate(R.layout.fragment_root, container, false)
+        initCommonView(mView)
+        return mView
+    }
+
+    open fun initCommonView(view: View) {
+        mViewStubToolbar = view.findViewById(R.id.view_stub_toolbar)
+        mViewStubContent = view.findViewById(R.id.view_stub_content)
+        mViewStubContent = view.findViewById(R.id.view_stub_content)
+        mViewStubInitLoading = view.findViewById(R.id.view_stub_init_loading)
+        mViewStubTransLoading = view.findViewById(R.id.view_stub_trans_loading)
+        mViewStubNoData = view.findViewById(R.id.view_stub_nodata)
+        mViewStubError = view.findViewById(R.id.view_stub_error)
 
         if (enableToolbar()) {
             mViewStubToolbar.layoutResource = onBindToolbarLayout()
-            val view = mViewStubToolbar.inflate()
-            initToolbar(view)
+            val viewTooBbar = mViewStubToolbar.inflate()
+            initTooBar(viewTooBbar)
         }
         mViewStubContent.layoutResource = onBindLayout()
         mViewStubContent.inflate()
     }
 
-    protected fun initToolbar(view: View) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //initView(mView)
+        initListener()
+
+        isViewCreated = true
+        //如果启用了懒加载就进行懒加载，否则就进行预加载
+        if (enableLazyData()) {
+            lazyLoad()
+        } else {
+            initData()
+        }
+    }
+
+    /**
+     * isVisibleToUser =true的时候代表当前页面可见，false 就是不可见
+     * setUserVisibleHint(boolean isVisibleToUser) 是在 Fragment OnCreateView()方法之前调用的
+     */
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        isViewVisable = isVisibleToUser
+        //如果启用了懒加载就进行懒加载，
+        if (enableLazyData() && isViewVisable) {
+            lazyLoad()
+        }
+    }
+
+    /**
+     * 懒加载机制 当页面可见的时候加载数据
+     */
+    private fun lazyLoad() {
+        //这里进行双重标记判断,必须确保onCreateView加载完毕且页面可见,才加载数据
+        KLog.v("MYTAG", "lazyLoad start...")
+        KLog.v("MYTAG", "isViewCreated:$isViewCreated")
+        KLog.v("MYTAG", "isViewVisable$isViewVisable")
+        if (isViewCreated && isViewVisable) {
+            initData()
+            //数据加载完毕,恢复标记,防止重复加载
+            isViewCreated = false
+            isViewVisable = false
+        }
+    }
+
+    //默认不启用懒加载
+    open fun enableLazyData(): Boolean {
+        return false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
+    protected fun initTooBar(view: View) {
         mToolbar = view.findViewById(R.id.toolbar_root)
         mTxtTitle = view.findViewById(R.id.toolbar_title)
-        tvToolbarRight = view.findViewById(R.id.tv_toolbar_right)
-        ivToolbarRight = view.findViewById(R.id.iv_toolbar_right)
         if (mToolbar != null) {
-            setSupportActionBar(mToolbar)
-            //是否显示标题
-            supportActionBar!!.setDisplayShowTitleEnabled(false)
-            mToolbar.setNavigationOnClickListener { onBackPressed() }
-
+            mActivity.setSupportActionBar(mToolbar)
+            mActivity.supportActionBar?.setDisplayShowTitleEnabled(false)
             if (enableToolBarLeft()) {
                 //设置是否添加显示NavigationIcon.如果要用
-                supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
                 //设置NavigationIcon的icon.可以是Drawable ,也可以是ResId
                 mToolbar.setNavigationIcon(getToolBarLeftIcon())
-                mToolbar.setNavigationOnClickListener { onBackPressed() }
+                mToolbar.setNavigationOnClickListener { mActivity.onBackPressed() }
             }
             //当标题栏右边的文字不为空时进行填充文字信息
             if (tvToolbarRight != null && !TextUtils.isEmpty(getToolBarRightTxt())) {
@@ -119,17 +173,8 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
                 ivToolbarRight.setOnClickListener(getToolBarRightImgClick())
             }
         }
-    }
-
-    override fun onTitleChanged(title: CharSequence, color: Int) {
-        super.onTitleChanged(title, color)
-        if (mTxtTitle != null && !TextUtils.isEmpty(title)) {
-            mTxtTitle.text = title
-        }
-        //可以再次覆盖设置title
-        val tootBarTitle = getTootBarTitle()
-        if (mTxtTitle != null && !TextUtils.isEmpty(tootBarTitle)) {
-            mTxtTitle.text = tootBarTitle
+        if (mTxtTitle != null) {
+            mTxtTitle.text = getTootBarTitle()
         }
     }
 
@@ -190,15 +235,6 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         return null
     }
 
-    open fun onBindToolbarLayout(): Int {
-        return R.layout.common_toolbar
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        EventBus.getDefault().unregister(this)
-        ActivityManager.getInstance()?.finishActivity(this)
-    }
 
     abstract fun onBindLayout(): Int
 
@@ -207,11 +243,15 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     override fun initListener() {}
 
     override fun finishActivity() {
-        finish()
+        mActivity.finish()
     }
 
     fun enableToolbar(): Boolean {
-        return true
+        return false
+    }
+
+    open fun onBindToolbarLayout(): Int {
+        return R.layout.common_toolbar
     }
 
     override fun showInitLoadView() {
@@ -242,12 +282,12 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         showNoDataView(false)
     }
 
-    override fun hideNetWorkErrView() {
-        showNetWorkErrView(false)
-    }
-
     override fun showNetWorkErrView() {
         showNetWorkErrView(true)
+    }
+
+    override fun hideNetWorkErrView() {
+        showNetWorkErrView(false)
     }
 
     fun showInitLoadView(show: Boolean) {
@@ -258,7 +298,6 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         mLoadingInitView?.visibility = if (show) View.VISIBLE else View.GONE
         mLoadingInitView?.loading(show)
     }
-
 
     fun showNetWorkErrView(show: Boolean) {
         if (mNetErrorView == null) {
@@ -274,7 +313,6 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         }
         mNetErrorView?.visibility = if (show) View.VISIBLE else View.GONE
     }
-
 
     fun showNoDataView(show: Boolean) {
         if (mNoDataView == null) {
@@ -301,7 +339,6 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun <T> onEvent(event: BaseActivityEvent<T>) {
+    fun <T> onEvent(event: BaseFragmentEvent<T>) {
     }
-
 }

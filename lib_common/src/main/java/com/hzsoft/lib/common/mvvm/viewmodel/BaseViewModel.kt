@@ -16,7 +16,7 @@ import java.util.*
 open class BaseViewModel constructor(application: Application) : AndroidViewModel(application),
     IBaseViewModel {
 
-    protected var mUIChangeLiveData: UIChangeLiveData = UIChangeLiveData()
+    var mUIChangeLiveData: UIChangeLiveData = UIChangeLiveData()
 
     inner class UIChangeLiveData : SingleLiveEvent<Any>() {
         private var showInitLoadViewEvent: SingleLiveEvent<Boolean>? = null
