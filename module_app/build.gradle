@@ -17,15 +17,15 @@ android {
         }
     }
 
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_sdk
 
     defaultConfig {
         applicationId "com.hzsoft.basedemo"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode app_version.version_code
+        versionName app_version.version_name
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

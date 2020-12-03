@@ -1,0 +1,12 @@
+Variant: release
+Config: release
+Store: ../zhouhuandev.jks
+Alias: zhouhuandev
+MD5: 2A:74:CD:3E:E1:E6:35:D3:A7:0F:58:AF:E8:F5:E5:53
+SHA1: FE:CF:DE:D5:36:1C:4F:FF:7D:60:6F:70:49:FB:CF:C1:EA:B0:C0:02
+SHA-256: B3:FA:54:DB:A0:69:5A:BC:74:45:0B:FC:64:EF:93:C8:54:37:CD:40:B0:5F:79:9E:E5:BE:64:27:01:A8:0C:56
+
+KEY_PATH=../zhouhuandev.jks
+KAY_PASS=123456
+ALIAS_NAME=zhouhuandev
+ALIAS_PASS=123456

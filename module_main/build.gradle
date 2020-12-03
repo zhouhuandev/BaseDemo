@@ -14,14 +14,14 @@ kapt {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_sdk
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode app_version.version_code
+        versionName app_version.version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -66,6 +66,6 @@ dependencies {
     api project(":lib_common")
     api project(":lib_net")
 
-    kapt "com.alibaba:arouter-compiler:1.2.2"
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.11.0'
+    kapt deps.arouter_compiler
+    kapt deps.moshi_kotlin_codegen
 }

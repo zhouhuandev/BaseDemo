@@ -12,14 +12,14 @@ kapt {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_sdk
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode app_version.version_code
+        versionName app_version.version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -54,40 +54,39 @@ dependencies {
 
     api project(":lib_refresh_layout")
 
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    api 'androidx.core:core-ktx:1.3.2'
-    api 'androidx.appcompat:appcompat:1.2.0'
-    api 'androidx.multidex:multidex:2.0.1'
-    api 'com.google.android.material:material:1.2.1'
+    api deps.kotlin_stdlib
+    api deps.kotlin_reflect
+    api deps.core_ktx
+    api deps.androidx_appcompat
+    api deps.multidex
+    api deps.android_material
 
-    api 'androidx.recyclerview:recyclerview:1.1.0'
-    api 'androidx.constraintlayout:constraintlayout:2.0.4'
+    api deps.androidx_recyclerview
+    api deps.constraintlayout
 
-    api 'com.github.tbruyelle:rxpermissions:0.10.2'
-    api 'org.greenrobot:eventbus:3.2.0'
-    api 'com.github.lovetuzitong:MultiImageSelector:1.2'
+    api deps.rxpermissions
+    api deps.eventbus
+    api deps.MultiImageSelector
 
-    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
-    api 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.2'
-    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
+    api deps.rxlifecycle
+    api deps.rxlifecycle_android
+    api deps.rxlifecycle_components
 
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    api "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
-    api "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+    api deps.lifecycle_viewmodel_ktx
+    api deps.lifecycle_livedata_ktx
+    api deps.lifecycle_extensions
+    api deps.lifecycle_runtime_ktx
+    api deps.lifecycle_common_java8
 
-    api "com.github.bumptech.glide:glide:4.11.0"
-    annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
+    api deps.glide
+    kapt deps.glide_compiler
 
-    api "com.alibaba:arouter-api:1.5.0"
-    kapt "com.alibaba:arouter-compiler:1.2.2"
+    api deps.arouter_api
+    kapt deps.arouter_compiler
 
     api 'com.squareup.moshi:moshi:1.11.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.11.0'
 
-    //coroutines
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.7"
+    api deps.kotlinx_coroutines_core
+    api deps.kotlinx_coroutines_core_common
 }

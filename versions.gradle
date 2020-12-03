@@ -1,0 +1,66 @@
+// 构建版本
+def build_versions = [:]
+build_versions.compile_sdk = 30
+build_versions.build_sdk = "30.0.2"
+build_versions.min_sdk = 21
+build_versions.target_sdk = 30
+ext.build_versions = build_versions
+
+// 生成APK版本
+def app_version = [:]
+app_version.version_code = 1
+app_version.version_name = "1.0.0"
+ext.app_version = app_version
+
+// 依赖
+def deps = [:]
+deps.kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+deps.kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+deps.core_ktx = "androidx.core:core-ktx:1.3.2"
+// Coroutines 协程
+deps.kotlinx_coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7"
+deps.kotlinx_coroutines_core_common = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.7"
+
+deps.multidex = "androidx.multidex:multidex:2.0.1"
+deps.androidx_appcompat = "androidx.appcompat:appcompat:1.2.0"
+deps.android_material = "com.google.android.material:material:1.2.1"
+deps.constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+deps.androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
+
+deps.rxpermissions = "com.github.tbruyelle:rxpermissions:0.10.2"
+deps.eventbus = "org.greenrobot:eventbus:3.2.0"
+deps.MultiImageSelector = "com.github.lovetuzitong:MultiImageSelector:1.2"
+
+// rxlife
+deps.rxlifecycle = "com.trello.rxlifecycle2:rxlifecycle:2.2.2"
+deps.rxlifecycle_android = "com.trello.rxlifecycle2:rxlifecycle-android:2.2.2"
+deps.rxlifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2"
+
+// lifecycle
+deps.lifecycle_viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+deps.lifecycle_livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+deps.lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+deps.lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+deps.lifecycle_common_java8 = "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+
+// Rxjava2
+deps.rxjava = "io.reactivex.rxjava2:rxjava:2.2.19"
+deps.rxandroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
+deps.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
+deps.converter_moshi = "com.squareup.retrofit2:converter-moshi:2.9.0"
+deps.converter_gson = "com.squareup.retrofit2:converter-gson:2.9.0"
+deps.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+// Glide
+deps.glide = "com.github.bumptech.glide:glide:4.11.0"
+deps.glide_compiler = "com.github.bumptech.glide:compiler:4.11.0"
+
+// Arouter
+deps.arouter_api = "com.alibaba:arouter-api:1.5.0"
+deps.arouter_compiler = "com.alibaba:arouter-compiler:1.2.2"
+
+// MoShi
+deps.moshi = "com.squareup.moshi:moshi:1.11.0"
+deps.moshi_kotlin_codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.11.0"
+
+ext.deps = deps
