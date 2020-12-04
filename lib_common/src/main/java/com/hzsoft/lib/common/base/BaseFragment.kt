@@ -1,5 +1,6 @@
 package com.hzsoft.lib.common.base
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -36,8 +37,10 @@ import org.greenrobot.eventbus.ThreadMode
 abstract class BaseFragment : Fragment(), BaseView {
 
     companion object {
-        protected val TAG = BaseFragment::class.java.getSimpleName()
+        val TAG = this::class.java.getSimpleName()
     }
+
+    protected lateinit var mContext: Context
 
     protected lateinit var mActivity: RxAppCompatActivity
     protected lateinit var mView: View
@@ -61,12 +64,17 @@ abstract class BaseFragment : Fragment(), BaseView {
     private var isViewCreated = false
     private var isViewVisable = false
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivity = (activity as RxAppCompatActivity?)!!
         ARouter.getInstance().inject(this)
         EventBus.getDefault().register(this)
-        KLog.e(TAG, "onCreate: 当前进入的Fragment: $targetFragment")
+        KLog.e(TAG, "onCreate: 当前进入的Fragment: $javaClass")
     }
 
     override fun onCreateView(
@@ -398,5 +406,9 @@ abstract class BaseFragment : Fragment(), BaseView {
         val flag = currentClickTime - mLastButterKnifeClickTime < 400L
         mLastButterKnifeClickTime = currentClickTime
         return flag
+    }
+
+    open fun onClick(v: View?) {
+
     }
 }

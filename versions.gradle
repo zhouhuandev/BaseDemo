@@ -26,6 +26,7 @@ deps.androidx_appcompat = "androidx.appcompat:appcompat:1.2.0"
 deps.android_material = "com.google.android.material:material:1.2.1"
 deps.constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"
 deps.androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
+deps.androidx_cardview = "androidx.cardview:cardview:1.0.0"
 
 deps.rxpermissions = "com.github.tbruyelle:rxpermissions:0.10.2"
 deps.eventbus = "org.greenrobot:eventbus:3.2.0"
@@ -62,5 +63,8 @@ deps.arouter_compiler = "com.alibaba:arouter-compiler:1.5.1"
 // MoShi
 deps.moshi = "com.squareup.moshi:moshi:1.11.0"
 deps.moshi_kotlin_codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.11.0"
+
+// leakcanary 自动进行埋点测试
+deps.leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.5"
 
 ext.deps = deps

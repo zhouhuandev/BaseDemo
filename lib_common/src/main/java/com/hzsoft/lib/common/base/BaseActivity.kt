@@ -35,7 +35,7 @@ import org.greenrobot.eventbus.ThreadMode
 abstract class BaseActivity : RxAppCompatActivity(), BaseView {
 
     companion object {
-        protected val TAG = BaseActivity::class.java.getSimpleName()
+        val TAG = this::class.java.getSimpleName()
     }
 
     protected lateinit var mContext: Context
@@ -358,5 +358,9 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         val flag = currentClickTime - mLastButterKnifeClickTime < 400L
         mLastButterKnifeClickTime = currentClickTime
         return flag
+    }
+
+    open fun onClick(v: View?) {
+
     }
 }

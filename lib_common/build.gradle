@@ -55,6 +55,7 @@ android {
 dependencies {
 
     api project(":lib_refresh_layout")
+    api project(":lib_image_picker")
 
     api deps.kotlin_stdlib
     api deps.kotlin_reflect
@@ -91,4 +92,6 @@ dependencies {
 
     api deps.kotlinx_coroutines_core
     api deps.kotlinx_coroutines_core_common
+
+    debugApi deps.leakcanary_android
 }
