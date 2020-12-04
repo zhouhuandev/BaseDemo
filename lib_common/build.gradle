@@ -4,10 +4,12 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
-
+// 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
+// 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
+        arg("AROUTER_GENERATE_DOC", "enable")
     }
 }
 
@@ -84,8 +86,8 @@ dependencies {
     api deps.arouter_api
     kapt deps.arouter_compiler
 
-    api 'com.squareup.moshi:moshi:1.11.0'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.11.0'
+    api deps.moshi
+    kapt deps.moshi_kotlin_codegen
 
     api deps.kotlinx_coroutines_core
     api deps.kotlinx_coroutines_core_common
