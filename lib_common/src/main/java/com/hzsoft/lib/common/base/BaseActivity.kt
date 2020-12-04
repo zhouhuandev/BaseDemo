@@ -345,4 +345,18 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         open(path, block)
         finish()
     }
+
+    private var mLastButterKnifeClickTime: Long = 0
+
+    /**
+     * 是否快速点击
+     *
+     * @return true 是
+     */
+    open fun beFastClick(): Boolean {
+        val currentClickTime = System.currentTimeMillis()
+        val flag = currentClickTime - mLastButterKnifeClickTime < 400L
+        mLastButterKnifeClickTime = currentClickTime
+        return flag
+    }
 }
