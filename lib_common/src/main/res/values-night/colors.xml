@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/bg_item</color>  <!--AppBarb背景色-->
+    <color name="colorPrimaryDark">@color/bg</color> <!--状态栏颜色-->
+    <color name="colorAccent">@color/tab_selected</color> <!--控制各个空间被选中时的颜色-->
+<!--    <color name="textColorPrimary">@color/white_night</color>-->
+
+    <color name="theme">#0000ff</color>
+    <color name="bg">#181818</color> <!--微信夜间模式背景色-->
+    <color name="bg_item">#232323</color> <!--微信夜间模式条目背景色-->
+    <color name="tab_selected">#80666666</color>
+    <color name="tab_normal">#97C5C9D0</color>
+
+
+</resources>

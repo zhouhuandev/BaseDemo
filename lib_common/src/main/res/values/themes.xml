@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <!--        App Bar 的背景色-->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -9,7 +9,8 @@
         <!--        控件在选中状态或获取焦点状态下使用这个颜色-->
         <item name="colorAccent">@color/colorAccent</item>
         <!--        文本颜色-->
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+<!--        <item name="android:textColorPrimary">@color/textColorPrimary</item>-->
+        <!--        默认工具样式-->
         <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
     </style>
 
@@ -21,19 +22,19 @@
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
     <!-- ToolBar菜单样式 -->
-    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
         <item name="actionMenuTextColor">@color/menu_color</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="AppTheme.BlackBackBar" parent="AppTheme">
+    <style name="MaterialComponents.BlackBackBar" parent="AppTheme">
         <item name="colorPrimary">@color/color_black</item>
         <item name="colorPrimaryDark">@color/color_white</item>
         <item name="navigationIcon">@drawable/callback_white_icon</item>
         <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
     </style>
 
-    <style name="AppTheme.BackBar" parent="AppTheme">
+    <style name="MaterialComponents.BackBar" parent="AppTheme">
         <item name="navigationIcon">@drawable/navbar_icon_return</item>
         <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
     </style>

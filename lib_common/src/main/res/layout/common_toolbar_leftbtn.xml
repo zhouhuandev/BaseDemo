@@ -9,7 +9,7 @@
     android:minHeight="?attr/actionBarSize"
     android:theme="@style/ToolbarTheme"
     app:layout_collapseMode="pin"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
     <Button
         android:id="@+id/bt_toolbar_left"
@@ -29,6 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="易车队"
-        android:textColor="?attr/colorPrimaryDark"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="17sp" />
 </androidx.appcompat.widget.Toolbar>
