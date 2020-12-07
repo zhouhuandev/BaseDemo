@@ -1,37 +1,28 @@
 package com.hzsoft.lib.common.utils
 
-import android.app.Service
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ImageView
-import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.PrecomputedTextCompat
 import androidx.core.widget.TextViewCompat
-import com.bumptech.glide.Glide
 import com.hzsoft.lib.common.BaseApplication
-import com.hzsoft.lib.common.R
+import com.hzsoft.lib.common.utils.ext.inputMethodManager
 
 /**
  * 显示软键盘
  */
 fun View.showKeyboard() {
-    (BaseApplication.getContext()
-        .getSystemService(Service.INPUT_METHOD_SERVICE) as? InputMethodManager)
-        ?.showSoftInput(this, 0)
+    BaseApplication.getContext().inputMethodManager?.showSoftInput(this, 0)
 }
 
 /**
  * 隐藏软键盘
  */
 fun View.hideKeyboard() {
-    (BaseApplication.getContext()
-        .getSystemService(Service.INPUT_METHOD_SERVICE) as? InputMethodManager)
-        ?.hideSoftInputFromWindow(this.windowToken, 0)
+    BaseApplication.getContext().inputMethodManager?.hideSoftInputFromWindow(this.windowToken, 0)
 }
 
 fun View.toVisible() {
@@ -61,10 +52,6 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
 }
-
-fun ImageView.loadImage(@DrawableRes resId: Int) = Glide.with(this).load(resId).placeholder(R.drawable.loading_anim).error(R.drawable.empty_pic_net).into(this)
-fun ImageView.loadImage(url: String) = Glide.with(this).load(url).placeholder(R.drawable.loading_anim).error(R.drawable.empty_pic_net).into(this)
-fun ImageView.loadAsGifImage(url: String) = Glide.with(this).asGif().load(url).placeholder(R.drawable.loading_anim).error(R.drawable.empty_pic_net).into(this);
 
 fun AppCompatTextView.setTextFutureExt(text: String) =
     setTextFuture(

@@ -43,6 +43,8 @@ class RetrofitManager {
             val loggingInterceptor = HttpLoggingInterceptor()
             if (BuildConfig.DEBUG) {
                 loggingInterceptor.apply { level = HttpLoggingInterceptor.Level.BODY }
+            }else{
+                loggingInterceptor.apply { level = HttpLoggingInterceptor.Level.BASIC }
             }
             return loggingInterceptor
         }

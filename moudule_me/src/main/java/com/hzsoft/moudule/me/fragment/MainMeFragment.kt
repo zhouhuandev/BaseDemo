@@ -4,7 +4,7 @@ import android.view.View
 import com.fly.tour.common.util.log.KLog
 import com.google.gson.Gson
 import com.hzsoft.lib.common.base.BaseFragment
-import com.hzsoft.lib.common.utils.showToast
+import com.hzsoft.lib.common.utils.ext.view.showToast
 import com.hzsoft.moudule.me.R
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper.OnResultCallBack
@@ -60,7 +60,7 @@ class MainMeFragment : BaseFragment() {
             return
         }
         when (v?.id) {
-            button_1.id -> {
+            R.id.button_1 -> {
                 val config =
                     ImagePickerHelper.with(ImagePickerHelper.Config())
                         .setWeChat(true)

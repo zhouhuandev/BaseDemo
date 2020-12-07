@@ -9,6 +9,7 @@
     <string name="SERVICE_UNAVAILABLE">服务器不可用</string>
     <string name="NETWORD_ERROR">网络错误，请重试</string>
     <string name="NULL_DATA">服务器没有返回任何数据</string>
+    <string name="NOT_NETWORD">网络未开启</string>
     <string name="PARSE_ERROR">数据解析错误</string>
     <string name="UNKNOWN">未知错误</string>
     <string name="TIMEOUT_ERROR">网络不给力哦！</string>

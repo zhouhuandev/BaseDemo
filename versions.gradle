@@ -37,6 +37,11 @@ deps.rxlifecycle = "com.trello.rxlifecycle2:rxlifecycle:2.2.2"
 deps.rxlifecycle_android = "com.trello.rxlifecycle2:rxlifecycle-android:2.2.2"
 deps.rxlifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2"
 
+// Room
+deps.room = "androidx.room:room-runtime:2.2.5"
+deps.room_compiler = "androidx.room:room-compiler:2.2.5"
+deps.room_ktx = "androidx.room:room-ktx:2.2.5"
+
 // lifecycle
 deps.lifecycle_viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 deps.lifecycle_livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"

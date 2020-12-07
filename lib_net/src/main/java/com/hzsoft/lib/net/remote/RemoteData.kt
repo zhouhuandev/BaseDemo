@@ -1,14 +1,13 @@
 package com.hzsoft.lib.net.remote
 
-import com.fly.tour.common.util.log.KLog
 import com.hzsoft.lib.common.utils.ext.view.showToast
 import com.hzsoft.lib.domain.base.BaseResponse
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.BuildConfig
 import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.dto.Resource
-import com.hzsoft.lib.net.error.ApiException
 import com.hzsoft.lib.net.error.NETWORD_ERROR
+import com.hzsoft.lib.net.error.NOT_NETWORD
 import com.hzsoft.lib.net.error.mapper.ErrorManager
 import com.hzsoft.lib.net.error.mapper.ErrorMapper
 import com.hzsoft.lib.net.remote.service.RecipesService
@@ -28,7 +27,6 @@ constructor(
     private val retrofitManager: RetrofitManager,
     private val networkConnectivity: NetworkConnectivity
 ) : RemoteDataSource {
-    val TAG = this::class.java.simpleName
     val errorManager by lazy { ErrorManager(ErrorMapper()) }
 
     override suspend fun requestRecipes(): Resource<List<Demo>> {
@@ -51,22 +49,14 @@ constructor(
      */
     private suspend fun processCall(responseCall: suspend () -> Response<*>): Any? {
         if (!networkConnectivity.isConnected()) {
-            return NETWORD_ERROR
+            //若当前客户端未打开数据连接开关
+            errorManager.getError(NOT_NETWORD).description.showToast(NetAppContext.getContext())
+            return NOT_NETWORD
         }
         return try {
             val response = responseCall.invoke()
-            val responseCode = response.code()
-            // 拦截器里面已经处理过此处，故此处不需要二次处理
-            if (response.isSuccessful) {
-                response.body()
-            } else {
-                // 网络响应不成功返回
-                val ex = ApiException(responseCode)
-                ex.message = errorManager.getError(responseCode).description
-                ex.message.showToast(NetAppContext.getContext())
-                KLog.e(TAG, ex.message, ex)
-                throw ex
-            }
+            //这里面不需要二次判断是否响应成功，已在响应拦截器里面处理
+            response.body()
         } catch (e: IOException) {
             if (BuildConfig.DEBUG) {
                 e.message?.showToast(NetAppContext.getContext())

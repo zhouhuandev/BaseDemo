@@ -84,3 +84,8 @@ const val TIMEOUT_ERROR = 1006
  * 没有数据
  */
 const val NULL_DATA = 1007
+
+/**
+ * 当前没有开启网络
+ */
+const val NOT_NETWORD = 1008

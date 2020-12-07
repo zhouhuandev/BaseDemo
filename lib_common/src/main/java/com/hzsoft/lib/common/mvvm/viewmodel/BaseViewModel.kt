@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.hzsoft.lib.common.event.SingleLiveEvent
 import java.util.*
+import kotlin.collections.set
 
 /**
  * 基础 ViewModel
@@ -19,6 +20,7 @@ open class BaseViewModel constructor(application: Application) : AndroidViewMode
     var mUIChangeLiveData: UIChangeLiveData = UIChangeLiveData()
 
     inner class UIChangeLiveData : SingleLiveEvent<Any>() {
+        private var showToastViewEvent: SingleLiveEvent<String>? = null
         private var showInitLoadViewEvent: SingleLiveEvent<Boolean>? = null
         private var showTransLoadingViewEvent: SingleLiveEvent<Boolean>? = null
         private var showNoDataViewEvent: SingleLiveEvent<Boolean>? = null
@@ -26,6 +28,10 @@ open class BaseViewModel constructor(application: Application) : AndroidViewMode
         private var startActivityEvent: SingleLiveEvent<Map<String, Any>>? = null
         private var finishActivityEvent: SingleLiveEvent<Void>? = null
         private var onBackPressedEvent: SingleLiveEvent<Void>? = null
+
+        fun getShowToastViewEvent():SingleLiveEvent<String>{
+            return createLiveData(showToastViewEvent).also { showToastViewEvent = it }
+        }
 
         fun getShowInitLoadViewEvent(): SingleLiveEvent<Boolean> {
             return createLiveData(showInitLoadViewEvent).also { showInitLoadViewEvent = it }
@@ -67,6 +73,10 @@ open class BaseViewModel constructor(application: Application) : AndroidViewMode
         var CLASS = "CLASS"
         var CANONICAL_NAME = "CANONICAL_NAME"
         var BUNDLE = "BUNDLE"
+    }
+
+    open fun postShowToastViewEvent(show: String) {
+        mUIChangeLiveData.getShowToastViewEvent().postValue(show)
     }
 
     open fun postShowInitLoadViewEvent(show: Boolean) {

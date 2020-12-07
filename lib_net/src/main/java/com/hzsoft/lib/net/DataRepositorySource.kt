@@ -2,6 +2,7 @@ package com.hzsoft.lib.net
 
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource
+import com.hzsoft.lib.net.local.entity.UserTestRoom
 import kotlinx.coroutines.flow.Flow
 
 
@@ -14,4 +15,6 @@ interface DataRepositorySource {
     suspend fun requestRecipes(): Flow<Resource<List<Demo>>>
     suspend fun doLogin(): Flow<Resource<String>>
     suspend fun removeFromFavourite(id: String): Flow<Resource<Boolean>>
+    suspend fun insertUserTestRoom(userTestRoom: UserTestRoom):Flow<Resource<Long>>
+    suspend fun getAllUserTestRoom(): Flow<Resource<List<UserTestRoom>>>
 }

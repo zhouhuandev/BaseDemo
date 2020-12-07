@@ -1,9 +1,10 @@
 package com.hzsoft.lib.net
 
-import com.hzsoft.lib.common.BaseApplication
 import com.hzsoft.lib.domain.entity.Demo
+import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.LocalData
+import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.remote.RemoteData
 import com.hzsoft.lib.net.remote.RetrofitManager
 import com.hzsoft.lib.net.utils.Network
@@ -23,7 +24,7 @@ import kotlin.coroutines.CoroutineContext
  */
 class DataRepository constructor(
     private val remoteRepository: RemoteData = RemoteData(
-        RetrofitManager(), Network(BaseApplication.getContext())
+        RetrofitManager(), Network(NetAppContext.getContext())
     ),
     private val localRepository: LocalData = LocalData(),
     private val ioDispatcher: CoroutineContext = Dispatchers.IO
@@ -47,4 +48,18 @@ class DataRepository constructor(
             emit(localRepository.removeFromFavourites(id))
         }.flowOn(ioDispatcher)
     }
+
+    override suspend fun insertUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Long>> {
+        return flow {
+            emit(localRepository.inserUserTestRoom(userTestRoom))
+        }.flowOn(ioDispatcher)
+    }
+
+    override suspend fun getAllUserTestRoom(): Flow<Resource<List<UserTestRoom>>> {
+        return flow {
+            emit(localRepository.getUserTestRoom())
+        }.flowOn(ioDispatcher)
+    }
+
+
 }

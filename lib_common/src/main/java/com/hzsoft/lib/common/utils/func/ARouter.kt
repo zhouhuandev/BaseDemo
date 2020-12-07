@@ -1,7 +1,6 @@
 package com.hzsoft.lib.common.utils
 
 import android.os.Bundle
-import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.launcher.ARouter
 
 /**

@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fly.tour.common.util.log.KLog
 import com.hzsoft.lib.common.mvvm.viewmodel.BaseViewModel
+import com.hzsoft.lib.common.utils.ext.view.showToast
 
 /**
  * Describe:
@@ -38,6 +39,8 @@ abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment() {
      * 初始化页面观察 变更相应的展示
      */
     protected open fun initBaseViewObservable() {
+        mViewModel.mUIChangeLiveData.getShowToastViewEvent()
+            .observe(this, Observer { it.showToast(mContext) })
         mViewModel.mUIChangeLiveData.getShowInitLoadViewEvent()
             .observe(this, Observer {
                 showInitLoadView(it)

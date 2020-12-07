@@ -2,14 +2,13 @@ package com.hzsoft.lib.net.remote.interceptor
 
 import android.text.TextUtils
 import com.fly.tour.common.util.log.KLog
-import com.hzsoft.lib.common.utils.showToast
+import com.hzsoft.lib.common.utils.ext.view.showToast
 import com.hzsoft.lib.net.config.Encoding
 import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.config.contentTypeValue
 import com.hzsoft.lib.net.error.ApiException
 import com.hzsoft.lib.net.error.NULL_DATA
 import com.hzsoft.lib.net.error.PARSE_ERROR
-import com.hzsoft.lib.net.error.SUCCESS
 import com.hzsoft.lib.net.error.mapper.ErrorManager
 import com.hzsoft.lib.net.error.mapper.ErrorMapper
 import okhttp3.Interceptor
