@@ -43,7 +43,7 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java, "app_database"
             )
                 // 每次数据库升级增加表都需要写在这里
-                .addMigrations(MIGRATION_1_2)
+                // .addMigrations(MIGRATION_1_2)
                 // 只要升级，销毁当前数据库
                 .fallbackToDestructiveMigration()
                 // 默认不能在主线程里面进行查询，需要打开一下方法
