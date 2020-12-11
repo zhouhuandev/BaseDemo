@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">lib_common</string>
+
+    <string name="channel_message">聊天消息</string>
+    <string name="channel_mention">\@提醒消息</string>
+    <string name="channel_notice">系统通知</string>
+    <string name="channel_call">音视频通话</string>
 </resources>
