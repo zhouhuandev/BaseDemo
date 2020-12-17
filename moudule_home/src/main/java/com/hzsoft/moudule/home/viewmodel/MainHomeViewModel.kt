@@ -4,17 +4,11 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.fly.tour.common.util.log.KLog
-import com.hzsoft.lib.common.mvvm.viewmodel.BaseViewModel
-import com.hzsoft.lib.common.utils.ext.view.showToast
+import com.hzsoft.lib.common.mvvm.viewmodel.BaseRefreshViewModel
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.DataRepository
 import com.hzsoft.lib.net.DataRepositorySource
-import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.dto.Resource
-import com.hzsoft.lib.net.error.ApiException
-import com.hzsoft.lib.net.error.mapper.ErrorManager
-import com.hzsoft.lib.net.error.mapper.ErrorMapper
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -26,7 +20,7 @@ import kotlinx.coroutines.launch
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class MainHomeViewModel(application: Application) : BaseViewModel(application) {
+class MainHomeViewModel(application: Application) : BaseRefreshViewModel<Demo>(application) {
     private val dataRepositoryRepository: DataRepositorySource = DataRepository()
 
     private val recipesLiveDataPrivate = MutableLiveData<Resource<List<Demo>>>()
@@ -41,6 +35,7 @@ class MainHomeViewModel(application: Application) : BaseViewModel(application) {
             dataRepositoryRepository.requestRecipes().collect {
                 recipesLiveDataPrivate.value = it
                 postShowTransLoadingViewEvent(false)
+                postStopRefreshEvent()
             }
         }
     }
@@ -65,6 +60,14 @@ class MainHomeViewModel(application: Application) : BaseViewModel(application) {
 
     fun showToastMessage(msg: String) {
         postShowToastViewEvent(msg)
+    }
+
+    override fun refreshData() {
+        getRecipes()
+    }
+
+    override fun loadMore() {
+
     }
 
 }

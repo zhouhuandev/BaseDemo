@@ -1,73 +1,12 @@
-if (isModule.toBoolean()) {
-    apply plugin: 'com.android.application'
-} else {
-    apply plugin: 'com.android.library'
-}
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
-
+apply from: "../module.build.gradle"
 android {
-    compileSdkVersion build_versions.compile_sdk
-    buildToolsVersion build_versions.build_sdk
-
     defaultConfig {
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode app_version.version_code
-        versionName app_version.version_name
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        //如果是独立模块，则使用当前组件的包名
+        if (isModule.toBoolean()) {
+            applicationId "com.hzsoft.module.home"
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    //@Parcelize标记需要设置experimental = true
-    androidExtensions {
-        experimental = true
-    }
-
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-            if (isModule.toBoolean()) {
-                manifest.srcFile 'src/main/module/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-                java {
-                    exclude 'debug/**'
-                }
-            }
-        }
-    }
-
 }
-
 dependencies {
-
-    api project(":lib_common")
-    api project(":lib_net")
-
-    kapt deps.arouter_compiler
-    kapt deps.moshi_kotlin_codegen
 
 }

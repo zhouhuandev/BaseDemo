@@ -1,6 +1,7 @@
 package com.hzsoft.lib.common.base
 
 import android.view.View
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.hzsoft.lib.common.mvvm.view.BaseRefreshView
 import com.hzsoft.lib.common.mvvm.viewmodel.BaseRefreshViewModel
@@ -12,9 +13,10 @@ import com.refresh.lib.DaisyRefreshLayout
  * 基于 MVVM 刷新页面
  *
  * @author zhouhuan
- * @Date 2020/12/3
+ * @Date 2020/12/17
  */
-abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMvvmFragment<VM>(),
+abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : BaseRefreshViewModel<T>> :
+    BaseMvvmDataBindingFragment<V, VM>(),
     BaseRefreshView {
 
     protected lateinit var mRefreshLayout: DaisyRefreshLayout

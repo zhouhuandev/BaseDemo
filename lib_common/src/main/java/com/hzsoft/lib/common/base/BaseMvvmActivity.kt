@@ -38,6 +38,9 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
      * 初始化页面观察 变更相应的展示
      */
     protected open fun initBaseViewObservable() {
+        // 将 Activty 的生命周期同步到 ViewModel 中
+        lifecycle.addObserver(mViewModel)
+
         mViewModel.mUIChangeLiveData.getShowToastViewEvent()
             .observe(this, Observer { it.showToast(mContext) })
         mViewModel.mUIChangeLiveData.getShowInitLoadViewEvent()

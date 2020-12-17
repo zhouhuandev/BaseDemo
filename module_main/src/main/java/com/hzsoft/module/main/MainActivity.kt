@@ -31,6 +31,10 @@ class MainActivity : BaseActivity() {
 
     override fun onBindLayout(): Int = R.layout.activity_main_index
 
+    override fun initView() {
+
+    }
+
     override fun initData() {
         mHomeFragment = mHomeProvider?.mainHomeFragment
         mMeFragment = mMeProvider?.mainMeFragment

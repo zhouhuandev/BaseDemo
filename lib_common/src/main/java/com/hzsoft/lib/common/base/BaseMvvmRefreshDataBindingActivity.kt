@@ -1,6 +1,6 @@
 package com.hzsoft.lib.common.base
 
-import android.view.View
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.hzsoft.lib.common.mvvm.view.BaseRefreshView
 import com.hzsoft.lib.common.mvvm.viewmodel.BaseRefreshViewModel
@@ -14,14 +14,15 @@ import com.refresh.lib.DaisyRefreshLayout
  * @author zhouhuan
  * @Date 2020/12/3
  */
-abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMvvmFragment<VM>(),
+abstract class BaseMvvmRefreshDataBindingActivity<T, V : ViewDataBinding, VM : BaseRefreshViewModel<T>> :
+    BaseMvvmDataBindingActivity<V, VM>(),
     BaseRefreshView {
 
     protected lateinit var mRefreshLayout: DaisyRefreshLayout
 
-    override fun initCommonView(view: View) {
-        super.initCommonView(view)
-        initRefreshView(view)
+    override fun initCommonView() {
+        super.initCommonView()
+        initRefreshView()
         initBaseViewRefreshObservable()
     }
 
@@ -31,13 +32,12 @@ abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMv
 
     protected abstract fun enableLoadMore(): Boolean
 
-
     /**
      * 初始化刷新组件
      */
-    private fun initRefreshView(view: View) {
+    private fun initRefreshView() {
         // 绑定组件
-        mRefreshLayout = view.findViewById(onBindRreshLayout())
+        mRefreshLayout = findViewById(onBindRreshLayout())
         // 是否开启刷新
         enableRefresh(enableRefresh())
         // 是否开启加载更多

@@ -55,12 +55,12 @@ abstract class BaseFragment : Fragment(), BaseView {
     protected var mLoadingInitView: LoadingInitView? = null
     protected var mLoadingTransView: LoadingTransView? = null
 
-    private lateinit var mViewStubToolbar: ViewStub
-    private lateinit var mViewStubContent: ViewStub
-    private lateinit var mViewStubInitLoading: ViewStub
-    private lateinit var mViewStubTransLoading: ViewStub
-    private lateinit var mViewStubNoData: ViewStub
-    private lateinit var mViewStubError: ViewStub
+    protected lateinit var mViewStubToolbar: ViewStub
+    protected lateinit var mViewStubContent: ViewStub
+    protected lateinit var mViewStubInitLoading: ViewStub
+    protected lateinit var mViewStubTransLoading: ViewStub
+    protected lateinit var mViewStubNoData: ViewStub
+    protected lateinit var mViewStubError: ViewStub
     private var isViewCreated = false
     private var isViewVisable = false
 
@@ -90,7 +90,6 @@ abstract class BaseFragment : Fragment(), BaseView {
     open fun initCommonView(view: View) {
         mViewStubToolbar = view.findViewById(R.id.view_stub_toolbar)
         mViewStubContent = view.findViewById(R.id.view_stub_content)
-        mViewStubContent = view.findViewById(R.id.view_stub_content)
         mViewStubInitLoading = view.findViewById(R.id.view_stub_init_loading)
         mViewStubTransLoading = view.findViewById(R.id.view_stub_trans_loading)
         mViewStubNoData = view.findViewById(R.id.view_stub_nodata)
@@ -101,13 +100,18 @@ abstract class BaseFragment : Fragment(), BaseView {
             val viewTooBbar = mViewStubToolbar.inflate()
             initTooBar(viewTooBbar)
         }
+        initConentView(mViewStubContent)
+    }
+
+    open fun initConentView(mViewStubContent: ViewStub) {
         mViewStubContent.layoutResource = onBindLayout()
         mViewStubContent.inflate()
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //initView(mView)
+        initView(mView)
         initListener()
 
         isViewCreated = true
@@ -251,6 +255,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     abstract fun onBindLayout(): Int
 
+    abstract fun initView(mView: View)
     abstract override fun initData()
 
     override fun initListener() {}

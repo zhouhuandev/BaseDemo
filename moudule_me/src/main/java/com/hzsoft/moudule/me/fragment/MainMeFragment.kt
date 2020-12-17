@@ -29,6 +29,10 @@ class MainMeFragment : BaseFragment() {
 
     override fun onBindLayout(): Int = R.layout.fragment_me_main
 
+    override fun initView(mView: View) {
+
+    }
+
     override fun initData() {
         val config = ImagePickerHelper.with(ImagePickerHelper.Config())
             .setWeChat(true)

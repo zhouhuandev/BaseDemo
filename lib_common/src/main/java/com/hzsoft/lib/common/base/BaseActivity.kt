@@ -65,6 +65,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         mContext = this
         initCommonView()
         ARouter.getInstance().inject(this)
+        initView()
         initListener()
         initData()
         EventBus.getDefault().register(this)
@@ -86,6 +87,10 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
             val view = mViewStubToolbar.inflate()
             initToolbar(view)
         }
+        initConentView(mViewStubContent)
+    }
+
+    open fun initConentView(mViewStubContent: ViewStub) {
         mViewStubContent.layoutResource = onBindLayout()
         mViewStubContent.inflate()
     }
@@ -204,6 +209,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
 
     abstract fun onBindLayout(): Int
 
+    abstract fun initView()
     abstract override fun initData()
 
     override fun initListener() {}

@@ -89,6 +89,11 @@ android {
     androidExtensions {
         experimental = true
     }
+    buildFeatures{
+        dataBinding = true
+        // for view binding :
+        // viewBinding = true
+    }
 }
 
 dependencies {

@@ -27,11 +27,11 @@ abstract class BaseRefreshViewModel<T>(application: Application) : BaseViewModel
         private var mStopLoadMoreLiveEvent: SingleLiveEvent<Void>? = null
 
         val stopRefresLiveEvent: SingleLiveEvent<Void>
-            get() = createLiveData(mStopRefresLiveEvent).also({ mStopRefresLiveEvent = it })
+            get() = createLiveData(mStopRefresLiveEvent).also { mStopRefresLiveEvent = it }
         val autoRefresLiveEvent: SingleLiveEvent<Void>
-            get() = createLiveData(mAutoRefresLiveEvent).also({ mAutoRefresLiveEvent = it })
+            get() = createLiveData(mAutoRefresLiveEvent).also { mAutoRefresLiveEvent = it }
         val stopLoadMoreLiveEvent: SingleLiveEvent<Void>
-            get() = createLiveData(mStopLoadMoreLiveEvent).also({ mStopLoadMoreLiveEvent = it })
+            get() = createLiveData(mStopLoadMoreLiveEvent).also { mStopLoadMoreLiveEvent = it }
     }
 
     /**

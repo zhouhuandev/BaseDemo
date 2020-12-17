@@ -39,6 +39,9 @@ abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment() {
      * 初始化页面观察 变更相应的展示
      */
     protected open fun initBaseViewObservable() {
+        // 将 Frament 的生命周期同步到 ViewModel 中
+        lifecycle.addObserver(mViewModel)
+
         mViewModel.mUIChangeLiveData.getShowToastViewEvent()
             .observe(this, Observer { it.showToast(mContext) })
         mViewModel.mUIChangeLiveData.getShowInitLoadViewEvent()
