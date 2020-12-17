@@ -17,7 +17,7 @@ import kotlin.collections.set
 open class BaseViewModel constructor(application: Application) : AndroidViewModel(application),
     IBaseViewModel {
 
-    var mUIChangeLiveData: UIChangeLiveData = UIChangeLiveData()
+    var mUIChangeLiveData = UIChangeLiveData()
 
     inner class UIChangeLiveData : SingleLiveEvent<Any>() {
         private var showToastViewEvent: SingleLiveEvent<String>? = null

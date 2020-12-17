@@ -12,14 +12,7 @@ import com.hzsoft.lib.common.event.SingleLiveEvent
 abstract class BaseRefreshViewModel<T>(application: Application) : BaseViewModel(application) {
     protected var mList = MutableLiveData<MutableList<T>>()
 
-    protected var mUIChangeRefreshLiveData: UIChangeRefreshLiveData? = null
-
-    open fun getUCRefresh(): UIChangeRefreshLiveData {
-        if (mUIChangeRefreshLiveData == null) {
-            return UIChangeRefreshLiveData()
-        }
-        return mUIChangeRefreshLiveData!!
-    }
+    var mUIChangeRefreshLiveData = UIChangeRefreshLiveData()
 
     inner class UIChangeRefreshLiveData : SingleLiveEvent<Any>() {
         private var mStopRefresLiveEvent: SingleLiveEvent<Void>? = null
@@ -38,21 +31,21 @@ abstract class BaseRefreshViewModel<T>(application: Application) : BaseViewModel
      * ViewModel 层发布停止刷新事件
      */
     open fun postStopRefreshEvent() {
-        mUIChangeRefreshLiveData?.stopRefresLiveEvent?.call()
+        mUIChangeRefreshLiveData.stopRefresLiveEvent.call()
     }
 
     /**
      * ViewModel 层发布自动刷新事件
      */
     open fun postAutoRefreshEvent() {
-        mUIChangeRefreshLiveData?.autoRefresLiveEvent?.call()
+        mUIChangeRefreshLiveData.autoRefresLiveEvent.call()
     }
 
     /**
      * ViewModel 层发布停止加载更多
      */
     open fun postStopLoadMoreEvent() {
-        mUIChangeRefreshLiveData?.stopLoadMoreLiveEvent?.call()
+        mUIChangeRefreshLiveData.stopLoadMoreLiveEvent.call()
     }
 
     open fun getList(): MutableList<T>? {

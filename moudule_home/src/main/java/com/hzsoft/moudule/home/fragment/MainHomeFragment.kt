@@ -105,7 +105,10 @@ class MainHomeFragment :
 
     private fun handleRecipesList(status: Resource<List<Demo>>) {
         when (status) {
-            is Resource.Success -> status.data?.let { bindListData(recipes = it) }
+            is Resource.Success -> status.data?.let {
+                // stopRefresh(it)
+                bindListData(recipes = it)
+            }
             is Resource.DataError -> {
                 status.errorCode?.let { KLog.e("zhouhuan", "--------->$it") }
             }
@@ -123,8 +126,6 @@ class MainHomeFragment :
 
     private fun bindListData(recipes: List<Demo>) {
         mAdapter.setNewList(recipes)
-        // textView.text = recipes.toJson()
-        mBinding.textView.text = recipes.toJson()
     }
 
     private fun bindListData2(userTestRoom: List<UserTestRoom>) {

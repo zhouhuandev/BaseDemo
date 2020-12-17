@@ -69,9 +69,15 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
      * 初始化观察者 ViewModel 层加载完数据的回调通知当前页面事件已完成
      */
     private fun initBaseViewRefreshObservable() {
-        mViewModel.getUCRefresh().autoRefresLiveEvent.observe(this, Observer { autoLoadData() })
-        mViewModel.getUCRefresh().stopRefresLiveEvent.observe(this, Observer { stopRefresh() })
-        mViewModel.getUCRefresh().stopLoadMoreLiveEvent.observe(this, Observer { stopLoadMore() })
+        mViewModel.mUIChangeRefreshLiveData.autoRefresLiveEvent.observe(
+            this,
+            Observer { autoLoadData() })
+        mViewModel.mUIChangeRefreshLiveData.stopRefresLiveEvent.observe(
+            this,
+            Observer { stopRefresh() })
+        mViewModel.mUIChangeRefreshLiveData.stopLoadMoreLiveEvent.observe(
+            this,
+            Observer { stopLoadMore() })
     }
 
 
