@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +38,7 @@ import org.greenrobot.eventbus.ThreadMode
 abstract class BaseFragment : Fragment(), BaseView {
 
     companion object {
-        val TAG = this::class.java.getSimpleName()
+        val TAG = this::class.java.simpleName
     }
 
     protected lateinit var mContext: Context
@@ -55,12 +56,12 @@ abstract class BaseFragment : Fragment(), BaseView {
     protected var mLoadingInitView: LoadingInitView? = null
     protected var mLoadingTransView: LoadingTransView? = null
 
-    private lateinit var mViewStubToolbar: ViewStub
-    private lateinit var mViewStubContent: ViewStub
-    private lateinit var mViewStubInitLoading: ViewStub
-    private lateinit var mViewStubTransLoading: ViewStub
-    private lateinit var mViewStubNoData: ViewStub
-    private lateinit var mViewStubError: ViewStub
+    protected lateinit var mViewStubToolbar: ViewStub
+    protected lateinit var mViewStubContent: ViewStub
+    protected lateinit var mViewStubInitLoading: ViewStub
+    protected lateinit var mViewStubTransLoading: ViewStub
+    protected lateinit var mViewStubNoData: ViewStub
+    protected lateinit var mViewStubError: ViewStub
     private var isViewCreated = false
     private var isViewVisable = false
 
@@ -90,7 +91,6 @@ abstract class BaseFragment : Fragment(), BaseView {
     open fun initCommonView(view: View) {
         mViewStubToolbar = view.findViewById(R.id.view_stub_toolbar)
         mViewStubContent = view.findViewById(R.id.view_stub_content)
-        mViewStubContent = view.findViewById(R.id.view_stub_content)
         mViewStubInitLoading = view.findViewById(R.id.view_stub_init_loading)
         mViewStubTransLoading = view.findViewById(R.id.view_stub_trans_loading)
         mViewStubNoData = view.findViewById(R.id.view_stub_nodata)
@@ -111,17 +111,12 @@ abstract class BaseFragment : Fragment(), BaseView {
         initListener()
 
         isViewCreated = true
-        //如果启用了懒加载就进行懒加载，否则就进行预加载
-        if (enableLazyData()) {
-            lazyLoad()
-        } else {
-            initData()
-        }
     }
 
     /**
      * isVisibleToUser =true的时候代表当前页面可见，false 就是不可见
      * setUserVisibleHint(boolean isVisibleToUser) 是在 Fragment OnCreateView()方法之前调用的
+     * 注：FragmentTransaction.setMaxLifecycle 处理 Lifecycle.State.RESUMED 则此函数不进行回调，失效
      */
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
@@ -134,23 +129,41 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     /**
      * 懒加载机制 当页面可见的时候加载数据
+     * 如果当前 FragmentTransaction.setMaxLifecycle 处理 Lifecycle.State.RESUMED 则 懒加载失效
+     * 如果 FragmentTransaction.setMaxLifecycle 传入BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT ，
+     * 则只有当前的Fragment处于Lifecycle.State.RESUMED状态。 所有其他片段的上限为Lifecycle.State.STARTED 。
+     * 如果传递了BEHAVIOR_SET_USER_VISIBLE_HINT ，则所有片段都处于Lifecycle.State.RESUMED状态，
+     * 并且将存在Fragment.setUserVisibleHint(boolean)回调
      */
     private fun lazyLoad() {
         //这里进行双重标记判断,必须确保onCreateView加载完毕且页面可见,才加载数据
         KLog.v("MYTAG", "lazyLoad start...")
         KLog.v("MYTAG", "isViewCreated:$isViewCreated")
-        KLog.v("MYTAG", "isViewVisable$isViewVisable")
+        KLog.v("MYTAG", "isViewVisable:$isViewVisable")
         if (isViewCreated && isViewVisable) {
+            Log.d(TAG, "lazyLoad: Successful")
             initData()
             //数据加载完毕,恢复标记,防止重复加载
             isViewCreated = false
             isViewVisable = false
+        } else {
+            Log.d(TAG, "lazyLoad: Fail")
         }
     }
 
     //默认不启用懒加载
     open fun enableLazyData(): Boolean {
         return false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //如果启用了懒加载就进行懒加载，否则就进行预加载
+        if (enableLazyData()) {
+            lazyLoad()
+        } else {
+            initData()
+        }
     }
 
     override fun onDestroy() {
@@ -251,6 +264,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     abstract fun onBindLayout(): Int
 
+    // abstract fun initView(mView: View)
     abstract override fun initData()
 
     override fun initListener() {}
