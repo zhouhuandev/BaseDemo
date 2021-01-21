@@ -1,20 +1,18 @@
 package com.hzsoft.lib.common.wight
 
+
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-
-
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hzsoft.lib.common.R
 import com.hzsoft.lib.common.utils.DisplayUtil
 import com.hzsoft.lib.common.utils.MultiMediaUtil
-
 import me.nereo.multi_image_selector.MultiImageSelectorActivity
 
 /**
@@ -94,7 +92,7 @@ class PhotoSelectDialog : BottomSheetDialogFragment(), View.OnClickListener {
 
     companion object {
 
-        val TAG = PhotoSelectDialog::class.java!!.getSimpleName()
+        val TAG = PhotoSelectDialog::class.java.simpleName
 
         fun newInstance(): PhotoSelectDialog {
             return PhotoSelectDialog()

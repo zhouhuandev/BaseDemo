@@ -14,12 +14,14 @@
 
 package com.hzsoft.lib.common.wight
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.SparseBooleanArray
@@ -348,7 +350,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
 
         override fun showView(isshow: Boolean) {
             if (mImageButton != null) {
-                Handler().post {
+                Handler(Looper.getMainLooper()).post {
                     mImageButton!!.clearAnimation()
                     mImageButton!!.visibility = if (isshow) View.VISIBLE else View.GONE
                 }
@@ -387,7 +389,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
 
     companion object {
 
-        private val TAG = ExpandableTextView::class.java!!.getSimpleName()
+        private val TAG = ExpandableTextView::class.java.simpleName
 
         private val EXPAND_INDICATOR_IMAGE_BUTTON = 0
 
@@ -423,6 +425,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
             }
         }
 
+        @SuppressLint("UseCompatLoadingForDrawables")
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         private fun getDrawable(context: Context, @DrawableRes resId: Int): Drawable {
             val resources = context.resources

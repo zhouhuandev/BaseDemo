@@ -1,4 +1,4 @@
-package com.task.data.error.mapper
+package com.hzsoft.lib.net.error.mapper
 
 interface ErrorMapperInterface {
     fun getErrorString(errorId: Int): String

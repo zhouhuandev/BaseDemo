@@ -1,9 +1,8 @@
 package com.hzsoft.lib.net.error.mapper
 
-import com.hzsoft.lib.common.BaseApplication
 import com.hzsoft.lib.net.R
+import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.error.*
-import com.task.data.error.mapper.ErrorMapperInterface
 
 /**
  * Describe:
@@ -15,7 +14,7 @@ import com.task.data.error.mapper.ErrorMapperInterface
 class ErrorMapper constructor() : ErrorMapperInterface {
 
     override fun getErrorString(errorId: Int): String {
-        return BaseApplication.instance.getString(errorId)
+        return NetAppContext.getContext().getString(errorId)
     }
 
     override val errorsMap: Map<Int, String>

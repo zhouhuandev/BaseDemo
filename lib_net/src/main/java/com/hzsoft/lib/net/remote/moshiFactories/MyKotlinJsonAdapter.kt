@@ -1,4 +1,4 @@
-package com.task.data.remote.moshiFactories
+package com.hzsoft.lib.net.remote.moshiFactories
 
 import com.squareup.moshi.*
 import com.squareup.moshi.internal.Util

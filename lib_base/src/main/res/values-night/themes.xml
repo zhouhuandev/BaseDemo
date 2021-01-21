@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        App Bar 的背景色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--        status bar（状态栏）背景色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--        控件在选中状态或获取焦点状态下使用这个颜色-->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--        文本颜色-->
+<!--        <item name="android:textColorPrimary">@color/textColorPrimary</item>-->
+        <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
+    </style>
+</resources>

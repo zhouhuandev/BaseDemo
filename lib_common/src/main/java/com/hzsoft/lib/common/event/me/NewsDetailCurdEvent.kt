@@ -1,6 +1,6 @@
 package com.hzsoft.lib.common.event.me
 
-import com.hzsoft.lib.common.event.BaseEvent
+import com.hzsoft.lib.base.event.BaseEvent
 
 /**
  * Description: <NewsDetailCurdEvent><br>

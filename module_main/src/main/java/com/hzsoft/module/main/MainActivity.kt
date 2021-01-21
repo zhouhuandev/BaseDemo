@@ -2,7 +2,7 @@ package com.hzsoft.module.main
 
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Autowired
-import com.hzsoft.lib.common.base.BaseActivity
+import com.hzsoft.lib.base.view.BaseActivity
 import com.hzsoft.lib.common.provider.IHomeProvider
 import com.hzsoft.lib.common.provider.IMeProvider
 import com.hzsoft.module.main.entity.MainChannel

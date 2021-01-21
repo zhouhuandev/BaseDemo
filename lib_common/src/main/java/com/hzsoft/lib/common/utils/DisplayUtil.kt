@@ -1,6 +1,6 @@
 package com.hzsoft.lib.common.utils
 
-import com.hzsoft.lib.common.BaseApplication
+import com.hzsoft.lib.base.BaseApplication
 
 /**
  * 单位转换工具类

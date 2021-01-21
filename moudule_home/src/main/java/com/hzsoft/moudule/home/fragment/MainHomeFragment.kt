@@ -2,8 +2,8 @@ package com.hzsoft.moudule.home.fragment
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.fly.tour.common.util.log.KLog
-import com.hzsoft.lib.common.base.BaseMvvmRefreshDataBindingFragment
+import com.hzsoft.lib.base.utils.log.KLog
+import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
 import com.hzsoft.lib.common.utils.EnvironmentUtil
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource

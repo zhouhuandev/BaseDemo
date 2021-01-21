@@ -1,0 +1,10 @@
+apply plugin: 'com.android.library'
+//此处路径使用 ../ 上一级的方式，是因为每个真正的 build是在子文件夹下真正的进行 build的，所以此处应该考虑为真正 build的相对路径
+apply from: "../base.build.gradle"
+
+android {
+    // 每个单独的 lib库build可进行单独自定义配置相关文件信息
+}
+dependencies {
+
+}

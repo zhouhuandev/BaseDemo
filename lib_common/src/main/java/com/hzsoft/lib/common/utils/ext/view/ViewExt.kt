@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.PrecomputedTextCompat
 import androidx.core.widget.TextViewCompat
-import com.hzsoft.lib.common.BaseApplication
+import com.hzsoft.lib.base.BaseApplication
 import com.hzsoft.lib.common.utils.ext.inputMethodManager
 
 /**

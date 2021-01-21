@@ -88,7 +88,7 @@ class MagicTextView : TextView {
             if (a.hasValue(R.styleable.MagicTextView_backgroundcolor)) {
                 val background = a.getDrawable(R.styleable.MagicTextView_backgroundcolor)
                 if (background != null) {
-                    this.setBackgroundDrawable(background)
+                    this.setBackground(background)
                 } else {
                     this.setBackgroundColor(
                             a.getColor(R.styleable.MagicTextView_backgroundcolor, -0x1000000))
@@ -136,19 +136,19 @@ class MagicTextView : TextView {
     }
 
     fun addOuterShadow(r: Float, dx: Float, dy: Float, color: Int) {
-        var r = r
-        if (r == 0f) {
-            r = 0.0001f
+        var R = r
+        if (R == 0f) {
+            R = 0.0001f
         }
-        outerShadows!!.add(Shadow(r, dx, dy, color))
+        outerShadows!!.add(Shadow(R, dx, dy, color))
     }
 
     fun addInnerShadow(r: Float, dx: Float, dy: Float, color: Int) {
-        var r = r
-        if (r == 0f) {
-            r = 0.0001f
+        var R = r
+        if (R == 0f) {
+            R = 0.0001f
         }
-        innerShadows!!.add(Shadow(r, dx, dy, color))
+        innerShadows!!.add(Shadow(R, dx, dy, color))
     }
 
     fun clearInnerShadows() {
@@ -235,11 +235,9 @@ class MagicTextView : TextView {
         }
 
 
-        if (restoreDrawables != null) {
-            this.setCompoundDrawablesWithIntrinsicBounds(restoreDrawables[0], restoreDrawables[1],
-                    restoreDrawables[2], restoreDrawables[3])
-        }
-        this.setBackgroundDrawable(restoreBackground)
+        this.setCompoundDrawablesWithIntrinsicBounds(restoreDrawables[0], restoreDrawables[1],
+                restoreDrawables[2], restoreDrawables[3])
+        this.background = restoreBackground
         this.setTextColor(restoreColor)
 
         unfreeze()

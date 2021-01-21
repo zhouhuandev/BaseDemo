@@ -3,44 +3,20 @@ if (isModule.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply from: "../base.build.gradle"
 
+// 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
+// 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
+        // arg("AROUTER_GENERATE_DOC", "enable")
     }
 }
 
 android {
-    compileSdkVersion build_versions.compile_sdk
-    buildToolsVersion build_versions.build_sdk
+    // 每个单独的 module库build可进行单独自定义配置相关文件信息
 
-    defaultConfig {
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode app_version.version_code
-        versionName app_version.version_name
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
     //@Parcelize标记需要设置experimental = true
     androidExtensions {
         experimental = true
@@ -67,7 +43,6 @@ android {
 }
 dependencies {
     api project(":lib_common")
-    api project(":lib_net")
 
     kapt deps.arouter_compiler
     kapt deps.moshi_kotlin_codegen

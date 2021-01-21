@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Looper
 import android.util.Log
+import com.hzsoft.lib.base.utils.ToastUtil
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,6 +1,5 @@
 package com.hzsoft.lib.net.remote
 
-import com.hzsoft.lib.common.utils.ext.view.showToast
 import com.hzsoft.lib.domain.base.BaseResponse
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.BuildConfig
@@ -12,6 +11,7 @@ import com.hzsoft.lib.net.error.mapper.ErrorManager
 import com.hzsoft.lib.net.error.mapper.ErrorMapper
 import com.hzsoft.lib.net.remote.service.RecipesService
 import com.hzsoft.lib.net.utils.NetworkConnectivity
+import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.task.data.remote.RemoteDataSource
 import retrofit2.Response
 import java.io.IOException

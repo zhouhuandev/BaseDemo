@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.app.NotificationCompat
-import com.hzsoft.lib.common.BaseApplication
+import com.hzsoft.lib.base.BaseApplication
 import com.hzsoft.lib.common.R
 import com.madchan.library.NotificationCompatUtil
 

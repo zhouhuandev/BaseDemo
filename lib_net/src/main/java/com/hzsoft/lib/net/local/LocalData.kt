@@ -1,6 +1,6 @@
 package com.hzsoft.lib.net.local
 
-import com.hzsoft.lib.common.BaseApplication
+import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 
@@ -11,7 +11,7 @@ import com.hzsoft.lib.net.local.entity.UserTestRoom
  */
 class LocalData constructor() {
 
-    private val appDatabase by lazy { AppDatabase.getDatabase(BaseApplication.getContext()) }
+    private val appDatabase by lazy { AppDatabase.getDatabase(NetAppContext.getContext()) }
 
     fun getUserTestRoom(): Resource<List<UserTestRoom>> {
         return Resource.Success(appDatabase.userTestRoomDao().loadAllUserTestRooms())

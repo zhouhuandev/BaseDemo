@@ -1,43 +1,16 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
-}
+apply from: "../lib.build.gradle"
 
 android {
-    compileSdkVersion build_versions.compile_sdk
-    buildToolsVersion build_versions.build_sdk
 
-    defaultConfig {
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode app_version.version_code
-        versionName app_version.version_name
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 }
 
 dependencies {
 
-    api project(':lib_common')
+    api project(":lib_log")
     api project(':lib_domain')
+
+    api deps.kotlin_stdlib
+    api deps.kotlin_reflect
 
     api deps.rxjava
     api deps.rxandroid
@@ -46,6 +19,13 @@ dependencies {
     api deps.converter_gson
     api deps.logging_interceptor
 
+    api deps.lifecycle_viewmodel_ktx
+    api deps.lifecycle_livedata_ktx
+    api deps.lifecycle_extensions
+    api deps.lifecycle_runtime_ktx
+    api deps.lifecycle_common_java8
+
+    api deps.moshi
     kapt deps.moshi_kotlin_codegen
 
     api deps.room

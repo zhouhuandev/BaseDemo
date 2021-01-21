@@ -1,96 +1,21 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
-}
-// 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
-// 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-        // arg("AROUTER_GENERATE_DOC", "enable")
-    }
-}
+apply from: "../lib.build.gradle"
 
 android {
-    compileSdkVersion build_versions.compile_sdk
-    buildToolsVersion build_versions.build_sdk
 
-    defaultConfig {
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode app_version.version_code
-        versionName app_version.version_name
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-
-        ndk {
-            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-        }
-    }
-
-    buildTypes {
-        debug {
-            buildConfigField "boolean", 'IS_DEBUG', 'true'
-        }
-        release {
-            buildConfigField "boolean", 'IS_DEBUG', 'false'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    //@Parcelize标记需要设置experimental = true
-    androidExtensions {
-        experimental = true
-    }
-    buildFeatures{
-        dataBinding = true
-        // for view binding :
-        // viewBinding = true
-    }
 }
 
 dependencies {
 
-    api project(":lib_refresh_layout")
+    api project(":lib_base")
+    api project(":lib_log")
+    api project(":lib_net")
     api project(":lib_image_picker")
 
-    api deps.kotlin_stdlib
-    api deps.kotlin_reflect
-    api deps.core_ktx
-    api deps.androidx_appcompat
-    api deps.multidex
-    api deps.android_material
-
-    api deps.androidx_recyclerview
-    api deps.constraintlayout
-
     api deps.rxpermissions
-    api deps.eventbus
     api deps.MultiImageSelector
-
-    api deps.rxlifecycle
-    api deps.rxlifecycle_android
-    api deps.rxlifecycle_components
-
-    api deps.lifecycle_viewmodel_ktx
-    api deps.lifecycle_livedata_ktx
-    api deps.lifecycle_extensions
-    api deps.lifecycle_runtime_ktx
-    api deps.lifecycle_common_java8
 
     api deps.glide
     kapt deps.glide_compiler
-
-    api deps.arouter_api
-    kapt deps.arouter_compiler
 
     api deps.moshi
     kapt deps.moshi_kotlin_codegen

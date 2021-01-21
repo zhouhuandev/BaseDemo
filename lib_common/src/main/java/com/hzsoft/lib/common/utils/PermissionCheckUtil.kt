@@ -1,6 +1,7 @@
 package com.hzsoft.lib.common.utils
 
 import android.Manifest
+import com.hzsoft.lib.base.utils.ToastUtil
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 /**

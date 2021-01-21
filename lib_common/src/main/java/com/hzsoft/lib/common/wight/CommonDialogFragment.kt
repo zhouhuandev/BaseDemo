@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
-import com.fly.tour.common.util.log.KLog
+import com.hzsoft.lib.base.utils.log.KLog
 import com.hzsoft.lib.common.R
 import com.hzsoft.lib.common.utils.DisplayUtil
 

@@ -1,8 +1,8 @@
 package com.hzsoft.lib.net.remote.interceptor
 
 import android.text.TextUtils
-import com.fly.tour.common.util.log.KLog
-import com.hzsoft.lib.common.utils.ext.view.showToast
+import com.hzsoft.lib.net.utils.ext.view.showToast
+import com.hzsoft.lib.base.utils.log.KLog
 import com.hzsoft.lib.net.config.Encoding
 import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.config.contentTypeValue

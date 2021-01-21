@@ -1,6 +1,6 @@
 package debug
 
-import com.hzsoft.lib.common.BaseApplication
+import com.hzsoft.lib.base.BaseApplication
 import com.hzsoft.lib.common.URL_BASE
 import com.hzsoft.lib.net.config.NetConfig
 

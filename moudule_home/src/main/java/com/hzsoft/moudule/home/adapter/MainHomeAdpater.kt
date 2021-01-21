@@ -2,9 +2,9 @@ package com.hzsoft.moudule.home.adapter
 
 import android.content.Context
 import com.bumptech.glide.Glide
-import com.hzsoft.lib.common.adapter.BaseDataBindAdapter
-import com.hzsoft.lib.common.adapter.BaseViewHolder
-import com.hzsoft.lib.common.utils.ext.view.showToast
+import com.hzsoft.lib.base.adapter.BaseDataBindAdapter
+import com.hzsoft.lib.base.adapter.BaseViewHolder
+import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.moudule.home.R
 import com.hzsoft.moudule.home.databinding.ItemRecipeBinding

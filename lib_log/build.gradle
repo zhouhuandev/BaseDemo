@@ -1,0 +1,9 @@
+apply from: "../lib.build.gradle"
+
+android {
+
+}
+
+dependencies {
+
+}
