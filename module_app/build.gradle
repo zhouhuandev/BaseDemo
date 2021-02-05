@@ -83,7 +83,7 @@ android {
 
 dependencies {
 
-    implementation project(":lib_common")
+    implementation project(":lib_base_module")
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
         implementation project(':moudule_home')

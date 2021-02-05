@@ -9,4 +9,4 @@ import com.hzsoft.lib.base.event.BaseEvent
  * Version:     V1.0.0<br>
  * Update:     <br>
 </BaseFragmentEvent> */
-class BaseFragmentEvent<T>(code: Int) : BaseEvent<T>(code)
+open class BaseFragmentEvent<T>(code: Int) : BaseEvent<T>(code)

@@ -8,4 +8,4 @@ import com.hzsoft.lib.base.event.BaseEvent
  * @author zhouhuan
  * @Data
  */
-class BaseActivityEvent<T>(code: Int) : BaseEvent<T>(code)
+open class BaseActivityEvent<T>(code: Int) : BaseEvent<T>(code)

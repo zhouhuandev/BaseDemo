@@ -42,7 +42,7 @@ android {
 
 }
 dependencies {
-    api project(":lib_common")
+    api project(":lib_base_module")
 
     kapt deps.arouter_compiler
     kapt deps.moshi_kotlin_codegen

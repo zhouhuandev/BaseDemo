@@ -11,7 +11,7 @@ import java.util.*
  * Version:     V1.0.0<br>
  * Update:     <br>
 </ActivityManager> */
-class ActivityManager private constructor() {
+open class ActivityManager() {
 
     val isActivityStackEmpty: Boolean
         get() = activityStack.empty()

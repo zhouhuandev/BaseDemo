@@ -1,6 +1,6 @@
 package debug
 
-import com.hzsoft.lib.base.BaseApplication
+import com.hzsoft.lib.base.module.ModuleApplication
 import com.hzsoft.lib.common.URL_BASE
 import com.hzsoft.lib.net.config.NetConfig
 
@@ -11,7 +11,7 @@ import com.hzsoft.lib.net.config.NetConfig
  * Version:     V1.0.0<br>
  * Update:     <br>
  */
-class MainApplication : BaseApplication() {
+class MainApplication : ModuleApplication() {
     override fun onCreate() {
         super.onCreate()
         initNet()

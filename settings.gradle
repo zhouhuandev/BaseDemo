@@ -7,6 +7,7 @@ include ':lib_image_picker'
 include ':lib_net'
 include ':lib_refresh_layout'
 include ':lib_common'
+include ':lib_base_module'
 include ':lib_base'
 include ':module_app'
 rootProject.name = "BaseDemo"

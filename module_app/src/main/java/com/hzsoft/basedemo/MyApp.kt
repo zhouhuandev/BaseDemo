@@ -1,6 +1,6 @@
 package com.hzsoft.basedemo
 
-import com.hzsoft.lib.common.CommonApplication
+import com.hzsoft.lib.base.module.ModuleApplication
 
 /**
  * Describe:
@@ -9,4 +9,4 @@ import com.hzsoft.lib.common.CommonApplication
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class MyApp : CommonApplication()
+class MyApp : ModuleApplication()

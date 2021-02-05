@@ -1,17 +1,15 @@
-package com.hzsoft.lib.common
+package com.hzsoft.lib.base.module
 
 import com.hzsoft.lib.base.BaseApplication
+import com.hzsoft.lib.common.URL_BASE
 import com.hzsoft.lib.net.config.NetConfig
 
 /**
- * Describe:
- *
- *
+ * 初始化应用程序
  * @author zhouhuan
- * @Date 2021/1/21
+ * @time 2020/11/30 23:04
  */
-open class CommonApplication : BaseApplication() {
-
+open class ModuleApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         initNet()
