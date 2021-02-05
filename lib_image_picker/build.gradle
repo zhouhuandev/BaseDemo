@@ -3,6 +3,10 @@ apply from: "../lib.build.gradle"
 android {
     // versionCode 15
     // versionName "3.1.4"
+    defaultConfig {
+        versionCode 15
+        versionName "3.1.4"
+    }
 }
 
 dependencies {
