@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewStub
+import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -54,7 +56,6 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     private lateinit var mViewStubTransLoading: ViewStub
     private lateinit var mViewStubNoData: ViewStub
     private lateinit var mViewStubError: ViewStub
-    private val isrefresh = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +73,14 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     }
 
     protected open fun initCommonView() {
+        if (enableAllowFullScreen()) {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+
         mViewStubToolbar = findViewById(R.id.view_stub_toolbar)
         mViewStubContent = findViewById(R.id.view_stub_content)
         mViewStubContent = findViewById(R.id.view_stub_content)
@@ -214,6 +223,10 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
 
     override fun finishActivity() {
         finish()
+    }
+
+    open fun enableAllowFullScreen(): Boolean {
+        return false
     }
 
     open fun enableToolbar(): Boolean {
