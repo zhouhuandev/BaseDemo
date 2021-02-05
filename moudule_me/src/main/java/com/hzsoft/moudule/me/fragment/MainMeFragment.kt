@@ -2,9 +2,9 @@ package com.hzsoft.moudule.me.fragment
 
 import android.view.View
 import com.google.gson.Gson
-import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.lib.base.utils.log.KLog
 import com.hzsoft.lib.base.view.BaseFragment
+import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.moudule.me.R
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper.OnResultCallBack
@@ -30,10 +30,6 @@ class MainMeFragment : BaseFragment() {
     override fun onBindLayout(): Int = R.layout.fragment_me_main
 
     override fun initView(mView: View) {
-
-    }
-
-    override fun initData() {
         val config = ImagePickerHelper.with(ImagePickerHelper.Config())
             .setWeChat(true)
             .setMimeType(0)
@@ -48,6 +44,10 @@ class MainMeFragment : BaseFragment() {
                 KLog.d(TAG, "选择的照片数据" + Gson().toJson(items))
             }, config
         )
+    }
+
+    override fun initData() {
+
     }
 
     override fun initListener() {

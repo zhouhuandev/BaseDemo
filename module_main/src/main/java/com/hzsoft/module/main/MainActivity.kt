@@ -63,7 +63,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun switchContent(from: Fragment?, to: Fragment?, tag: String) {
+    private fun switchContent(from: Fragment?, to: Fragment?, tag: String) {
         if (from == null || to == null) {
             return
         }
