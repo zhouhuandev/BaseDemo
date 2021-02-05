@@ -70,17 +70,11 @@ class EnvironmentUtil {
      *
      * @return
      */
-    @SuppressLint("NewApi")
-    protected fun isTopActivity(context: Context, clazz: Class<*>): Boolean {
+    fun isTopActivity(context: Context, clazz: Class<*>): Boolean {
         val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val runningTaskInfos = manager.getRunningTasks(1)
-        return if (runningTaskInfos != null && !runningTaskInfos.isEmpty()
-            && clazz.name == runningTaskInfos[0].topActivity!!.className
-        ) {
-            true
-        } else {
-            false
-        }
+        return (runningTaskInfos != null && runningTaskInfos.isNotEmpty()
+                && clazz.name == runningTaskInfos[0].topActivity!!.className)
     }
 
     /**
@@ -93,7 +87,7 @@ class EnvironmentUtil {
          *
          * @return 可读写返回true, 否则返回false
          */
-        val isExternalStorageWritable: Boolean
+        private val isExternalStorageWritable: Boolean
             get() {
                 val state = Environment.getExternalStorageState()
                 return Environment.MEDIA_MOUNTED == state
