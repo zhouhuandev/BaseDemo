@@ -1,4 +1,4 @@
-package com.hzsoft.lib.common.event.me
+package com.hzsoft.lib.base.module.event.me
 
 import com.hzsoft.lib.base.event.BaseEvent
 

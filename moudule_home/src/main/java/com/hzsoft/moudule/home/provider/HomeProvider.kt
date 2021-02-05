@@ -3,7 +3,7 @@ package com.hzsoft.moudule.home.provider
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.hzsoft.lib.common.provider.IHomeProvider
+import com.hzsoft.lib.base.module.provider.IHomeProvider
 import com.hzsoft.moudule.home.fragment.MainHomeFragment
 
 /**

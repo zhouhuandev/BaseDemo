@@ -1,4 +1,4 @@
-package com.hzsoft.lib.common.event
+package com.hzsoft.lib.base.module.event
 
 /**
  * Description: <EventCode><br>
