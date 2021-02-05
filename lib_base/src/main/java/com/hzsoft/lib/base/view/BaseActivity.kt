@@ -34,9 +34,7 @@ import org.greenrobot.eventbus.ThreadMode
  */
 abstract class BaseActivity : RxAppCompatActivity(), BaseView {
 
-    companion object {
-        val TAG = this::class.java.getSimpleName()
-    }
+    val TAG: String = this::class.java.simpleName
 
     protected lateinit var mContext: Context
 

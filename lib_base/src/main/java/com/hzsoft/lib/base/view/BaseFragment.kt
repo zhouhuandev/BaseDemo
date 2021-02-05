@@ -37,9 +37,7 @@ import org.greenrobot.eventbus.ThreadMode
  */
 abstract class BaseFragment : Fragment(), BaseView {
 
-    companion object {
-        val TAG = this::class.java.getSimpleName()
-    }
+    val TAG: String = this::class.java.simpleName
 
     protected lateinit var mContext: Context
 
