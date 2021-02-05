@@ -1,4 +1,4 @@
-package luyao.util.ktx.ext.listener
+package com.hzsoft.lib.common.utils.ext.listener
 
 import androidx.viewpager.widget.ViewPager
 

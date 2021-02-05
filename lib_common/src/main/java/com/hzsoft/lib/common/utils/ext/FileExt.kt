@@ -1,6 +1,7 @@
 package com.hzsoft.lib.common.utils.ext
 
 import com.hzsoft.lib.common.utils.*
+import com.hzsoft.lib.common.utils.func.getMimeType
 import java.io.File
 import java.nio.charset.Charset
 

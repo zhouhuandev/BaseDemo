@@ -1,4 +1,4 @@
-package com.hzsoft.lib.common.utils
+package com.hzsoft.lib.common.utils.func
 
 import android.webkit.MimeTypeMap
 import java.util.*

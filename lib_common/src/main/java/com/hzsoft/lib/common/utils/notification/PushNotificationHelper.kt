@@ -1,4 +1,4 @@
-package com.madchan.notificationchannellib
+package com.hzsoft.lib.common.utils.notification
 
 import android.app.Notification
 import android.app.NotificationManager
@@ -8,7 +8,6 @@ import android.net.Uri
 import androidx.core.app.NotificationCompat
 import com.hzsoft.lib.base.BaseApplication
 import com.hzsoft.lib.common.R
-import com.madchan.library.NotificationCompatUtil
 
 /**
  * 推送通知横幅消息

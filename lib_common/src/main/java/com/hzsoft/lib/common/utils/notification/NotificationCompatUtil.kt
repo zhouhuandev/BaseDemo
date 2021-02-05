@@ -1,4 +1,4 @@
-package com.madchan.library
+package com.hzsoft.lib.common.utils.notification
 
 import android.app.Notification
 import android.app.NotificationChannel

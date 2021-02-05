@@ -1,4 +1,4 @@
-package com.hzsoft.lib.common.utils
+package com.hzsoft.lib.common.utils.ext.view
 
 import android.text.Editable
 import android.text.TextWatcher
