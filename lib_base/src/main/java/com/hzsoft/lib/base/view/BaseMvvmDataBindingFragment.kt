@@ -24,17 +24,17 @@ abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewMod
     }
 
     private fun initViewDataBinding(mViewStubContent: ViewStub) {
+        viewModelId = onBindVariableId()
         mViewStubContent.setOnInflateListener { _, inflated ->
             mBinding = DataBindingUtil.bind<V>(inflated)!!
             mBinding.setVariable(viewModelId, mViewModel)
         }
-        viewModelId = onBindVariableId()
     }
 
     abstract fun onBindVariableId(): Int
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding?.unbind()
+        mBinding.unbind()
     }
 }
