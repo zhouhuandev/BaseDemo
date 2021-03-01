@@ -34,11 +34,11 @@ class NotificationCompatUtil {
          * @return
          */
         fun createNotificationBuilder(
-            context: Context,
-            channel: Channel,
-            title: CharSequence? = null,
-            text: CharSequence? = null,
-            intent: Intent? = null
+                context: Context,
+                channel: Channel,
+                title: CharSequence? = null,
+                text: CharSequence? = null,
+                intent: Intent? = null
         ): NotificationCompat.Builder {
             // 必须先创建通知渠道，然后才能在Android 8.0及更高版本上发布任何通知
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -46,12 +46,15 @@ class NotificationCompatUtil {
             }
 
             val builder =
-                NotificationCompat.Builder(context, channel.channelId)
-                    .setPriority(getLowVersionPriority(channel)) // 通知优先级，优先级确定通知在Android7.1和更低版本上的干扰程度。
-                    .setVisibility(channel.lockScreenVisibility) // 锁定屏幕公开范围
-                    .setVibrate(channel.vibrate) // 震动模式
-                    .setSound(channel.sound ?: Settings.System.DEFAULT_NOTIFICATION_URI)    // 声音
-                    .setOnlyAlertOnce(true) // 设置通知只会在通知首次出现时打断用户（通过声音、振动或视觉提示），而之后更新则不会再打断用户。
+                    NotificationCompat.Builder(context, channel.channelId)
+                            .setPriority(getLowVersionPriority(channel)) // 通知优先级，优先级确定通知在Android7.1和更低版本上的干扰程度。
+                            .setVisibility(channel.lockScreenVisibility) // 锁定屏幕公开范围
+                            .setVibrate(channel.vibrate) // 震动模式
+                            .setSound(channel.sound ?: Settings.System.DEFAULT_NOTIFICATION_URI)    // 声音
+                            .setAutoCancel(channel.autoCancel) // 设置通知栏点击后是否清除，设置为true，当点击此通知栏后，它会自动消失
+                            .setWhen(System.currentTimeMillis()) //通知产生的时间，会在通知信息里显示，一般是系统获取到的时间
+                            .setOnlyAlertOnce(channel.onlyAlertOnce) // 设置通知只会在通知首次出现时打断用户（通过声音、振动或视觉提示），而之后更新则不会再打断用户。
+                            .setOngoing(channel.ongoing)// 设置是否是正在进行中的通知，默认是false
 
             // 标题，此为可选内容
             if (!TextUtils.isEmpty(title)) builder.setContentTitle(title)
@@ -62,10 +65,10 @@ class NotificationCompatUtil {
             // 设置通知的点按操作，每个通知都应该对点按操作做出响应，通常是在应用中打开对应于该通知的Activity。
             if (intent != null) {
                 val pendingIntent =
-                    PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                        PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                 builder.setContentIntent(pendingIntent)
-                    .setAutoCancel(true) // 在用户点按通知后自动移除通知
-                if(NotificationManager.IMPORTANCE_HIGH == channel.importance) builder.setFullScreenIntent(pendingIntent, false)
+                        .setAutoCancel(true) // 在用户点按通知后自动移除通知
+                if (NotificationManager.IMPORTANCE_HIGH == channel.importance) builder.setFullScreenIntent(pendingIntent, false)
             }
 
             return builder
@@ -97,16 +100,17 @@ class NotificationCompatUtil {
          */
         @RequiresApi(api = Build.VERSION_CODES.O)
         private fun createChannel(
-            context: Context,
-            channel: Channel
+                context: Context,
+                channel: Channel
         ) {
             val notificationChannel =
-                NotificationChannel(channel.channelId, channel.name, channel.importance)
+                    NotificationChannel(channel.channelId, channel.name, channel.importance)
             notificationChannel.description = channel.description   // 描述
             notificationChannel.vibrationPattern = channel.vibrate  // 震动模式
-            notificationChannel.setSound(channel.sound ?: Settings.System.DEFAULT_NOTIFICATION_URI, notificationChannel.audioAttributes)    // 声音
+            notificationChannel.setSound(channel.sound
+                    ?: Settings.System.DEFAULT_NOTIFICATION_URI, notificationChannel.audioAttributes)    // 声音
             val notificationManager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(notificationChannel)
         }
 
@@ -120,12 +124,12 @@ class NotificationCompatUtil {
          * @param notification 通知
          */
         fun notify(
-            context: Context,
-            id: Int,
-            notification: Notification?
+                context: Context,
+                id: Int,
+                notification: Notification?
         ) {
             val notificationManager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(id, notification)
         }
 
@@ -136,7 +140,7 @@ class NotificationCompatUtil {
          */
         fun cancel(context: Context, id: Int) {
             val notificationManager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.cancel(id)
         }
 
@@ -146,7 +150,7 @@ class NotificationCompatUtil {
          */
         fun cancelAll(context: Context) {
             val notificationManager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.cancelAll()
         }
     }
@@ -155,13 +159,16 @@ class NotificationCompatUtil {
      * 通知渠道
      */
     data class Channel(
-        val channelId: String,                                                       // 唯一渠道ID
-        val name: CharSequence,                                                      // 用户可见名称
-        val importance: Int,                                                         // 重要性级别
-        val description: String? = null,                                             // 描述
-        @NotificationCompat.NotificationVisibility
-        val lockScreenVisibility: Int = NotificationCompat.VISIBILITY_SECRET,        // 锁定屏幕公开范围
-        val vibrate: LongArray? = null,                                              // 震动模式
-        val sound: Uri? = null                                                      // 声音
+            val channelId: String,                                                       // 唯一渠道ID
+            val name: CharSequence,                                                      // 用户可见名称
+            val importance: Int,                                                         // 重要性级别
+            val description: String? = null,                                             // 描述
+            @NotificationCompat.NotificationVisibility
+            val lockScreenVisibility: Int = NotificationCompat.VISIBILITY_SECRET,        // 锁定屏幕公开范围
+            val vibrate: LongArray? = null,                                              // 震动模式
+            val sound: Uri? = null,                                                      // 声音
+            val autoCancel: Boolean = true,                                              //是否支持取消
+            val onlyAlertOnce: Boolean = true,                                           // 设置通知只会在通知首次出现时打断用户（通过声音、振动或视觉提示），而之后更新则不会再打断用户。
+            val ongoing: Boolean = false                                                 //是否是正在进行中的通知，默认是false
     )
 }
