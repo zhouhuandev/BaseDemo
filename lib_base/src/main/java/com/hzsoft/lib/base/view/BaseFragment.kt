@@ -13,8 +13,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.facade.Postcard
-import com.alibaba.android.arouter.launcher.ARouter
 import com.hzsoft.lib.base.R
 import com.hzsoft.lib.base.event.common.BaseFragmentEvent
 import com.hzsoft.lib.base.mvvm.view.BaseView
@@ -71,7 +69,6 @@ abstract class BaseFragment : Fragment(), BaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivity = (activity as RxAppCompatActivity?)!!
-        ARouter.getInstance().inject(this)
         EventBus.getDefault().register(this)
         KLog.e(TAG, "onCreate: 当前进入的Fragment: $javaClass")
     }
@@ -388,27 +385,6 @@ abstract class BaseFragment : Fragment(), BaseView {
         val intent = Intent(context, T::class.java)
         intent.block()
         startActivity(intent)
-    }
-
-    /**
-     * 阿里路由跳转
-     * open("填入你要跳转的ARouter路径") {
-     * withString("你要传递extra的key", "你要传递extra的value")
-     * }
-     */
-    open fun open(path: String, block: Postcard.() -> Unit = {}) {
-        val postcard = ARouter.getInstance().build(path)
-        postcard.block()
-        postcard.navigation()
-    }
-
-    /**
-     * 阿里路由跳转并结束当前页面
-     * 建议：切记当前Activity只有一个Frament方式使用使用
-     */
-    open fun openWithFinish(path: String, block: Postcard.() -> Unit = {}) {
-        open(path, block)
-        mActivity.finish()
     }
 
     private var mLastButterKnifeClickTime: Long = 0

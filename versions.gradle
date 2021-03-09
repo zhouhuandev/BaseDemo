@@ -61,10 +61,6 @@ deps.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.0"
 deps.glide = "com.github.bumptech.glide:glide:4.11.0"
 deps.glide_compiler = "com.github.bumptech.glide:compiler:4.11.0"
 
-// Arouter
-deps.arouter_api = "com.alibaba:arouter-api:1.5.1"
-deps.arouter_compiler = "com.alibaba:arouter-compiler:1.5.1"
-
 // MoShi
 deps.moshi = "com.squareup.moshi:moshi:1.11.0"
 deps.moshi_kotlin_codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.11.0"

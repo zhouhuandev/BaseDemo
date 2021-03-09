@@ -12,8 +12,6 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import com.alibaba.android.arouter.facade.Postcard
-import com.alibaba.android.arouter.launcher.ARouter
 import com.hzsoft.lib.base.R
 import com.hzsoft.lib.base.event.common.BaseActivityEvent
 import com.hzsoft.lib.base.manager.ActivityManager
@@ -63,7 +61,6 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         setContentView(R.layout.activity_root)
         mContext = this
         initCommonView()
-        ARouter.getInstance().inject(this)
         initView()
         initListener()
         initData()
@@ -341,26 +338,6 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         val intent = Intent(this, T::class.java)
         intent.block()
         startActivity(intent)
-    }
-
-    /**
-     * 阿里路由跳转
-     * open("填入你要跳转的ARouter路径") {
-     * withString("你要传递extra的key", "你要传递extra的value")
-     * }
-     */
-    open fun open(path: String, block: Postcard.() -> Unit = {}) {
-        val postcard = ARouter.getInstance().build(path)
-        postcard.block()
-        postcard.navigation()
-    }
-
-    /**
-     * 阿里路由跳转并结束当前页面
-     */
-    open fun openWithFinish(path: String, block: Postcard.() -> Unit = {}) {
-        open(path, block)
-        finish()
     }
 
     private var mLastButterKnifeClickTime: Long = 0

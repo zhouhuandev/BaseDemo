@@ -1,14 +1,5 @@
 apply from: "../lib.build.gradle"
 
-// 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
-// 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-        // arg("AROUTER_GENERATE_DOC", "enable")
-    }
-}
-
 android {
     buildTypes {
         debug {
@@ -52,6 +43,4 @@ dependencies {
     api deps.lifecycle_runtime_ktx
     api deps.lifecycle_common_java8
 
-    api deps.arouter_api
-    kapt deps.arouter_compiler
 }
