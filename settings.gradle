@@ -6,5 +6,5 @@ include ':lib_refresh_layout'
 include ':lib_common'
 include ':lib_base_module'
 include ':lib_base'
-include ':moudble_app'
+include ':app'
 rootProject.name = "BaseDemo"
