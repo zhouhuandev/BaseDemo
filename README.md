@@ -1,39 +1,185 @@
 # BaseDemo
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+## 介绍
 
-#### 软件架构
+BaseDemo 是Android MVVM + Retrofit + OkHttp + Coroutine 协程 + 组件化架构的Android应用开发规范化架构，通过不断的升级迭代，目前主要分为两个版本，分别为分支 MVVM+Databinding 组件化版本，分支MVVM+Databinding+Single 单体版本。旨在帮助您快速构建属于自己的APP项目架构，做到快速响应上手，另外再长期的实践经验中汇总了大量的使用工具类，主要放在了项目 `lib_common` 组件中，以供大家参考使用。具体使用请开发者工具自己项目需求决定选择如何使用。
+
+如果我的付出可以换来对您的帮助的话，还请您点个start，将会是我不懈更新的动力，万分感谢。如果在使用中有任何问题，请留言
+
+- 电子邮件：zhouhuan88888@163.com
+
+## 功能演示
 软件架构说明
+- 主页 上拉刷新，下拉加载，Room操作
 
+![Home](https://github.com/zhouhuandev/BaseDemo/blob/mvvm%2Bdatabinding/image/a29695860836d6dc26f8438785b69af.jpg)
 
-#### 安装教程
+- 中心 添加照片，视频
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+![Me](https://github.com/zhouhuandev/BaseDemo/blob/mvvm%2Bdatabinding/image/5ee846d27257d5f251e23878355c920.jpg)
 
-#### 使用说明
+## 主要功能
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 核心基础库 lib_base
 
-#### 参与贡献
+#### MVVM七大的核心公用基类
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+##### 基础页面接口
+- 视图层核接口 BaseView
 
+```kotlin
+interface BaseView : ILoadView, INoDataView, ITransView, INetErrView {
+    fun initListener()
+    fun initData()
+    fun finishActivity()
+}
+```
+- 加载初始化弹窗接口 ILoadView
+```kotlin
+interface ILoadView {
+    //显示初始加载的View，初始进来加载数据需要显示的View
+    fun showInitLoadView()
 
-#### 特技
+    //隐藏初始加载的View
+    fun hideInitLoadView()
+}
+```
+- 显示是否有数据页面接口 INoDataView
+```kotlin
+interface INoDataView {
+    //显示无数据View
+    fun showNoDataView()
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+    //隐藏无数据View
+    fun hideNoDataView()
+
+    //显示指定资源的无数据View
+    fun showNoDataView(@DrawableRes resid: Int)
+}
+```
+- 显示小菊花View接口 ITransView
+```kotlin
+interface ITransView {
+    //显示背景透明小菊花View,例如删除操作
+    fun showTransLoadingView()
+
+    //隐藏背景透明小菊花View
+    fun hideTransLoadingView()
+}
+```
+- 显示是否网络错误View接口 INetErrView
+```kotlin
+interface INetErrView {
+    //显示网络错误的View
+    fun showNetWorkErrView()
+
+    //隐藏网络错误的View
+    fun hideNetWorkErrView()
+}
+```
+- 基础刷新接口 BaseRefreshView
+```kotlin
+interface BaseRefreshView {
+
+    /**
+     * 是否启用下拉刷新
+     * @param b
+     */
+    fun enableRefresh(b: Boolean)
+
+    /**
+     * 是否启用上拉加载更多
+     */
+    fun enableLoadMore(b: Boolean)
+
+    /**
+     * 刷新回调
+     * 向 ViewModel 发送刷新请求
+     */
+    fun onRefreshEvent()
+
+    /**
+     * 加载更多的回调
+     * 向 ViewModel 发送加载更多请求
+     */
+    fun onLoadMoreEvent()
+
+    /**
+     * 自动加载的事件
+     * 向 ViewModel 发送自动加载的请求
+     */
+    fun onAutoLoadEvent()
+
+    /**
+     * 停止刷新
+     */
+    fun stopRefresh()
+
+    /**
+     * 停止加载更多
+     */
+    fun stopLoadMore()
+
+    /**
+     * 自动加载数据
+     */
+    fun autoLoadData()
+}
+```
+
+##### 基础活动
+
+```kotlin
+abstract class BaseActivity : RxAppCompatActivity(), BaseView {
+	abstract fun onBindLayout(): Int
+	abstract fun initView()
+    abstract override fun initData()
+    override fun initListener()
+}
+```
+
+##### BaseMvvmActivity
+
+```kotlin
+abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
+	/**
+     * 绑定 ViewModel
+     */
+    abstract fun onBindViewModel(): Class<VM>
+	
+    /**
+     * 放置 观察者对象
+     */
+    abstract fun initViewObservable()
+}
+```
+
+##### BaseMvvmDataBindingActivity
+
+```kotlin
+abstract class BaseMvvmDataBindingActivity<V : ViewDataBinding, VM : BaseViewModel> : BaseMvvmActivity<VM>() {
+	abstract fun onBindVariableId(): Int
+}
+```
+
+##### BaseMvvmRefreshActivity
+
+```kotlin
+abstract class BaseMvvmRefreshActivity<T, VM : BaseRefreshViewModel<T>> : BaseMvvmActivity<VM>(), BaseRefreshView {
+	protected abstract fun onBindRreshLayout(): Int
+
+    protected abstract fun enableRefresh(): Boolean
+
+    protected abstract fun enableLoadMore(): Boolean
+}
+```
+##### BaseMvvmRefreshDataBindingActivity
+```kotlin
+abstract class BaseMvvmRefreshDataBindingActivity<T, V : ViewDataBinding, VM : BaseRefreshViewModel<T>> : BaseMvvmDataBindingActivity<V, VM>(), BaseRefreshView {
+	protected abstract fun onBindRreshLayout(): Int
+
+    protected abstract fun enableRefresh(): Boolean
+
+    protected abstract fun enableLoadMore(): Boolean
+}
+```
