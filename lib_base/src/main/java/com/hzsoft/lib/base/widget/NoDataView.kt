@@ -1,4 +1,4 @@
-package com.hzsoft.lib.base.wight
+package com.hzsoft.lib.base.widget
 
 import android.content.Context
 import android.util.AttributeSet

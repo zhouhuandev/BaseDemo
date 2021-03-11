@@ -18,10 +18,10 @@ import com.hzsoft.lib.base.event.common.BaseFragmentEvent
 import com.hzsoft.lib.base.mvvm.view.BaseView
 import com.hzsoft.lib.base.utils.NetUtil
 import com.hzsoft.lib.base.utils.log.KLog
-import com.hzsoft.lib.base.wight.LoadingInitView
-import com.hzsoft.lib.base.wight.LoadingTransView
-import com.hzsoft.lib.base.wight.NetErrorView
-import com.hzsoft.lib.base.wight.NoDataView
+import com.hzsoft.lib.base.widget.LoadingInitView
+import com.hzsoft.lib.base.widget.LoadingTransView
+import com.hzsoft.lib.base.widget.NetErrorView
+import com.hzsoft.lib.base.widget.NoDataView
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
