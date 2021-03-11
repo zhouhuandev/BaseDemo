@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.hzsoft.lib.base.wight.LoadingTransView
+<com.hzsoft.lib.base.widget.LoadingTransView
     android:id="@+id/view_trans_loading"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

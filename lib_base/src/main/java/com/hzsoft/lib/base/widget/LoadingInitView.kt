@@ -1,4 +1,4 @@
-package com.hzsoft.lib.base.wight
+package com.hzsoft.lib.base.widget
 
 import android.content.Context
 import android.graphics.drawable.AnimationDrawable
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.hzsoft.lib.base.R
 
+
 /**
  * Description: <LoadingView><br>
  * Author:      mxdl<br>
@@ -15,12 +16,12 @@ import com.hzsoft.lib.base.R
  * Version:     V1.0.0<br>
  * Update:     <br>
 </LoadingView> */
-class LoadingTransView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
+class LoadingInitView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
     private val mAnimationDrawable: AnimationDrawable
 
     init {
-        View.inflate(context, R.layout.view_trans_loading, this)
-        val imgLoading = findViewById<ImageView>(R.id.img_trans_loading)
+        View.inflate(context, R.layout.view_init_loading, this)
+        val imgLoading = findViewById<ImageView>(R.id.img_init_loading)
         mAnimationDrawable = imgLoading.drawable as AnimationDrawable
     }
 
