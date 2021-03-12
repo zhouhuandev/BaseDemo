@@ -520,6 +520,12 @@ class MyApp : ModuleApplication()
 Name : "zhouhuandev",
 Blog : "https://blog.csdn.net/youxun1312"
 ```
+
+### 感谢第三方开源
+
+- [YImagePicker](https://github.com/yangpeixing/YImagePicker)
+- [KLog](https://github.com/ZhaoKaiQiang/KLog)
+
 ### License
 
 ```
