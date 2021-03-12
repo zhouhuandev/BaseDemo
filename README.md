@@ -526,6 +526,8 @@ Blog : "https://blog.csdn.net/youxun1312"
 - [YImagePicker](https://github.com/yangpeixing/YImagePicker)
 - [KLog](https://github.com/ZhaoKaiQiang/KLog)
 
+注：还有一大部分对此项目提供帮助的开源大佬们，就不一一列出，在此衷心感谢，若是有不足地方麻烦指导改正。
+
 ### License
 
 ```
