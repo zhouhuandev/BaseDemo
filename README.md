@@ -442,7 +442,7 @@ Module的属性是在每个组件的 build.gradle 文件中配置的，当我们
 ```properties
 isModule=false
 ```
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312120433.png?raw=true)
+![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312120433.jpg?raw=true)
 
 ```gradle
 if (isModule.toBoolean()) {
@@ -451,13 +451,13 @@ if (isModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 ```
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312120649.png?raw=true)
+![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312120649.jpg?raw=true)
 
 ### 组件之间AndroidManifest合并问题
 
 我们可以为组件开发模式下的业务组件再创建一个 AndroidManifest.xml，然后根据isModule指定AndroidManifest.xml的文件路径，让业务组件在集成模式和组件模式下使用不同的AndroidManifest.xml，这样表单冲突的问题就可以规避了 已module_main组件为例配置如下：
 
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312121017.png?raw=true)
+![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312121017.jpg?raw=true)
 
 ```gradle
 sourceSets {
@@ -479,7 +479,7 @@ sourceSets {
 
 在每个组件的debug目录下创建一个Application并在module下的AndroidManifest.xml进行配置
 
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312121337.png?raw=true)
+![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312121337.jpg?raw=true)
 
 ### 集成开发模式下的Application
 
