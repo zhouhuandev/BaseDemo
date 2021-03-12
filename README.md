@@ -421,8 +421,11 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 ![MVVM架构示意图](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/final-architecture.png?raw=true)
 
 - View层类关系图
+
 ![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312104341.png?raw=true)
+
 - ViewModel层类关系图
+
 ![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312115824.png?raw=true)
 
 ### 组件化实现
