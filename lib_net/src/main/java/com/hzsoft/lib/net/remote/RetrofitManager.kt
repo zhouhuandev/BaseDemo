@@ -7,7 +7,7 @@ import com.hzsoft.lib.net.remote.interceptor.ResponseInterceptor
 import com.hzsoft.lib.net.remote.moshiFactories.MyStandardJsonAdapters
 import com.hzsoft.lib.net.utils.SSLContextUtil
 import com.squareup.moshi.Moshi
-import com.task.data.remote.moshiFactories.MyKotlinJsonAdapterFactory
+import com.hzsoft.lib.net.remote.moshiFactories.MyKotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -57,12 +57,12 @@ class RetrofitManager {
         okHttpBuilder.addInterceptor(ResponseInterceptor())
         // 添加配置增加拦截器
         val interceptors = NetConfig.getInterceptors()
-        if (interceptors.size > 0) {
+        if (interceptors.isNotEmpty()) {
             interceptors.forEach { okHttpBuilder.addInterceptor(it) }
         }
         // 添加网络拦截器
         val networkInterceptors = NetConfig.getNetworkInterceptors()
-        if (networkInterceptors.size > 0) {
+        if (networkInterceptors.isNotEmpty()) {
             networkInterceptors.forEach { okHttpBuilder.addInterceptor(it) }
         }
 

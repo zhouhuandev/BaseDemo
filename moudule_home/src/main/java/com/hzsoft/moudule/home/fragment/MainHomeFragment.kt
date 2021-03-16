@@ -10,7 +10,7 @@ import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.utils.observe
 import com.hzsoft.moudule.home.R
 import com.hzsoft.moudule.home.viewmodel.MainHomeViewModel
-import com.wx.jetpack.core.utils.toJson
+import com.hzsoft.lib.net.utils.toJson
 import kotlinx.android.synthetic.main.fragment_home_main.*
 
 /**

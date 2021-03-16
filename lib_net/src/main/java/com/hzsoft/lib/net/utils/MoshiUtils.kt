@@ -1,4 +1,4 @@
-package com.wx.jetpack.core.utils
+package com.hzsoft.lib.net.utils
 
 
 import com.squareup.moshi.JsonAdapter

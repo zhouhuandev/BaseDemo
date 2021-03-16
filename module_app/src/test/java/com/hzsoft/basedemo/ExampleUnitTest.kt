@@ -1,7 +1,7 @@
 package com.hzsoft.basedemo
 
-import com.wx.jetpack.core.utils.fromJson
-import com.wx.jetpack.core.utils.toJson
+import com.hzsoft.lib.net.utils.fromJson
+import com.hzsoft.lib.net.utils.toJson
 import org.junit.Test
 
 import org.junit.Assert.*

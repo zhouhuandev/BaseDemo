@@ -39,8 +39,6 @@ dependencies {
     api project(':lib_common')
     api project(':lib_domain')
 
-    api deps.rxjava
-    api deps.rxandroid
     api deps.adapter_rxjava2
     api deps.converter_moshi
     api deps.converter_gson

@@ -3,7 +3,6 @@ package com.hzsoft.lib.net.error.mapper
 import com.hzsoft.lib.common.BaseApplication
 import com.hzsoft.lib.net.R
 import com.hzsoft.lib.net.error.*
-import com.task.data.error.mapper.ErrorMapperInterface
 
 /**
  * Describe:
