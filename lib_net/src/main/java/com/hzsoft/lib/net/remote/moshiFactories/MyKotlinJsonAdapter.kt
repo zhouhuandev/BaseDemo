@@ -33,9 +33,9 @@ private val ABSENT_VALUE = Any()
  * constructor, and then by setting any additional properties that exist, if any.
  */
 internal class MyKotlinJsonAdapter<T>(
-        val constructor: KFunction<T>,
-        val bindings: List<Binding<T, Any?>?>,
-        val options: JsonReader.Options) : JsonAdapter<T>() {
+    val constructor: KFunction<T>,
+    val bindings: List<Binding<T, Any?>?>,
+    val options: JsonReader.Options) : JsonAdapter<T>() {
 
     override fun fromJson(reader: JsonReader): T {
         val constructorSize = constructor.parameters.size
@@ -225,10 +225,10 @@ class MyKotlinJsonAdapterFactory : JsonAdapter.Factory {
                 resolvedPropertyType, Util.jsonAnnotations(allAnnotations.toTypedArray()), property.name)
 
             bindingsByName[property.name] =
-                    MyKotlinJsonAdapter.Binding(
-                            name, adapter,
-                            property as KProperty1<Any, Any?>, parameter
-                    )
+                MyKotlinJsonAdapter.Binding(
+                    name, adapter,
+                    property as KProperty1<Any, Any?>, parameter
+                )
         }
 
         val bindings = ArrayList<MyKotlinJsonAdapter.Binding<Any, Any?>?>()
