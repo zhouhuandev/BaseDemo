@@ -49,9 +49,6 @@ deps.lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
 deps.lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
 deps.lifecycle_common_java8 = "androidx.lifecycle:lifecycle-common-java8:2.2.0"
 
-// Rxjava2
-deps.rxjava = "io.reactivex.rxjava2:rxjava:2.2.19"
-deps.rxandroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
 deps.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
 deps.converter_moshi = "com.squareup.retrofit2:converter-moshi:2.9.0"
 deps.converter_gson = "com.squareup.retrofit2:converter-gson:2.9.0"

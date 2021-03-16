@@ -13,8 +13,8 @@ import com.hzsoft.lib.common.utils.EnvironmentUtil
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
-import com.hzsoft.lib.net.utils.observe
-import com.wx.jetpack.core.utils.toJson
+import com.hzsoft.lib.net.utils.ext.observe
+import com.hzsoft.lib.net.utils.toJson
 import kotlinx.android.synthetic.main.fragment_home_main.*
 
 /**

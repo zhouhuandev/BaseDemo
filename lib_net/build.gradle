@@ -12,8 +12,6 @@ dependencies {
     api deps.kotlin_stdlib
     api deps.kotlin_reflect
 
-    api deps.rxjava
-    api deps.rxandroid
     api deps.adapter_rxjava2
     api deps.converter_moshi
     api deps.converter_gson
