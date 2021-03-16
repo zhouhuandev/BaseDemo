@@ -1,4 +1,4 @@
-package com.task.data.remote
+package com.hzsoft.lib.net.remote
 
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource

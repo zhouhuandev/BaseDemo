@@ -57,12 +57,12 @@ class RetrofitManager {
         okHttpBuilder.addInterceptor(ResponseInterceptor())
         // 添加配置增加拦截器
         val interceptors = NetConfig.getInterceptors()
-        if (interceptors.size > 0) {
+        if (interceptors.isNotEmpty()) {
             interceptors.forEach { okHttpBuilder.addInterceptor(it) }
         }
         // 添加网络拦截器
         val networkInterceptors = NetConfig.getNetworkInterceptors()
-        if (networkInterceptors.size > 0) {
+        if (networkInterceptors.isNotEmpty()) {
             networkInterceptors.forEach { okHttpBuilder.addInterceptor(it) }
         }
 
