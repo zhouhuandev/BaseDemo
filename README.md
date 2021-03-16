@@ -12,11 +12,11 @@ BaseDemo 是Android MVVM + Retrofit + OkHttp + Coroutine 协程 + 组件化架�
 软件架构说明
 - 主页 上拉刷新，下拉加载，Room操作
 
-![Home](https://github.com/zhouhuandev/BaseDemo/blob/mvvm%2Bdatabinding/image/a29695860836d6dc26f8438785b69af.jpg)
+![Home](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211108.jpg)
 
 - 中心 添加照片，视频
 
-![Me](https://github.com/zhouhuandev/BaseDemo/blob/mvvm%2Bdatabinding/image/5ee846d27257d5f251e23878355c920.jpg)
+![Me](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211101.jpg)
 
 ## 主要功能
 
@@ -404,7 +404,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 
 ### 项目架构
 
-![项目架构](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312093450.png?raw=true)
+![项目架构](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211114.png)
 
 - 集成模式：所有的业务组件被“app壳工程”依赖，组成一个完整的APP；
 - 组件模式：可以独立开发业务组件，每一个业务组件就是一个APP；
@@ -416,17 +416,17 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 
 ### MVVM架构
 #### BaseMVVM架构
-![MVVM](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312094026.png?raw=true)
+![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211118.png)
 #### 官方指导MVVM架构
-![MVVM架构示意图](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/final-architecture.png?raw=true)
+![MVVM架构示意图](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211213.png)
 
 - View层类关系图
 
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312104341.png?raw=true)
+![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211131.png)
 
 - ViewModel层类关系图
 
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312115824.png?raw=true)
+![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211135.png)
 
 ### 组件化实现
 基于阿里 `ARouter` 作为路由，实现组件与组件的通信跳转
@@ -442,7 +442,7 @@ Module的属性是在每个组件的 build.gradle 文件中配置的，当我们
 ```properties
 isModule=false
 ```
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312120433.jpg?raw=true)
+![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211140.jpg)
 
 ```gradle
 if (isModule.toBoolean()) {
@@ -451,13 +451,13 @@ if (isModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 ```
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312120649.jpg?raw=true)
+![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211145.jpg)
 
 ### 组件之间AndroidManifest合并问题
 
 我们可以为组件开发模式下的业务组件再创建一个 AndroidManifest.xml，然后根据isModule指定AndroidManifest.xml的文件路径，让业务组件在集成模式和组件模式下使用不同的AndroidManifest.xml，这样表单冲突的问题就可以规避了 已module_main组件为例配置如下：
 
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312121017.jpg?raw=true)
+![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211150.jpg)
 
 ```gradle
 sourceSets {
@@ -479,7 +479,7 @@ sourceSets {
 
 在每个组件的debug目录下创建一个Application并在module下的AndroidManifest.xml进行配置
 
-![UML](https://github.com/zhouhuandev/BaseDemo/blob/mvvm+databinding/image/20210312121337.jpg?raw=true)
+![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211206.jpg)
 
 ### 集成开发模式下的Application
 
