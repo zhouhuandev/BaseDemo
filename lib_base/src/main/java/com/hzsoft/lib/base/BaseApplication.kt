@@ -1,6 +1,7 @@
 package com.hzsoft.lib.base
 
 import android.app.Application
+import android.content.Context
 import com.hzsoft.lib.base.utils.log.KLog
 
 /**
@@ -19,6 +20,7 @@ open class BaseApplication : Application() {
         lateinit var instance: BaseApplication
             private set
 
-        fun getContext() = instance.applicationContext
+        @JvmStatic
+        fun getContext(): Context = instance.applicationContext
     }
 }
