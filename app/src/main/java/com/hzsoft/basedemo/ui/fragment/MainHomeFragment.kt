@@ -15,7 +15,7 @@ import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.utils.ext.launch
-import com.hzsoft.lib.net.utils.observe
+import com.hzsoft.lib.net.utils.ext.observe
 import com.hzsoft.lib.net.utils.toJson
 
 /**
