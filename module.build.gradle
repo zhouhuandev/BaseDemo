@@ -17,10 +17,6 @@ kapt {
 android {
     // 每个单独的 module库build可进行单独自定义配置相关文件信息
 
-    //@Parcelize标记需要设置experimental = true
-    androidExtensions {
-        experimental = true
-    }
     buildFeatures{
         dataBinding = true
         // for view binding :

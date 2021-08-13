@@ -33,21 +33,24 @@ deps.eventbus = "org.greenrobot:eventbus:3.2.0"
 deps.MultiImageSelector = "com.github.lovetuzitong:MultiImageSelector:1.2"
 
 // rxlife
-deps.rxlifecycle = "com.trello.rxlifecycle2:rxlifecycle:2.2.2"
-deps.rxlifecycle_android = "com.trello.rxlifecycle2:rxlifecycle-android:2.2.2"
-deps.rxlifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2"
+def rxLifecycleVersion = '2.2.2'
+deps.rxlifecycle = "com.trello.rxlifecycle2:rxlifecycle:$rxLifecycleVersion"
+deps.rxlifecycle_android = "com.trello.rxlifecycle2:rxlifecycle-android:$rxLifecycleVersion"
+deps.rxlifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:$rxLifecycleVersion"
 
 // Room
-deps.room = "androidx.room:room-runtime:2.2.5"
-deps.room_compiler = "androidx.room:room-compiler:2.2.5"
-deps.room_ktx = "androidx.room:room-ktx:2.2.5"
+def roomVersion = '2.2.5'
+deps.room = "androidx.room:room-runtime:$roomVersion"
+deps.room_compiler = "androidx.room:room-compiler:$roomVersion"
+deps.room_ktx = "androidx.room:room-ktx:$roomVersion"
 
 // lifecycle
-deps.lifecycle_viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-deps.lifecycle_livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-deps.lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
-deps.lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-deps.lifecycle_common_java8 = "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+def lifecycleVersion = '2.2.0'
+deps.lifecycle_viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+deps.lifecycle_livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+deps.lifecycle_extensions = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+deps.lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+deps.lifecycle_common_java8 = "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
 
 // Rxjava2
 deps.rxjava = "io.reactivex.rxjava2:rxjava:2.2.19"
@@ -58,12 +61,16 @@ deps.converter_gson = "com.squareup.retrofit2:converter-gson:2.9.0"
 deps.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
 // Glide
-deps.glide = "com.github.bumptech.glide:glide:4.11.0"
-deps.glide_compiler = "com.github.bumptech.glide:compiler:4.11.0"
+def glideVersion = '4.11.0'
+deps.glide = "com.github.bumptech.glide:glide:$glideVersion"
+deps.glide_compiler = "com.github.bumptech.glide:compiler:$glideVersion"
+// glide高斯模糊
+deps.glide_transformations = 'jp.wasabeef:glide-transformations:4.0.1'
 
 // MoShi
-deps.moshi = "com.squareup.moshi:moshi:1.11.0"
-deps.moshi_kotlin_codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.11.0"
+def moshiVersion = '1.12.0'
+deps.moshi = "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+deps.moshi_kotlin_codegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
 // leakcanary 自动进行埋点测试
 deps.leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.5"
