@@ -3,15 +3,17 @@
     <color name="colorPrimary">@color/color_white</color> <!--AppBarb背景色-->
     <color name="colorPrimaryDark">@color/color_black</color> <!--状态栏颜色-->
     <color name="colorAccent">@color/tab_selected</color> <!--控制各个空间被选中时的颜色-->
-<!--    <color name="textColorPrimary">@color/color_333</color>-->
+    <!--    <color name="textColorPrimary">@color/color_333</color>-->
 
     <color name="theme">#0000ff</color>
     <color name="menu_color">#1976D2</color>
     <color name="color_black">#000</color>
     <color name="color_white">#fff</color>
+    <color name="white">#FFFFFF</color>
     <color name="color_333">#333</color>
     <color name="color_666">#666</color>
     <color name="color_999">#999</color>
+    <color name="color_99000000">#99000000</color>
     <color name="white_night">#D3D3D3</color>  <!--微信夜间模式字体颜色-->
 
     <color name="bg">#eeeff3</color>

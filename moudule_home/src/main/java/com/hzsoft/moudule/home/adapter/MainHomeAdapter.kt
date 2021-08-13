@@ -1,11 +1,11 @@
-package com.hzsoft.moudule.home.adapter
+package com.hzsoft.basedemo.adapter
 
 import android.content.Context
 import com.bumptech.glide.Glide
 import com.hzsoft.lib.base.adapter.BaseDataBindAdapter
 import com.hzsoft.lib.base.adapter.BaseViewHolder
-import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.lib.domain.entity.Demo
+import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.moudule.home.R
 import com.hzsoft.moudule.home.databinding.ItemRecipeBinding
 
@@ -16,7 +16,7 @@ import com.hzsoft.moudule.home.databinding.ItemRecipeBinding
  * @author zhouhuan
  * @Date 2020/12/17
  */
-class MainHomeAdpater(mContext: Context) :
+class MainHomeAdapter(private val mContext: Context) :
     BaseDataBindAdapter<Demo, ItemRecipeBinding, BaseViewHolder>(mContext) {
 
     override fun onBindItem(binding: ItemRecipeBinding?, item: Demo, position: Int) {

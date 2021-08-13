@@ -30,6 +30,7 @@ class ErrorMapper constructor() : ErrorMapperInterface {
             Pair(NETWORD_ERROR, getErrorString(R.string.NETWORD_ERROR)),
             Pair(TIMEOUT_ERROR, getErrorString(R.string.TIMEOUT_ERROR)),
             Pair(NULL_DATA, getErrorString(R.string.NULL_DATA)),
-            Pair(NOT_NETWORD, getErrorString(R.string.NOT_NETWORD))
-        ).withDefault { getErrorString(UNKNOWN) }
+            Pair(NOT_NETWORD, getErrorString(R.string.NOT_NETWORD)),
+            Pair(UNKNOWN, getErrorString(R.string.TIMEOUT_ERROR))
+        ).withDefault { getErrorString(R.string.TIMEOUT_ERROR) }
 }

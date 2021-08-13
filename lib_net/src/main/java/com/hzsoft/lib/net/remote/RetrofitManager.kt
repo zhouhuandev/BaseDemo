@@ -4,10 +4,10 @@ import com.hzsoft.lib.net.BuildConfig
 import com.hzsoft.lib.net.config.NetConfig
 import com.hzsoft.lib.net.remote.interceptor.RequestInterceptor
 import com.hzsoft.lib.net.remote.interceptor.ResponseInterceptor
+import com.hzsoft.lib.net.remote.moshiFactories.MyKotlinJsonAdapterFactory
 import com.hzsoft.lib.net.remote.moshiFactories.MyStandardJsonAdapters
 import com.hzsoft.lib.net.utils.SSLContextUtil
 import com.squareup.moshi.Moshi
-import com.hzsoft.lib.net.remote.moshiFactories.MyKotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

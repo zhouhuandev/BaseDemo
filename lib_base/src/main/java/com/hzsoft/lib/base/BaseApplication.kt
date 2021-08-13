@@ -1,8 +1,9 @@
 package com.hzsoft.lib.base
 
 import android.app.Application
+import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
-import com.hzsoft.lib.base.utils.log.KLog
+import com.hzsoft.lib.log.KLog
 
 /**
  * 初始化应用程序
@@ -23,9 +24,12 @@ open class BaseApplication : Application() {
     }
 
     companion object {
+        const val TAG = "BaseApplication"
+
         lateinit var instance: BaseApplication
             private set
 
-        fun getContext() = instance.applicationContext
+        @JvmStatic
+        fun getContext(): Context = instance.applicationContext
     }
 }

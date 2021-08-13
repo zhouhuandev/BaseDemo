@@ -1,10 +1,7 @@
 apply from: "../lib.build.gradle"
 
 android {
-    //@Parcelize标记需要设置experimental = true
-    androidExtensions {
-        experimental = true
-    }
+
 }
 
 dependencies {

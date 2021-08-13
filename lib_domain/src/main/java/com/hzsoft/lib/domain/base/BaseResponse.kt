@@ -11,13 +11,11 @@ import com.squareup.moshi.JsonClass
  * @Date 2020/12/1
  */
 @JsonClass(generateAdapter = true)
-class BaseResponse<T> constructor(
-    @Json(name = "success")
-    var success: Boolean = false,
-    @Json(name = "status")
-    var status: Int = 0,
-    @Json(name = "message")
-    var message: String? = null,
+class BaseResponse<out T> constructor(
+    @Json(name = "code")
+    val code: Int = 0,
+    @Json(name = "msg")
+    val msg: String? = "",
     @Json(name = "data")
-    var data: T? = null
+    val data: T? = null
 )

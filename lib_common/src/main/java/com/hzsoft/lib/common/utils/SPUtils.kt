@@ -33,7 +33,7 @@ object SPUtils {
     /**
      * 保存在手机里面的文件名
      */
-    val FILE_NAME = "fly_tour_data"
+    val FILE_NAME = "base_demo_data"
 
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
