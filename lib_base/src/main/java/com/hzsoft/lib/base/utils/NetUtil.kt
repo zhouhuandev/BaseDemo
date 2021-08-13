@@ -13,11 +13,13 @@ import com.hzsoft.lib.base.BaseApplication
  */
 object NetUtil {
 
+    @JvmStatic
     fun checkNet(): Boolean {
         val context = BaseApplication.instance
-        return isWifiConnection(context!!) || isStationConnection(context!!)
+        return isWifiConnection(context) || isStationConnection(context)
     }
 
+    @JvmStatic
     fun checkNetToast(): Boolean {
         val isNet = checkNet()
         if (!isNet) {
@@ -32,9 +34,10 @@ object NetUtil {
      * @param context
      * @return
      */
+    @JvmStatic
     fun isStationConnection(context: Context): Boolean {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                ?: return false
+            ?: return false
         val networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
         return if (networkInfo != null) {
             networkInfo.isAvailable && networkInfo.isConnected
@@ -47,15 +50,17 @@ object NetUtil {
      * @param context
      * @return
      */
+    @JvmStatic
     fun isWifiConnection(context: Context): Boolean {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                ?: return false
+            ?: return false
         val networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
         return if (networkInfo != null) {
             networkInfo.isAvailable && networkInfo.isConnected
         } else false
     }
 
+    @JvmStatic
     fun isNetWorkState(context: Context): NetType {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = manager.activeNetworkInfo

@@ -7,7 +7,7 @@ import com.hzsoft.lib.net.local.LocalData
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.remote.RemoteData
 import com.hzsoft.lib.net.remote.RetrofitManager
-import com.hzsoft.lib.net.utils.Network
+import com.hzsoft.lib.net.utils.NetworkHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -24,7 +24,7 @@ import kotlin.coroutines.CoroutineContext
  */
 class DataRepository constructor(
     private val remoteRepository: RemoteData = RemoteData(
-        RetrofitManager(), Network(NetAppContext.getContext())
+        RetrofitManager(), NetworkHelper(NetAppContext.getContext())
     ),
     private val localRepository: LocalData = LocalData(),
     private val ioDispatcher: CoroutineContext = Dispatchers.IO

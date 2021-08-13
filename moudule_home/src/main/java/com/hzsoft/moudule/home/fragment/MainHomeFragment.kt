@@ -1,21 +1,22 @@
 package com.hzsoft.moudule.home.fragment
 
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hzsoft.lib.base.utils.log.KLog
+import com.hzsoft.basedemo.adapter.MainHomeAdapter
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
 import com.hzsoft.lib.common.utils.EnvironmentUtil
 import com.hzsoft.lib.domain.entity.Demo
+import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
+import com.hzsoft.lib.net.utils.ext.launch
 import com.hzsoft.lib.net.utils.ext.observe
+import com.hzsoft.lib.net.utils.toJson
 import com.hzsoft.moudule.home.BR
 import com.hzsoft.moudule.home.R
-import com.hzsoft.moudule.home.adapter.MainHomeAdpater
 import com.hzsoft.moudule.home.databinding.FragmentHomeMainBinding
 import com.hzsoft.moudule.home.viewmodel.MainHomeViewModel
-import com.hzsoft.lib.net.utils.toJson
-import kotlinx.android.synthetic.main.fragment_home_main.*
 
 /**
  * Describe:
@@ -33,7 +34,7 @@ class MainHomeFragment :
         }
     }
 
-    private lateinit var mAdapter: MainHomeAdpater
+    private lateinit var mAdapter: MainHomeAdapter
 
     override fun onBindVariableId(): Int = BR.viewModel
 
@@ -47,7 +48,7 @@ class MainHomeFragment :
     override fun onBindLayout(): Int = R.layout.fragment_home_main
 
     override fun initView(mView: View) {
-        mAdapter = MainHomeAdpater(mContext)
+        mAdapter = MainHomeAdapter(mContext)
         mBinding.mRecyclerView.adapter = mAdapter
         mBinding.mRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
@@ -59,8 +60,8 @@ class MainHomeFragment :
     }
 
     override fun initListener() {
-        addUser.setOnClickListener(this::onClick)
-        selectUser.setOnClickListener(this::onClick)
+        findViewById<View>(R.id.addUser).setOnClickListener(this::onClick)
+        findViewById<View>(R.id.selectUser).setOnClickListener(this::onClick)
     }
 
     var index = 0
@@ -103,14 +104,10 @@ class MainHomeFragment :
 
     override fun getTootBarTitle(): String = resources.getString(R.string.module_home)
 
-    private fun handleRecipesList(status: Resource<List<Demo>>) {
-        when (status) {
-            is Resource.Success -> status.data?.let {
-                // stopRefresh(it)
-                bindListData(recipes = it)
-            }
-            is Resource.DataError -> {
-                status.errorCode?.let { KLog.e("zhouhuan", "--------->$it") }
+    private fun handleRecipesList(resource: Resource<List<Demo>>) {
+        resource.launch {
+            it?.apply {
+                bindListData(recipes = this)
             }
         }
     }
@@ -129,6 +126,6 @@ class MainHomeFragment :
     }
 
     private fun bindListData2(userTestRoom: List<UserTestRoom>) {
-        textView2.text = userTestRoom.toJson()
+        findViewById<TextView>(R.id.textView2).text = userTestRoom.toJson()
     }
 }

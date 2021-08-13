@@ -2,11 +2,11 @@ package com.hzsoft.module.main
 
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Autowired
-import com.hzsoft.lib.base.view.BaseActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hzsoft.lib.base.module.provider.IHomeProvider
 import com.hzsoft.lib.base.module.provider.IMeProvider
+import com.hzsoft.lib.base.view.BaseActivity
 import com.hzsoft.module.main.entity.MainChannel
-import kotlinx.android.synthetic.main.activity_main_index.*
 
 /**
  * Describe:
@@ -32,10 +32,6 @@ class MainActivity : BaseActivity() {
     override fun onBindLayout(): Int = R.layout.activity_main_index
 
     override fun initView() {
-
-    }
-
-    override fun initData() {
         mHomeFragment = mHomeProvider?.mainHomeFragment
         mMeFragment = mMeProvider?.mainMeFragment
 
@@ -47,8 +43,12 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun initData() {
+
+    }
+
     override fun initListener() {
-        navigation.setOnNavigationItemSelectedListener {
+        findViewById<BottomNavigationView>(R.id.navigation).setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
                     switchContent(mCurrFragment, mHomeFragment, MainChannel.HOME.name)

@@ -2,7 +2,6 @@ package com.hzsoft.lib.base.view
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Observer
 import com.hzsoft.lib.base.mvvm.view.BaseRefreshView
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseRefreshViewModel
 import com.refresh.lib.BaseRefreshLayout
@@ -20,6 +19,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
     BaseRefreshView {
 
     protected lateinit var mRefreshLayout: DaisyRefreshLayout
+    protected var isRefresh = true
 
     override fun initCommonView(view: View) {
         super.initCommonView(view)
@@ -48,12 +48,14 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         // 下拉刷新
         mRefreshLayout.setOnRefreshListener(object : BaseRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
+                isRefresh = true
                 onRefreshEvent()
             }
         })
         // 上拉加载
         mRefreshLayout.setOnLoadMoreListener(object : BaseRefreshLayout.OnLoadMoreListener {
             override fun onLoadMore() {
+                isRefresh = false
                 onLoadMoreEvent()
             }
         })
@@ -69,15 +71,15 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
      * 初始化观察者 ViewModel 层加载完数据的回调通知当前页面事件已完成
      */
     private fun initBaseViewRefreshObservable() {
-        mViewModel.mUIChangeRefreshLiveData.autoRefresLiveEvent.observe(
-            this,
-            Observer { autoLoadData() })
-        mViewModel.mUIChangeRefreshLiveData.stopRefresLiveEvent.observe(
-            this,
-            Observer { stopRefresh() })
-        mViewModel.mUIChangeRefreshLiveData.stopLoadMoreLiveEvent.observe(
-            this,
-            Observer { stopLoadMore() })
+        mViewModel.mUIChangeRefreshLiveData.autoRefreshLiveEvent.observe(this) {
+            autoLoadData()
+        }
+        mViewModel.mUIChangeRefreshLiveData.stopRefreshLiveEvent.observe(this) {
+            stopRefresh()
+        }
+        mViewModel.mUIChangeRefreshLiveData.stopLoadMoreLiveEvent.observe(this) {
+            stopLoadMore()
+        }
     }
 
 

@@ -1,8 +1,7 @@
 package com.hzsoft.lib.net.remote.interceptor
 
 import android.text.TextUtils
-import com.hzsoft.lib.net.utils.ext.view.showToast
-import com.hzsoft.lib.base.utils.log.KLog
+import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.config.Encoding
 import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.config.contentTypeValue
@@ -11,6 +10,7 @@ import com.hzsoft.lib.net.error.NULL_DATA
 import com.hzsoft.lib.net.error.PARSE_ERROR
 import com.hzsoft.lib.net.error.mapper.ErrorManager
 import com.hzsoft.lib.net.error.mapper.ErrorMapper
+import com.hzsoft.lib.net.utils.ext.view.showToast
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Response
@@ -26,8 +26,12 @@ import java.nio.charset.Charset
  * @Date 2020/12/1
  */
 class ResponseInterceptor : Interceptor {
-    private val TAG = ResponseInterceptor::class.java.simpleName
-    val errorManager: ErrorManager = ErrorManager(ErrorMapper())
+
+    companion object {
+        val TAG: String = ResponseInterceptor::class.java.simpleName
+    }
+
+    private val errorManager: ErrorManager = ErrorManager(ErrorMapper())
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -62,7 +66,7 @@ class ResponseInterceptor : Interceptor {
         }
     }
 
-    fun bufferBody(response: Response): String {
+    private fun bufferBody(response: Response): String {
         val source = response.body!!.source()
         source.request(Long.MAX_VALUE)
         val buffer = source.buffer()

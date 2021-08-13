@@ -16,7 +16,7 @@ import com.hzsoft.lib.net.local.entity.UserTestRoom
  * @author zhouhuan
  * @Date 2020/12/7
  */
-@Database(version = 1, entities = [UserTestRoom::class])
+@Database(version = 1, exportSchema = false, entities = [UserTestRoom::class])
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userTestRoomDao(): UserTestRoomDao

@@ -2,7 +2,7 @@ package com.hzsoft.lib.base.utils.log.klog
 
 import android.util.Log
 
-import com.hzsoft.lib.base.utils.log.KLog
+import com.hzsoft.lib.log.KLog
 
 /**
  * Created by zhaokaiqiang on 15/11/18.

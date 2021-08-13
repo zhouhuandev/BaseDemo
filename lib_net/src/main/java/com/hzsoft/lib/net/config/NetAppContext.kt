@@ -1,7 +1,7 @@
 package com.hzsoft.lib.net.config
 
 import android.content.Context
-import java.lang.NullPointerException
+import java.lang.ref.WeakReference
 
 /**
  * Describe:
@@ -11,14 +11,14 @@ import java.lang.NullPointerException
  * @Date 2020/12/1
  */
 object NetAppContext {
-    private var mContext: Context? = null
+    private var mContext: WeakReference<Context>? = null
 
     /**
      * 初始化工具上下文
      */
     fun init(context: Context) {
-        this.mContext = context.applicationContext
+        this.mContext = WeakReference(context.applicationContext)
     }
 
-    fun getContext(): Context = mContext ?: throw NullPointerException("Net Not init")
+    fun getContext(): Context = mContext?.get() ?: throw NullPointerException("Net Not init")
 }

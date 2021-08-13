@@ -1,5 +1,4 @@
-package com.hzsoft.lib.base.utils.log
-
+package com.hzsoft.lib.log
 
 import android.text.TextUtils
 
@@ -60,128 +59,159 @@ object KLog {
     private var mIsGlobalTagEmpty = true
     private var IS_SHOW_LOG = true
 
+    @JvmStatic
     fun init(isShowLog: Boolean) {
         IS_SHOW_LOG = isShowLog
     }
 
+    @JvmStatic
     fun init(isShowLog: Boolean, tag: String?) {
         IS_SHOW_LOG = isShowLog
         mGlobalTag = tag
         mIsGlobalTagEmpty = TextUtils.isEmpty(mGlobalTag)
     }
 
+    @JvmStatic
     fun v() {
         printLog(V, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun v(msg: Any) {
         printLog(V, null, msg)
     }
 
+    @JvmStatic
     fun v(tag: String, vararg objects: Any) {
         printLog(V, tag, *objects)
     }
 
+    @JvmStatic
     fun d() {
         printLog(D, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun d(msg: Any) {
         printLog(D, null, msg)
     }
 
+    @JvmStatic
     fun d(tag: String, vararg objects: Any) {
         printLog(D, tag, *objects)
     }
 
+    @JvmStatic
     fun i() {
         printLog(I, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun i(msg: Any) {
         printLog(I, null, msg)
     }
 
+    @JvmStatic
     fun i(tag: String, vararg objects: Any) {
         printLog(I, tag, *objects)
     }
 
+    @JvmStatic
     fun w() {
         printLog(W, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun w(msg: Any) {
         printLog(W, null, msg)
     }
 
+    @JvmStatic
     fun w(tag: String, vararg objects: Any) {
         printLog(W, tag, *objects)
     }
 
+    @JvmStatic
     fun e() {
         printLog(E, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun e(msg: Any) {
         printLog(E, null, msg)
     }
 
+    @JvmStatic
     fun e(tag: String, vararg objects: Any) {
         printLog(E, tag, *objects)
     }
 
+    @JvmStatic
     fun a() {
         printLog(A, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun a(msg: Any) {
         printLog(A, null, msg)
     }
 
+    @JvmStatic
     fun a(tag: String, vararg objects: Any) {
         printLog(A, tag, *objects)
     }
 
+    @JvmStatic
     fun json(jsonFormat: String) {
         printLog(JSON, null, jsonFormat)
     }
 
+    @JvmStatic
     fun json(tag: String, jsonFormat: String) {
         printLog(JSON, tag, jsonFormat)
     }
 
+    @JvmStatic
     fun xml(xml: String) {
         printLog(XML, null, xml)
     }
 
+    @JvmStatic
     fun xml(tag: String, xml: String) {
         printLog(XML, tag, xml)
     }
 
+    @JvmStatic
     fun file(targetDirectory: File, msg: Any) {
         printFile(null, targetDirectory, null, msg)
     }
 
+    @JvmStatic
     fun file(tag: String, targetDirectory: File, msg: Any) {
         printFile(tag, targetDirectory, null, msg)
     }
 
+    @JvmStatic
     fun file(tag: String, targetDirectory: File, fileName: String, msg: Any) {
         printFile(tag, targetDirectory, fileName, msg)
     }
 
+    @JvmStatic
     fun debug() {
         printDebug(null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun debug(msg: Any) {
         printDebug(null, msg)
     }
 
+    @JvmStatic
     fun debug(tag: String, vararg objects: Any) {
         printDebug(tag, *objects)
     }
 
+    @JvmStatic
     fun trace() {
         printStackTrace()
     }
@@ -199,7 +229,8 @@ object KLog {
         pw.flush()
         val message = sw.toString()
 
-        val traceString = message.split("\\n\\t".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
+        val traceString =
+            message.split("\\n\\t".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
         val sb = StringBuilder()
         sb.append("\n")
         for (trace in traceString) {
@@ -243,7 +274,12 @@ object KLog {
     }
 
 
-    private fun printFile(tagStr: String?, targetDirectory: File, fileName: String?, objectMsg: Any) {
+    private fun printFile(
+        tagStr: String?,
+        targetDirectory: File,
+        fileName: String?,
+        objectMsg: Any
+    ) {
 
         if (!IS_SHOW_LOG) {
             return
@@ -257,19 +293,25 @@ object KLog {
         FileLog.printFile(tag, targetDirectory, fileName, headString, msg)
     }
 
-    private fun wrapperContent(stackTraceIndex: Int, tagStr: String?, vararg objects: Any): Array<String> {
+    private fun wrapperContent(
+        stackTraceIndex: Int,
+        tagStr: String?,
+        vararg objects: Any
+    ): Array<String> {
 
         val stackTrace = Thread.currentThread().stackTrace
 
         val targetElement = stackTrace[stackTraceIndex]
         var className = targetElement.className
-        val classNameInfo = className.split("\\.".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
+        val classNameInfo =
+            className.split("\\.".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
         if (classNameInfo.size > 0) {
             className = classNameInfo[classNameInfo.size - 1] + SUFFIX
         }
 
         if (className.contains("$")) {
-            className = className.split("\\$".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()[0] + SUFFIX
+            className = className.split("\\$".toRegex()).dropLastWhile({ it.isEmpty() })
+                .toTypedArray()[0] + SUFFIX
         }
 
         val methodName = targetElement.methodName
@@ -301,11 +343,13 @@ object KLog {
             for (i in objects.indices) {
                 val `object` = objects[i]
                 if (`object` == null) {
-                    stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ").append(
-                        NULL
-                    ).append("\n")
+                    stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ")
+                        .append(
+                            NULL
+                        ).append("\n")
                 } else {
-                    stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ").append(`object`.toString()).append("\n")
+                    stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ")
+                        .append(`object`.toString()).append("\n")
                 }
             }
             return stringBuilder.toString()

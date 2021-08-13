@@ -17,7 +17,7 @@ abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewMod
     protected lateinit var mBinding: V
     private var viewModelId = 0
 
-    override fun initConentView(mViewStubContent: ViewStub) {
+    override fun initContentView(mViewStubContent: ViewStub) {
         mViewStubContent.layoutResource = onBindLayout()
         initViewDataBinding(mViewStubContent)
         mViewStubContent.inflate()

@@ -2,7 +2,7 @@ package com.hzsoft.lib.base.utils.log.klog
 
 import android.util.Log
 
-import com.hzsoft.lib.base.utils.log.KLog
+import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.base.utils.log.KLogUtil
 
 import org.json.JSONArray

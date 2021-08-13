@@ -14,9 +14,9 @@ import java.util.*
  * @author zhouhuan
  * @Data 2020/11/19
  */
-abstract class BaseAdapter<E, VH : BaseViewHolder>(protected var mContext: Context) :
+abstract class BaseAdapter<E, VH : BaseViewHolder>(protected open var context: Context) :
     RecyclerView.Adapter<VH>() {
-    protected var mList: MutableList<E>
+    protected var mList: MutableList<E> = ArrayList()
     protected var mOnItemClickListener: OnItemClickListener? = null
     protected var mOnItemLongClickListener: OnItemLongClickListener? = null
     protected var mOnItemChildClickListener: OnItemChildClickListener? = null
@@ -25,12 +25,8 @@ abstract class BaseAdapter<E, VH : BaseViewHolder>(protected var mContext: Conte
     val listData: List<E>
         get() = mList
 
-    init {
-        mList = ArrayList()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val view = LayoutInflater.from(mContext).inflate(onBindLayout(viewType), parent, false)
+        val view = LayoutInflater.from(context).inflate(onBindLayout(viewType), parent, false)
         val onCreateHolder = onCreateHolder(view)
         onCreateHolder.adapter = this
         return onCreateHolder
@@ -49,7 +45,7 @@ abstract class BaseAdapter<E, VH : BaseViewHolder>(protected var mContext: Conte
     /**
      * 绑定数据
      */
-    protected abstract fun onBindItem(holder: VH, item: E, positon: Int)
+    protected abstract fun onBindItem(holder: VH, item: E, position: Int)
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val e = mList[position]
@@ -89,7 +85,7 @@ abstract class BaseAdapter<E, VH : BaseViewHolder>(protected var mContext: Conte
         }
     }
 
-    fun refresh(list: List<E>) {
+    open fun refresh(list: List<E>) {
         mList.clear()
         if (list.isNotEmpty()) {
             mList.addAll(list)
@@ -97,8 +93,8 @@ abstract class BaseAdapter<E, VH : BaseViewHolder>(protected var mContext: Conte
         notifyDataSetChanged()
     }
 
-    fun remove(positon: Int) {
-        mList.removeAt(positon)
+    fun remove(position: Int) {
+        mList.removeAt(position)
         notifyDataSetChanged()
     }
 
@@ -126,7 +122,7 @@ abstract class BaseAdapter<E, VH : BaseViewHolder>(protected var mContext: Conte
         notifyDataSetChanged()
     }
 
-    fun setItemClickListener(itemClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
         mOnItemClickListener = itemClickListener
     }
 
