@@ -11,17 +11,18 @@ import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.IdRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.hzsoft.lib.base.R
 import com.hzsoft.lib.base.event.common.BaseFragmentEvent
 import com.hzsoft.lib.base.mvvm.view.BaseView
 import com.hzsoft.lib.base.utils.NetUtil
-import com.hzsoft.lib.base.utils.log.KLog
 import com.hzsoft.lib.base.widget.LoadingInitView
 import com.hzsoft.lib.base.widget.LoadingTransView
 import com.hzsoft.lib.base.widget.NetErrorView
 import com.hzsoft.lib.base.widget.NoDataView
+import com.hzsoft.lib.log.KLog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -35,7 +36,9 @@ import org.greenrobot.eventbus.ThreadMode
  */
 abstract class BaseFragment : Fragment(), BaseView {
 
-    val TAG: String = this::class.java.simpleName
+    companion object {
+        val TAG: String = this::class.java.simpleName
+    }
 
     protected lateinit var mContext: Context
 
@@ -68,9 +71,14 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val currentTimeMillis = System.currentTimeMillis()
+
         mActivity = (activity as RxAppCompatActivity?)!!
         EventBus.getDefault().register(this)
-        KLog.e(TAG, "onCreate: 当前进入的Fragment: $javaClass")
+        initBundle()
+
+        val totalTime = System.currentTimeMillis() - currentTimeMillis
+        KLog.e(TAG, "onCreate: 当前进入的Fragment: $javaClass 初始化时间:$totalTime ms")
     }
 
     override fun onCreateView(
@@ -93,13 +101,13 @@ abstract class BaseFragment : Fragment(), BaseView {
 
         if (enableToolbar()) {
             mViewStubToolbar.layoutResource = onBindToolbarLayout()
-            val viewTooBbar = mViewStubToolbar.inflate()
-            initTooBar(viewTooBbar)
+            val viewToolBar = mViewStubToolbar.inflate()
+            initTooBar(viewToolBar)
         }
-        initConentView(mViewStubContent)
+        initContentView(mViewStubContent)
     }
 
-    open fun initConentView(mViewStubContent: ViewStub) {
+    open fun initContentView(mViewStubContent: ViewStub) {
         mViewStubContent.layoutResource = onBindLayout()
         mViewStubContent.inflate()
     }
@@ -188,7 +196,7 @@ abstract class BaseFragment : Fragment(), BaseView {
             }
             //当标题栏右边的文字不为空时进行填充文字信息
             if (tvToolbarRight != null && !TextUtils.isEmpty(getToolBarRightTxt())) {
-                tvToolbarRight?.setText(getToolBarRightTxt())
+                tvToolbarRight?.text = getToolBarRightTxt()
                 tvToolbarRight?.visibility = View.VISIBLE
                 tvToolbarRight?.setOnClickListener(getToolBarRightTxtClick())
             }
@@ -261,6 +269,9 @@ abstract class BaseFragment : Fragment(), BaseView {
         return null
     }
 
+    open fun initBundle() {
+
+    }
 
     abstract fun onBindLayout(): Int
 
@@ -403,5 +414,9 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     open fun onClick(v: View?) {
 
+    }
+
+    open fun <T : View?> findViewById(@IdRes id: Int): T {
+        return mView.findViewById<T>(id)
     }
 }

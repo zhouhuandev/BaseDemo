@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel
 import com.hzsoft.lib.base.utils.ext.view.showToast
-import com.hzsoft.lib.base.utils.log.KLog
+import com.hzsoft.lib.log.KLog
 
 /**
  * Describe:

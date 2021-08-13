@@ -1,9 +1,8 @@
 package com.hzsoft.lib.domain.entity
 
-import android.os.Parcelable
+import com.hzsoft.lib.domain.base.BaseBean
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
 
 
 /**
@@ -14,7 +13,6 @@ import kotlinx.android.parcel.Parcelize
  * @Date 2020/12/1
  */
 @JsonClass(generateAdapter = true)
-@Parcelize
 data class Demo(
     @Json(name = "calories")
     val calories: String?,
@@ -40,4 +38,4 @@ data class Demo(
     val thumb: String?,
     @Json(name = "time")
     val time: String?
-) : Parcelable
+) : BaseBean()

@@ -2,26 +2,21 @@ package com.hzsoft.lib.base.view
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
-import android.view.ViewStub
-import android.view.Window
-import android.view.WindowManager
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.hzsoft.lib.base.R
 import com.hzsoft.lib.base.event.common.BaseActivityEvent
-import com.hzsoft.lib.base.manager.ActivityManager
 import com.hzsoft.lib.base.mvvm.view.BaseView
 import com.hzsoft.lib.base.utils.NetUtil
-import com.hzsoft.lib.base.utils.log.KLog
 import com.hzsoft.lib.base.widget.LoadingInitView
 import com.hzsoft.lib.base.widget.LoadingTransView
 import com.hzsoft.lib.base.widget.NetErrorView
 import com.hzsoft.lib.base.widget.NoDataView
+import com.hzsoft.lib.log.KLog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -34,7 +29,9 @@ import org.greenrobot.eventbus.ThreadMode
  */
 abstract class BaseActivity : RxAppCompatActivity(), BaseView {
 
-    val TAG: String = this::class.java.simpleName
+    companion object {
+        val TAG: String = this::class.java.simpleName
+    }
 
     protected lateinit var mContext: Context
 
@@ -57,16 +54,18 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        val currentTimeMillis = System.currentTimeMillis()
+
         setContentView(R.layout.activity_root)
         mContext = this
+        initBundle()
         initCommonView()
         initView()
         initListener()
-        initData()
         EventBus.getDefault().register(this)
-        ActivityManager.getInstance()?.addActivity(this)
-        KLog.e(TAG, "onCreate: 当前进入的Activity: $localClassName")
+
+        val totalTime = System.currentTimeMillis() - currentTimeMillis
+        KLog.e(TAG, "onCreate: 当前进入的Activity: $localClassName 初始化时间:$totalTime ms")
     }
 
     protected open fun initCommonView() {
@@ -80,7 +79,6 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
 
         mViewStubToolbar = findViewById(R.id.view_stub_toolbar)
         mViewStubContent = findViewById(R.id.view_stub_content)
-        mViewStubContent = findViewById(R.id.view_stub_content)
         mViewStubInitLoading = findViewById(R.id.view_stub_init_loading)
         mViewStubTransLoading = findViewById(R.id.view_stub_trans_loading)
         mViewStubError = findViewById(R.id.view_stub_error)
@@ -91,10 +89,10 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
             val view = mViewStubToolbar.inflate()
             initToolbar(view)
         }
-        initConentView(mViewStubContent)
+        initContentView(mViewStubContent)
     }
 
-    open fun initConentView(mViewStubContent: ViewStub) {
+    open fun initContentView(mViewStubContent: ViewStub) {
         mViewStubContent.layoutResource = onBindLayout()
         mViewStubContent.inflate()
     }
@@ -119,7 +117,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
             }
             //当标题栏右边的文字不为空时进行填充文字信息
             if (tvToolbarRight != null && !TextUtils.isEmpty(getToolBarRightTxt())) {
-                tvToolbarRight?.setText(getToolBarRightTxt())
+                tvToolbarRight?.text = getToolBarRightTxt()
                 tvToolbarRight?.visibility = View.VISIBLE
                 tvToolbarRight?.setOnClickListener(getToolBarRightTxtClick())
             }
@@ -142,6 +140,11 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         if (mTxtTitle != null && !TextUtils.isEmpty(tootBarTitle)) {
             mTxtTitle?.text = tootBarTitle
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
     }
 
     open fun getTootBarTitle(): String {
@@ -208,7 +211,10 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
-        ActivityManager.getInstance()?.finishActivity(this)
+    }
+
+    open fun initBundle() {
+
     }
 
     abstract fun onBindLayout(): Int

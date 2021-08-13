@@ -16,7 +16,7 @@ import com.hzsoft.lib.net.utils.ext.view.showToast
  * @author zhouhuan
  * @Date 2020/12/17
  */
-class MainHomeAdpater(mContext: Context) :
+class MainHomeAdapter(private val mContext: Context) :
     BaseDataBindAdapter<Demo, ItemRecipeBinding, BaseViewHolder>(mContext) {
 
     override fun onBindItem(binding: ItemRecipeBinding?, item: Demo, position: Int) {

@@ -3,12 +3,10 @@ package com.hzsoft.basedemo.ui.fragment
 import android.view.View
 import com.google.gson.Gson
 import com.hzsoft.basedemo.R
-import com.hzsoft.lib.base.utils.log.KLog
 import com.hzsoft.lib.base.view.BaseFragment
+import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
-import com.ypx.imagepicker.demo.utils.ImagePickerHelper.OnResultCallBack
-import kotlinx.android.synthetic.main.fragment_me_main.*
 
 /**
  * Describe:
@@ -39,8 +37,8 @@ class MainMeFragment : BaseFragment() {
             .setMaxCount(6)
             .build()
         imagePickerHelper = ImagePickerHelper(
-            activity, gridLayout,
-            OnResultCallBack { items ->
+            activity, findViewById(R.id.gridLayout),
+            { items ->
                 KLog.d(TAG, "选择的照片数据" + Gson().toJson(items))
             }, config
         )
@@ -51,8 +49,8 @@ class MainMeFragment : BaseFragment() {
     }
 
     override fun initListener() {
-        button_1.setOnClickListener(this::onClick)
-        button_2.setOnClickListener(this::onClick)
+        findViewById<View>(R.id.button_1).setOnClickListener(this::onClick)
+        findViewById<View>(R.id.button_2).setOnClickListener(this::onClick)
     }
 
     override fun enableToolbar(): Boolean = true
@@ -76,7 +74,7 @@ class MainMeFragment : BaseFragment() {
                 imagePickerHelper!!.setConfig(config)
                 "拍照模式设置成功".showToast(mContext)
             }
-            button_2.id -> {
+            R.id.button_2 -> {
                 val config =
                     ImagePickerHelper.with(ImagePickerHelper.Config())
                         .setWeChat(true)

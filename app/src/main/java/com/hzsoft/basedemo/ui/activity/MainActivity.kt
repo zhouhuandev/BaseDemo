@@ -1,12 +1,12 @@
 package com.hzsoft.basedemo.ui.activity
 
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.entity.MainChannel
 import com.hzsoft.basedemo.ui.fragment.MainHomeFragment
 import com.hzsoft.basedemo.ui.fragment.MainMeFragment
 import com.hzsoft.lib.base.view.BaseActivity
-import kotlinx.android.synthetic.main.activity_main_index.*
 
 /**
  * Describe:
@@ -24,10 +24,6 @@ class MainActivity : BaseActivity() {
     override fun onBindLayout(): Int = R.layout.activity_main_index
 
     override fun initView() {
-
-    }
-
-    override fun initData() {
         mHomeFragment = MainHomeFragment.newsInstance()
         mMeFragment = MainMeFragment.newsInstance()
 
@@ -39,8 +35,12 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun initData() {
+
+    }
+
     override fun initListener() {
-        navigation.setOnNavigationItemSelectedListener {
+        findViewById<BottomNavigationView>(R.id.navigation).setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
                     switchContent(mCurrFragment, mHomeFragment, MainChannel.HOME.name)
