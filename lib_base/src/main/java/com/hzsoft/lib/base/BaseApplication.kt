@@ -2,7 +2,6 @@ package com.hzsoft.lib.base
 
 import android.app.Application
 import android.content.Context
-import android.text.TextUtils
 import com.hzsoft.lib.log.KLog
 
 /**
