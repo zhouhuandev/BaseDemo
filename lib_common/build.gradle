@@ -16,12 +16,10 @@ dependencies {
 
     api deps.glide
     kapt deps.glide_compiler
+    api deps.glide_transformations
 
     api deps.moshi
     kapt deps.moshi_kotlin_codegen
-
-    api deps.kotlinx_coroutines_core
-    api deps.kotlinx_coroutines_core_common
 
     debugApi deps.leakcanary_android
 }
