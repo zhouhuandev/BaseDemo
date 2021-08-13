@@ -34,14 +34,7 @@ constructor(
         //创建接口服务
         val recipesService = retrofitManager.create<RecipesService>()
 
-        return when (val response = processCall(recipesService::fetchRecipes)) {
-            is BaseResponse<*> -> {
-                Resource.Success(data = toAs(response.data))
-            }
-            else -> {
-                Resource.DataError(errorCode = response as Int)
-            }
-        }
+        return dealDataWhen(processCall(recipesService::fetchRecipes))
     }
 
 
@@ -80,9 +73,23 @@ constructor(
     }
 
     /**
+     * 处理相应结果
+     */
+    private inline fun <reified T> dealDataWhen(any: Any?): Resource<T> {
+        return when (any) {
+            is BaseResponse<*> -> {
+                Resource.Success(data = toAs(if (any.data != null) any.data else any.msg))
+            }
+            else -> {
+                Resource.DataError(errorCode = toAs(any))
+            }
+        }
+    }
+
+    /**
      * 类型转换
      */
-    private fun <T> toAs(obj: Any?): T {
+    private inline fun <reified T> toAs(obj: Any?): T {
         return obj as T
     }
 
