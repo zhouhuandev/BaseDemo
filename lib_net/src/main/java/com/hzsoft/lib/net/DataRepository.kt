@@ -32,28 +32,28 @@ class DataRepository constructor(
     DataRepositorySource {
 
     override suspend fun requestRecipes(): Flow<Resource<List<Demo>>> {
-        return dealDataFlow(remoteRepository.requestRecipes())
+        return dealDataFlow { remoteRepository.requestRecipes() }
     }
 
     override suspend fun doLogin(): Flow<Resource<String>> {
-        return dealDataFlow(localRepository.doLogin())
+        return dealDataFlow { localRepository.doLogin() }
     }
 
     override suspend fun removeFromFavourite(id: String): Flow<Resource<Boolean>> {
-        return dealDataFlow(localRepository.removeFromFavourites(id))
+        return dealDataFlow { localRepository.removeFromFavourites(id) }
     }
 
     override suspend fun insertUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Long>> {
-        return dealDataFlow(localRepository.inserUserTestRoom(userTestRoom))
+        return dealDataFlow { localRepository.inserUserTestRoom(userTestRoom) }
     }
 
     override suspend fun getAllUserTestRoom(): Flow<Resource<List<UserTestRoom>>> {
-        return dealDataFlow(localRepository.getUserTestRoom())
+        return dealDataFlow { localRepository.getUserTestRoom() }
     }
 
-    private inline fun <reified T> dealDataFlow(any: T): Flow<T> {
+    private inline fun <reified T> dealDataFlow(crossinline block: suspend () -> T): Flow<T> {
         return flow {
-            emit(any)
+            emit(block.invoke())
         }.flowOn(ioDispatcher)
     }
 }
