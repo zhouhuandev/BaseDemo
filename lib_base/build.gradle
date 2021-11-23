@@ -54,4 +54,8 @@ dependencies {
 
     api deps.arouter_api
     kapt deps.arouter_compiler
+
+    api deps.savedstate
+    api deps.activity_ktx
+    api deps.fragment_ktx
 }
