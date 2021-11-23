@@ -1,6 +1,5 @@
 package com.hzsoft.moudule.home.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -20,7 +19,7 @@ import kotlinx.coroutines.launch
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class MainHomeViewModel(application: Application) : BaseRefreshViewModel<Demo>(application) {
+class MainHomeViewModel : BaseRefreshViewModel<Demo>() {
     private val dataRepositoryRepository: DataRepositorySource = DataRepository()
 
     private val recipesLiveDataPrivate = MutableLiveData<Resource<List<Demo>>>()
