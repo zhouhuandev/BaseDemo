@@ -9,7 +9,7 @@ import com.hzsoft.lib.base.event.SingleLiveEvent
  * @time 2020/12/2
  */
 abstract class BaseRefreshViewModel<T> : BaseViewModel() {
-    private var mList = MutableLiveData<MutableList<T>>()
+    protected var mList = MutableLiveData<MutableList<T>>()
 
     var mUIChangeRefreshLiveData = UIChangeRefreshLiveData()
 
