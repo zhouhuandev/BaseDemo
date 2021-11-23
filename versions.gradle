@@ -1,9 +1,9 @@
 // 构建版本
 def build_versions = [:]
-build_versions.compile_sdk = 29
+build_versions.compile_sdk = 30
 build_versions.build_sdk = "30.0.2"
 build_versions.min_sdk = 21
-build_versions.target_sdk = 29
+build_versions.target_sdk = 30
 ext.build_versions = build_versions
 
 // 生成APK版本
