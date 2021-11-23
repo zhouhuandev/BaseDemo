@@ -14,8 +14,8 @@ class SaveStateTestViewModel(state: SavedStateHandle) :
 
     // 将Key声明为常量
     companion object {
-        val JUMP_PAGE = "jump_page"
-        val COUNT = "count"
+        const val JUMP_PAGE = "jump_page"
+        const val COUNT = "count"
     }
 
     val savedStateHandle = state

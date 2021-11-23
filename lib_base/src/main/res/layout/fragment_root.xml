@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_root">
+        android:layout_below="@+id/view_stub_toolbar">
 
         <ViewStub
             android:id="@+id/view_stub_content"
