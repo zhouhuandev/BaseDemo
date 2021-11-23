@@ -2,21 +2,62 @@
 
 ## 介绍
 
-BaseDemo 是Android MVVM + Retrofit + OkHttp + Coroutine 协程 + 组件化架构的Android应用开发规范化架构，通过不断的升级迭代，目前主要分为两个版本，分别为分支 MVVM+Databinding 组件化版本，分支MVVM+Databinding+Single 单体版本。旨在帮助您快速构建属于自己的APP项目架构，做到快速响应上手，另外再长期的实践经验中汇总了大量的使用工具类，主要放在了项目 `lib_common` 组件中，以供大家参考使用。具体使用请开发者工具自己项目需求决定选择如何使用。
+BaseDemo 是Android MVVM + Retrofit + OkHttp + Coroutine 协程 + Room + 组件化架构的Android应用开发规范化架构，通过不断的升级迭代，目前主要分为两个版本，分别为分支 MVVM+Databinding 组件化版本，分支MVVM+Databinding+Single 单体版本。旨在帮助您快速构建属于自己的APP项目架构，做到快速响应上手，另外再长期的实践经验中汇总了大量的使用工具类，主要放在了项目 `lib_common`组件中，以供大家参考使用。具体使用请开发者工具自己项目需求决定选择如何使用。
 
 如果我的付出可以换来对您的帮助的话，还请您点个start，将会是我不懈更新的动力，万分感谢。如果在使用中有任何问题，请留言
 
 - 电子邮件：zhouhuan88888@163.com
 
 ## 功能演示
+
 软件架构说明
-- 主页 上拉刷新，下拉加载，Room操作
 
-![Home](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211108.jpg)
+<table>
+    <tr>
+        <td align="center">
+            <h3>上拉加载，下拉刷新</h3>
+        </td>
+        <td align="center">
+            <h3>演示入口</h3>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <img src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/161637674837_.pic.jpg" alt="Home" style="zoom:30%;" />
+        </td>
+        <td align="center">
+            <img src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/171637674836_.pic.jpg" alt="Home" style="zoom:30%;" />
+        </td>
+    </tr>
+</table>
 
-- 中心 添加照片，视频
+<table>
+    <tr>
+        <td align="center">
+            <h3>SaveStateHandler操作示例</h3>
+        </td>
+        <td align="center">
+            <h3>Room操作示例</h3>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <img src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/151637674836_.pic.jpg" alt="Home" style="zoom:30%;" />
+        </td>
+        <td align="center">
+            <img src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/141637674835_.pic.jpg" alt="Home" style="zoom:30%;" />
+        </td>
+    </tr>
+</table>
 
-![Me](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211101.jpg)
+- 扫码体验APK
+
+<img src="https://www.pgyer.com/app/qrcode/tBPE" alt="下载二维码" style="zoom:100%;" />
+
+- 演示视频
+
+<video src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/1637675109209180.mp4" alt="Home" style="zoom:30%;" />
+
 
 ## 主要功能
 
@@ -27,6 +68,7 @@ BaseDemo 是Android MVVM + Retrofit + OkHttp + Coroutine 协程 + 组件化架�
 ##### 基础页面接口
 
 - 视图层核接口 BaseView
+
 ```kotlin
 interface BaseView : ILoadView, INoDataView, ITransView, INetErrView {
     fun initListener()
@@ -34,7 +76,9 @@ interface BaseView : ILoadView, INoDataView, ITransView, INetErrView {
     fun finishActivity()
 }
 ```
+
 - 加载初始化弹窗接口 ILoadView
+
 ```kotlin
 interface ILoadView {
     //显示初始加载的View，初始进来加载数据需要显示的View
@@ -44,7 +88,9 @@ interface ILoadView {
     fun hideInitLoadView()
 }
 ```
+
 - 显示是否有数据页面接口 INoDataView
+
 ```kotlin
 interface INoDataView {
     //显示无数据View
@@ -57,7 +103,9 @@ interface INoDataView {
     fun showNoDataView(@DrawableRes resid: Int)
 }
 ```
+
 - 显示小菊花View接口 ITransView
+
 ```kotlin
 interface ITransView {
     //显示背景透明小菊花View,例如删除操作
@@ -67,7 +115,9 @@ interface ITransView {
     fun hideTransLoadingView()
 }
 ```
+
 - 显示是否网络错误View接口 INetErrView
+
 ```kotlin
 interface INetErrView {
     //显示网络错误的View
@@ -77,7 +127,9 @@ interface INetErrView {
     fun hideNetWorkErrView()
 }
 ```
+
 - 基础刷新接口 BaseRefreshView
+
 ```kotlin
 interface BaseRefreshView {
 
@@ -171,7 +223,9 @@ abstract class BaseMvvmRefreshActivity<T, VM : BaseRefreshViewModel<T>> : BaseMv
     protected abstract fun enableLoadMore(): Boolean
 }
 ```
+
 ##### BaseMvvmRefreshDataBindingActivity
+
 ```kotlin
 abstract class BaseMvvmRefreshDataBindingActivity<T, V : ViewDataBinding, VM : BaseRefreshViewModel<T>> : BaseMvvmDataBindingActivity<V, VM>(), BaseRefreshView {
     protected abstract fun onBindRreshLayout(): Int
@@ -216,6 +270,7 @@ abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMv
     protected abstract fun enableLoadMore(): Boolean
 }
 ```
+
 ##### BaseMvvmRefreshDataBindingFragment
 
 ```kotlin
@@ -233,24 +288,28 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 - BaseViewHolder
 - IBaseViewModel
 - BaseViewModel
-- BaseRefreshViewModel
-...
+- BaseRefreshViewModel ...
 
 ### 功能特色
 
 - 支持是否使用 `ToolBar`
+
 ```kotlin
     open fun enableToolbar(): Boolean {
         return true
     }
 ```
+
 - 支持自定义 `ToolBar`
+
 ```koltin
     open fun onBindToolbarLayout(): Int {
         return R.layout.common_toolbar
     }
 ```
+
 - 支持标题文字图标信息自定义
+
 ```kotlin
     open fun getTootBarTitle(): String {
         return ""
@@ -309,7 +368,9 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         return null
     }
 ```
+
 - 支持`loading`加载数据
+
 ```kotlin
     override fun showInitLoadView() {
         showInitLoadView(true)
@@ -319,7 +380,9 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         showInitLoadView(false)
     }
 ```
+
 - 支持透明`loading`的加载数据
+
 ```kotlin
     override fun showTransLoadingView() {
         showTransLoadingView(true)
@@ -329,13 +392,17 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         showTransLoadingView(false)
     }
 ```
+
 - 支持是否使用全屏显示
+
 ```kotlin
     open fun enableAllowFullScreen(): Boolean {
         return false
     }
 ```
+
 - 支持显示无数据
+
 ```kotlin
     override fun showNoDataView() {
         showNoDataView(true)
@@ -349,7 +416,9 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         showNoDataView(false)
     }
 ```
+
 - 支持网络网络错误显示
+
 ```kotlin
     override fun hideNetWorkErrView() {
         showNetWorkErrView(false)
@@ -359,7 +428,9 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         showNetWorkErrView(true)
     }
 ```
+
 - 支持`Fragment`的懒加载
+
 ```kotlin
     /**
      * 懒加载机制 当页面可见的时候加载数据
@@ -387,12 +458,12 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         return false
     }
 ```
+
 - 支持`DataBinding`
 - 封装`UIChangeLiveData`、`UIChangeRefreshLiveData`
-- `ViewModel` lazy加载
-...
+- `ViewModel` lazy加载 ...
 
-### 上拉下拉功能组件 lib_refresh_layout
+### 上拉下拉功能组件 lib_refresh_layout（已废弃，改用SmartRefreshLayout代替）
 
 - 支持最基本的下拉刷新、上拉加载更多
 - 支持自定义HeadView和FootView
@@ -415,9 +486,13 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 - Common组件：属于功能组件，支撑业务组件的基础，提供多数业务组件需要的功能
 
 ### MVVM架构
+
 #### BaseMVVM架构
+
 ![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211118.png)
+
 #### 官方指导MVVM架构
+
 ![MVVM架构示意图](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211213.png)
 
 - View层类关系图
@@ -429,19 +504,23 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 ![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211135.png)
 
 ### 组件化实现
+
 基于阿里 `ARouter` 作为路由，实现组件与组件的通信跳转
 
 https://github.com/alibaba/ARoute
 
 ### 集成模式和组件模式转换
 
-Module的属性是在每个组件的 build.gradle 文件中配置的，当我们在组件模式开发时，业务组件应处于application属性，这时的业务组件就是一个 Android App，可以独立开发和调试；而当我们转换到集成模式开发时，业务组件应该处于 library 属性，这样才能被我们的“app壳工程”所依赖，组成一个具有完整功能的APP
+Module的属性是在每个组件的 build.gradle 文件中配置的，当我们在组件模式开发时，业务组件应处于application属性，这时的业务组件就是一个 Android
+App，可以独立开发和调试；而当我们转换到集成模式开发时，业务组件应该处于 library 属性，这样才能被我们的“app壳工程”所依赖，组成一个具有完整功能的APP
 
-先打开 `BaseDemo` 工程的根目录下找到 `gradle.properties` 文件，然后将 `isModule` 改为你需要的开发模式（true/false）， 然后点击 `Sync Project` 按钮同步项目
+先打开 `BaseDemo` 工程的根目录下找到 `gradle.properties` 文件，然后将 `isModule` 改为你需要的开发模式（true/false），
+然后点击 `Sync Project` 按钮同步项目
 
 ```properties
 isModule=false
 ```
+
 ![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211140.jpg)
 
 ```gradle
@@ -451,11 +530,14 @@ if (isModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 ```
+
 ![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211145.jpg)
 
 ### 组件之间AndroidManifest合并问题
 
-我们可以为组件开发模式下的业务组件再创建一个 AndroidManifest.xml，然后根据isModule指定AndroidManifest.xml的文件路径，让业务组件在集成模式和组件模式下使用不同的AndroidManifest.xml，这样表单冲突的问题就可以规避了 已module_main组件为例配置如下：
+我们可以为组件开发模式下的业务组件再创建一个
+AndroidManifest.xml，然后根据isModule指定AndroidManifest.xml的文件路径，让业务组件在集成模式和组件模式下使用不同的AndroidManifest.xml，这样表单冲突的问题就可以规避了
+已module_main组件为例配置如下：
 
 ![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211150.jpg)
 
@@ -525,12 +607,15 @@ Blog : "https://blog.csdn.net/youxun1312"
 
 - [YImagePicker](https://github.com/yangpeixing/YImagePicker)
 - [KLog](https://github.com/ZhaoKaiQiang/KLog)
+- [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
+- [BRVAH](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 
 注：还有一大部分对此项目提供帮助的开源大佬们，就不一一列出，在此衷心感谢，若是有不足地方麻烦指导改正。
 
 ### 日志
 
 - 2021.8.14 优化整体架构，升级依赖版本
+- 2021.11.23 优化架构，更新刷新框架、Adapter适配器，修复已知问题
 
 ### License
 
