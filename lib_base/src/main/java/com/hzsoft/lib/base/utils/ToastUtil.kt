@@ -151,7 +151,7 @@ object ToastUtil {
         if (isNormal) {
             toast = Toast.makeText(mContext, message, duration)
         } else {
-            if (isCustom && Build.VERSION.SDK_INT < 30) {
+            if (isCustom /*&& Build.VERSION.SDK_INT < 30*/) {
                 val inflate = LayoutInflater.from(mContext)
                     .inflate(R.layout.view_toast, LinearLayout(mContext), true)
                 inflate.findViewById<TextView>(R.id.toast_text).text = message
