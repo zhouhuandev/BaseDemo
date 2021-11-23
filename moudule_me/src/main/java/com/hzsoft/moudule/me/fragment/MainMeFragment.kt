@@ -9,6 +9,7 @@ import com.hzsoft.lib.base.view.BaseFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.moudule.me.R
+import com.hzsoft.moudule.me.activity.RoomTestActivity
 import com.hzsoft.moudule.me.activity.SaveStateTestActivity
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
 
@@ -60,6 +61,7 @@ class MainMeFragment : BaseFragment() {
         findViewById<Button>(R.id.button_1).setOnClickListener(this::onClick)
         findViewById<Button>(R.id.button_2).setOnClickListener(this::onClick)
         findViewById<Button>(R.id.button_3).setOnClickListener(this::onClick)
+        findViewById<Button>(R.id.button_4).setOnClickListener(this::onClick)
     }
 
     override fun enableToolbar(): Boolean = true
@@ -102,6 +104,9 @@ class MainMeFragment : BaseFragment() {
                     return
                 }
                 SaveStateTestActivity.start(mContext, trim)
+            }
+            R.id.button_4 -> {
+                RoomTestActivity.start(mContext)
             }
         }
     }
