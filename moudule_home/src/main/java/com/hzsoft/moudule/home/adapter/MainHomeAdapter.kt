@@ -1,4 +1,4 @@
-package com.hzsoft.basedemo.adapter
+package com.hzsoft.moudule.home.adapter
 
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder

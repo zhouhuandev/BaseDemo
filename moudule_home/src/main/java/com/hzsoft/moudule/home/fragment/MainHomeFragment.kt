@@ -1,7 +1,7 @@
 package com.hzsoft.moudule.home.fragment
 
 import android.view.View
-import com.hzsoft.basedemo.adapter.MainHomeAdapter
+import com.hzsoft.moudule.home.adapter.MainHomeAdapter
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
 import com.hzsoft.lib.common.utils.EnvironmentUtil
