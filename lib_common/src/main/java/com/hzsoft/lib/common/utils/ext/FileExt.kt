@@ -20,13 +20,13 @@ val File.canListFiles: Boolean
  * Total size (include all subFile)
  */
 val File.totalSize: Long
-    get() = if (isFile) length() else getFolderSize(this)
+    get() = if (isFile) length() else FileUtil.getFolderSize(this)
 
 /**
  * Formatted total size (include all subFile)
  */
 val File.formatSize: String
-    get() = getFormatFileSize(totalSize)
+    get() = FileUtil.getFormatFileSize(totalSize)
 
 /**
  * Return file's mimeType, such as "png"
@@ -43,7 +43,7 @@ fun File.listFiles(
     isRecursive: Boolean = false,
     filter: ((file: File) -> Boolean)? = null
 ): Array<out File> {
-    val fileList = if (!isRecursive) listFiles() else getAllSubFile(this)
+    val fileList = if (!isRecursive) listFiles() else FileUtil.getAllSubFile(this)
     var result: Array<File> = arrayOf()
     return if (filter == null) fileList
     else {
@@ -96,8 +96,8 @@ fun File.moveToWithProgress(
     func: ((file: File, i: Int) -> Unit)? = null
 ) {
 
-    if (isDirectory) copyFolder(this, File(destFolder, name), overwrite, func)
-    else copyFile(this, File(destFolder, name), overwrite, func)
+    if (isDirectory) FileUtil.copyFolder(this, File(destFolder, name), overwrite, func)
+    else FileUtil.copyFile(this, File(destFolder, name), overwrite, func)
 
     if (!reserve) deleteRecursively()
 }

@@ -18,7 +18,7 @@ android {
             buildConfigField "boolean", 'IS_DEBUG', 'false'
         }
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
         // for view binding :
         // viewBinding = true

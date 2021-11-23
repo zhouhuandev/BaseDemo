@@ -1,6 +1,5 @@
 package com.hzsoft.lib.base.mvvm.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.hzsoft.lib.base.event.SingleLiveEvent
 
@@ -9,7 +8,7 @@ import com.hzsoft.lib.base.event.SingleLiveEvent
  * @author zhouhuan
  * @time 2020/12/2
  */
-abstract class BaseRefreshViewModel<T>(application: Application) : BaseViewModel(application) {
+abstract class BaseRefreshViewModel<T> : BaseViewModel() {
     protected var mList = MutableLiveData<MutableList<T>>()
 
     var mUIChangeRefreshLiveData = UIChangeRefreshLiveData()

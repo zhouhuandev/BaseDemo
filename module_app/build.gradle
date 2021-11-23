@@ -70,7 +70,7 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
         // for view binding :
         // viewBinding = true
@@ -82,7 +82,7 @@ dependencies {
     implementation project(":lib_base_module")
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
-        implementation project(':moudule_home')
-        implementation project(':moudule_me')
+        implementation project(':module_home')
+        implementation project(':module_me')
     }
 }

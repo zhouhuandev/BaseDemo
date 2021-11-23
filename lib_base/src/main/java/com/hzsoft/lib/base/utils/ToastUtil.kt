@@ -1,6 +1,5 @@
 package com.hzsoft.lib.base.utils
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Build
 import android.os.Handler
@@ -34,14 +33,16 @@ object ToastUtil {
             return field
         }
 
+    @JvmStatic
     fun init(context: Application) {
         mContext = context
     }
 
+    @JvmStatic
     fun showCenterOnTestAndDev(res: String) {
         val message = "该提示仅会出现在测试和开发环境：\n$res"
-        if (BuildConfig.IS_DEBUG) {
-            showToastCenter(res)
+        if (BuildConfig.DEBUG) {
+            showToastCenter(message)
         }
     }
 
@@ -139,28 +140,26 @@ object ToastUtil {
      * @param isCustom 是否开启自定义 默认true 开启
      * @param isNormal 是否普通 默认false 关闭
      */
-    @SuppressLint("ShowToast")
-    private fun buildToastView(
+    @JvmStatic
+    fun buildToastView(
         message: CharSequence,
         duration: Int = Toast.LENGTH_SHORT,
         isCustom: Boolean = true,
         isNormal: Boolean = false
     ): Toast {
-        val toast = Toast(mContext)
-        toast.duration = duration
+        var toast = Toast(mContext)
         if (isNormal) {
-            toast.setText(message)
+            toast = Toast.makeText(mContext, message, duration)
         } else {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-                toast.setGravity(Gravity.CENTER, 0, 0)
-            }
-            if (isCustom && Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1 && Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            if (isCustom /*&& Build.VERSION.SDK_INT < 30*/) {
                 val inflate = LayoutInflater.from(mContext)
                     .inflate(R.layout.view_toast, LinearLayout(mContext), true)
                 inflate.findViewById<TextView>(R.id.toast_text).text = message
                 toast.view = inflate
+                toast.duration = duration
+                toast.setGravity(Gravity.CENTER, 0, 0)
             } else {
-                toast.setText(message)
+                toast = Toast.makeText(mContext, message, duration)
             }
         }
         return toast

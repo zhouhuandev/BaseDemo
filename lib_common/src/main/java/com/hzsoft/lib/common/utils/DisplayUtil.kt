@@ -1,6 +1,7 @@
 package com.hzsoft.lib.common.utils
 
 import com.hzsoft.lib.base.BaseApplication
+import java.lang.ref.WeakReference
 
 /**
  * 单位转换工具类
@@ -13,7 +14,7 @@ import com.hzsoft.lib.base.BaseApplication
  * @time 2020/11/30 23:09
  */
 object DisplayUtil {
-    private val context = BaseApplication.instance!!.getApplicationContext()
+    private val context = WeakReference(BaseApplication.instance.applicationContext)
 
     /**
      * 将px值转换为dip或dp值，保证尺寸大小不变
@@ -35,7 +36,7 @@ object DisplayUtil {
      * @return
      */
     fun px2dip(pxValue: Float): Int {
-        return (pxValue / context.getResources().getDisplayMetrics().density + 0.5f).toInt()
+        return (pxValue / context.get()?.resources!!.displayMetrics.density + 0.5f).toInt()
     }
 
     /**
@@ -57,7 +58,7 @@ object DisplayUtil {
      * @return
      */
     fun dip2px(dipValue: Float): Int {
-        return (dipValue * context.getResources().getDisplayMetrics().density + 0.5f).toInt()
+        return (dipValue * context.get()?.resources!!.displayMetrics.density + 0.5f).toInt()
     }
 
     /**
@@ -79,7 +80,7 @@ object DisplayUtil {
      * @return
      */
     fun px2sp(pxValue: Float): Int {
-        return (pxValue / context.getResources().getDisplayMetrics().scaledDensity + 0.5f).toInt()
+        return (pxValue / context.get()?.resources!!.displayMetrics.scaledDensity + 0.5f).toInt()
     }
 
     /**
@@ -101,6 +102,6 @@ object DisplayUtil {
      * @return
      */
     fun sp2px(spValue: Float): Int {
-        return (spValue * context.getResources().getDisplayMetrics().scaledDensity + 0.5f).toInt()
+        return (spValue * context.get()?.resources!!.displayMetrics.scaledDensity + 0.5f).toInt()
     }
 }
