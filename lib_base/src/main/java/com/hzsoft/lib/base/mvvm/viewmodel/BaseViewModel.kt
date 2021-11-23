@@ -1,10 +1,9 @@
 package com.hzsoft.lib.base.mvvm.viewmodel
 
-import android.app.Application
 import android.os.Bundle
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
 import com.hzsoft.lib.base.event.SingleLiveEvent
 import java.util.*
 import kotlin.collections.set
@@ -14,7 +13,7 @@ import kotlin.collections.set
  * @author zhouhuan
  * @time 2020/12/2
  */
-open class BaseViewModel constructor(application: Application) : AndroidViewModel(application),
+open class BaseViewModel : ViewModel(),
     IBaseViewModel {
 
     var mUIChangeLiveData = UIChangeLiveData()
@@ -71,7 +70,6 @@ open class BaseViewModel constructor(application: Application) : AndroidViewMode
 
     object ParameterField {
         var CLASS = "CLASS"
-        var CANONICAL_NAME = "CANONICAL_NAME"
         var BUNDLE = "BUNDLE"
     }
 
@@ -99,7 +97,7 @@ open class BaseViewModel constructor(application: Application) : AndroidViewMode
         val params: MutableMap<String, Any> = HashMap()
         params[ParameterField.CLASS] = clz
         if (bundle != null) {
-            params.put(ParameterField.BUNDLE, bundle)
+            params[ParameterField.BUNDLE] = bundle
         }
         mUIChangeLiveData.getStartActivityEvent().postValue(params)
     }
