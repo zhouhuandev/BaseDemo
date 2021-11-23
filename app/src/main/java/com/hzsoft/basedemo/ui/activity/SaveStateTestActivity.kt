@@ -1,11 +1,11 @@
-package com.hzsoft.moudule.me.activity
+package com.hzsoft.basedemo.ui.activity
 
 import android.content.Context
 import android.content.Intent
 import android.widget.Button
 import android.widget.TextView
+import com.hzsoft.basedemo.R
 import com.hzsoft.lib.base.view.BaseMvvmActivity
-import com.hzsoft.moudule.me.R
 
 /**
  * 测试 SaveStateHandler

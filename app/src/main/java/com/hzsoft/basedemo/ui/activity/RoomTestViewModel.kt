@@ -1,4 +1,4 @@
-package com.hzsoft.moudule.me.activity
+package com.hzsoft.basedemo.ui.activity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

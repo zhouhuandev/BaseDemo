@@ -1,10 +1,10 @@
-package com.hzsoft.moudule.me.activity
+package com.hzsoft.basedemo.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
+import com.hzsoft.basedemo.R
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseFragment
 import com.hzsoft.lib.base.view.BaseMvvmRefreshActivity
@@ -14,8 +14,7 @@ import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.utils.ext.observe
-import com.hzsoft.moudule.me.R
-import com.hzsoft.moudule.me.adapter.RoomTestAdapter
+import com.hzsoft.basedemo.ui.adapter.RoomTestAdapter
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -25,13 +24,11 @@ import kotlin.random.nextInt
  * @author zhouhuan
  * @time 2021/11/23
  */
-@Route(path = "/me/room_test")
 class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel>() {
 
     companion object {
         fun start(context: Context) {
-            ARouter.getInstance().build("/me/room_test")
-                .navigation(context)
+            context.startActivity(Intent(context, RoomTestActivity::class.java))
         }
     }
 

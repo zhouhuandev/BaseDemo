@@ -1,4 +1,4 @@
-package com.hzsoft.moudule.me.activity
+package com.hzsoft.basedemo.ui.activity
 
 import androidx.lifecycle.SavedStateHandle
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel

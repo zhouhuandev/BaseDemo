@@ -4,13 +4,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.google.gson.Gson
+import com.hzsoft.basedemo.R
 import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.base.view.BaseFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.utils.ext.view.showToast
-import com.hzsoft.moudule.me.R
-import com.hzsoft.moudule.me.activity.RoomTestActivity
-import com.hzsoft.moudule.me.activity.SaveStateTestActivity
+import com.hzsoft.basedemo.ui.activity.RoomTestActivity
+import com.hzsoft.basedemo.ui.activity.SaveStateTestActivity
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
 
 /**

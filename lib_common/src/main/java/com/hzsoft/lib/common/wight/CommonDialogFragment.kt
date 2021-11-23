@@ -12,7 +12,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.common.R
 import com.hzsoft.lib.common.utils.DisplayUtil
 import com.hzsoft.lib.log.KLog

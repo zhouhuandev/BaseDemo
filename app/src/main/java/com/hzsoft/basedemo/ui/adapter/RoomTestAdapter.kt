@@ -1,10 +1,10 @@
-package com.hzsoft.moudule.me.adapter
+package com.hzsoft.basedemo.ui.adapter
 
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.hzsoft.basedemo.R
 import com.hzsoft.lib.base.adapter.BaseSkeletonAdapter
 import com.hzsoft.lib.net.local.entity.UserTestRoom
-import com.hzsoft.moudule.me.R
 
 /**
  *
