@@ -54,9 +54,7 @@ BaseDemo 是Android MVVM + Retrofit + OkHttp + Coroutine 协程 + Room + 组件�
 
 <img src="https://www.pgyer.com/app/qrcode/tBPE" alt="下载二维码" style="zoom:100%;" />
 
-- 演示视频
-
-<video src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/1637675109209180.mp4" alt="Home" style="zoom:30%;" />
+- [演示视频传送门](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/1637675109209180.mp4)
 
 
 ## 主要功能
