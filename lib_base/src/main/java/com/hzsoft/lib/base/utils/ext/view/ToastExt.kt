@@ -1,9 +1,9 @@
 package com.hzsoft.lib.base.utils.ext.view
 
-import android.content.Context
 import android.view.View
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
+import com.hzsoft.lib.base.utils.ToastUtil
 
 /**
  * Describe:
@@ -18,16 +18,16 @@ import com.google.android.material.snackbar.Snackbar
  * 使用方式
  * "This is Toast".showToast(context,Toast.LENGTH_SHORT)
  */
-fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(context, this, duration).show()
+fun String.showToast(duration: Int = Toast.LENGTH_SHORT) {
+    ToastUtil.showToastCenter(this, duration)
 }
 
 /**
  * 使用方式
  * "This is Toast".showToast(context,Toast.LENGTH_SHORT)
  */
-fun Int.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(context, this, duration).show()
+fun Int.showToast(duration: Int = Toast.LENGTH_SHORT) {
+    ToastUtil.showToastCenter(this, duration)
 }
 
 /**
@@ -42,13 +42,7 @@ fun View.showSnackbar(
     duration: Int = Snackbar.LENGTH_SHORT,
     block: (() -> Unit)? = null
 ) {
-    val snackbar = Snackbar.make(this, text, duration)
-    if (actionText != null && block != null) {
-        snackbar.setAction(actionText) {
-            block()
-        }
-    }
-    snackbar.show()
+    ToastUtil.showSnackbar(this, text, actionText, duration, block)
 }
 
 /**
@@ -63,11 +57,5 @@ fun View.showSnackbar(
     duration: Int = Snackbar.LENGTH_SHORT,
     block: (() -> Unit)? = null
 ) {
-    val snackbar = Snackbar.make(this, resid, duration)
-    if (actionText != null && block != null) {
-        snackbar.setAction(actionText) {
-            block()
-        }
-    }
-    snackbar.show()
+    ToastUtil.showSnackbar(this, resid, actionText, duration, block)
 }
