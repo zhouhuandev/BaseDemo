@@ -10,26 +10,41 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.common.R
 import com.hzsoft.lib.common.utils.DisplayUtil
+import com.hzsoft.lib.log.KLog
 
-class CommonDialogFragment : androidx.fragment.app.DialogFragment() {
+/**
+ * 公共弹窗
+ * @author zhouhuan
+ * @time 2021-08-19 18:11
+ */
+class CommonDialogFragment : DialogFragment() {
     private var mOnDialogClickListener: OnDialogClickListener? = null
+
     override fun dismiss() {
         super.dismiss()
         isShowing = false
         KLog.v(TAG, "dismiss start...")
     }
-    override fun show(manager: FragmentManager, tag: String?) {
-        if (manager != null) {
-            super.show(manager, tag)
+
+    fun show(fragmentManager: FragmentManager) {
+        if (!this.isAdded) {
+            this.show(fragmentManager, fragmentTag)
         }
-        isShowing = true
     }
 
-    fun setOnDialogClickListener(onDialogClickListener: OnDialogClickListener): CommonDialogFragment {
+    override fun show(manager: FragmentManager, tag: String?) {
+        if (isShowing) {
+            return
+        }
+        isShowing = true
+        super.show(manager, tag)
+    }
+
+    fun setOnDialogClickListener(onDialogClickListener: OnDialogClickListener?): CommonDialogFragment {
         mOnDialogClickListener = onDialogClickListener
         return this
     }
@@ -45,11 +60,18 @@ class CommonDialogFragment : androidx.fragment.app.DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog!!.window!!.setLayout(resources.displayMetrics.widthPixels - DisplayUtil.dip2px(40f) * 2, ViewGroup.LayoutParams.WRAP_CONTENT)
-        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.setLayout(
+            resources.displayMetrics.widthPixels - DisplayUtil.dip2px(40f) * 2,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_common_dialog, container, false)
         val arguments = arguments
         var title: String? = null
@@ -60,9 +82,9 @@ class CommonDialogFragment : androidx.fragment.app.DialogFragment() {
         if (arguments != null) {
             title = arguments.getString("title")
             describe = arguments.getString("describe")
-            leftbtn = arguments.getString("leftbtn")
-            rightbtn = arguments.getString("rightbtn")
-            rightBtnTextColor = arguments.getInt("rightbtncolor", 0)
+            leftbtn = arguments.getString("leftBtn")
+            rightbtn = arguments.getString("rightBtn")
+            rightBtnTextColor = arguments.getInt("rightBtnColor", 0)
         }
         val txtTitle = view.findViewById<TextView>(R.id.txt_common_dialog_title)
         val txtDescribe = view.findViewById<TextView>(R.id.txt_common_dialog_describe)
@@ -91,87 +113,91 @@ class CommonDialogFragment : androidx.fragment.app.DialogFragment() {
         if (rightBtnTextColor != 0) {
             btnRight.setTextColor(rightBtnTextColor)
         }
-        btnLeft.setOnClickListener { view ->
-            if (mOnDialogClickListener != null) {
-                mOnDialogClickListener!!.onLeftBtnClick(view)
-            }
+        btnLeft.setOnClickListener { v ->
+            mOnDialogClickListener?.onLeftBtnClick(v)
             dismiss()
         }
-        btnRight.setOnClickListener { view ->
-            if (mOnDialogClickListener != null) {
-                mOnDialogClickListener!!.onRightBtnClick(view)
-            }
+        btnRight.setOnClickListener { v ->
+            mOnDialogClickListener?.onRightBtnClick(v)
             dismiss()
         }
         return view
     }
 
     class Builder {
-        internal lateinit var title: String
-        internal lateinit var describe: String
-        internal lateinit var leftbtn: String
-        internal lateinit var rightbtn: String
-        internal var btnRightTextColor: Int = 0
-        internal lateinit var mListener: OnDialogClickListener
+        var title: String = ""
+        var describe: String = ""
+        var leftBtn: String = ""
+        var rightBtn: String = ""
+        var btnRightTextColor: Int = 0
+        var mListener: OnDialogClickListener? = null
 
-
+        @JvmName("setTitle1")
         fun setTitle(title: String): Builder {
             this.title = title
             return this
         }
 
+        @JvmName("setDescribe1")
         fun setDescribe(describe: String): Builder {
             this.describe = describe
             return this
         }
 
-        fun setLeftbtn(leftbtn: String): Builder {
-            this.leftbtn = leftbtn
+        @JvmName("setLeftBtn1")
+        fun setLeftBtn(leftBtn: String): Builder {
+            this.leftBtn = leftBtn
             return this
         }
 
-        fun setRightbtn(rightbtn: String): Builder {
-            this.rightbtn = rightbtn
+        @JvmName("setRightBtn1")
+        fun setRightBtn(rightBtn: String): Builder {
+            this.rightBtn = rightBtn
             return this
         }
 
+        @JvmName("setOnDialogClickListener1")
         fun setOnDialogClickListener(listener: OnDialogClickListener): Builder {
             this.mListener = listener
             return this
         }
 
-        fun setRightbtnTextColor(rightBtnTextcolor: Int): Builder {
-            this.btnRightTextColor = rightBtnTextcolor
+        @JvmName("setRightBtnTextColor1")
+        fun setRightBtnTextColor(rightBtnTextColor: Int): Builder {
+            this.btnRightTextColor = rightBtnTextColor
             return this
         }
 
         fun build(): CommonDialogFragment {
-            return CommonDialogFragment.newInstance(this)
+            return newInstance(this)
         }
     }
 
-   override fun onCancel(dialog: DialogInterface) {
-        if (dialog != null) {
-            super.onCancel(dialog)
-        }
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
         isShowing = false
         KLog.v(TAG, "onCancel start...")
     }
 
     companion object {
-        val TAG = CommonDialogFragment::class.java!!.getSimpleName()
+        val TAG: String = CommonDialogFragment::class.java.simpleName
+
+        const val fragmentTag = "common_dialog"
+
+        /**
+         * 避免弹多个dialog
+         */
         var isShowing = false
-            private set//避免弹多个dialog
 
         fun newInstance(builder: Builder): CommonDialogFragment {
             val commonDialogFragment = CommonDialogFragment()
             val args = Bundle()
             args.putString("title", builder.title)
             args.putString("describe", builder.describe)
-            args.putString("leftbtn", builder.leftbtn)
-            args.putString("rightbtn", builder.rightbtn)
-            args.putInt("rightbtncolor", builder.btnRightTextColor)
-            commonDialogFragment.mOnDialogClickListener = builder.mListener
+            args.putString("leftBtn", builder.leftBtn)
+            args.putString("rightBtn", builder.rightBtn)
+            args.putInt("rightBtnColor", builder.btnRightTextColor)
+            commonDialogFragment.setOnDialogClickListener(builder.mListener)
             commonDialogFragment.arguments = args
             return commonDialogFragment
         }
