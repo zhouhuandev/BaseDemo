@@ -42,7 +42,7 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
         lifecycle.addObserver(mViewModel)
 
         mViewModel.mUIChangeLiveData.getShowToastViewEvent()
-            .observe(this, Observer { it.showToast(mContext) })
+            .observe(this, Observer { it.showToast() })
         mViewModel.mUIChangeLiveData.getShowInitLoadViewEvent()
             .observe(this, Observer {
                 showInitLoadView(it)

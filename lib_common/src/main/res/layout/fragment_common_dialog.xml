@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_dialog_fragment_bg"
+    android:background="@drawable/shape_layout_white_8"
     android:orientation="vertical">
 
     <TextView
@@ -10,11 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingRight="20dp"
-        android:textColor="#333333"
-        android:textSize="17sp" />
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:textColor="#333"
+        android:textSize="@dimen/sp_17" />
 
     <TextView
         android:id="@+id/txt_common_dialog_describe"
@@ -22,18 +22,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:padding="20dp"
-        android:textColor="#666666"
-        android:textSize="14sp" />
+        android:padding="@dimen/dp_20"
+        android:textColor="#666"
+        android:textSize="@dimen/sp_14" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/dp_1"
         android:background="#2108141F" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="@dimen/dp_44"
         android:orientation="horizontal">
 
         <Button
@@ -43,13 +43,13 @@
             android:layout_weight="1"
             android:background="@null"
             android:text="取消"
-            android:textColor="#007AFF"
-            android:textSize="17sp" />
+            android:textColor="#666"
+            android:textSize="@dimen/sp_15" />
 
         <View
             android:id="@+id/view_halving_line"
             android:layout_width="1dp"
-            android:layout_height="44dp"
+            android:layout_height="@dimen/dp_44"
             android:background="#2108141F" />
 
         <Button
@@ -60,6 +60,6 @@
             android:background="@null"
             android:text="确定"
             android:textColor="#007AFF"
-            android:textSize="17sp" />
+            android:textSize="@dimen/sp_15" />
     </LinearLayout>
 </LinearLayout>

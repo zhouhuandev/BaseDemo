@@ -1,11 +1,16 @@
 package com.hzsoft.basedemo.ui.fragment
 
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import com.google.gson.Gson
-import com.hzsoft.basedemo.R
+import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.base.view.BaseFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.utils.ext.view.showToast
+import com.hzsoft.moudule.me.R
+import com.hzsoft.moudule.me.activity.RoomTestActivity
+import com.hzsoft.moudule.me.activity.SaveStateTestActivity
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
 
 /**
@@ -23,11 +28,15 @@ class MainMeFragment : BaseFragment() {
         }
     }
 
+    private lateinit var editText: EditText
+
     private var imagePickerHelper: ImagePickerHelper? = null
 
     override fun onBindLayout(): Int = R.layout.fragment_me_main
 
     override fun initView(mView: View) {
+        editText = findViewById(R.id.editText)
+
         val config = ImagePickerHelper.with(ImagePickerHelper.Config())
             .setWeChat(true)
             .setMimeType(0)
@@ -49,8 +58,10 @@ class MainMeFragment : BaseFragment() {
     }
 
     override fun initListener() {
-        findViewById<View>(R.id.button_1).setOnClickListener(this::onClick)
-        findViewById<View>(R.id.button_2).setOnClickListener(this::onClick)
+        findViewById<Button>(R.id.button_1).setOnClickListener(this::onClick)
+        findViewById<Button>(R.id.button_2).setOnClickListener(this::onClick)
+        findViewById<Button>(R.id.button_3).setOnClickListener(this::onClick)
+        findViewById<Button>(R.id.button_4).setOnClickListener(this::onClick)
     }
 
     override fun enableToolbar(): Boolean = true
@@ -85,6 +96,17 @@ class MainMeFragment : BaseFragment() {
                         .build()
                 imagePickerHelper!!.setConfig(config)
                 "视频模式设置成功".showToast(mContext)
+            }
+            R.id.button_3 -> {
+                val trim = editText.text.toString().trim()
+                if (trim.isBlank()) {
+                    ToastUtil.showToastCenter("输入内容不能为空")
+                    return
+                }
+                SaveStateTestActivity.start(mContext, trim)
+            }
+            R.id.button_4 -> {
+                RoomTestActivity.start(mContext)
             }
         }
     }

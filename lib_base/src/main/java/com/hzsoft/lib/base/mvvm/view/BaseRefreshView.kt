@@ -19,6 +19,11 @@ interface BaseRefreshView {
     fun enableLoadMore(b: Boolean)
 
     /**
+     * 是否启用列表惯性滑动到底部时自动加载更多
+     */
+    fun enableAutoLoadMore(b: Boolean)
+
+    /**
      * 刷新回调
      * 向 ViewModel 发送刷新请求
      */
@@ -38,13 +43,15 @@ interface BaseRefreshView {
 
     /**
      * 停止刷新
+     * @param boolean false 刷新失败
      */
-    fun stopRefresh()
+    fun stopRefresh(boolean: Boolean)
 
     /**
      * 停止加载更多
+     * @param boolean false 加载失败
      */
-    fun stopLoadMore()
+    fun stopLoadMore(boolean: Boolean)
 
     /**
      * 自动加载数据

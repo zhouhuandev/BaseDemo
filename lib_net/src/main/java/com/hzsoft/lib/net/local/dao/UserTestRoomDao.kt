@@ -19,14 +19,14 @@ interface UserTestRoomDao {
     @Update
     fun updateUserTestRoom(newUserTestRoom: UserTestRoom)
 
-    @Query("SELECT * FROM USERTESTROOM")
+    @Query("SELECT * FROM USERTESTROOM ORDER BY id DESC")
     fun loadAllUserTestRooms(): List<UserTestRoom>
 
     @Query("SELECT * FROM USERTESTROOM WHERE AGE > :age")
     fun loadUserTestRoomOlderThan(age: Int): List<UserTestRoom>
 
     @Delete
-    fun deleteUserTestRoom(deleteUserTestRoom: UserTestRoom)
+    fun deleteUserTestRoom(deleteUserTestRoom: UserTestRoom): Int
 
     @Query("DELETE FROM USERTESTROOM WHERE lastName = :lastName")
     fun deleteUserTestRoomByLastName(lastName: String): Int

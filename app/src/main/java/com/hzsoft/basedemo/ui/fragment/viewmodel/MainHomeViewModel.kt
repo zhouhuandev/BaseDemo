@@ -1,8 +1,8 @@
 package com.hzsoft.basedemo.ui.fragment.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseRefreshViewModel
 import com.hzsoft.lib.domain.entity.Demo
@@ -20,7 +20,10 @@ import kotlinx.coroutines.launch
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class MainHomeViewModel(application: Application) : BaseRefreshViewModel<Demo>(application) {
+class MainHomeViewModel(state: SavedStateHandle) : BaseRefreshViewModel<Demo>() {
+
+    val savedStateHandle = state
+
     private val dataRepositoryRepository: DataRepositorySource = DataRepository()
 
     private val recipesLiveDataPrivate = MutableLiveData<Resource<List<Demo>>>()
@@ -29,37 +32,13 @@ class MainHomeViewModel(application: Application) : BaseRefreshViewModel<Demo>(a
     private val userTestRoomLiveDataPrivate = MutableLiveData<Resource<List<UserTestRoom>>>()
     val userTestRoomLiveData: LiveData<Resource<List<UserTestRoom>>> get() = userTestRoomLiveDataPrivate
 
-    fun getRecipes() {
+    private fun getRecipes() {
         viewModelScope.launch {
-            postShowTransLoadingViewEvent(true)
             dataRepositoryRepository.requestRecipes().collect {
                 recipesLiveDataPrivate.value = it
-                postShowTransLoadingViewEvent(false)
                 postStopRefreshEvent()
             }
         }
-    }
-
-    fun insertUserTestRoom(userTestRoom: UserTestRoom) {
-        viewModelScope.launch {
-            dataRepositoryRepository.insertUserTestRoom(userTestRoom).collect {
-                showToastMessage("插入数据成功$it")
-            }
-        }
-    }
-
-    fun getUserTestRoom() {
-        viewModelScope.launch {
-            postShowTransLoadingViewEvent(true)
-            dataRepositoryRepository.getAllUserTestRoom().collect {
-                userTestRoomLiveDataPrivate.value = it
-                postShowTransLoadingViewEvent(false)
-            }
-        }
-    }
-
-    fun showToastMessage(msg: String) {
-        postShowToastViewEvent(msg)
     }
 
     override fun refreshData() {

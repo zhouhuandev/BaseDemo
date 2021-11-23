@@ -10,8 +10,9 @@ import com.hzsoft.lib.net.config.NetConfig
  * @time 2020/11/30 23:04
  */
 open class ModuleApplication : BaseApplication() {
-    override fun onCreate() {
-        super.onCreate()
+
+    override fun initOnlyMainProcessInLowPriorityThread() {
+        super.initOnlyMainProcessInLowPriorityThread()
         initNet()
     }
 

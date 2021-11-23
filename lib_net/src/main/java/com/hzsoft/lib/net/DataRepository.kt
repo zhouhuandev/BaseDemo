@@ -39,12 +39,12 @@ class DataRepository constructor(
         return dealDataFlow { localRepository.doLogin() }
     }
 
-    override suspend fun removeFromFavourite(id: String): Flow<Resource<Boolean>> {
-        return dealDataFlow { localRepository.removeFromFavourites(id) }
+    override suspend fun removeUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Int>> {
+        return dealDataFlow { localRepository.removeUserTestRoom(userTestRoom) }
     }
 
     override suspend fun insertUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Long>> {
-        return dealDataFlow { localRepository.inserUserTestRoom(userTestRoom) }
+        return dealDataFlow { localRepository.insertUserTestRoom(userTestRoom) }
     }
 
     override suspend fun getAllUserTestRoom(): Flow<Resource<List<UserTestRoom>>> {

@@ -17,15 +17,17 @@ class LocalData constructor() {
         return Resource.Success(appDatabase.userTestRoomDao().loadAllUserTestRooms())
     }
 
-    fun inserUserTestRoom(userTestRoom: UserTestRoom): Resource<Long> {
-        return Resource.Success(appDatabase.userTestRoomDao().insertUserTestRoom(userTestRoom = userTestRoom))
+    fun insertUserTestRoom(userTestRoom: UserTestRoom): Resource<Long> {
+        return Resource.Success(
+            appDatabase.userTestRoomDao().insertUserTestRoom(userTestRoom = userTestRoom)
+        )
     }
 
     fun doLogin(): Resource<String> {
         return Resource.Success("String")
     }
 
-    fun removeFromFavourites(id: String): Resource<Boolean> {
-        return Resource.Success(true)
+    fun removeUserTestRoom(userTestRoom: UserTestRoom): Resource<Int> {
+        return Resource.Success(appDatabase.userTestRoomDao().deleteUserTestRoom(userTestRoom))
     }
 }

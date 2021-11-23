@@ -4,8 +4,7 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.hzsoft.lib.base.mvvm.view.BaseRefreshView
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseRefreshViewModel
-import com.refresh.lib.BaseRefreshLayout
-import com.refresh.lib.DaisyRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 /**
  * Describe:
@@ -18,7 +17,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
     BaseMvvmDataBindingFragment<V, VM>(),
     BaseRefreshView {
 
-    protected lateinit var mRefreshLayout: DaisyRefreshLayout
+    protected lateinit var mRefreshLayout: SmartRefreshLayout
     protected var isRefresh = true
 
     override fun initCommonView(view: View) {
@@ -27,7 +26,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         initBaseViewRefreshObservable()
     }
 
-    protected abstract fun onBindRreshLayout(): Int
+    protected abstract fun onBindRefreshLayout(): Int
 
     protected abstract fun enableRefresh(): Boolean
 
@@ -39,32 +38,26 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
      */
     private fun initRefreshView(view: View) {
         // 绑定组件
-        mRefreshLayout = view.findViewById(onBindRreshLayout())
+        mRefreshLayout = view.findViewById(onBindRefreshLayout())
         // 是否开启刷新
         enableRefresh(enableRefresh())
         // 是否开启加载更多
         enableLoadMore(enableLoadMore())
 
         // 下拉刷新
-        mRefreshLayout.setOnRefreshListener(object : BaseRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                isRefresh = true
+        mRefreshLayout.setOnRefreshListener {
+            isRefresh = true
+            isRefresh = true
                 onRefreshEvent()
             }
-        })
+
         // 上拉加载
-        mRefreshLayout.setOnLoadMoreListener(object : BaseRefreshLayout.OnLoadMoreListener {
-            override fun onLoadMore() {
-                isRefresh = false
+        mRefreshLayout.setOnLoadMoreListener {
+            isRefresh = false
+            isRefresh = false
                 onLoadMoreEvent()
             }
-        })
-        // 自动加载
-        mRefreshLayout.setOnAutoLoadListener(object : BaseRefreshLayout.OnAutoLoadListener {
-            override fun onAutoLoad() {
-                onAutoLoadEvent()
-            }
-        })
+
     }
 
     /**
@@ -75,10 +68,10 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
             autoLoadData()
         }
         mViewModel.mUIChangeRefreshLiveData.stopRefreshLiveEvent.observe(this) {
-            stopRefresh()
+            stopRefresh(it)
         }
         mViewModel.mUIChangeRefreshLiveData.stopLoadMoreLiveEvent.observe(this) {
-            stopLoadMore()
+            stopLoadMore(it)
         }
     }
 
@@ -91,16 +84,24 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
         mRefreshLayout.setEnableLoadMore(b)
     }
 
+    override fun enableAutoLoadMore(b: Boolean) {
+        mRefreshLayout.setEnableAutoLoadMore(b)
+    }
+
+    override fun onAutoLoadEvent() {
+
+    }
+
     override fun autoLoadData() {
         mRefreshLayout.autoRefresh()
     }
 
-    override fun stopRefresh() {
-        mRefreshLayout.isRefreshing = false
+    override fun stopRefresh(boolean: Boolean) {
+        mRefreshLayout.finishRefresh(boolean)
     }
 
-    override fun stopLoadMore() {
-        mRefreshLayout.setLoadMore(false)
+    override fun stopLoadMore(boolean: Boolean) {
+        mRefreshLayout.finishLoadMore(boolean)
     }
 
 }

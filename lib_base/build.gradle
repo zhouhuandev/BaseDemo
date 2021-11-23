@@ -9,7 +9,7 @@ android {
             buildConfigField "boolean", 'IS_DEBUG', 'false'
         }
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
         // for view binding :
         // viewBinding = true
@@ -19,7 +19,6 @@ android {
 dependencies {
 
     api project(":lib_log")
-    api project(":lib_refresh_layout")
 
     api deps.kotlin_stdlib
     api deps.kotlin_reflect
@@ -43,4 +42,21 @@ dependencies {
     api deps.lifecycle_runtime_ktx
     api deps.lifecycle_common_java8
 
+    api deps.savedstate
+    api deps.activity_ktx
+    api deps.fragment_ktx
+
+    api deps.refresh_layout_kernel
+    api deps.refresh_header_classics
+    api deps.refresh_header_radar
+    api deps.refresh_header_falsify
+    api deps.refresh_header_material
+    api deps.refresh_header_two_level
+    api deps.refresh_footer_ball
+    api deps.refresh_footer_classics
+
+    api deps.skeleton
+    api deps.shimmerlayout
+
+    api deps.BaseRecyclerViewAdapterHelper
 }

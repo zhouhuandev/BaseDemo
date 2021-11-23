@@ -101,31 +101,33 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
         mToolbar = view.findViewById(R.id.toolbar_root)
         mTxtTitle = view.findViewById(R.id.toolbar_title)
         tvToolbarRight = view.findViewById(R.id.tv_toolbar_right)
-        ivToolbarRight = view.findViewById(R.id.iv_toolbar_right)
-        if (mToolbar != null) {
-            setSupportActionBar(mToolbar)
+        mToolbar?.apply {
+            setSupportActionBar(this)
             //是否显示标题
             supportActionBar!!.setDisplayShowTitleEnabled(false)
-            mToolbar?.setNavigationOnClickListener { onBackPressed() }
+            setNavigationOnClickListener { onBackPressed() }
 
             if (enableToolBarLeft()) {
                 //设置是否添加显示NavigationIcon.如果要用
                 supportActionBar!!.setDisplayHomeAsUpEnabled(true)
                 //设置NavigationIcon的icon.可以是Drawable ,也可以是ResId
-                mToolbar?.setNavigationIcon(getToolBarLeftIcon())
-                mToolbar?.setNavigationOnClickListener { onBackPressed() }
+                setNavigationIcon(getToolBarLeftIcon())
             }
             //当标题栏右边的文字不为空时进行填充文字信息
-            if (tvToolbarRight != null && !TextUtils.isEmpty(getToolBarRightTxt())) {
-                tvToolbarRight?.text = getToolBarRightTxt()
-                tvToolbarRight?.visibility = View.VISIBLE
-                tvToolbarRight?.setOnClickListener(getToolBarRightTxtClick())
+            if (getToolBarRightTxt().isNotBlank()) {
+                tvToolbarRight?.apply {
+                    text = getToolBarRightTxt()
+                    visibility = View.VISIBLE
+                    setOnClickListener(getToolBarRightTxtClick())
+                }
             }
             //当标题右边的图标不为 默认0时进行填充图标
-            if (ivToolbarRight != null && getToolBarRightImg() != 0) {
-                ivToolbarRight?.setImageResource(getToolBarRightImg())
-                ivToolbarRight?.visibility = View.VISIBLE
-                ivToolbarRight?.setOnClickListener(getToolBarRightImgClick())
+            if (getToolBarRightImg() != 0) {
+                ivToolbarRight?.apply {
+                    setImageResource(getToolBarRightImg())
+                    visibility = View.VISIBLE
+                    setOnClickListener(getToolBarRightImgClick())
+                }
             }
         }
     }
@@ -158,7 +160,7 @@ abstract class BaseActivity : RxAppCompatActivity(), BaseView {
      * @return
      */
     open fun getToolBarLeftIcon(): Int {
-        return R.drawable.ic_white_black_45dp
+        return R.drawable.navbar_icon_return
     }
 
     /**
