@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.entity.MainChannel
+import com.hzsoft.basedemo.ui.fragment.MainHomeFragment
+import com.hzsoft.basedemo.ui.fragment.MainMeFragment
 import com.hzsoft.lib.base.view.BaseActivity
 
 /**
