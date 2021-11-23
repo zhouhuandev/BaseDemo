@@ -1,6 +1,5 @@
 package com.hzsoft.lib.base.utils
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Build
 import android.os.Handler

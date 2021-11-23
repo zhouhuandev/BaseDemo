@@ -1,128 +1,112 @@
-package com.hzsoft.lib.base.utils;
+package com.hzsoft.lib.base.utils
 
-import android.os.Build;
-import android.text.TextUtils;
-
-import com.hzsoft.lib.log.KLog;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import android.os.Build
+import android.text.TextUtils
+import com.hzsoft.lib.log.KLog.e
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.util.*
 
 /**
  * 系统判断工具
  * @author zhouhuan
  * @time 2021/6/20 16:35
  */
-public class OsUtils {
+object OsUtils {
+    const val ROM_MIUI = "MIUI"
+    const val ROM_EMUI = "EMUI"
+    const val ROM_FLYME = "FLYME"
+    const val ROM_OPPO = "OPPO"
+    const val ROM_SMARTISAN = "SMARTISAN"
+    const val ROM_VIVO = "VIVO"
+    const val ROM_QIKU = "QIKU"
+    private const val KEY_VERSION_MIUI = "ro.miui.ui.version.name"
+    private const val KEY_VERSION_EMUI = "ro.build.version.emui"
+    private const val KEY_VERSION_OPPO = "ro.build.version.opporom"
+    private const val KEY_VERSION_SMARTISAN = "ro.smartisan.version"
+    private const val KEY_VERSION_VIVO = "ro.vivo.os.version"
+    private const val TAG = ""
+    private var sName: String? = null
+    private var sVersion: String? = null
 
-    public static final String ROM_MIUI = "MIUI";
-    public static final String ROM_EMUI = "EMUI";
-    public static final String ROM_FLYME = "FLYME";
-    public static final String ROM_OPPO = "OPPO";
-    public static final String ROM_SMARTISAN = "SMARTISAN";
-    public static final String ROM_VIVO = "VIVO";
-    public static final String ROM_QIKU = "QIKU";
+    val isEmui: Boolean
+        get() = check(ROM_EMUI)
+    val isMiui: Boolean
+        get() = check(ROM_MIUI)
+    val isVivo: Boolean
+        get() = check(ROM_VIVO)
+    val isOppo: Boolean
+        get() = check(ROM_OPPO)
+    val isFlyme: Boolean
+        get() = check(ROM_FLYME)
 
-    private static final String KEY_VERSION_MIUI = "ro.miui.ui.version.name";
-    private static final String KEY_VERSION_EMUI = "ro.build.version.emui";
-    private static final String KEY_VERSION_OPPO = "ro.build.version.opporom";
-    private static final String KEY_VERSION_SMARTISAN = "ro.smartisan.version";
-    private static final String KEY_VERSION_VIVO = "ro.vivo.os.version";
-    private static final String TAG = "";
-
-    private static String sName;
-    private static String sVersion;
-
-    public static boolean isEmui() {
-        return check(ROM_EMUI);
+    fun is360(): Boolean {
+        return check(ROM_QIKU) || check("360")
     }
 
-    public static boolean isMiui() {
-        return check(ROM_MIUI);
-    }
-
-    public static boolean isVivo() {
-        return check(ROM_VIVO);
-    }
-
-    public static boolean isOppo() {
-        return check(ROM_OPPO);
-    }
-
-    public static boolean isFlyme() {
-        return check(ROM_FLYME);
-    }
-
-    public static boolean is360() {
-        return check(ROM_QIKU) || check("360");
-    }
-
-    public static boolean isSmartisan() {
-        return check(ROM_SMARTISAN);
-    }
-
-    public static String getName() {
-        if (sName == null) {
-            check("");
+    val isSmartisan: Boolean
+        get() = check(ROM_SMARTISAN)
+    val name: String?
+        get() {
+            if (sName == null) {
+                check("")
+            }
+            return sName
         }
-        return sName;
-    }
-
-    public static String getVersion() {
-        if (sVersion == null) {
-            check("");
+    val version: String?
+        get() {
+            if (sVersion == null) {
+                check("")
+            }
+            return sVersion
         }
-        return sVersion;
-    }
 
-    public static boolean check(String rom) {
+    fun check(rom: String): Boolean {
         if (sName != null) {
-            return sName.equals(rom);
+            return sName == rom
         }
-
-        if (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_MIUI))) {
-            sName = ROM_MIUI;
-        } else if (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_EMUI))) {
-            sName = ROM_EMUI;
-        } else if (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_OPPO))) {
-            sName = ROM_OPPO;
-        } else if (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_VIVO))) {
-            sName = ROM_VIVO;
-        } else if (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_SMARTISAN))) {
-            sName = ROM_SMARTISAN;
+        if (!TextUtils.isEmpty(getProp(KEY_VERSION_MIUI).also { sVersion = it })) {
+            sName = ROM_MIUI
+        } else if (!TextUtils.isEmpty(getProp(KEY_VERSION_EMUI).also { sVersion = it })) {
+            sName = ROM_EMUI
+        } else if (!TextUtils.isEmpty(getProp(KEY_VERSION_OPPO).also { sVersion = it })) {
+            sName = ROM_OPPO
+        } else if (!TextUtils.isEmpty(getProp(KEY_VERSION_VIVO).also { sVersion = it })) {
+            sName = ROM_VIVO
+        } else if (!TextUtils.isEmpty(getProp(KEY_VERSION_SMARTISAN).also { sVersion = it })) {
+            sName = ROM_SMARTISAN
         } else {
-            sVersion = Build.DISPLAY;
-            if (sVersion.toUpperCase().contains(ROM_FLYME)) {
-                sName = ROM_FLYME;
+            sVersion = Build.DISPLAY
+            if (sVersion!!.uppercase(Locale.getDefault()).contains(ROM_FLYME)) {
+                sName = ROM_FLYME
             } else {
-                sVersion = Build.UNKNOWN;
-                sName = Build.MANUFACTURER.toUpperCase();
+                sVersion = Build.UNKNOWN
+                sName = Build.MANUFACTURER.uppercase(Locale.getDefault())
             }
         }
-        return sName.equals(rom);
+        return sName == rom
     }
 
-    public static String getProp(String name) {
-        String line = null;
-        BufferedReader input = null;
+    fun getProp(name: String): String? {
+        var line: String? = null
+        var input: BufferedReader? = null
         try {
-            Process p = Runtime.getRuntime().exec("getprop " + name);
-            input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
-            line = input.readLine();
-            input.close();
-        } catch (IOException ex) {
-            KLog.e(TAG, "Unable to read prop " + name, ex);
-            return null;
+            val p = Runtime.getRuntime().exec("getprop $name")
+            input = BufferedReader(InputStreamReader(p.inputStream), 1024)
+            line = input.readLine()
+            input.close()
+        } catch (ex: IOException) {
+            e(TAG, "Unable to read prop $name", ex)
+            return null
         } finally {
             if (input != null) {
                 try {
-                    input.close();
-                } catch (IOException e) {
-
+                    input.close()
+                } catch (e: IOException) {
                 }
             }
         }
-        return line;
+        return line
     }
 }
