@@ -14,7 +14,7 @@ import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.utils.ext.observe
-import com.hzsoft.basedemo.ui.adapter.RoomTestAdapter
+import com.hzsoft.basedemo.adapter.RoomTestAdapter
 import kotlin.random.Random
 import kotlin.random.nextInt
 

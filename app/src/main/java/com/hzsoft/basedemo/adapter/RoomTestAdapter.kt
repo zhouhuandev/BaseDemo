@@ -1,4 +1,4 @@
-package com.hzsoft.basedemo.ui.adapter
+package com.hzsoft.basedemo.adapter
 
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
