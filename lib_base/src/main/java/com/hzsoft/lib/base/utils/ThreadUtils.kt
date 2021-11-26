@@ -129,7 +129,7 @@ object ThreadUtils {
      * @param runnable Runnable
      * @param delayed  时长 Millis
      */
-    fun runOnUiThread(runnable: Runnable?, delayed: Long) {
+    fun runOnUiThread(runnable: Runnable, delayed: Long) {
         M_MAIN_LOOPER_HANDLER.postDelayed(runnable, delayed)
     }
 
@@ -138,7 +138,7 @@ object ThreadUtils {
      *
      * @param runnable Runnable
      */
-    fun runOnUiThread(runnable: Runnable?) {
+    fun runOnUiThread(runnable: Runnable) {
         M_MAIN_LOOPER_HANDLER.post(runnable)
     }
 
@@ -147,7 +147,7 @@ object ThreadUtils {
      *
      * @param runnable Runnable
      */
-    fun runOnUiThreadImediatly(runnable: Runnable?) {
+    fun runOnUiThreadImediatly(runnable: Runnable) {
         M_MAIN_LOOPER_HANDLER.postAtFrontOfQueue(runnable)
     }
 
@@ -156,7 +156,7 @@ object ThreadUtils {
      *
      * @param runnable Runnable
      */
-    fun runOnUiThreadDelay(runnable: Runnable?, delayMillis: Long) {
+    fun runOnUiThreadDelay(runnable: Runnable, delayMillis: Long) {
         M_MAIN_LOOPER_HANDLER.postDelayed(runnable, delayMillis)
     }
 }
