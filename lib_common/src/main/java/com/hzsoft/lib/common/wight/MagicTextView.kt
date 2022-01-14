@@ -1,6 +1,5 @@
 package com.hzsoft.lib.common.wight
 
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
@@ -17,16 +16,12 @@ import android.widget.TextView
 import com.hzsoft.lib.common.R
 import java.util.*
 
-
 /**
- *
  * https://github.com/m5/MagicTextView
- * Description: <描边效果的TextView><br>
- * Author: mxdl<br>
- * Date: 2018/8/24<br>
- * Version: V1.0.0<br>
- * Update: <br>
-</描边效果的TextView> */
+ * 描边效果的TextView
+ * @author zhouhuan
+ * @time 2022/1/14
+ */
 @SuppressLint("AppCompatCustomView")
 class MagicTextView : TextView {
     private var outerShadows: ArrayList<Shadow>? = null
@@ -55,7 +50,11 @@ class MagicTextView : TextView {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         init(attrs)
     }
 
@@ -71,8 +70,10 @@ class MagicTextView : TextView {
 
             val typefaceName = a.getString(R.styleable.MagicTextView_typeface)
             if (typefaceName != null) {
-                val tf = Typeface.createFromAsset(context.assets,
-                        String.format("fonts/%s.ttf", typefaceName))
+                val tf = Typeface.createFromAsset(
+                    context.assets,
+                    String.format("fonts/%s.ttf", typefaceName)
+                )
                 typeface = tf
             }
 
@@ -91,28 +92,37 @@ class MagicTextView : TextView {
                     this.setBackground(background)
                 } else {
                     this.setBackgroundColor(
-                            a.getColor(R.styleable.MagicTextView_backgroundcolor, -0x1000000))
+                        a.getColor(R.styleable.MagicTextView_backgroundcolor, -0x1000000)
+                    )
                 }
             }
 
             if (a.hasValue(R.styleable.MagicTextView_innerShadowColor)) {
-                this.addInnerShadow(a.getDimensionPixelSize(R.styleable.MagicTextView_innerShadowRadius, 0).toFloat(),
-                        a.getDimensionPixelOffset(R.styleable.MagicTextView_innerShadowDx, 0).toFloat(),
-                        a.getDimensionPixelOffset(R.styleable.MagicTextView_innerShadowDy, 0).toFloat(),
-                        a.getColor(R.styleable.MagicTextView_innerShadowColor, -0x1000000))
+                this.addInnerShadow(
+                    a.getDimensionPixelSize(R.styleable.MagicTextView_innerShadowRadius, 0)
+                        .toFloat(),
+                    a.getDimensionPixelOffset(R.styleable.MagicTextView_innerShadowDx, 0).toFloat(),
+                    a.getDimensionPixelOffset(R.styleable.MagicTextView_innerShadowDy, 0).toFloat(),
+                    a.getColor(R.styleable.MagicTextView_innerShadowColor, -0x1000000)
+                )
             }
 
             if (a.hasValue(R.styleable.MagicTextView_outerShadowColor)) {
-                this.addOuterShadow(a.getDimensionPixelSize(R.styleable.MagicTextView_outerShadowRadius, 0).toFloat(),
-                        a.getDimensionPixelOffset(R.styleable.MagicTextView_outerShadowDx, 0).toFloat(),
-                        a.getDimensionPixelOffset(R.styleable.MagicTextView_outerShadowDy, 0).toFloat(),
-                        a.getColor(R.styleable.MagicTextView_outerShadowColor, -0x1000000))
+                this.addOuterShadow(
+                    a.getDimensionPixelSize(R.styleable.MagicTextView_outerShadowRadius, 0)
+                        .toFloat(),
+                    a.getDimensionPixelOffset(R.styleable.MagicTextView_outerShadowDx, 0).toFloat(),
+                    a.getDimensionPixelOffset(R.styleable.MagicTextView_outerShadowDy, 0).toFloat(),
+                    a.getColor(R.styleable.MagicTextView_outerShadowColor, -0x1000000)
+                )
             }
 
             if (a.hasValue(R.styleable.MagicTextView_strokeColor)) {
-                val strokeWidth = a.getDimensionPixelSize(R.styleable.MagicTextView_strokeWidth, 1).toFloat()
+                val strokeWidth =
+                    a.getDimensionPixelSize(R.styleable.MagicTextView_strokeWidth, 1).toFloat()
                 val strokeColor = a.getColor(R.styleable.MagicTextView_strokeColor, -0x1000000)
-                val strokeMiter = a.getDimensionPixelSize(R.styleable.MagicTextView_strokeMiter, 10).toFloat()
+                val strokeMiter =
+                    a.getDimensionPixelSize(R.styleable.MagicTextView_strokeMiter, 10).toFloat()
                 var strokeJoin: Join? = null
                 when (a.getInt(R.styleable.MagicTextView_strokeJoinStyle, 0)) {
                     0 -> strokeJoin = Join.MITER
@@ -235,8 +245,10 @@ class MagicTextView : TextView {
         }
 
 
-        this.setCompoundDrawablesWithIntrinsicBounds(restoreDrawables[0], restoreDrawables[1],
-                restoreDrawables[2], restoreDrawables[3])
+        this.setCompoundDrawablesWithIntrinsicBounds(
+            restoreDrawables[0], restoreDrawables[1],
+            restoreDrawables[2], restoreDrawables[3]
+        )
         this.background = restoreBackground
         this.setTextColor(restoreColor)
 
@@ -260,7 +272,12 @@ class MagicTextView : TextView {
 
     // Keep these things locked while onDraw in processing
     fun freeze() {
-        lockedCompoundPadding = intArrayOf(compoundPaddingLeft, compoundPaddingRight, compoundPaddingTop, compoundPaddingBottom)
+        lockedCompoundPadding = intArrayOf(
+            compoundPaddingLeft,
+            compoundPaddingRight,
+            compoundPaddingTop,
+            compoundPaddingBottom
+        )
         frozen = true
     }
 
@@ -309,5 +326,10 @@ class MagicTextView : TextView {
         return if (!frozen) super.getCompoundPaddingBottom() else lockedCompoundPadding!![3]
     }
 
-    class Shadow(internal var r: Float, internal var dx: Float, internal var dy: Float, internal var color: Int)
+    class Shadow(
+        internal var r: Float,
+        internal var dx: Float,
+        internal var dy: Float,
+        internal var color: Int
+    )
 }

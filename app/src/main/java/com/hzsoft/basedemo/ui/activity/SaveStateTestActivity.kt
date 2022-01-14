@@ -6,15 +6,17 @@ import android.widget.Button
 import android.widget.TextView
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.ui.activity.viewmodel.SaveStateTestViewModel
+import android.view.ViewStub
 import com.hzsoft.lib.base.view.BaseMvvmActivity
 
 /**
- * 测试 SaveStateHandler
+ * 测试 SaveStateHandler，使用了ViewBinding示例
  *
  * @author zhouhuan
  * @time 2021/11/23
  */
-class SaveStateTestActivity : BaseMvvmActivity<SaveStateTestViewModel>() {
+class SaveStateTestActivity : BaseMvvmActivity<SaveStateTestViewModel>(),
+    ActivityViewBinding<ActivitySaveStateTestBinding> by ActivityBinding() {
 
     companion object {
         fun start(context: Context, info: String) {
@@ -23,11 +25,6 @@ class SaveStateTestActivity : BaseMvvmActivity<SaveStateTestViewModel>() {
             })
         }
     }
-
-    private lateinit var textView: TextView
-    private lateinit var textView1: TextView
-    private lateinit var textView2: TextView
-    private lateinit var textView3: TextView
 
     private var countLeft = 0
     private var countRight = 0
@@ -38,16 +35,19 @@ class SaveStateTestActivity : BaseMvvmActivity<SaveStateTestViewModel>() {
 
     override fun onBindLayout(): Int = R.layout.activity_save_state_test
 
+    override fun initContentView(mViewStubContent: ViewStub) {
+        mViewStubContent.setOnInflateListener { _, inflated ->
+            inflate({ ActivitySaveStateTestBinding.bind(inflated) }, false)
+        }
+        super.initContentView(mViewStubContent)
+    }
+
     override fun initView() {
-        textView = findViewById(R.id.textView)
-        textView1 = findViewById(R.id.textView1)
-        textView2 = findViewById(R.id.textView2)
-        textView3 = findViewById(R.id.textView3)
-        findViewById<Button>(R.id.left).setOnClickListener {
+        requireBinding().left.setOnClickListener {
             ++countLeft
             initData()
         }
-        findViewById<Button>(R.id.right).setOnClickListener {
+        requireBinding().right.setOnClickListener {
             ++countRight
             mViewModel.saveCount(countRight)
             initData()
@@ -59,9 +59,9 @@ class SaveStateTestActivity : BaseMvvmActivity<SaveStateTestViewModel>() {
             countRight = mViewModel.getCount()
         }
 
-        textView.text = "收到的页面内容：%s".format(mViewModel.getJumpPage())
-        textView2.text = "会重置：%s".format(countLeft)
-        textView3.text = "不会重置：%s".format(mViewModel.getCount())
+        requireBinding().textView.text = "收到的页面内容：%s".format(mViewModel.getJumpPage())
+        requireBinding().textView2.text = "会重置：%s".format(countLeft)
+        requireBinding().textView3.text = "不会重置：%s".format(mViewModel.getCount())
     }
 
     override fun onBindViewModel(): Class<SaveStateTestViewModel> =

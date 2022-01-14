@@ -7,12 +7,11 @@ import android.util.AttributeSet
 import android.widget.TextView
 
 /**
- * Description: <文字图标居中TextView><br>
- * Author:      mxdl<br>
- * Date:        2018/8/24<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
-</文字图标居中TextView> */
+ * 文字图标居中TextView
+ *
+ * @author zhouhuan
+ * @time 2022/1/14
+ */
 @SuppressLint("AppCompatCustomView")
 class DrawableCenterTextView : TextView {
 

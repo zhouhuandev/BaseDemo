@@ -6,14 +6,6 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.hzsoft.lib.common.R
 
-
-/**
- * Description: <NetworkErrorView><br>
- * Author:      mxdl<br>
- * Date:        2018/6/20<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
-</NetworkErrorView> */
 class NetworkErrorView : RelativeLayout {
 
     constructor(context: Context) : super(context) {

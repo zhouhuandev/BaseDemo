@@ -1,5 +1,6 @@
 package com.hzsoft.basedemo.ui.activity.viewmodel
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -21,7 +22,9 @@ import kotlinx.coroutines.launch
 class RoomTestViewModel(state: SavedStateHandle) :
     BaseRefreshViewModel<UserTestRoom>() {
 
-    val savedStateHandle = state
+    private val savedStateHandle = state
+
+    var showEmpty = ObservableField(false)
 
     private val dataRepositoryRepository: DataRepositorySource = DataRepository()
 

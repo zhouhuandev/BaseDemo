@@ -42,36 +42,34 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
         lifecycle.addObserver(mViewModel)
 
         mViewModel.mUIChangeLiveData.getShowToastViewEvent()
-            .observe(this, Observer { it.showToast() })
+            .observe(this) { it.showToast() }
         mViewModel.mUIChangeLiveData.getShowInitLoadViewEvent()
-            .observe(this, Observer {
+            .observe(this) {
                 showInitLoadView(it)
-            })
+            }
         mViewModel.mUIChangeLiveData.getShowTransLoadingViewEvent()
-            .observe(this, Observer {
-                v("MYTAG", "view postShowTransLoadingViewEvent start...")
+            .observe(this) {
                 showTransLoadingView(it)
-            })
+            }
         mViewModel.mUIChangeLiveData.getShowNoDataViewEvent()
-            .observe(this, Observer {
+            .observe(this) {
                 showNoDataView(it)
-            })
+            }
         mViewModel.mUIChangeLiveData.getShowNetWorkErrViewEvent()
-            .observe(this, Observer {
+            .observe(this) {
                 showNetWorkErrView(it)
-            })
-        mViewModel.mUIChangeLiveData.getStartActivityEvent().observe(
-            this,
-            Observer {
+            }
+        mViewModel.mUIChangeLiveData.getStartActivityEvent()
+            .observe(this) {
                 val clz =
                     it[BaseViewModel.ParameterField.CLASS] as Class<*>?
                 val bundle = it[BaseViewModel.ParameterField.BUNDLE] as Bundle?
                 startActivity(clz, bundle)
-            })
+            }
         mViewModel.mUIChangeLiveData.getFinishActivityEvent()
-            .observe(this, Observer { finish() })
+            .observe(this) { finish() }
         mViewModel.mUIChangeLiveData.getOnBackPressedEvent()
-            .observe(this, Observer { onBackPressed() })
+            .observe(this) { onBackPressed() }
     }
 
 }

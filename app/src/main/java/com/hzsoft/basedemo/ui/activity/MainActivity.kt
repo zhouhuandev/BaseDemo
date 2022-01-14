@@ -2,6 +2,7 @@ package com.hzsoft.basedemo.ui.activity
 
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.entity.MainChannel
 import com.hzsoft.basedemo.ui.fragment.MainHomeFragment

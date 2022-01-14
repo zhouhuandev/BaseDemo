@@ -1,9 +1,10 @@
 package com.hzsoft.lib.base.view
 
 import android.view.ViewStub
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel
+import com.hzsoft.lib.base.view.databinding.FragmentBinding
+import com.hzsoft.lib.base.view.databinding.FragmentBindingHolder
 
 /**
  * Describe:
@@ -13,28 +14,18 @@ import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel
  * @Date 2020/12/17
  */
 abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewModel> :
-    BaseMvvmFragment<VM>() {
-    protected lateinit var mBinding: V
-    private var viewModelId = 0
+    BaseMvvmFragment<VM>(), FragmentBindingHolder<V> by FragmentBinding() {
 
     override fun initContentView(mViewStubContent: ViewStub) {
-        mViewStubContent.layoutResource = onBindLayout()
-        initViewDataBinding(mViewStubContent)
-        mViewStubContent.inflate()
-    }
-
-    private fun initViewDataBinding(mViewStubContent: ViewStub) {
-        viewModelId = onBindVariableId()
-        mViewStubContent.setOnInflateListener { _, inflated ->
-            mBinding = DataBindingUtil.bind<V>(inflated)!!
-            mBinding.setVariable(viewModelId, mViewModel)
+        with(mViewStubContent) {
+            layoutResource = onBindLayout()
+            inflate(this) { binding ->
+                onBindVariableId().forEach { pair ->
+                    binding.setVariable(pair.first, pair.second)
+                }
+            }
         }
     }
 
-    abstract fun onBindVariableId(): Int
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mBinding.unbind()
-    }
+    abstract fun onBindVariableId(): MutableList<Pair<Int, Any>>
 }

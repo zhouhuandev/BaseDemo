@@ -9,7 +9,7 @@ import com.hzsoft.basedemo.adapter.RoomTestAdapter
 import com.hzsoft.basedemo.ui.activity.viewmodel.RoomTestViewModel
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseFragment
-import com.hzsoft.lib.base.view.BaseMvvmRefreshActivity
+import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingActivity
 import com.hzsoft.lib.common.utils.VibrateTool
 import com.hzsoft.lib.common.wight.CommonDialogFragment
 import com.hzsoft.lib.log.KLog
@@ -20,7 +20,7 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 /**
- * 测试 Room
+ * 测试 Room，使用了DataBinding示例
  *
  * @author zhouhuan
  * @time 2021/11/23
@@ -101,7 +101,7 @@ class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel
     override fun initView() {
         mAdapter = RoomTestAdapter()
         mAdapter.bindSkeletonScreen(
-            findViewById(R.id.mRecyclerView),
+            requireBinding().mRecyclerView,
             com.hzsoft.lib.base.R.layout.skeleton_default_service_item,
             8
         )
@@ -135,12 +135,16 @@ class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel
 
     override fun initListener() {
         super.initListener()
-        findViewById<View>(R.id.addUser).setOnClickListener(this::onClick)
-        findViewById<View>(R.id.selectUser).setOnClickListener(this::onClick)
+        requireBinding().addUser.setOnClickListener(this::onClick)
+        requireBinding().selectUser.setOnClickListener(this::onClick)
     }
 
     override fun initData() {
         onRefreshEvent()
+    }
+
+    override fun onBindVariableId(): MutableList<Pair<Int, Any>> {
+        return arrayListOf(BR.viewModel to mViewModel)
     }
 
     override fun onBindViewModel(): Class<RoomTestViewModel> =
@@ -170,7 +174,7 @@ class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel
         }
     }
 
-    var firstLoad = true
+    private var firstLoad = true
 
     override fun onRefreshEvent() {
         // 为了展示骨架屏
@@ -204,7 +208,6 @@ class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel
 
     private fun bindListData2(userTestRoom: ArrayList<UserTestRoom>) {
         mAdapter.setNewInstance(userTestRoom)
-        findViewById<TextView>(R.id.textView).visibility =
-            if (userTestRoom.isEmpty()) View.VISIBLE else View.INVISIBLE
+        mViewModel.showEmpty.set(userTestRoom.isEmpty())
     }
 }
