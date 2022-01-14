@@ -8,14 +8,6 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.hzsoft.lib.base.R
 
-
-/**
- * Description: <LoadingView><br>
- * Author:      mxdl<br>
- * Date:        2019/3/25<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
-</LoadingView> */
 class LoadingInitView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
     private val mAnimationDrawable: AnimationDrawable
 

@@ -2,7 +2,7 @@
 
 ## 介绍
 
-BaseDemo 是Android MVVM + Retrofit + OkHttp + Coroutine 协程 + Room + 组件化架构的Android应用开发规范化架构，通过不断的升级迭代，目前主要分为两个版本，分别为分支 MVVM+Databinding 组件化版本，分支MVVM+Databinding+Single 单体版本。旨在帮助您快速构建属于自己的APP项目架构，做到快速响应上手，另外再长期的实践经验中汇总了大量的使用工具类，主要放在了项目 `lib_common`组件中，以供大家参考使用。具体使用请开发者工具自己项目需求决定选择如何使用。
+🔥🔥🔥 BaseDemo 是Android MVVM + Retrofit + OkHttp + Coroutine 协程 + ViewBinding & DataBinding + Room + 组件化架构的Android应用开发规范化架构，通过不断的升级迭代，目前主要分为两个版本，分别为分支 MVVM+Databinding 组件化版本，分支MVVM+Databinding+Single 单体版本。旨在帮助您快速构建属于自己的APP项目架构，做到快速响应上手，另外再长期的实践经验中汇总了大量的使用工具类，主要放在了项目 `lib_common`组件中，以供大家参考使用。具体使用请开发者工具自己项目需求决定选择如何使用。
 
 如果我的付出可以换来对您的帮助的话，还请您点个start，将会是我不懈更新的动力，万分感谢。如果在使用中有任何问题，请留言
 
@@ -207,8 +207,8 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
 ##### BaseMvvmDataBindingActivity
 
 ```kotlin
-abstract class BaseMvvmDataBindingActivity<V : ViewDataBinding, VM : BaseViewModel> : BaseMvvmActivity<VM>() {
-    abstract fun onBindVariableId(): Int
+abstract class BaseMvvmDataBindingActivity<V : ViewDataBinding, VM : BaseViewModel> : BaseMvvmActivity<VM>(), ActivityBindingHolder<V> by ActivityBinding() {
+    abstract fun onBindVariableId(): MutableList<Pair<Int, Any>>
 }
 ```
 
@@ -216,7 +216,7 @@ abstract class BaseMvvmDataBindingActivity<V : ViewDataBinding, VM : BaseViewMod
 
 ```kotlin
 abstract class BaseMvvmRefreshActivity<T, VM : BaseRefreshViewModel<T>> : BaseMvvmActivity<VM>(), BaseRefreshView {
-    protected abstract fun onBindRreshLayout(): Int
+    protected abstract fun initRefreshView(): Int
     protected abstract fun enableRefresh(): Boolean
     protected abstract fun enableLoadMore(): Boolean
 }
@@ -226,7 +226,7 @@ abstract class BaseMvvmRefreshActivity<T, VM : BaseRefreshViewModel<T>> : BaseMv
 
 ```kotlin
 abstract class BaseMvvmRefreshDataBindingActivity<T, V : ViewDataBinding, VM : BaseRefreshViewModel<T>> : BaseMvvmDataBindingActivity<V, VM>(), BaseRefreshView {
-    protected abstract fun onBindRreshLayout(): Int
+    protected abstract fun onBindRefreshLayout(): Int
     protected abstract fun enableRefresh(): Boolean
     protected abstract fun enableLoadMore(): Boolean
 }
@@ -252,17 +252,15 @@ abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment() {
 ##### BaseMvvmDataBindingFragment
 
 ```kotlin
-abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewModel> :
-    BaseMvvmFragment<VM>() {
-    abstract fun onBindVariableId(): Int
+abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewModel> : BaseMvvmFragment<VM>(), FragmentBindingHolder<V> by FragmentBinding() {
+    abstract fun onBindVariableId(): MutableList<Pair<Int, Any>>
 }
 ```
 
 ##### BaseMvvmRefreshFragment
 
 ```koltin
-abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMvvmFragment<VM>(),
-    BaseRefreshView {
+abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMvvmFragment<VM>(), BaseRefreshView {
     protected abstract fun onBindRreshLayout(): Int
     protected abstract fun enableRefresh(): Boolean
     protected abstract fun enableLoadMore(): Boolean
@@ -281,9 +279,8 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 }
 ```
 
-- BaseAdapter
-- BaseDataBindAdapter
-- BaseViewHolder
+- BaseFragmentPagerAdapter
+- BaseSkeletonAdapter
 - IBaseViewModel
 - BaseViewModel
 - BaseRefreshViewModel ...
@@ -458,7 +455,129 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 ```
 
 - 支持`DataBinding`
+
+  **for Activity**
+
+  ```kotlin
+  import com.hzsoft.lib.base.view.databinding.ActivityBinding
+  import com.hzsoft.lib.base.view.databinding.ActivityViewBinding
+  
+  // 原始页面使用DataBinding
+  class HomeActivity : AppCompatActivity(), ActivityBindingHolder<ActivityHomeBinding> by ActivityBinding(R.layout.activity_home) {
+      override fun onCreate(savedInstanceState: Bundle?) {
+          super.onCreate(savedInstanceState)
+          // replace setContentView(), and hold binding instance
+          inflate(/* option: */ onClear = { it.onClear() }) {
+              // init binding, views and states here
+          }
+      }
+  
+      // Optional: perform clear binding
+      private fun ActivityHomeBinding.onClear() {
+          // clear something.
+      }
+  }
+  // ViewStub页面使用DataBinding
+  请参考 #BaseMvvmDataBindingActivity
+  ```
+
+  **for Fragment**
+
+  ```kotlin
+  import com.hzsoft.lib.base.view.databinding.FragmentBinding
+  import com.hzsoft.lib.base.view.databinding.FragmentViewBinding
+  
+  // 原始页面使用DataBinding
+  class HomeFragment : Fragment(), FragmentBindingHolder<FragmentHomeBinding> by FragmentBinding() {
+      
+      override fun onCreateView(
+          inflater: LayoutInflater,
+          container: ViewGroup?,
+          savedInstanceState: Bundle?
+      ): View {
+          return inflate(
+              inflater = inflater,
+              root = container,
+              attachToRoot = false,
+              /* option: */ onClear = { it.onClear() }
+          ) {
+              // init binding, views and states here
+          }
+      }
+  
+      // Optional: perform clear binding
+      private fun FragmentHomeBinding.onClear() {
+          // clear something.
+      }
+  }
+  // ViewStub页面使用DataBinding
+  请参考 #BaseMvvmDataBindingFragment
+  ```
+
+- 支持`ViewBinding`
+
+  **for Activity**
+
+  ```kotlin
+  import com.hzsoft.lib.base.view.viewbinding.ActivityBinding
+  import com.hzsoft.lib.base.view.viewbinding.ActivityViewBinding
+  
+  // 原始页面使用ViewBinding
+  class HomeActivity : AppCompatActivity(), ActivityViewBinding<ActivityHomeBinding> by ActivityBinding() {
+      override fun onCreate(savedInstanceState: Bundle?) {
+          super.onCreate(savedInstanceState)
+          // replace setContentView(), and hold binding instance
+          inflate(
+              inflate = { ActivityHomeBinding.inflate(layoutInflater) },
+              /* 原始页面此处默认为 true */ isRoot = true,
+              /* option: */ onClear = { it.onClear() }
+          ) {
+              // init with binding
+          }
+      }
+  
+      // Optional: perform clear binding
+      private fun ActivityHomeBinding.onClear() {
+          // clear something.
+      }
+  }
+  // ViewStub页面使用ViewBinding
+  请参考 #SaveStateTestActivity
+  ```
+
+  **for Fragment**
+
+  ```kotlin
+  import com.hzsoft.lib.base.view.viewbinding.FragmentBinding
+  import com.hzsoft.lib.base.view.viewbinding.FragmentViewBinding
+  
+  // 原始页面使用ViewBinding
+  class HomeFragment : Fragment(), FragmentViewBinding<FragmentHomeBinding> by FragmentBinding() {
+  
+      override fun onCreateView(
+          inflater: LayoutInflater,
+          container: ViewGroup?,
+          savedInstanceState: Bundle?
+      ): View {
+          return inflate(
+              inflate = { FragmentHomeBinding.inflate(inflater, container, false) },
+              /* option: */ onClear = { it.onClear() }
+          ) {
+              // init binding, views and states here
+          }
+      }
+  
+      // Optional: perform clear binding
+      private fun FragmentHomeBinding.onClear() {
+          // clear something.
+      }
+  }
+  // ViewStub页面使用ViewBinding
+  请参考 #MainMeFragment
+  ```
+
 - 封装`UIChangeLiveData`、`UIChangeRefreshLiveData`
+
 - `ViewModel` lazy加载 ...
 
 ### 上拉下拉功能组件 lib_refresh_layout（已废弃，改用SmartRefreshLayout代替）
@@ -614,6 +733,7 @@ Blog : "https://blog.csdn.net/youxun1312"
 
 - 2021.8.14 优化整体架构，升级依赖版本
 - 2021.11.23 优化架构，更新刷新框架、Adapter适配器，修复已知问题
+- 2022.01.14 优化`ViewBinding` & `DataBinding`、新增部分拓展函数
 
 ### License
 

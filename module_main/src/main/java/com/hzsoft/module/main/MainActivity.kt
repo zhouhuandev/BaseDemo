@@ -3,6 +3,7 @@ package com.hzsoft.module.main
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.lib.base.module.provider.IHomeProvider
 import com.hzsoft.lib.base.module.provider.IMeProvider
 import com.hzsoft.lib.base.view.BaseActivity
@@ -17,11 +18,11 @@ import com.hzsoft.module.main.entity.MainChannel
  */
 class MainActivity : BaseActivity() {
 
-    @Autowired(name = "/home/main")
+    @Autowired(name = ARouteConstants.Main.HOME_MAIN)
     @JvmField
     var mHomeProvider: IHomeProvider? = null
 
-    @Autowired(name = "/me/main")
+    @Autowired(name = ARouteConstants.Me.ME_MAIN)
     @JvmField
     var mMeProvider: IMeProvider? = null
 

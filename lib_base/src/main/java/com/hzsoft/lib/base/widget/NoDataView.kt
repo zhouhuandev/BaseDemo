@@ -9,13 +9,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.hzsoft.lib.base.R
 
-/**
- * Description: <NoDataView><br>
- * Author:      mxdl<br>
- * Date:        2019/3/25<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
-</NoDataView> */
 class NoDataView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
 
     private val mRlNoDataRoot: RelativeLayout

@@ -7,13 +7,6 @@ import android.widget.RelativeLayout
 import androidx.annotation.ColorRes
 import com.hzsoft.lib.base.R
 
-/**
- * Description: <LoadingView><br>
- * Author:      mxdl<br>
- * Date:        2019/3/25<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
-</LoadingView> */
 class NetErrorView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
     private var mOnClickListener: View.OnClickListener? = null
     private val mRlNetWorkError: RelativeLayout

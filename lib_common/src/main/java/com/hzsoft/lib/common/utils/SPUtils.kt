@@ -1,19 +1,5 @@
 package com.hzsoft.lib.common.utils
 
-/**
- * Description: <SPUtils><br>
- * Author: mxdl<br>
- * Date: 2018/6/19<br>
- * Version: V1.0.0<br>
- * Update: <br>
- *
- *  * 1.缓存数据
- *  * 2.获取数据
- *  * 3.删除数据
- *  * 4.清空数据
- *
-</SPUtils> */
-
 import android.content.Context
 import android.content.SharedPreferences
 
@@ -33,7 +19,7 @@ object SPUtils {
     /**
      * 保存在手机里面的文件名
      */
-    val FILE_NAME = "base_demo_data"
+    private const val FILE_NAME = "base_demo_data"
 
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法

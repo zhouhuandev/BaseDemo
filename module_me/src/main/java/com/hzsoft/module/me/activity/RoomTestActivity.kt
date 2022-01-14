@@ -2,35 +2,38 @@ package com.hzsoft.module.me.activity
 
 import android.content.Context
 import android.view.View
-import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseFragment
-import com.hzsoft.lib.base.view.BaseMvvmRefreshActivity
+import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingActivity
 import com.hzsoft.lib.common.utils.VibrateTool
 import com.hzsoft.lib.common.wight.CommonDialogFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.utils.ext.observe
+import com.hzsoft.module.me.BR
 import com.hzsoft.module.me.R
 import com.hzsoft.module.me.adapter.RoomTestAdapter
+import com.hzsoft.module.me.databinding.ActivityRoomTestBinding
 import kotlin.random.Random
 import kotlin.random.nextInt
 
 /**
- * 测试 Room
+ * 测试 Room，使用了DataBinding示例
  *
  * @author zhouhuan
  * @time 2021/11/23
  */
-@Route(path = "/me/room_test")
-class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel>() {
+@Route(path = ARouteConstants.Me.ME_ROOT_TEST, name = "Room测试")
+class RoomTestActivity :
+    BaseMvvmRefreshDataBindingActivity<UserTestRoom, ActivityRoomTestBinding, RoomTestViewModel>() {
 
     companion object {
         fun start(context: Context) {
-            ARouter.getInstance().build("/me/room_test")
+            ARouter.getInstance().build(ARouteConstants.Me.ME_ROOT_TEST)
                 .navigation(context)
         }
     }
@@ -103,7 +106,7 @@ class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel
     override fun initView() {
         mAdapter = RoomTestAdapter()
         mAdapter.bindSkeletonScreen(
-            findViewById(R.id.mRecyclerView),
+            requireBinding().mRecyclerView,
             com.hzsoft.lib.base.R.layout.skeleton_default_service_item,
             8
         )
@@ -137,12 +140,16 @@ class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel
 
     override fun initListener() {
         super.initListener()
-        findViewById<View>(R.id.addUser).setOnClickListener(this::onClick)
-        findViewById<View>(R.id.selectUser).setOnClickListener(this::onClick)
+        requireBinding().addUser.setOnClickListener(this::onClick)
+        requireBinding().selectUser.setOnClickListener(this::onClick)
     }
 
     override fun initData() {
         onRefreshEvent()
+    }
+
+    override fun onBindVariableId(): MutableList<Pair<Int, Any>> {
+        return arrayListOf(BR.viewModel to mViewModel)
     }
 
     override fun onBindViewModel(): Class<RoomTestViewModel> =
@@ -172,7 +179,7 @@ class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel
         }
     }
 
-    var firstLoad = true
+    private var firstLoad = true
 
     override fun onRefreshEvent() {
         // 为了展示骨架屏
@@ -206,7 +213,6 @@ class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel
 
     private fun bindListData2(userTestRoom: ArrayList<UserTestRoom>) {
         mAdapter.setNewInstance(userTestRoom)
-        findViewById<TextView>(R.id.textView).visibility =
-            if (userTestRoom.isEmpty()) View.VISIBLE else View.INVISIBLE
+        mViewModel.showEmpty.set(userTestRoom.isEmpty())
     }
 }
