@@ -2,12 +2,13 @@ package com.hzsoft.basedemo.ui.activity
 
 import android.content.Context
 import android.content.Intent
-import android.widget.Button
-import android.widget.TextView
-import com.hzsoft.basedemo.R
-import com.hzsoft.basedemo.ui.activity.viewmodel.SaveStateTestViewModel
 import android.view.ViewStub
+import com.hzsoft.basedemo.R
+import com.hzsoft.basedemo.databinding.ActivitySaveStateTestBinding
+import com.hzsoft.basedemo.ui.activity.viewmodel.SaveStateTestViewModel
 import com.hzsoft.lib.base.view.BaseMvvmActivity
+import com.hzsoft.lib.base.view.viewbinding.ActivityBinding
+import com.hzsoft.lib.base.view.viewbinding.ActivityViewBinding
 
 /**
  * 测试 SaveStateHandler，使用了ViewBinding示例

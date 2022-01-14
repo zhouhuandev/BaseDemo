@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewStub
 import com.google.gson.Gson
 import com.hzsoft.basedemo.R
+import com.hzsoft.basedemo.databinding.FragmentMeMainBinding
 import com.hzsoft.basedemo.ui.activity.RoomTestActivity
 import com.hzsoft.basedemo.ui.activity.SaveStateTestActivity
 import com.hzsoft.lib.base.utils.ToastUtil

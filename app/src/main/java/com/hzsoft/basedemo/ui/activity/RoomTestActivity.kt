@@ -3,9 +3,10 @@ package com.hzsoft.basedemo.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
-import android.widget.TextView
+import com.hzsoft.basedemo.BR
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.adapter.RoomTestAdapter
+import com.hzsoft.basedemo.databinding.ActivityRoomTestBinding
 import com.hzsoft.basedemo.ui.activity.viewmodel.RoomTestViewModel
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseFragment
@@ -25,7 +26,8 @@ import kotlin.random.nextInt
  * @author zhouhuan
  * @time 2021/11/23
  */
-class RoomTestActivity : BaseMvvmRefreshActivity<UserTestRoom, RoomTestViewModel>() {
+class RoomTestActivity :
+    BaseMvvmRefreshDataBindingActivity<UserTestRoom, ActivityRoomTestBinding, RoomTestViewModel>() {
 
     companion object {
         fun start(context: Context) {
