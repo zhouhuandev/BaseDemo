@@ -13,14 +13,12 @@ import android.widget.TextView
 import com.hzsoft.lib.common.R
 import com.hzsoft.lib.common.utils.DisplayUtil
 
-
 /**
- * Description: <旋转进度的dialog><br>
- * Author: mxdl<br>
- * Date: 2018/4/19<br>
- * Version: V1.0.0<br>
- * Update: <br>
-</旋转进度的dialog> */
+ * 旋转进度的dialog
+ *
+ * @author zhouhuan
+ * @time 2022/1/14
+ */
 class RotateProgressDialog : androidx.fragment.app.DialogFragment() {
 
     private var mTxtProgress: TextView? = null

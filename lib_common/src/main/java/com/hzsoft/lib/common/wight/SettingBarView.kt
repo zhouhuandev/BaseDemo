@@ -11,13 +11,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.hzsoft.lib.common.R
 
-/**
- * Description: <SettingBarView><br>
- * Author:      mxdl<br>
- * Date:        2019/3/4<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
-</SettingBarView> */
 class SettingBarView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
     private val imgLeftIcon: ImageView?
     private val txtSetTitle: TextView
@@ -60,8 +53,10 @@ class SettingBarView(context: Context, attrs: AttributeSet) : RelativeLayout(con
         txtSetContent = findViewById(R.id.txt_set_content)
         imgRightIcon = findViewById(R.id.img_right_icon)
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SettingBarView)
-        val isVisableLeftIcon = typedArray.getBoolean(R.styleable.SettingBarView_set_left_icon_visable, false)
-        val isVisableRightIcon = typedArray.getBoolean(R.styleable.SettingBarView_set_right_icon_visable, false)
+        val isVisableLeftIcon =
+            typedArray.getBoolean(R.styleable.SettingBarView_set_left_icon_visable, false)
+        val isVisableRightIcon =
+            typedArray.getBoolean(R.styleable.SettingBarView_set_right_icon_visable, false)
         val title = typedArray.getString(R.styleable.SettingBarView_set_title)
         val hint = typedArray.getString(R.styleable.SettingBarView_set_content_hint)
         val content = typedArray.getString(R.styleable.SettingBarView_set_content)

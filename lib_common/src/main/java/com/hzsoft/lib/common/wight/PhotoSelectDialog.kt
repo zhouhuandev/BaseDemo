@@ -15,13 +15,6 @@ import com.hzsoft.lib.common.utils.DisplayUtil
 import com.hzsoft.lib.common.utils.MultiMediaUtil
 import me.nereo.multi_image_selector.MultiImageSelectorActivity
 
-/**
- * Description: <PhotoSelectDialog><br>
- * Author: mxdl<br>
- * Date: 2019/1/3<br>
- * Version: V1.0.0<br>
- * Update: <br>
-</PhotoSelectDialog> */
 class PhotoSelectDialog : BottomSheetDialogFragment(), View.OnClickListener {
     private var mOnClickLisener: OnPhotoClickLisener? = null
     private var mPhotoPath: String? = null
@@ -57,7 +50,7 @@ class PhotoSelectDialog : BottomSheetDialogFragment(), View.OnClickListener {
     override fun onClick(v: View) {
         val i = v.id
         if (i == R.id.btn_take_photo) {
-            mPhotoPath = MultiMediaUtil.getPhotoPath(activity!!)
+            mPhotoPath = MultiMediaUtil.getPhotoPath(requireActivity())
             MultiMediaUtil.takePhoto(this, mPhotoPath!!, MultiMediaUtil.TAKE_PHONE)
 
         } else if (i == R.id.btn_select_photo) {

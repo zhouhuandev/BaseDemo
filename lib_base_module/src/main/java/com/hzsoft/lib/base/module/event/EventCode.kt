@@ -1,12 +1,11 @@
 package com.hzsoft.lib.base.module.event
 
 /**
- * Description: <EventCode><br>
- * Author:      mxdl<br>
- * Date:        2018/4/4<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
-</EventCode> */
+ * EventCode
+ *
+ * @author zhouhuan
+ * @time 2022/1/14
+ */
 interface EventCode {
     interface MainCode//1000开始
 
