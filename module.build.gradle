@@ -17,10 +17,10 @@ kapt {
 android {
     // 每个单独的 module库build可进行单独自定义配置相关文件信息
 
-    buildFeatures{
-        dataBinding = true
+    buildFeatures {
+        dataBinding true
         // for view binding :
-        // viewBinding = true
+        viewBinding true
     }
     sourceSets {
         main {
