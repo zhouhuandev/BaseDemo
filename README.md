@@ -478,7 +478,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
       }
   }
   // ViewStub页面使用DataBinding
-  请参考 #BaseMvvmDataBindingActivity
+  // 请参考 #BaseMvvmDataBindingActivity
   ```
 
   **for Fragment**
@@ -511,7 +511,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
       }
   }
   // ViewStub页面使用DataBinding
-  请参考 #BaseMvvmDataBindingFragment
+  // 请参考 #BaseMvvmDataBindingFragment
   ```
 
 - 支持`ViewBinding`
@@ -542,7 +542,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
       }
   }
   // ViewStub页面使用ViewBinding
-  请参考 #SaveStateTestActivity
+  // 请参考 #SaveStateTestActivity
   ```
 
   **for Fragment**
@@ -573,7 +573,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
       }
   }
   // ViewStub页面使用ViewBinding
-  请参考 #MainMeFragment
+  // 请参考 #MainMeFragment
   ```
 
 - 封装`UIChangeLiveData`、`UIChangeRefreshLiveData`
