@@ -33,7 +33,9 @@ class MainHomeFragment :
 
     private lateinit var mAdapter: MainHomeAdapter
 
-    override fun onBindVariableId(): Int = BR.viewModel
+    override fun onBindVariableId(): MutableList<Pair<Int, Any>> {
+        return arrayListOf(BR.viewModel to mViewModel)
+    }
 
     override fun onBindViewModel(): Class<MainHomeViewModel> = MainHomeViewModel::class.java
 
@@ -46,7 +48,7 @@ class MainHomeFragment :
     override fun initView(mView: View) {
         mAdapter = MainHomeAdapter()
         mAdapter.bindSkeletonScreen(
-            mBinding.mRecyclerView,
+            requireBinding().mRecyclerView,
             com.hzsoft.lib.base.R.layout.skeleton_default_service_item,
             8
         )
