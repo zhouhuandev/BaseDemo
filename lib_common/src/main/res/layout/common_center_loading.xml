@@ -13,7 +13,7 @@
         android:paddingHorizontal="@dimen/dp_30"
         android:paddingVertical="@dimen/dp_28">
 
-        <com.hzsoft.lib.common.wight.LoadingView
+        <com.hzsoft.lib.common.widget.LoadingView
             android:id="@+id/load_view"
             android:layout_width="@dimen/dp_34"
             android:layout_height="@dimen/dp_34" />

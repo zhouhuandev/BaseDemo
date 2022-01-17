@@ -1,4 +1,4 @@
-package com.hzsoft.lib.common.wight
+package com.hzsoft.lib.common.widget
 
 import android.content.DialogInterface
 import android.graphics.Color

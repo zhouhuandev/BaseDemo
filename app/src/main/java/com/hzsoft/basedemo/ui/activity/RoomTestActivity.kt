@@ -12,7 +12,7 @@ import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseFragment
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingActivity
 import com.hzsoft.lib.common.utils.VibrateTool
-import com.hzsoft.lib.common.wight.CommonDialogFragment
+import com.hzsoft.lib.common.widget.CommonDialogFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
