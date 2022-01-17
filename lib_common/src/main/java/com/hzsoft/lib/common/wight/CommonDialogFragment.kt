@@ -24,6 +24,17 @@ import com.hzsoft.lib.log.KLog
 class CommonDialogFragment : DialogFragment() {
     private var mOnDialogClickListener: OnDialogClickListener? = null
 
+    /**
+     * 避免弹多个dialog
+     */
+    private var isShowing = false
+
+    /**
+     * 是否正在显示
+     * @return true:显示 false:不显示
+     */
+    fun isShow() = isShowing
+
     override fun dismiss() {
         super.dismiss()
         isShowing = false
@@ -44,10 +55,8 @@ class CommonDialogFragment : DialogFragment() {
         super.show(manager, tag)
     }
 
-    fun setOnDialogClickListener(onDialogClickListener: OnDialogClickListener?): CommonDialogFragment {
-        mOnDialogClickListener = onDialogClickListener
-        return this
-    }
+    fun setOnDialogClickListener(onDialogClickListener: OnDialogClickListener?): CommonDialogFragment =
+        apply { this.mOnDialogClickListener = onDialogClickListener }
 
     interface OnDialogClickListener {
         fun onLeftBtnClick(view: View)
@@ -60,11 +69,13 @@ class CommonDialogFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(
-            resources.displayMetrics.widthPixels - DisplayUtil.dip2px(40f) * 2,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.apply {
+            setLayout(
+                resources.displayMetrics.widthPixels - DisplayUtil.dip2px(40f) * 2,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
     }
 
     override fun onCreateView(
@@ -125,51 +136,45 @@ class CommonDialogFragment : DialogFragment() {
     }
 
     class Builder {
-        var title: String = ""
-        var describe: String = ""
-        var leftBtn: String = ""
-        var rightBtn: String = ""
-        var btnRightTextColor: Int = 0
-        var mListener: OnDialogClickListener? = null
+        private var title: String = ""
+        private var describe: String = ""
+        private var leftBtn: String = ""
+        private var rightBtn: String = ""
+        private var btnRightTextColor: Int = 0
+        private var mListener: OnDialogClickListener? = null
 
-        @JvmName("setTitle1")
-        fun setTitle(title: String): Builder {
-            this.title = title
-            return this
-        }
+        fun setTitle(title: String): Builder = apply { this.title = title }
 
-        @JvmName("setDescribe1")
-        fun setDescribe(describe: String): Builder {
-            this.describe = describe
-            return this
-        }
+        fun setDescribe(describe: String): Builder = apply { this.describe = describe }
 
-        @JvmName("setLeftBtn1")
-        fun setLeftBtn(leftBtn: String): Builder {
-            this.leftBtn = leftBtn
-            return this
-        }
+        fun setLeftBtn(leftBtn: String): Builder = apply { this.leftBtn = leftBtn }
 
-        @JvmName("setRightBtn1")
-        fun setRightBtn(rightBtn: String): Builder {
-            this.rightBtn = rightBtn
-            return this
-        }
+        fun setRightBtn(rightBtn: String): Builder = apply { this.rightBtn = rightBtn }
 
-        @JvmName("setOnDialogClickListener1")
-        fun setOnDialogClickListener(listener: OnDialogClickListener): Builder {
-            this.mListener = listener
-            return this
-        }
+        fun setOnDialogClickListener(listener: OnDialogClickListener): Builder =
+            apply { this.mListener = listener }
 
-        @JvmName("setRightBtnTextColor1")
-        fun setRightBtnTextColor(rightBtnTextColor: Int): Builder {
-            this.btnRightTextColor = rightBtnTextColor
-            return this
-        }
+        fun setRightBtnTextColor(rightBtnTextColor: Int): Builder =
+            apply { this.btnRightTextColor = rightBtnTextColor }
 
         fun build(): CommonDialogFragment {
             return newInstance(this)
+        }
+
+        private fun newInstance(builder: Builder): CommonDialogFragment {
+            val commonDialogFragment = CommonDialogFragment()
+            val args = Bundle()
+            commonDialogFragment.arguments = args.apply {
+                with(builder) {
+                    putString("title", title)
+                    putString("describe", describe)
+                    putString("leftBtn", leftBtn)
+                    putString("rightBtn", rightBtn)
+                    putInt("rightBtnColor", btnRightTextColor)
+                    commonDialogFragment.setOnDialogClickListener(mListener)
+                }
+            }
+            return commonDialogFragment
         }
     }
 
@@ -183,23 +188,5 @@ class CommonDialogFragment : DialogFragment() {
         val TAG: String = CommonDialogFragment::class.java.simpleName
 
         const val fragmentTag = "common_dialog"
-
-        /**
-         * 避免弹多个dialog
-         */
-        var isShowing = false
-
-        fun newInstance(builder: Builder): CommonDialogFragment {
-            val commonDialogFragment = CommonDialogFragment()
-            val args = Bundle()
-            args.putString("title", builder.title)
-            args.putString("describe", builder.describe)
-            args.putString("leftBtn", builder.leftBtn)
-            args.putString("rightBtn", builder.rightBtn)
-            args.putInt("rightBtnColor", builder.btnRightTextColor)
-            commonDialogFragment.setOnDialogClickListener(builder.mListener)
-            commonDialogFragment.arguments = args
-            return commonDialogFragment
-        }
     }
 }
