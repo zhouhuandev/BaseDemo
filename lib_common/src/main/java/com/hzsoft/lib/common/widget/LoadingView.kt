@@ -1,4 +1,4 @@
-package com.hzsoft.lib.common.wight
+package com.hzsoft.lib.common.widget
 
 import android.animation.ArgbEvaluator
 import android.content.Context
@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.view.View
 import com.hzsoft.lib.common.utils.DisplayUtil.dip2px
 import kotlin.jvm.JvmOverloads
-import com.hzsoft.lib.common.utils.DisplayUtil
 
 /**
  * 加载View
