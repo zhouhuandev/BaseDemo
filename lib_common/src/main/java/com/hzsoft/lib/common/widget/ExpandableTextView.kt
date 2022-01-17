@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.hzsoft.lib.common.wight
+package com.hzsoft.lib.common.widget
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi

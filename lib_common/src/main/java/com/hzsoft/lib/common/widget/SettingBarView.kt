@@ -1,4 +1,4 @@
-package com.hzsoft.lib.common.wight
+package com.hzsoft.lib.common.widget
 
 import android.content.Context
 import android.text.TextUtils
