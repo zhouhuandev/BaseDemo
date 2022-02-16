@@ -30,6 +30,7 @@ abstract class BaseSkeletonAdapter<E, VH : BaseViewHolder>(
         recyclerView: RecyclerView,
         @LayoutRes layoutId: Int, itemCount: Int
     ) {
+        super.recyclerView = recyclerView
         skeletonScreen = Skeleton.bind(recyclerView) //设置实际adapter
             .adapter(this) //是否开启动画
             .shimmer(true) //shimmer的倾斜角度 闪过去得阴影
