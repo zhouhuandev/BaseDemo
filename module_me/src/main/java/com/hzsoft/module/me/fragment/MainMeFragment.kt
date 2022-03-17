@@ -1,18 +1,16 @@
 package com.hzsoft.module.me.fragment
 
 import android.view.View
-import android.view.ViewStub
 import com.google.gson.Gson
 import com.hzsoft.lib.base.utils.ToastUtil
-import com.hzsoft.lib.base.view.BaseFragment
-import com.hzsoft.lib.base.view.viewbinding.FragmentBinding
-import com.hzsoft.lib.base.view.viewbinding.FragmentViewBinding
+import com.hzsoft.lib.base.view.BaseMvvmViewBindingFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.module.me.R
 import com.hzsoft.module.me.activity.RoomTestActivity
 import com.hzsoft.module.me.activity.SaveStateTestActivity
 import com.hzsoft.module.me.databinding.FragmentMeMainBinding
+import com.hzsoft.module.me.viewmodel.MainMeViewModel
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
 
 /**
@@ -22,8 +20,7 @@ import com.ypx.imagepicker.demo.utils.ImagePickerHelper
  * @author zhouhuan
  * @Date 2020/12/3
  */
-class MainMeFragment : BaseFragment(),
-    FragmentViewBinding<FragmentMeMainBinding> by FragmentBinding() {
+class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMeViewModel>() {
 
     companion object {
         fun newsInstance(): MainMeFragment {
@@ -36,11 +33,8 @@ class MainMeFragment : BaseFragment(),
 
     override fun onBindLayout(): Int = R.layout.fragment_me_main
 
-    override fun initContentView(mViewStubContent: ViewStub) {
-        mViewStubContent.setOnInflateListener { _, inflated ->
-            inflate({ FragmentMeMainBinding.bind(inflated) })
-        }
-        super.initContentView(mViewStubContent)
+    override fun onBindingClass(): Class<FragmentMeMainBinding> {
+        return FragmentMeMainBinding::class.java
     }
 
     override fun initView(mView: View) {
@@ -116,5 +110,13 @@ class MainMeFragment : BaseFragment(),
                 RoomTestActivity.start(mContext)
             }
         }
+    }
+
+    override fun onBindViewModel(): Class<MainMeViewModel> {
+        return MainMeViewModel::class.java
+    }
+
+    override fun initViewObservable() {
+
     }
 }

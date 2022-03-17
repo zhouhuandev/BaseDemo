@@ -2,11 +2,7 @@ package com.hzsoft.module.me.activity
 
 import android.content.Context
 import android.content.Intent
-import android.view.ViewStub
-import com.hzsoft.lib.base.view.BaseMvvmActivity
 import com.hzsoft.lib.base.view.BaseMvvmViewBindingActivity
-import com.hzsoft.lib.base.view.viewbinding.ActivityBinding
-import com.hzsoft.lib.base.view.viewbinding.ActivityViewBinding
 import com.hzsoft.module.me.R
 import com.hzsoft.module.me.databinding.ActivitySaveStateTestBinding
 
@@ -36,8 +32,9 @@ class SaveStateTestActivity :
 
     override fun onBindLayout(): Int = R.layout.activity_save_state_test
 
-    override fun onBindingClass(): Class<ActivitySaveStateTestBinding> =
-        ActivitySaveStateTestBinding::class.java
+    override fun onBindingClass(): Class<ActivitySaveStateTestBinding> {
+        return ActivitySaveStateTestBinding::class.java
+    }
 
     override fun initView() {
         requireBinding().left.setOnClickListener {
