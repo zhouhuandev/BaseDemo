@@ -1,5 +1,6 @@
 package com.hzsoft.lib.net.remote
 
+import android.os.Looper
 import android.text.TextUtils
 import com.hzsoft.lib.domain.base.BaseResponse
 import com.hzsoft.lib.domain.entity.Demo
@@ -63,9 +64,7 @@ constructor(
             }
         } catch (e: IOException) {
             if (BuildConfig.DEBUG) {
-                ThreadUtils.runOnUiThread {
-                    e.message?.showToast()
-                }
+                e.message?.showToast()
                 KLog.e("RemoteData", e)
             }
             showToast(NETWORD_ERROR)
@@ -97,10 +96,8 @@ constructor(
      * 错误吐司
      */
     private fun showToast(code: Int, msg: String? = ""): Int {
-        ThreadUtils.runOnUiThread {
-            if (!TextUtils.isEmpty(msg)) msg?.showToast(NetAppContext.getContext())
-            else errorManager.getError(code).description.showToast(NetAppContext.getContext())
-        }
+        if (!TextUtils.isEmpty(msg)) msg?.showToast(NetAppContext.getContext())
+        else errorManager.getError(code).description.showToast(NetAppContext.getContext())
         return code
     }
 }
