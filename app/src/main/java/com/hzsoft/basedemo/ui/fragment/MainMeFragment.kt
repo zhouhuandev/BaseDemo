@@ -10,11 +10,7 @@ import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.base.view.BaseMvvmViewBindingFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.utils.ext.view.showToast
-import com.hzsoft.module.me.R
-import com.hzsoft.module.me.activity.RoomTestActivity
-import com.hzsoft.module.me.activity.SaveStateTestActivity
-import com.hzsoft.module.me.databinding.FragmentMeMainBinding
-import com.hzsoft.module.me.viewmodel.MainMeViewModel
+import com.hzsoft.basedemo.ui.fragment.viewmodel.MainMeViewModel
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
 
 /**
