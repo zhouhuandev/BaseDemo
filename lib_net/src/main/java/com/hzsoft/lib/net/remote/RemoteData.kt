@@ -1,5 +1,6 @@
 package com.hzsoft.lib.net.remote
 
+import android.os.Looper
 import android.text.TextUtils
 import com.hzsoft.lib.domain.base.BaseResponse
 import com.hzsoft.lib.domain.entity.Demo
@@ -98,9 +99,22 @@ constructor(
      */
     private fun showToast(code: Int, msg: String? = ""): Int {
         ThreadUtils.runOnUiThread {
-            if (!TextUtils.isEmpty(msg)) msg?.showToast(NetAppContext.getContext())
-            else errorManager.getError(code).description.showToast(NetAppContext.getContext())
+            if (Looper.myLooper() == null || Looper.myLooper() != Looper.getMainLooper()) {
+                Looper.prepare()
+                showToastByMainLooper(code, msg)
+                Looper.loop()
+            } else {
+                showToastByMainLooper(code, msg)
+            }
         }
         return code
+    }
+
+    /**
+     * 避免直接调用
+     */
+    private fun showToastByMainLooper(code: Int, msg: String? = "") {
+        if (!TextUtils.isEmpty(msg)) msg?.showToast(NetAppContext.getContext())
+        else errorManager.getError(code).description.showToast(NetAppContext.getContext())
     }
 }
