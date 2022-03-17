@@ -1,7 +1,10 @@
 package com.hzsoft.lib.base.view.viewbinding
 
+import android.util.Log
 import android.view.View
+import android.view.ViewStub
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
 
 /**
@@ -12,6 +15,10 @@ import androidx.viewbinding.ViewBinding
  */
 class FragmentViewBindingHolder<T : ViewBinding> : FragmentViewBinding<T> {
 
+    companion object {
+        private const val TAG = "FragmentViewBindingHold"
+    }
+
     private val _bindingHolder = IViewBindingHolder.Holder<T>()
 
     override fun Fragment.inflate(
@@ -20,12 +27,32 @@ class FragmentViewBindingHolder<T : ViewBinding> : FragmentViewBinding<T> {
         init: ((binding: T) -> Unit)?
     ): View {
         return inflate().also {
-            _bindingHolder.bind(it)
-            init?.invoke(it)
-            ObserverWrapper(viewLifecycleOwner) {
-                clearBinding { onClear?.invoke(this) }
-            }.attach()
+            handleBinding(this, it, onClear, init)
         }.root
+    }
+
+    override fun Fragment.inflate(
+        viewStub: ViewStub,
+        bindingClass: Class<T>,
+        onClear: ((binding: T) -> Unit)?,
+        init: ((binding: T) -> Unit)?
+    ) {
+        viewStub.setOnInflateListener { _, inflated ->
+            try {
+                bindingClass.getDeclaredMethod("bind", View::class.java)
+                    .invoke(null, inflated) as? T
+            } catch (ex: NoSuchMethodException) {
+                Log.e(
+                    TAG,
+                    "Fail to inflate binding<${bindingClass::javaClass.name}> in ${this::javaClass.name}",
+                    ex
+                )
+                null
+            }?.also {
+                handleBinding(this, it, onClear, init)
+            }
+        }
+        viewStub.inflate()
     }
 
     override val binding: T? get() = _bindingHolder.binding
@@ -34,6 +61,19 @@ class FragmentViewBindingHolder<T : ViewBinding> : FragmentViewBinding<T> {
 
     override fun clearBinding(clear: T.() -> Unit) {
         _bindingHolder.clearBinding(clear)
+    }
+
+    private fun handleBinding(
+        lifecycleOwner: LifecycleOwner,
+        binding: T,
+        onClear: ((T) -> Unit)?,
+        init: ((T) -> Unit)?
+    ) {
+        _bindingHolder.bind(binding)
+        init?.invoke(binding)
+        ObserverWrapper(lifecycleOwner) {
+            clearBinding { onClear?.invoke(this) }
+        }.attach()
     }
 }
 
@@ -62,5 +102,5 @@ class FragmentViewBindingHolder<T : ViewBinding> : FragmentViewBinding<T> {
  * ```
  */
 @Suppress("FunctionName") // delegate FragmentViewBindingHolder implementation
-inline fun <reified T : ViewBinding> FragmentBinding(): FragmentViewBinding<T> =
+fun <T : ViewBinding> FragmentBinding(): FragmentViewBinding<T> =
     FragmentViewBindingHolder()

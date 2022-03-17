@@ -14,7 +14,7 @@ interface ActivityViewBinding<T : ViewBinding> : IViewBindingHolder<T> {
 
     fun ComponentActivity.inflate(
         inflate: () -> T,
-        isRoot: Boolean ?= true,
+        isRoot: Boolean? = true,
         onClear: ((T) -> Unit)? = null,
         init: ((T) -> Unit)? = null
     ): T
@@ -22,13 +22,13 @@ interface ActivityViewBinding<T : ViewBinding> : IViewBindingHolder<T> {
     fun ComponentActivity.inflate(
         bindingClass: Class<T>,
         onClear: ((T) -> Unit)? = null,
-        init: (T) -> Unit
+        init: ((T) -> Unit)? = null
     )
 
     fun ComponentActivity.inflate(
         viewStub: ViewStub,
         bindingClass: Class<T>,
         onClear: ((T) -> Unit)? = null,
-        init: (T) -> Unit
+        init: ((T) -> Unit)? = null
     )
 }
