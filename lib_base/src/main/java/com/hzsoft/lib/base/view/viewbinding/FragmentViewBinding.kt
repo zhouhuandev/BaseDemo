@@ -1,6 +1,7 @@
 package com.hzsoft.lib.base.view.viewbinding
 
 import android.view.View
+import android.view.ViewStub
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
@@ -17,4 +18,11 @@ interface FragmentViewBinding<T : ViewBinding> : IViewBindingHolder<T> {
         onClear: ((binding: T) -> Unit)? = null,
         init: ((binding: T) -> Unit)? = null
     ): View
+
+    fun Fragment.inflate(
+        viewStub: ViewStub,
+        bindingClass: Class<T>,
+        onClear: ((binding: T) -> Unit)? = null,
+        init: ((binding: T) -> Unit)? = null
+    )
 }
