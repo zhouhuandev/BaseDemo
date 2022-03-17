@@ -64,9 +64,7 @@ constructor(
             }
         } catch (e: IOException) {
             if (BuildConfig.DEBUG) {
-                ThreadUtils.runOnUiThread {
-                    e.message?.showToast()
-                }
+                e.message?.showToast()
                 KLog.e("RemoteData", e)
             }
             showToast(NETWORD_ERROR)
@@ -98,23 +96,8 @@ constructor(
      * 错误吐司
      */
     private fun showToast(code: Int, msg: String? = ""): Int {
-        ThreadUtils.runOnUiThread {
-            if (Looper.myLooper() == null || Looper.myLooper() != Looper.getMainLooper()) {
-                Looper.prepare()
-                showToastByMainLooper(code, msg)
-                Looper.loop()
-            } else {
-                showToastByMainLooper(code, msg)
-            }
-        }
-        return code
-    }
-
-    /**
-     * 避免直接调用
-     */
-    private fun showToastByMainLooper(code: Int, msg: String? = "") {
         if (!TextUtils.isEmpty(msg)) msg?.showToast(NetAppContext.getContext())
         else errorManager.getError(code).description.showToast(NetAppContext.getContext())
+        return code
     }
 }
