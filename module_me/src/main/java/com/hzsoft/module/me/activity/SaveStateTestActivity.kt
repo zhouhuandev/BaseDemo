@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.ViewStub
 import com.hzsoft.lib.base.view.BaseMvvmActivity
+import com.hzsoft.lib.base.view.BaseMvvmViewBindingActivity
 import com.hzsoft.lib.base.view.viewbinding.ActivityBinding
 import com.hzsoft.lib.base.view.viewbinding.ActivityViewBinding
 import com.hzsoft.module.me.R
@@ -15,8 +16,8 @@ import com.hzsoft.module.me.databinding.ActivitySaveStateTestBinding
  * @author zhouhuan
  * @time 2021/11/23
  */
-class SaveStateTestActivity : BaseMvvmActivity<SaveStateTestViewModel>(),
-    ActivityViewBinding<ActivitySaveStateTestBinding> by ActivityBinding() {
+class SaveStateTestActivity :
+    BaseMvvmViewBindingActivity<ActivitySaveStateTestBinding, SaveStateTestViewModel>() {
 
     companion object {
         fun start(context: Context, info: String) {
@@ -35,12 +36,8 @@ class SaveStateTestActivity : BaseMvvmActivity<SaveStateTestViewModel>(),
 
     override fun onBindLayout(): Int = R.layout.activity_save_state_test
 
-    override fun initContentView(mViewStubContent: ViewStub) {
-        mViewStubContent.setOnInflateListener { _, inflated ->
-            inflate({ ActivitySaveStateTestBinding.bind(inflated) }, false)
-        }
-        super.initContentView(mViewStubContent)
-    }
+    override fun onBindingClass(): Class<ActivitySaveStateTestBinding> =
+        ActivitySaveStateTestBinding::class.java
 
     override fun initView() {
         requireBinding().left.setOnClickListener {

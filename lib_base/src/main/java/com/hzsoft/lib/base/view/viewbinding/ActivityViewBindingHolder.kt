@@ -40,7 +40,7 @@ class ActivityViewBindingHolder<T : ViewBinding> : ActivityViewBinding<T> {
     override fun ComponentActivity.inflate(
         bindingClass: Class<T>,
         onClear: ((T) -> Unit)?,
-        init: (T) -> Unit
+        init: ((T) -> Unit)?
     ) {
         try {
             bindingClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
@@ -62,7 +62,7 @@ class ActivityViewBindingHolder<T : ViewBinding> : ActivityViewBinding<T> {
         viewStub: ViewStub,
         bindingClass: Class<T>,
         onClear: ((T) -> Unit)?,
-        init: (T) -> Unit
+        init: ((T) -> Unit)?
     ) {
         viewStub.setOnInflateListener { _, inflated ->
             try {
