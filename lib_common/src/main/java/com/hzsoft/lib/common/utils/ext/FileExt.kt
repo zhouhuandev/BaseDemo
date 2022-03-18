@@ -109,3 +109,8 @@ fun File.rename(newName: String) =
 /** Rename to newFile's name */
 fun File.rename(newFile: File) =
     if (newFile.exists()) false else renameTo(newFile)
+
+/**
+ * Convert the file to Base64
+ */
+fun File.encodeBase64File() = FileUtil.encodeBase64File(this)
