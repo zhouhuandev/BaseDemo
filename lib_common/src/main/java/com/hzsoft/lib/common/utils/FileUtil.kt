@@ -1,9 +1,12 @@
 package com.hzsoft.lib.common.utils
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Environment
 import android.os.storage.StorageManager
 import android.text.TextUtils
+import android.util.Base64
 import android.util.Log
 import com.hzsoft.lib.base.BaseApplication
 import com.hzsoft.lib.common.BuildConfig
@@ -251,6 +254,46 @@ object FileUtil {
             } else {
                 copyFile(subFile, File(destFolder, subFile.name), overwrite, func)
             }
+        }
+    }
+
+    /**
+     * Convert the file to Base64
+     *
+     * @param path filePath
+     */
+    fun encodeBase64File(path: String): String? = encodeBase64File(File(path))
+
+    /**
+     * Convert the file to Base64
+     *
+     * @param file file
+     */
+    fun encodeBase64File(file: File): String? {
+        return try {
+            FileInputStream(file).use { fileInputStream ->
+                val buffer = ByteArray(file.length().toInt())
+                fileInputStream.read(buffer)
+                Base64.encodeToString(buffer, Base64.DEFAULT or Base64.NO_WRAP)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    /**
+     * Convert the Base64 to Bitmap
+     *
+     * @param base64 Base64 String
+     */
+    fun base64ToBitmap(base64: String): Bitmap? {
+        return try {
+            val bitmapArray = Base64.decode(base64, Base64.DEFAULT or Base64.NO_WRAP)
+            BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.size)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
     }
 }
