@@ -25,6 +25,28 @@ fun View.hideKeyboard() {
     BaseApplication.getContext().inputMethodManager?.hideSoftInputFromWindow(this.windowToken, 0)
 }
 
+/**
+ * View is visible?
+ * @return {@code true} visible <br> {@false} gone or invisible
+ */
+val View.visible: Boolean get() = visibility == View.VISIBLE
+
+/**
+ * View set visible or gone
+ * @param visible {@code true} visible {@false} gone
+ */
+fun View.gone(visible: Boolean) {
+    visibility = if (visible) View.VISIBLE else View.GONE
+}
+
+/**
+ * View set visible or invisible
+ * @param visible {@code true} visible {@false} invisible
+ */
+fun View.visible(visible: Boolean) {
+    visibility = if (visible) View.VISIBLE else View.INVISIBLE
+}
+
 fun View.toVisible() {
     this.visibility = View.VISIBLE
 }
