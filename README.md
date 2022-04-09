@@ -6,7 +6,7 @@
 
 如果我的付出可以换来对您的帮助的话，还请您点个start，将会是我不懈更新的动力，万分感谢。如果在使用中有任何问题，请留言
 
-- 电子邮件：zhouhuan88888@163.com
+- 电子邮件：zhouhuandev@gmail.com
 
 ## 功能演示
 
@@ -711,7 +711,7 @@ class MyApp : ModuleApplication()
 
 欢迎 Start ，打call https://github.com/zhouhuandev/BaseDemo 在使用中有任何问题，请留言
 
-邮箱：zhouhuan88888@163.com
+邮箱：zhouhuandev@gmail.com
 
 ### 关于作者
 
