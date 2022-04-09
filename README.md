@@ -726,7 +726,7 @@ Blog : "https://blog.csdn.net/youxun1312"
 
 ![微信二维码](https://gitee.com/zhouhuandev/ImageRepo/raw/master/2022/images/20220409-090729.jpeg)
 
-![BaseDemo交流群](https://gitee.com/zhouhuandev/ImageRepo/raw/master/2022/images/20220409-093018.jpeg)
+<img src="https://gitee.com/zhouhuandev/ImageRepo/raw/master/2022/images/20220409-093018.jpeg" alt="BaseDemo交流群" style="zoom:30%;" />
 
 ## 感谢第三方开源
 
