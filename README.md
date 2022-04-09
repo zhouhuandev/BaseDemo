@@ -297,7 +297,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 
 - 支持自定义 `ToolBar`
 
-```koltin
+```kotlin
     open fun onBindToolbarLayout(): Int {
         return R.layout.common_toolbar
     }
@@ -707,20 +707,28 @@ class MyApp : ModuleApplication()
 - compileSdkVersion(编译版本)：30 (Adnroid 10.0)
 - buildToolsVersion(SDK 构建版本)：30.0.2
 
-### 问题反馈
+## 问题反馈
 
 欢迎 Start ，打call https://github.com/zhouhuandev/BaseDemo 在使用中有任何问题，请留言
 
 邮箱：zhouhuandev@gmail.com
 
-### 关于作者
+## 关于作者
 
 ```
 Name : "zhouhuandev",
 Blog : "https://blog.csdn.net/youxun1312"
 ```
 
-### 感谢第三方开源
+## 微信交流群
+
+搜索 `zhouhuandev` 加我微信好友，注意请添加备注：昵称-BaseDemo用户，否则你的申请将不会被验证通过。
+
+![微信二维码](https://gitee.com/zhouhuandev/ImageRepo/raw/master/2022/images/20220409-090729.jpeg)
+
+![BaseDemo交流群](https://gitee.com/zhouhuandev/ImageRepo/raw/master/2022/images/20220409-093018.jpeg)
+
+## 感谢第三方开源
 
 - [YImagePicker](https://github.com/yangpeixing/YImagePicker)
 - [KLog](https://github.com/ZhaoKaiQiang/KLog)
@@ -730,13 +738,13 @@ Blog : "https://blog.csdn.net/youxun1312"
 
 注：还有一大部分对此项目提供帮助的开源大佬们，就不一一列出，在此衷心感谢，若是有不足地方麻烦指导改正。
 
-### 日志
+## 日志
 
 - 2021.8.14 优化整体架构，升级依赖版本
 - 2021.11.23 优化架构，更新刷新框架、Adapter适配器，修复已知问题
 - 2022.01.14 优化`ViewBinding` & `DataBinding`、新增部分拓展函数
 
-### License
+## License
 
 ```
 Copyright (C)  zhouhuan, BaseDemo Framework Open Source Project
