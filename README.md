@@ -297,7 +297,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 
 - 支持自定义 `ToolBar`
 
-```koltin
+```kotlin
     open fun onBindToolbarLayout(): Int {
         return R.layout.common_toolbar
     }
