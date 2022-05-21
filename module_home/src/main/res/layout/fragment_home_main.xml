@@ -9,72 +9,17 @@
             type="com.hzsoft.module.home.viewmodel.MainHomeViewModel" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/mRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button1"
-
-                android:textColor="@color/color_333" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="Button2"
-                android:textColor="@color/color_333" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="Button3"
-                android:textColor="@color/color_333" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="Button4"
-                android:textColor="@color/color_333" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <com.scwang.smart.refresh.layout.SmartRefreshLayout
-                android:id="@+id/mRefreshLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </layout>

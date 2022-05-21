@@ -55,23 +55,6 @@ class MainHomeFragment :
         )
     }
 
-    override fun initListener() {
-        super.initListener()
-        requireBinding().button1.setOnClickListener {
-            ToastUtil.showToastCenter("I'm Button1")
-        }
-        requireBinding().button2.setOnClickListener {
-            requireBinding().button1.text = "I'm a dog!"
-            ToastUtil.showToastCenter("I'm Button2")
-        }
-        requireBinding().button3.setOnClickListener {
-            ToastUtil.showToast("I'm Button3")
-        }
-        requireBinding().button4.setOnClickListener {
-            ToastUtil.showToast("I'm Button4")
-        }
-    }
-
     override fun initData() {
         onRefreshEvent()
         KLog.d(TAG, EnvironmentUtil.Storage.getCachePath(mContext))
