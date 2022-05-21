@@ -743,6 +743,7 @@ Blog : "https://blog.csdn.net/youxun1312"
 - 2021.8.14 优化整体架构，升级依赖版本
 - 2021.11.23 优化架构，更新刷新框架、Adapter适配器，修复已知问题
 - 2022.01.14 优化`ViewBinding` & `DataBinding`、新增部分拓展函数
+- 2022.05.21 重构依赖架构，修复 Binding 问题
 
 ## License
 
