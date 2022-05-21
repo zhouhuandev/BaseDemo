@@ -70,11 +70,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    buildFeatures {
-        dataBinding true
-        // for view binding :
-        viewBinding true
-    }
 }
 
 dependencies {

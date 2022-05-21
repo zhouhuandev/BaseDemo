@@ -7,9 +7,6 @@ import com.hzsoft.basedemo.databinding.ItemRecipeBinding
 import com.hzsoft.lib.base.adapter.BaseSkeletonAdapter
 import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.domain.entity.Demo
-import com.hzsoft.lib.net.utils.ext.view.showToast
-import com.hzsoft.module.home.R
-import com.hzsoft.module.home.databinding.ItemRecipeBinding
 
 /**
  * Describe:
