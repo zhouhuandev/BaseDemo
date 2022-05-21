@@ -31,6 +31,7 @@ class ObserverWrapper(private val owner: LifecycleOwner, private var onClear: ((
 
     private fun detach() {
         owner.lifecycle.removeObserver(this)
+        attached = false
         onClear?.invoke()
         onClear = null
     }

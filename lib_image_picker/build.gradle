@@ -10,16 +10,18 @@ android {
 }
 
 dependencies {
-
-    api deps.androidx_appcompat
-    api deps.androidx_recyclerview
-    api deps.androidx_cardview
-    api deps.constraintlayout
-
-    debugApi deps.leakcanary_android
-
-    api deps.glide
-    kapt deps.glide_compiler
+    def Depends = [
+            apis               : rootProject.ext.imagePickerDepends.api,
+            implementations    : rootProject.ext.imagePickerDepends.implementations,
+            kapt               : rootProject.ext.imagePickerDepends.kapt,
+            compileOnly        : rootProject.ext.imagePickerDepends.compile,
+            testImplementations: rootProject.ext.imagePickerDepends.testImpl,
+    ]
+    Depends.apis.each { api it }
+    Depends.implementations.each { implementation it }
+    Depends.kapt.each { kapt it }
+    Depends.compileOnly.each { compileOnly it }
+    Depends.testImplementations.each { testImplementation it }
 }
 
 

@@ -3,8 +3,8 @@ package com.hzsoft.module.home.adapter
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.hzsoft.lib.base.adapter.BaseSkeletonAdapter
+import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.domain.entity.Demo
-import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.module.home.R
 import com.hzsoft.module.home.databinding.ItemRecipeBinding
 
@@ -30,9 +30,7 @@ class MainHomeAdapter :
             }
 
             rlRecipeItem.setOnClickListener {
-                "您点击了${this@MainHomeAdapter.getItemPosition(item)}".showToast(
-                    context
-                )
+                "您点击了${this@MainHomeAdapter.getItemPosition(item)}".showToast()
             }
         }
     }

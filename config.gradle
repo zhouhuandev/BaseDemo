@@ -1,0 +1,143 @@
+ext {
+    // 构建版本
+    kotlinVersion = getProperty('kotlin.version')
+    compileVersion = 30
+    buildToolsVersion = "30.0.2"
+    minSdkVersion = 21
+    targetVersion = 30
+    // 生成APK版本
+    versionCode = 2
+    versionName = "1.0.2"
+
+    apply from: 'lib_depends.gradle'
+
+    baseDepends = [
+            api            : [
+                    libs.google.material,
+                    libs.google.gson,
+                    libs.androidx.core,
+                    libs.androidx.appcompat,
+                    libs.androidx.multidex,
+                    libs.androidx.recyclerview,
+                    libs.androidx.activity.ktx,
+                    libs.androidx.fragment.ktx,
+                    libs.androidx.lifecycle.runtime,
+                    libs.androidx.lifecycle.runtime_ktx,
+                    libs.androidx.lifecycle.common_java8,
+                    libs.androidx.lifecycle.viewmodel,
+                    libs.androidx.lifecycle.viewmodel_ktx,
+                    libs.androidx.lifecycle.viewmodel_savedstate,
+                    libs.androidx.lifecycle.livedata_ktx,
+                    libs.smart.layout_kernel,
+                    libs.smart.header_classics,
+                    libs.smart.header_radar,
+                    libs.smart.header_falsify,
+                    libs.smart.header_material,
+                    libs.smart.header_two_level,
+                    libs.smart.footer_classics,
+                    libs.smart.footer_ball,
+                    libs.BaseAdapterHelper,
+                    libs.skeleton,
+                    libs.shimmerlayout,
+                    libs.eventbus,
+            ],
+            implementations: [],
+            kapt           : [],
+            compile        : [
+                    libs.androidx.databinding.runtime,
+                    libs.androidx.databinding.adapters,
+                    libs.androidx.viewbinding,
+            ],
+            testImpl       : [
+                    libs.junit,
+            ],
+    ]
+
+    baseModuleDepends = [
+            api            : [],
+            implementations: [],
+            kapt           : [],
+            compile        : [],
+            testImpl       : [],
+    ]
+
+    commonDepends = [
+            api            : [
+                    libs.glide.core,
+                    libs.glide.transformations,
+            ],
+            implementations: [],
+            kapt           : [
+                    libs.glide.compiler,
+            ],
+            compile        : [],
+            testImpl       : [],
+            debugApi       : [
+                    libs.leakcanary,
+            ],
+    ]
+
+    domainDepends = [
+            api            : [],
+            implementations: [],
+            kapt           : [],
+            compile        : [],
+            testImpl       : [],
+    ]
+
+    imagePickerDepends = [
+            api            : [
+                    libs.androidx.appcompat,
+                    libs.androidx.recyclerview,
+                    libs.google.material,
+                    libs.glide.core,
+            ],
+            implementations: [],
+            kapt           : [
+                    libs.glide.compiler,
+            ],
+            compile        : [],
+            testImpl       : [],
+    ]
+
+    netDepends = [
+            api            : [
+                    libs.kotlin.coroutines,
+                    libs.retrofit2.converter_gson,
+                    libs.retrofit2.logging_interceptor,
+                    libs.androidx.room.core,
+                    libs.androidx.room.room_ktx,
+            ],
+            implementations: [],
+            kapt           : [
+                    libs.androidx.room.room_compiler,
+            ],
+            compile        : [],
+            testImpl       : [],
+    ]
+
+    // module.build.gradle
+    moduleBuildDepends = [
+            api            : [],
+            implementations: [],
+            kapt           : [],
+            compile        : [],
+            testImpl       : [],
+    ]
+
+    // base.build.gradle
+    baseBuildDepends = [
+            api            : [
+                    libs.arouter.core,
+            ],
+            implementations: [],
+            kapt           : [
+                    libs.arouter.compiler,
+            ],
+            compile        : [],
+            testImpl       : [
+                    libs.junit,
+            ],
+    ]
+
+}

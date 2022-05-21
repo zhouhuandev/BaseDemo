@@ -5,6 +5,16 @@ android {
 }
 
 dependencies {
-    api deps.moshi
-    kapt deps.moshi_kotlin_codegen
+    def Depends = [
+            apis               : rootProject.ext.domainDepends.api,
+            implementations    : rootProject.ext.domainDepends.implementations,
+            kapt               : rootProject.ext.domainDepends.kapt,
+            compileOnly        : rootProject.ext.domainDepends.compile,
+            testImplementations: rootProject.ext.domainDepends.testImpl,
+    ]
+    Depends.apis.each { api it }
+    Depends.implementations.each { implementation it }
+    Depends.kapt.each { kapt it }
+    Depends.compileOnly.each { compileOnly it }
+    Depends.testImplementations.each { testImplementation it }
 }

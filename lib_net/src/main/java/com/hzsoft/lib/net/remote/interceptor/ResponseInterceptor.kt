@@ -1,16 +1,15 @@
 package com.hzsoft.lib.net.remote.interceptor
 
 import android.text.TextUtils
+import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.config.Encoding
-import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.config.contentTypeValue
 import com.hzsoft.lib.net.error.ApiException
 import com.hzsoft.lib.net.error.NULL_DATA
 import com.hzsoft.lib.net.error.PARSE_ERROR
 import com.hzsoft.lib.net.error.mapper.ErrorManager
 import com.hzsoft.lib.net.error.mapper.ErrorMapper
-import com.hzsoft.lib.net.utils.ext.view.showToast
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Response
@@ -42,7 +41,7 @@ class ResponseInterceptor : Interceptor {
         if (!response.isSuccessful) {
             val ex = ApiException(response.code)
             ex.message = errorManager.getError(response.code).description
-            ex.message.showToast(NetAppContext.getContext())
+            ex.message.showToast()
             KLog.e(TAG, ex.message, ex)
             throw ex
         }

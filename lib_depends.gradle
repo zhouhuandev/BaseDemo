@@ -1,0 +1,80 @@
+ext {
+    libs = [
+            kotlin           : [
+                    coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${getProperty('kotlin.coroutines')}",
+            ],
+            androidx         : [
+                    core        : 'androidx.core:core-ktx:1.6.0',
+                    appcompat   : 'androidx.appcompat:appcompat:1.3.1',
+                    multidex    : "androidx.multidex:multidex:2.0.1",
+                    viewbinding : 'androidx.databinding:viewbinding:4.2.1',
+                    databinding : [
+                            runtime : 'androidx.databinding:databinding-runtime:4.2.1',
+                            common  : 'androidx.databinding:databinding-common:4.2.1',
+                            adapters: 'androidx.databinding:databinding-adapters:4.2.1',
+                    ],
+                    lifecycle   : [
+                            runtime             : 'androidx.lifecycle:lifecycle-runtime:2.3.1',
+                            runtime_ktx         : 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1',
+                            common_java8        : 'androidx.lifecycle:lifecycle-common-java8:2.3.1',
+                            livedata_ktx        : "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1",
+                            viewmodel           : 'androidx.lifecycle:lifecycle-viewmodel:2.3.1',
+                            viewmodel_ktx       : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1',
+                            viewmodel_savedstate: 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1',
+                    ],
+                    activity    : [
+                            ktx: 'androidx.activity:activity-ktx:1.2.2',
+                    ],
+                    fragment    : [
+                            ktx: 'androidx.fragment:fragment-ktx:1.3.6',
+                    ],
+                    recyclerview: 'androidx.recyclerview:recyclerview:1.2.1',
+                    room        : [
+                            core         : "androidx.room:room-runtime:2.2.5",
+                            room_compiler: "androidx.room:room-compiler:2.2.5",
+                            room_ktx     : "androidx.room:room-ktx:2.2.5",
+                    ]
+            ],
+            google           : [
+                    material: 'com.google.android.material:material:1.3.0',
+                    gson    : 'com.google.code.gson:gson:2.8.5'
+            ],
+            retrofit2        : [
+                    converter_moshi    : 'com.squareup.retrofit2:converter-moshi:2.9.0',
+                    converter_gson     : 'com.squareup.retrofit2:converter-gson:2.9.0',
+                    logging_interceptor: 'com.squareup.okhttp3:logging-interceptor:4.9.0',
+            ],
+            glide            : [
+                    "core"           : "com.github.bumptech.glide:glide:4.11.0",
+                    "compiler"       : "com.github.bumptech.glide:compiler:4.11.0",
+                    // glide高斯模糊
+                    "transformations": "jp.wasabeef:glide-transformations:4.0.1"
+            ],
+            arouter          : [
+                    "core"    : "com.alibaba:arouter-api:1.5.2",
+                    "compiler": "com.alibaba:arouter-compiler:1.5.2",
+            ],
+            moshi            : [
+                    "core"          : "com.squareup.moshi:moshi-kotlin:1.12.0",
+                    "kotlin_codegen": "com.squareup.moshi:moshi-kotlin-codegen:1.12.0",
+            ],
+            smart            : [
+                    "layout_kernel"   : "com.scwang.smart:refresh-layout-kernel:2.0.3",
+                    "header_classics" : "com.scwang.smart:refresh-header-classics:2.0.3",
+                    "header_radar"    : "com.scwang.smart:refresh-header-radar:2.0.3",
+                    "header_falsify"  : "com.scwang.smart:refresh-header-falsify:2.0.3",
+                    "header_material" : "com.scwang.smart:refresh-header-material:2.0.3",
+                    "header_two_level": "com.scwang.smart:refresh-header-two-level:2.0.3",
+                    "footer_classics" : "com.scwang.smart:refresh-footer-classics:2.0.3",
+                    "footer_ball"     : "com.scwang.smart:refresh-footer-ball:2.0.3",
+            ],
+            BaseAdapterHelper: "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4",
+            // 骨架屏
+            skeleton         : "com.ethanhua:skeleton:1.1.2",
+            // 动画的实现
+            shimmerlayout    : "io.supercharge:shimmerlayout:2.1.0",
+            eventbus         : "org.greenrobot:eventbus:3.2.0",
+            leakcanary       : "com.squareup.leakcanary:leakcanary-android:2.5",
+            junit            : "junit:junit:4.12",
+    ]
+}

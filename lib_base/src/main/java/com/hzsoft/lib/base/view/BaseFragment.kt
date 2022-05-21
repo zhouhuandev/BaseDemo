@@ -3,7 +3,6 @@ package com.hzsoft.lib.base.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,7 @@ import android.view.ViewStub
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.Postcard
@@ -25,7 +25,6 @@ import com.hzsoft.lib.base.widget.LoadingTransView
 import com.hzsoft.lib.base.widget.NetErrorView
 import com.hzsoft.lib.base.widget.NoDataView
 import com.hzsoft.lib.log.KLog
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -44,7 +43,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     protected lateinit var mContext: Context
 
-    protected lateinit var mActivity: RxAppCompatActivity
+    protected lateinit var mActivity: AppCompatActivity
     protected lateinit var mView: View
 
     protected var mTxtTitle: TextView? = null
@@ -75,7 +74,7 @@ abstract class BaseFragment : Fragment(), BaseView {
         super.onCreate(savedInstanceState)
         val currentTimeMillis = System.currentTimeMillis()
 
-        mActivity = (activity as RxAppCompatActivity?)!!
+        mActivity = (activity as AppCompatActivity?)!!
         ARouter.getInstance().inject(this)
         EventBus.getDefault().register(this)
         initBundle()

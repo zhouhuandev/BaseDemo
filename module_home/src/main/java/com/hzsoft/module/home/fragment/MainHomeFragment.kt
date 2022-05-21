@@ -3,6 +3,7 @@ package com.hzsoft.module.home.fragment
 import android.view.View
 import com.hzsoft.module.home.adapter.MainHomeAdapter
 import com.hzsoft.lib.base.utils.ThreadUtils
+import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
 import com.hzsoft.lib.common.utils.EnvironmentUtil
 import com.hzsoft.lib.domain.entity.Demo
@@ -53,7 +54,6 @@ class MainHomeFragment :
             8
         )
     }
-
 
     override fun initData() {
         onRefreshEvent()
