@@ -3,6 +3,7 @@ package com.hzsoft.module.home.fragment
 import android.view.View
 import com.hzsoft.module.home.adapter.MainHomeAdapter
 import com.hzsoft.lib.base.utils.ThreadUtils
+import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
 import com.hzsoft.lib.common.utils.EnvironmentUtil
 import com.hzsoft.lib.domain.entity.Demo
@@ -54,6 +55,22 @@ class MainHomeFragment :
         )
     }
 
+    override fun initListener() {
+        super.initListener()
+        requireBinding().button1.setOnClickListener {
+            ToastUtil.showToastCenter("I'm Button1")
+        }
+        requireBinding().button2.setOnClickListener {
+            requireBinding().button1.text = "I'm a dog!"
+            ToastUtil.showToastCenter("I'm Button2")
+        }
+        requireBinding().button3.setOnClickListener {
+            ToastUtil.showToast("I'm Button3")
+        }
+        requireBinding().button4.setOnClickListener {
+            ToastUtil.showToast("I'm Button4")
+        }
+    }
 
     override fun initData() {
         onRefreshEvent()
