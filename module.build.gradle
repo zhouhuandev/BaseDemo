@@ -5,23 +5,9 @@ if (isModule.toBoolean()) {
 }
 apply from: "../base.build.gradle"
 
-// 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
-// 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-        // arg("AROUTER_GENERATE_DOC", "enable")
-    }
-}
-
 android {
     // 每个单独的 module库build可进行单独自定义配置相关文件信息
 
-    buildFeatures {
-        dataBinding true
-        // for view binding :
-        viewBinding true
-    }
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -40,6 +26,16 @@ android {
 dependencies {
     api project(":lib_base_module")
 
-    kapt deps.arouter_compiler
-    kapt deps.moshi_kotlin_codegen
+    def Depends = [
+            apis               : rootProject.ext.moduleBuildDepends.api,
+            implementations    : rootProject.ext.moduleBuildDepends.implementations,
+            kapt               : rootProject.ext.moduleBuildDepends.kapt,
+            compileOnly        : rootProject.ext.moduleBuildDepends.compile,
+            testImplementations: rootProject.ext.moduleBuildDepends.testImpl,
+    ]
+    Depends.apis.each { api it }
+    Depends.implementations.each { implementation it }
+    Depends.kapt.each { kapt it }
+    Depends.compileOnly.each { compileOnly it }
+    Depends.testImplementations.each { testImplementation it }
 }

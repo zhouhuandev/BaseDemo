@@ -1,32 +1,23 @@
 apply from: "../lib.build.gradle"
 
-// 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
-// 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-        // arg("AROUTER_GENERATE_DOC", "enable")
-    }
-}
-
 android {
-    buildTypes {
-        debug {
-            buildConfigField "boolean", 'IS_DEBUG', 'true'
-        }
-        release {
-            buildConfigField "boolean", 'IS_DEBUG', 'false'
-        }
-    }
-    buildFeatures {
-        dataBinding true
-        // for view binding :
-        viewBinding true
-    }
+
 }
 
 dependencies {
 
     api project(":lib_common")
-    kapt deps.arouter_compiler
+
+    def Depends = [
+            apis               : rootProject.ext.baseModuleDepends.api,
+            implementations    : rootProject.ext.baseModuleDepends.implementations,
+            kapt               : rootProject.ext.baseModuleDepends.kapt,
+            compileOnly        : rootProject.ext.baseModuleDepends.compile,
+            testImplementations: rootProject.ext.baseModuleDepends.testImpl,
+    ]
+    Depends.apis.each { api it }
+    Depends.implementations.each { implementation it }
+    Depends.kapt.each { kapt it }
+    Depends.compileOnly.each { compileOnly it }
+    Depends.testImplementations.each { testImplementation it }
 }

@@ -11,15 +11,18 @@ dependencies {
     api project(":lib_net")
     api project(":lib_image_picker")
 
-    api deps.rxpermissions
-    api deps.MultiImageSelector
-
-    api deps.glide
-    kapt deps.glide_compiler
-    api deps.glide_transformations
-
-    api deps.moshi
-    kapt deps.moshi_kotlin_codegen
-
-    debugApi deps.leakcanary_android
+    def Depends = [
+            apis               : rootProject.ext.commonDepends.api,
+            implementations    : rootProject.ext.commonDepends.implementations,
+            kapt               : rootProject.ext.commonDepends.kapt,
+            compileOnly        : rootProject.ext.commonDepends.compile,
+            testImplementations: rootProject.ext.commonDepends.testImpl,
+            debugApi           : rootProject.ext.commonDepends.debugApi,
+    ]
+    Depends.apis.each { api it }
+    Depends.implementations.each { implementation it }
+    Depends.kapt.each { kapt it }
+    Depends.compileOnly.each { compileOnly it }
+    Depends.testImplementations.each { testImplementation it }
+    Depends.debugApi.each { debugApi it }
 }
