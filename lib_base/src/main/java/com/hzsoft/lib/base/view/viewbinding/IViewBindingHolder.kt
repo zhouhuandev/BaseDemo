@@ -41,6 +41,7 @@ interface IViewBindingHolder<T : ViewBinding> {
         override fun clearBinding(clear: VB.() -> Unit) {
             binding?.apply { clear() }
             _cleared = true
+            _inflated = false
             _binding = null
         }
 
