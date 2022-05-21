@@ -6,28 +6,20 @@ android {
 
 dependencies {
 
+    api project(":lib_base")
     api project(":lib_log")
     api project(':lib_domain')
 
-    api deps.kotlin_stdlib
-    api deps.kotlin_reflect
-
-    api deps.kotlinx_coroutines_android
-
-    api deps.converter_moshi
-    api deps.converter_gson
-    api deps.logging_interceptor
-
-    api deps.lifecycle_viewmodel_ktx
-    api deps.lifecycle_livedata_ktx
-    api deps.lifecycle_extensions
-    api deps.lifecycle_runtime_ktx
-    api deps.lifecycle_common_java8
-
-    api deps.moshi
-    kapt deps.moshi_kotlin_codegen
-
-    api deps.room
-    kapt deps.room_compiler
-    api deps.room_ktx
+    def Depends = [
+            apis               : rootProject.ext.netDepends.api,
+            implementations    : rootProject.ext.netDepends.implementations,
+            kapt               : rootProject.ext.netDepends.kapt,
+            compileOnly        : rootProject.ext.netDepends.compile,
+            testImplementations: rootProject.ext.netDepends.testImpl,
+    ]
+    Depends.apis.each { api it }
+    Depends.implementations.each { implementation it }
+    Depends.kapt.each { kapt it }
+    Depends.compileOnly.each { compileOnly it }
+    Depends.testImplementations.each { testImplementation it }
 }

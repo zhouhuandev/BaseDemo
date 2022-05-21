@@ -1,62 +1,22 @@
 apply from: "../lib.build.gradle"
-
 android {
-    buildTypes {
-        debug {
-            buildConfigField "boolean", 'IS_DEBUG', 'true'
-        }
-        release {
-            buildConfigField "boolean", 'IS_DEBUG', 'false'
-        }
-    }
-    buildFeatures {
-        dataBinding true
-        // for view binding :
-        viewBinding true
-    }
+
 }
 
 dependencies {
 
     api project(":lib_log")
 
-    api deps.kotlin_stdlib
-    api deps.kotlin_reflect
-    api deps.core_ktx
-    api deps.androidx_appcompat
-    api deps.multidex
-    api deps.android_material
-
-    api deps.androidx_recyclerview
-    api deps.constraintlayout
-
-    api deps.eventbus
-
-    api deps.rxlifecycle
-    api deps.rxlifecycle_android
-    api deps.rxlifecycle_components
-
-    api deps.lifecycle_viewmodel_ktx
-    api deps.lifecycle_livedata_ktx
-    api deps.lifecycle_extensions
-    api deps.lifecycle_runtime_ktx
-    api deps.lifecycle_common_java8
-
-    api deps.savedstate
-    api deps.activity_ktx
-    api deps.fragment_ktx
-
-    api deps.refresh_layout_kernel
-    api deps.refresh_header_classics
-    api deps.refresh_header_radar
-    api deps.refresh_header_falsify
-    api deps.refresh_header_material
-    api deps.refresh_header_two_level
-    api deps.refresh_footer_ball
-    api deps.refresh_footer_classics
-
-    api deps.skeleton
-    api deps.shimmerlayout
-
-    api deps.BaseRecyclerViewAdapterHelper
+    def Depends = [
+            apis               : rootProject.ext.baseDepends.api,
+            implementations    : rootProject.ext.baseDepends.implementations,
+            kapt               : rootProject.ext.baseDepends.kapt,
+            compileOnly        : rootProject.ext.baseDepends.compile,
+            testImplementations: rootProject.ext.baseDepends.testImpl,
+    ]
+    Depends.apis.each { api it }
+    Depends.implementations.each { implementation it }
+    Depends.kapt.each { kapt it }
+    Depends.compileOnly.each { compileOnly it }
+    Depends.testImplementations.each { testImplementation it }
 }

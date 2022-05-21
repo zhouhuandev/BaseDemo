@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.hzsoft.lib.base.R
 import com.hzsoft.lib.base.event.common.BaseActivityEvent
@@ -17,7 +18,6 @@ import com.hzsoft.lib.base.widget.LoadingTransView
 import com.hzsoft.lib.base.widget.NetErrorView
 import com.hzsoft.lib.base.widget.NoDataView
 import com.hzsoft.lib.log.KLog
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -27,7 +27,7 @@ import org.greenrobot.eventbus.ThreadMode
  * @author zhouhuan
  * @time 2020/12/2
  */
-abstract class BaseActivity : RxAppCompatActivity(), BaseView {
+abstract class BaseActivity : AppCompatActivity(), BaseView {
 
     companion object {
         val TAG: String = this::class.java.simpleName

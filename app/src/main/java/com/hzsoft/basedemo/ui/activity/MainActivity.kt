@@ -31,7 +31,7 @@ class MainActivity : BaseActivity() {
         mCurrFragment = mHomeFragment
         if (mHomeFragment != null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.frame_content, mHomeFragment as Fragment, MainChannel.HOME.name)
+                .replace(R.id.frame_content, mHomeFragment as Fragment, MainChannel.HOME.description)
                 .commit()
         }
     }
@@ -44,11 +44,11 @@ class MainActivity : BaseActivity() {
         findViewById<BottomNavigationView>(R.id.navigation).setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
-                    switchContent(mCurrFragment, mHomeFragment, MainChannel.HOME.name)
+                    switchContent(mCurrFragment, mHomeFragment, MainChannel.HOME.description)
                     mCurrFragment = mHomeFragment
                 }
                 R.id.navigation_me -> {
-                    switchContent(mCurrFragment, mMeFragment, MainChannel.ME.name)
+                    switchContent(mCurrFragment, mMeFragment, MainChannel.ME.description)
                     mCurrFragment = mMeFragment
                 }
             }

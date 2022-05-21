@@ -1,18 +1,17 @@
 package com.hzsoft.lib.net.remote
 
 import android.text.TextUtils
+import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.domain.base.BaseResponse
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.BuildConfig
-import com.hzsoft.lib.net.config.NetAppContext
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.error.*
 import com.hzsoft.lib.net.error.mapper.ErrorManager
 import com.hzsoft.lib.net.error.mapper.ErrorMapper
 import com.hzsoft.lib.net.remote.service.RecipesService
 import com.hzsoft.lib.net.utils.NetworkConnectivity
-import com.hzsoft.lib.net.utils.ext.view.showToast
 import retrofit2.Response
 import java.io.IOException
 
@@ -94,8 +93,8 @@ constructor(
      * 错误吐司
      */
     private fun showToast(code: Int, msg: String? = ""): Int {
-        if (!TextUtils.isEmpty(msg)) msg?.showToast(NetAppContext.getContext())
-        else errorManager.getError(code).description.showToast(NetAppContext.getContext())
+        if (!TextUtils.isEmpty(msg)) msg?.showToast()
+        else errorManager.getError(code).description.showToast()
         return code
     }
 }

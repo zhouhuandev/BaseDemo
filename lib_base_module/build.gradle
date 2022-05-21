@@ -1,22 +1,23 @@
 apply from: "../lib.build.gradle"
 
 android {
-    buildTypes {
-        debug {
-            buildConfigField "boolean", 'IS_DEBUG', 'true'
-        }
-        release {
-            buildConfigField "boolean", 'IS_DEBUG', 'false'
-        }
-    }
-    buildFeatures {
-        dataBinding true
-        // for view binding :
-        viewBinding true
-    }
+
 }
 
 dependencies {
 
     api project(":lib_common")
+
+    def Depends = [
+            apis               : rootProject.ext.baseModuleDepends.api,
+            implementations    : rootProject.ext.baseModuleDepends.implementations,
+            kapt               : rootProject.ext.baseModuleDepends.kapt,
+            compileOnly        : rootProject.ext.baseModuleDepends.compile,
+            testImplementations: rootProject.ext.baseModuleDepends.testImpl,
+    ]
+    Depends.apis.each { api it }
+    Depends.implementations.each { implementation it }
+    Depends.kapt.each { kapt it }
+    Depends.compileOnly.each { compileOnly it }
+    Depends.testImplementations.each { testImplementation it }
 }

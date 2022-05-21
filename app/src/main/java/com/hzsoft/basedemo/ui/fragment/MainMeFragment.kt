@@ -7,9 +7,9 @@ import com.hzsoft.basedemo.databinding.FragmentMeMainBinding
 import com.hzsoft.basedemo.ui.activity.RoomTestActivity
 import com.hzsoft.basedemo.ui.activity.SaveStateTestActivity
 import com.hzsoft.lib.base.utils.ToastUtil
+import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.base.view.BaseMvvmViewBindingFragment
 import com.hzsoft.lib.log.KLog
-import com.hzsoft.lib.net.utils.ext.view.showToast
 import com.hzsoft.basedemo.ui.fragment.viewmodel.MainMeViewModel
 import com.ypx.imagepicker.demo.utils.ImagePickerHelper
 
@@ -84,7 +84,7 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
                         .setMulti(true)
                         .build()
                 imagePickerHelper!!.setConfig(config)
-                "拍照模式设置成功".showToast(mContext)
+                "拍照模式设置成功".showToast()
             }
             R.id.button_2 -> {
                 val config =
@@ -96,7 +96,7 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
                         .setMulti(true)
                         .build()
                 imagePickerHelper!!.setConfig(config)
-                "视频模式设置成功".showToast(mContext)
+                "视频模式设置成功".showToast()
             }
             R.id.button_3 -> {
                 val trim = requireBinding().editText.text.toString().trim()

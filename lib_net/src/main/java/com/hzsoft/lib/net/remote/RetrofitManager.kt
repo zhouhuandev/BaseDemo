@@ -4,14 +4,11 @@ import com.hzsoft.lib.net.BuildConfig
 import com.hzsoft.lib.net.config.NetConfig
 import com.hzsoft.lib.net.remote.interceptor.RequestInterceptor
 import com.hzsoft.lib.net.remote.interceptor.ResponseInterceptor
-import com.hzsoft.lib.net.remote.moshiFactories.MyKotlinJsonAdapterFactory
-import com.hzsoft.lib.net.remote.moshiFactories.MyStandardJsonAdapters
 import com.hzsoft.lib.net.utils.SSLContextUtil
-import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
@@ -85,19 +82,11 @@ class RetrofitManager {
             .baseUrl(NetConfig.getBaseUrl())
             .client(client)
             // .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            // .addConverterFactory(GsonConverterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create(getMoshi()))
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     fun <S> create(serviceClass: Class<S>): S = retrofit.create(serviceClass)
 
     inline fun <reified T> create(): T = create(T::class.java)
-
-    private fun getMoshi(): Moshi {
-        return Moshi.Builder()
-            .add(MyKotlinJsonAdapterFactory())
-            .add(MyStandardJsonAdapters.FACTORY)
-            .build()
-    }
 }

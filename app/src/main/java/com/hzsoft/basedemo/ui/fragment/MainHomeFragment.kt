@@ -7,6 +7,7 @@ import com.hzsoft.basedemo.adapter.MainHomeAdapter
 import com.hzsoft.basedemo.databinding.FragmentHomeMainBinding
 import com.hzsoft.basedemo.ui.fragment.viewmodel.MainHomeViewModel
 import com.hzsoft.lib.base.utils.ThreadUtils
+import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
 import com.hzsoft.lib.common.utils.EnvironmentUtil
 import com.hzsoft.lib.domain.entity.Demo
@@ -53,7 +54,6 @@ class MainHomeFragment :
             8
         )
     }
-
 
     override fun initData() {
         onRefreshEvent()
