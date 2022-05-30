@@ -82,7 +82,7 @@ constructor(
     private inline fun <reified T> dealDataWhen(any: Any?): Resource<T> {
         return when (any) {
             is BaseResponse<*> -> {
-                Resource.Success(data = toAs(if (any.data != null) any.data else any.msg))
+                Resource.Success(data = toAs(if (any.data != null) any.data else null))
             }
             else -> {
                 Resource.DataError(errorCode = toAs(any))
