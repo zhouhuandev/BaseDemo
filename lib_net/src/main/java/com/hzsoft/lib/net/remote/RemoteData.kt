@@ -85,7 +85,7 @@ constructor(
                 Resource.Success(data = toAs(if (any.data != null) any.data else null))
             }
             else -> {
-                Resource.DataError(errorCode = toAs(any))
+                Resource.DataError(UNKNOWN)
             }
         }
     }
