@@ -13,7 +13,7 @@ import com.hzsoft.lib.net.error.mapper.ErrorMapper
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Response
-import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.json.JSONObject
 import java.nio.charset.Charset
 
@@ -55,7 +55,7 @@ class ResponseInterceptor : Interceptor {
             val message = jsonObject.getString("message")
             if (0 == status) {
                 response.newBuilder()
-                    .body(ResponseBody.create(contentTypeValue.toMediaTypeOrNull(), body))
+                    .body(body.toResponseBody(contentTypeValue.toMediaTypeOrNull()))
                     .build()
             } else {
                 throw ApiException(status, message ?: "")
@@ -68,7 +68,7 @@ class ResponseInterceptor : Interceptor {
     private fun bufferBody(response: Response): String {
         val source = response.body!!.source()
         source.request(Long.MAX_VALUE)
-        val buffer = source.buffer()
+        val buffer = source.buffer
         return buffer.clone().readString(Charset.forName(Encoding))
     }
 }

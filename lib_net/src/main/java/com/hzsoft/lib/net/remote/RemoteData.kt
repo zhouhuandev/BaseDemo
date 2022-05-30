@@ -60,6 +60,14 @@ constructor(
                 }
             }
         } catch (e: IOException) {
+            /**
+             * Kotlin 协程异常处理
+             * 使用协程及挂在函数请求，Retrofit 默认会使用 [retrofit2.HttpServiceMethod.SuspendForResponse] 处理请求，
+             * 而不是 [retrofit2.DefaultCallAdapterFactory.ExecutorCallbackCall]，
+             * 捕获异常是在 [okhttp3.internal.connection.RealCall] 的 run 方法中捕获 [java.io.IOException]中进行失败回调，
+             * 因此需要在 [retrofit2.HttpServiceMethod.SuspendForResponse] 返回异常，通过拓展函数 在 [retrofit2.KotlinExtensions.awaitResponse] 中捕获异常，并返回包装类，
+             * 在[kotlinx.coroutines.CancellableContinuationImpl.resumeImpl]中返回 CancelledContinuation 包装类，最终抛出异常
+             */
             if (BuildConfig.DEBUG) {
                 e.message?.showToast()
                 KLog.e("RemoteData", e)
