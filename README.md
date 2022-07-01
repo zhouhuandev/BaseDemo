@@ -23,10 +23,10 @@
     </tr>
     <tr>
         <td align="center">
-            <img src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/161637674837_.pic.jpg" alt="Home" style="zoom:30%;" />
+            <img src="https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/161637674837_.pic.jpg" alt="Home" style="zoom:30%;" />
         </td>
         <td align="center">
-            <img src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/171637674836_.pic.jpg" alt="Home" style="zoom:30%;" />
+            <img src="https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/171637674836_.pic.jpg" alt="Home" style="zoom:30%;" />
         </td>
     </tr>
 </table>
@@ -42,10 +42,10 @@
     </tr>
     <tr>
         <td align="center">
-            <img src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/151637674836_.pic.jpg" alt="Home" style="zoom:30%;" />
+            <img src="https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/151637674836_.pic.jpg" alt="Home" style="zoom:30%;" />
         </td>
         <td align="center">
-            <img src="https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/141637674835_.pic.jpg" alt="Home" style="zoom:30%;" />
+            <img src="https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/141637674835_.pic.jpg" alt="Home" style="zoom:30%;" />
         </td>
     </tr>
 </table>
@@ -54,7 +54,7 @@
 
 <img src="https://www.pgyer.com/app/qrcode/tBPE" alt="下载二维码" style="zoom:100%;" />
 
-- [演示视频传送门](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/1637675109209180.mp4)
+- [演示视频传送门](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/1637675109209180.mp4)
 
 
 ## 主要功能
@@ -592,7 +592,7 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 
 ### 项目架构
 
-![项目架构](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211114.png)
+![项目架构](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211114.png)
 
 - 集成模式：所有的业务组件被“app壳工程”依赖，组成一个完整的APP；
 - 组件模式：可以独立开发业务组件，每一个业务组件就是一个APP；
@@ -606,19 +606,19 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 
 #### BaseMVVM架构
 
-![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211118.png)
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211118.png)
 
 #### 官方指导MVVM架构
 
-![MVVM架构示意图](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211213.png)
+![MVVM架构示意图](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211213.png)
 
 - View层类关系图
 
-![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211131.png)
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211131.png)
 
 - ViewModel层类关系图
 
-![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211135.png)
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211135.png)
 
 ### 组件化实现
 
@@ -638,7 +638,7 @@ App，可以独立开发和调试；而当我们转换到集成模式开发时�
 isModule=false
 ```
 
-![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211140.jpg)
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211140.jpg)
 
 ```gradle
 if (isModule.toBoolean()) {
@@ -648,7 +648,7 @@ if (isModule.toBoolean()) {
 }
 ```
 
-![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211145.jpg)
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211145.jpg)
 
 ### 组件之间AndroidManifest合并问题
 
@@ -656,7 +656,7 @@ if (isModule.toBoolean()) {
 AndroidManifest.xml，然后根据isModule指定AndroidManifest.xml的文件路径，让业务组件在集成模式和组件模式下使用不同的AndroidManifest.xml，这样表单冲突的问题就可以规避了
 已module_main组件为例配置如下：
 
-![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211150.jpg)
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211150.jpg)
 
 ```gradle
 sourceSets {
@@ -678,7 +678,7 @@ sourceSets {
 
 在每个组件的debug目录下创建一个Application并在module下的AndroidManifest.xml进行配置
 
-![](https://gitee.com/shandong_zhaotai_network_sd_zhaotai/ImageRepo/raw/master/2021/images/20210312211206.jpg)
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211206.jpg)
 
 ### 集成开发模式下的Application
 
@@ -709,7 +709,7 @@ class MyApp : ModuleApplication()
 
 ## 问题反馈
 
-欢迎 Start ，打call https://github.com/zhouhuandev/BaseDemo 在使用中有任何问题，请留言
+欢迎 Start ，打call https://raw.githubusercontent.com/zhouhuandev/BaseDemo 在使用中有任何问题，请留言
 
 邮箱：zhouhuandev@gmail.com
 
@@ -722,11 +722,9 @@ Blog : "https://blog.csdn.net/youxun1312"
 
 ## 微信交流群
 
-搜索 `zhouhuandev` 加我微信好友，注意请添加备注：昵称-BaseDemo用户，否则你的申请将不会被验证通过。
+搜索 `zhouhuandev` 加我微信好友拉你入群，注意请添加备注：昵称-BaseDemo用户，否则你的申请将不会被验证通过。
 
-![微信二维码](https://gitee.com/zhouhuandev/ImageRepo/raw/master/2022/images/20220409-090729.jpeg)
-
-![BaseDemo交流群](https://gitee.com/zhouhuandev/ImageRepo/raw/master/2022/images/20220409-093018.jpeg)
+![微信二维码](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20220409-090729.jpeg)
 
 ## 感谢第三方开源
 
