@@ -8,6 +8,12 @@
 
 - 电子邮件：zhouhuandev@gmail.com
 
+## 地址
+
+Github: https://github.com/zhouhuandev/BaseDemo
+
+Gitee: https://gitee.com/zhouhuandev/BaseDemo
+
 ## 功能演示
 
 软件架构说明
@@ -709,7 +715,7 @@ class MyApp : ModuleApplication()
 
 ## 问题反馈
 
-欢迎 Start ，打call https://raw.githubusercontent.com/zhouhuandev/BaseDemo 在使用中有任何问题，请留言
+欢迎 Start ，打call https://github.com/zhouhuandev/BaseDemo 在使用中有任何问题，请留言
 
 邮箱：zhouhuandev@gmail.com
 
