@@ -57,7 +57,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val currentTimeMillis = System.currentTimeMillis()
-
+        initFullScreen()
         setContentView(R.layout.activity_root)
         mContext = this
         initBundle()
@@ -71,7 +71,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
         KLog.e(TAG, "onCreate: 当前进入的Activity: $localClassName 初始化时间:$totalTime ms")
     }
 
-    protected open fun initCommonView() {
+    protected open fun initFullScreen() {
         if (enableAllowFullScreen()) {
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -79,6 +79,9 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
             )
             requestWindowFeature(Window.FEATURE_NO_TITLE);
         }
+    }
+
+    protected open fun initCommonView() {
 
         mViewStubToolbar = findViewById(R.id.view_stub_toolbar)
         mViewStubContent = findViewById(R.id.view_stub_content)
@@ -104,6 +107,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
         mToolbar = view.findViewById(R.id.toolbar_root)
         mTxtTitle = view.findViewById(R.id.toolbar_title)
         tvToolbarRight = view.findViewById(R.id.tv_toolbar_right)
+        ivToolbarRight = view.findViewById(R.id.iv_toolbar_right)
         mToolbar?.apply {
             setSupportActionBar(this)
             //是否显示标题
