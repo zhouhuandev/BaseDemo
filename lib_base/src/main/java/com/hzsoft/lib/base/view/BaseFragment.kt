@@ -173,6 +173,11 @@ abstract class BaseFragment : Fragment(), BaseView {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mActivity.setSupportActionBar(null)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
@@ -182,6 +187,7 @@ abstract class BaseFragment : Fragment(), BaseView {
         mToolbar = view.findViewById(R.id.toolbar_root)
         mTxtTitle = view.findViewById(R.id.toolbar_title)
         tvToolbarRight = view.findViewById(R.id.tv_toolbar_right)
+        ivToolbarRight = view.findViewById(R.id.iv_toolbar_right)
         mToolbar?.apply {
             mActivity.setSupportActionBar(this)
             mActivity.supportActionBar?.setDisplayShowTitleEnabled(false)
