@@ -176,6 +176,11 @@ abstract class BaseFragment : Fragment(), BaseView {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mActivity.setSupportActionBar(null)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
