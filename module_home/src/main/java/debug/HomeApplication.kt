@@ -1,10 +1,8 @@
 package debug
 
-import android.app.Application
-import com.hzsoft.lib.net.config.NetConfig
-import com.hzsoft.lib.common.URL_BASE
+import com.hzsoft.lib.base.module.ModuleApplication
 
-class HomeApplication : Application() {
+class HomeApplication : ModuleApplication() {
     override fun onCreate() {
         super.onCreate()
     }
