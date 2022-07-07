@@ -37,7 +37,7 @@ android {
                 BAIDU_TUISONG_API_KEY  : "",//百度推送
                 GAODE_APIKEY           : "",//高德APPKEY
 
-                EASEMOB_APPKEY         : "#chaohu",//环信APPKEY
+                EASEMOB_APPKEY         : "#basedemo",//环信APPKEY
 
                 UMENG_APPKEY           : "",//友盟APPKEY
                 UMENG_CHANNEL          : "",//友盟
