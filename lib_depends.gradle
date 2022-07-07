@@ -30,9 +30,9 @@ ext {
                     ],
                     recyclerview: 'androidx.recyclerview:recyclerview:1.2.1',
                     room        : [
-                            core         : "androidx.room:room-runtime:2.2.5",
-                            room_compiler: "androidx.room:room-compiler:2.2.5",
-                            room_ktx     : "androidx.room:room-ktx:2.2.5",
+                            core         : "androidx.room:room-runtime:2.4.2",
+                            room_compiler: "androidx.room:room-compiler:2.4.2",
+                            room_ktx     : "androidx.room:room-ktx:2.4.2",
                     ]
             ],
             google           : [
