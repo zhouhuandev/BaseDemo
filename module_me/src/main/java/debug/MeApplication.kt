@@ -1,6 +1,6 @@
 package debug
 
-import android.app.Application
+import com.hzsoft.lib.base.module.ModuleApplication
 
 /**
  *
@@ -8,7 +8,7 @@ import android.app.Application
  * @author zhouhuan
  * @Data 2020/12/3
  */
-class MeApplication : Application() {
+class MeApplication : ModuleApplication() {
     override fun onCreate() {
         super.onCreate()
 
