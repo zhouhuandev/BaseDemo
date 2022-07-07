@@ -1,5 +1,7 @@
-plugins {
-    id 'com.android.application'
+if (!isModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
 apply from: "../base.build.gradle"
 
@@ -17,7 +19,9 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.hzsoft.basedemo"
+        if (!isModule.toBoolean()) {
+            applicationId "com.hzsoft.basedemo"
+        }
         multiDexEnabled true
 
         ndk {
@@ -25,8 +29,8 @@ android {
         }
 
         manifestPlaceholders = [
-                PACKAGE_NAME           : applicationId,
-                JPUSH_PKGNAME          : applicationId,
+                PACKAGE_NAME           : applicationId == null ? "" : applicationId,
+                JPUSH_PKGNAME          : applicationId == null ? "" : applicationId,
                 JPUSH_APPKEY           : "", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL          : "developer-default", //暂时填写默认值即可.
 
@@ -45,21 +49,23 @@ android {
         signingConfig signingConfigs.release
     }
 
-    //打包改名
-    android.applicationVariants.all { variant ->
-        def appName = rootProject.name
-        def buildType = variant.buildType.name
-        def outputTime = new Date().format("yyyy_MMdd_HHmm", TimeZone.getTimeZone("GMT+08:00"))
-        def versionName = variant.versionName
-        def versionCode = variant.versionCode
-        variant.outputs.each { output ->
-            if ("release" == buildType) {
-                if (output.outputFileName.endsWith('.apk')) {
-                    output.outputFileName = "${versionName}\\${appName}_${versionCode}_V${versionName}_${outputTime}.apk"
-                }
-            } else {
-                if (output.outputFileName.endsWith('.apk')) {
-                    output.outputFileName = "${appName}_${versionCode}_V${versionName}_debug.apk"
+    if (!isModule.toBoolean()) {
+        //打包改名
+        android.applicationVariants.all { variant ->
+            def appName = rootProject.name
+            def buildType = variant.buildType.name
+            def outputTime = new Date().format("yyyy_MMdd_HHmm", TimeZone.getTimeZone("GMT+08:00"))
+            def versionName = variant.versionName
+            def versionCode = variant.versionCode
+            variant.outputs.each { output ->
+                if ("release" == buildType) {
+                    if (output.outputFileName.endsWith('.apk')) {
+                        output.outputFileName = "${versionName}\\${appName}_${versionCode}_V${versionName}_${outputTime}.apk"
+                    }
+                } else {
+                    if (output.outputFileName.endsWith('.apk')) {
+                        output.outputFileName = "${appName}_${versionCode}_V${versionName}_debug.apk"
+                    }
                 }
             }
         }
