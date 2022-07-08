@@ -267,7 +267,7 @@ abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewMod
 
 ```kotlin
 abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMvvmFragment<VM>(), BaseRefreshView {
-    protected abstract fun onBindRreshLayout(): Int
+    protected abstract fun onBindRefreshLayout(): Int
     protected abstract fun enableRefresh(): Boolean
     protected abstract fun enableLoadMore(): Boolean
 }
@@ -279,7 +279,7 @@ abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMv
 abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : BaseRefreshViewModel<T>> :
     BaseMvvmDataBindingFragment<V, VM>(),
     BaseRefreshView {
-    protected abstract fun onBindRreshLayout(): Int
+    protected abstract fun onBindRefreshLayout(): Int
     protected abstract fun enableRefresh(): Boolean
     protected abstract fun enableLoadMore(): Boolean
 }
