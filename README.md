@@ -62,8 +62,37 @@ Gitee: https://gitee.com/zhouhuandev/BaseDemo
 
 - [演示视频传送门](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/1637675109209180.mp4)
 
-
 ## 主要功能
+
+### 项目架构
+
+![项目架构](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211114.png)
+
+- 集成模式：所有的业务组件被“app壳工程”依赖，组成一个完整的APP；
+- 组件模式：可以独立开发业务组件，每一个业务组件就是一个APP；
+- app壳工程：负责管理各个业务组件，和打包apk，没有具体的业务功能；
+- 业务组件：根据公司具体业务而独立形成一个的工程；
+- 功能组件：提供开发APP的某些基础功能，例如打印日志、下拉刷新控件等；
+- Main组件：属于业务组件，指定APP启动页面、主界面；
+- Common组件：属于功能组件，支撑业务组件的基础，提供多数业务组件需要的功能
+
+### MVVM架构
+
+#### BaseMVVM架构
+
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211118.png)
+
+#### 官方指导MVVM架构
+
+![MVVM架构示意图](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211213.png)
+
+- View层类关系图
+
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211131.png)
+
+- ViewModel层类关系图
+
+![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211135.png)
 
 ### 核心基础库 lib_base
 
@@ -596,36 +625,6 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
 - 通用小菊花样式DaisyRefreshLayout
 - 通用小箭头样式ArrowRefreshLayout
 
-### 项目架构
-
-![项目架构](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211114.png)
-
-- 集成模式：所有的业务组件被“app壳工程”依赖，组成一个完整的APP；
-- 组件模式：可以独立开发业务组件，每一个业务组件就是一个APP；
-- app壳工程：负责管理各个业务组件，和打包apk，没有具体的业务功能；
-- 业务组件：根据公司具体业务而独立形成一个的工程；
-- 功能组件：提供开发APP的某些基础功能，例如打印日志、下拉刷新控件等；
-- Main组件：属于业务组件，指定APP启动页面、主界面；
-- Common组件：属于功能组件，支撑业务组件的基础，提供多数业务组件需要的功能
-
-### MVVM架构
-
-#### BaseMVVM架构
-
-![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211118.png)
-
-#### 官方指导MVVM架构
-
-![MVVM架构示意图](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211213.png)
-
-- View层类关系图
-
-![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211131.png)
-
-- ViewModel层类关系图
-
-![](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/20210312211135.png)
-
 ### 组件化实现
 
 基于阿里 `ARouter` 作为路由，实现组件与组件的通信跳转
@@ -697,8 +696,11 @@ class MyApp : ModuleApplication()
 ### build.gradle 管理
 
 - 第三方 lib 源码库 且都需引入 `lib.build.gradle`,每个单独 moudle 都需要引入 `module.build.gradle`
-- `versions.gradle` 依赖三方库版本统一管理
+- `lib_depends.gradle` 依赖三方库版本统一管理
+- `config.gradle` 组件项目依赖统一管理
 - `base.build.gradle` 基础编译版本统一管理
+
+每个 module 中新增第三方依赖时，仅需要在 `lib_depends.gradle` 中增加第三方依赖版本号，`config.gradle` 中定义使用定义的依赖版本信息即可。
 
 ### 开发环境
 
@@ -748,6 +750,7 @@ Blog : "https://blog.csdn.net/youxun1312"
 - 2021.11.23 优化架构，更新刷新框架、Adapter适配器，修复已知问题
 - 2022.01.14 优化`ViewBinding` & `DataBinding`、新增部分拓展函数
 - 2022.05.21 重构依赖架构，修复 Binding 问题
+- 2022.07.09 优化基类&刷新实体类限制
 
 ## License
 
