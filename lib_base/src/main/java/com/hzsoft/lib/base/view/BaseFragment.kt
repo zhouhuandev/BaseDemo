@@ -42,7 +42,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     protected lateinit var mContext: Context
 
-    protected var mActivity: AppCompatActivity ? = null
+    protected var mActivity: AppCompatActivity? = null
     protected lateinit var mView: View
 
     protected var mTxtTitle: TextView? = null
@@ -281,7 +281,6 @@ abstract class BaseFragment : Fragment(), BaseView {
     }
 
     private fun init() {
-        ARouter.getInstance().inject(this)
         if (enableEventBus()) EventBus.getDefault().register(this)
     }
 

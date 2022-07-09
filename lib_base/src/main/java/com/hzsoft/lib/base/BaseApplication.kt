@@ -3,6 +3,7 @@ package com.hzsoft.lib.base
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.hzsoft.lib.base.utils.ProcessUtils
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.log.KLog
@@ -16,8 +17,6 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @time 2020/11/30 23:04
  */
 open class BaseApplication : Application() {
-
-    }
 
     companion object {
         const val TAG = "BaseApplication"

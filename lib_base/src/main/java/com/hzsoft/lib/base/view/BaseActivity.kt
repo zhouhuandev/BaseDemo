@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
 import android.text.TextUtils
-import android.view.*
+import android.view.View
+import android.view.ViewStub
+import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -230,7 +233,6 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     }
 
     private fun init() {
-        ARouter.getInstance().inject(this)
         if (enableEventBus()) EventBus.getDefault().register(this)
     }
 
