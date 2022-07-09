@@ -10,7 +10,6 @@ import com.hzsoft.lib.net.DataRepository
 import com.hzsoft.lib.net.DataRepositorySource
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -20,7 +19,7 @@ import kotlinx.coroutines.launch
  * @time 2021/11/23
  */
 class RoomTestViewModel(state: SavedStateHandle) :
-    BaseRefreshViewModel<UserTestRoom>() {
+    BaseRefreshViewModel() {
 
     private val savedStateHandle = state
 

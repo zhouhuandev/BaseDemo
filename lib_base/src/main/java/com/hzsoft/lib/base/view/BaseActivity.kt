@@ -3,6 +3,7 @@ package com.hzsoft.lib.base.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.text.TextUtils
 import android.view.*
 import android.widget.ImageView
@@ -40,10 +41,10 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     protected var ivToolbarRight: ImageView? = null
     protected var mToolbar: Toolbar? = null
 
-    protected var mNetErrorView: NetErrorView? = null
-    protected var mNoDataView: NoDataView? = null
-    protected var mLoadingInitView: LoadingInitView? = null
-    protected var mLoadingTransView: LoadingTransView? = null
+    private var mNetErrorView: NetErrorView? = null
+    private var mNoDataView: NoDataView? = null
+    private var mLoadingInitView: LoadingInitView? = null
+    private var mLoadingTransView: LoadingTransView? = null
 
     private lateinit var mViewStubToolbar: ViewStub
     private lateinit var mViewStubContent: ViewStub
@@ -52,19 +53,23 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     private lateinit var mViewStubNoData: ViewStub
     private lateinit var mViewStubError: ViewStub
 
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        mContext = newBase ?: this
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val currentTimeMillis = System.currentTimeMillis()
+        val startTime = SystemClock.elapsedRealtime()
         initFullScreen()
         setContentView(R.layout.activity_root)
-        mContext = this
+        init()
         initBundle()
         initCommonView()
         initView()
         initListener()
-        EventBus.getDefault().register(this)
 
-        val totalTime = System.currentTimeMillis() - currentTimeMillis
+        val totalTime = SystemClock.elapsedRealtime() - startTime
         KLog.e(TAG, "onCreate: 当前进入的Activity: $localClassName 初始化时间:$totalTime ms")
     }
 
@@ -177,6 +182,11 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     }
 
     /**
+     * 是否打开EventBus
+     */
+    open fun enableEventBus(): Boolean = false
+
+    /**
      * 设置标题右边显示文字
      *
      * @return
@@ -216,7 +226,12 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
 
     override fun onDestroy() {
         super.onDestroy()
-        EventBus.getDefault().unregister(this)
+        if (enableEventBus()) EventBus.getDefault().unregister(this)
+    }
+
+    private fun init() {
+        ARouter.getInstance().inject(this)
+        if (enableEventBus()) EventBus.getDefault().register(this)
     }
 
     open fun initBundle() {

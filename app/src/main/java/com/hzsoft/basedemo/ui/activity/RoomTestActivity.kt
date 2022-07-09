@@ -27,7 +27,7 @@ import kotlin.random.nextInt
  * @time 2021/11/23
  */
 class RoomTestActivity :
-    BaseMvvmRefreshDataBindingActivity<UserTestRoom, ActivityRoomTestBinding, RoomTestViewModel>() {
+    BaseMvvmRefreshDataBindingActivity<ActivityRoomTestBinding, RoomTestViewModel>() {
 
     companion object {
         fun start(context: Context) {

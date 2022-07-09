@@ -24,7 +24,7 @@ import com.hzsoft.lib.net.utils.ext.observe
  * @Date 2020/12/3
  */
 class MainHomeFragment :
-    BaseMvvmRefreshDataBindingFragment<Demo, FragmentHomeMainBinding, MainHomeViewModel>() {
+    BaseMvvmRefreshDataBindingFragment<FragmentHomeMainBinding, MainHomeViewModel>() {
 
     companion object {
         fun newsInstance(): MainHomeFragment {

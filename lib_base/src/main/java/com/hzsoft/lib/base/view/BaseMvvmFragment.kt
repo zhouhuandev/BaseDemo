@@ -67,9 +67,9 @@ abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment() {
                 startActivity(clz, bundle)
             }
         mViewModel.mUIChangeLiveData.getFinishActivityEvent()
-            .observe(this) { mActivity.finish() }
+            .observe(this) { mActivity?.finish() }
         mViewModel.mUIChangeLiveData.getOnBackPressedEvent()
-            .observe(this) { mActivity.onBackPressed() }
+            .observe(this) { mActivity?.onBackPressed() }
     }
 
 }
