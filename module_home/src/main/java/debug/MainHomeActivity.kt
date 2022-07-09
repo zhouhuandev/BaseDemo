@@ -22,7 +22,7 @@ import com.hzsoft.module.home.viewmodel.MainHomeViewModel
  * @since 2022/7/7 23:00
  */
 class MainHomeActivity :
-    BaseMvvmRefreshDataBindingActivity<Demo, FragmentHomeMainBinding, MainHomeViewModel>() {
+    BaseMvvmRefreshDataBindingActivity<FragmentHomeMainBinding, MainHomeViewModel>() {
 
     private lateinit var mAdapter: MainHomeAdapter
 

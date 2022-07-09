@@ -11,7 +11,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @author zhouhuan
  * @Date 2020/12/3
  */
-abstract class BaseMvvmRefreshActivity<T, VM : BaseRefreshViewModel<T>> : BaseMvvmActivity<VM>(),
+abstract class BaseMvvmRefreshActivity<VM : BaseRefreshViewModel> : BaseMvvmActivity<VM>(),
     BaseRefreshView {
 
     protected lateinit var mRefreshLayout: SmartRefreshLayout

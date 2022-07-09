@@ -12,7 +12,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @author zhouhuan
  * @Date 2020/12/3
  */
-abstract class BaseMvvmRefreshFragment<T, VM : BaseRefreshViewModel<T>> : BaseMvvmFragment<VM>(),
+abstract class BaseMvvmRefreshFragment<VM : BaseRefreshViewModel> : BaseMvvmFragment<VM>(),
     BaseRefreshView {
 
     protected lateinit var mRefreshLayout: SmartRefreshLayout

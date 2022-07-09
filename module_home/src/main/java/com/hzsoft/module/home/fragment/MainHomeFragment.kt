@@ -24,7 +24,7 @@ import com.hzsoft.module.home.viewmodel.MainHomeViewModel
  * @Date 2020/12/3
  */
 class MainHomeFragment :
-    BaseMvvmRefreshDataBindingFragment<Demo, FragmentHomeMainBinding, MainHomeViewModel>() {
+    BaseMvvmRefreshDataBindingFragment<FragmentHomeMainBinding, MainHomeViewModel>() {
 
     companion object {
         fun newsInstance(): MainHomeFragment {

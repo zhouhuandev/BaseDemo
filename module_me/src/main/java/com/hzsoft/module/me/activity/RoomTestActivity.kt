@@ -29,7 +29,7 @@ import kotlin.random.nextInt
  */
 @Route(path = ARouteConstants.Me.ME_ROOT_TEST, name = "Room测试")
 class RoomTestActivity :
-    BaseMvvmRefreshDataBindingActivity<UserTestRoom, ActivityRoomTestBinding, RoomTestViewModel>() {
+    BaseMvvmRefreshDataBindingActivity<ActivityRoomTestBinding, RoomTestViewModel>() {
 
     companion object {
         fun start(context: Context) {
