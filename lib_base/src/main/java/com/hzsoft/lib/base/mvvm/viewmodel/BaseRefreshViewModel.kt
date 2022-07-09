@@ -1,6 +1,5 @@
 package com.hzsoft.lib.base.mvvm.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import com.hzsoft.lib.base.event.SingleLiveEvent
 
 /**
@@ -8,8 +7,7 @@ import com.hzsoft.lib.base.event.SingleLiveEvent
  * @author zhouhuan
  * @time 2020/12/2
  */
-abstract class BaseRefreshViewModel<T> : BaseViewModel() {
-    protected var mList = MutableLiveData<MutableList<T>>()
+abstract class BaseRefreshViewModel : BaseViewModel() {
 
     var mUIChangeRefreshLiveData = UIChangeRefreshLiveData()
 
@@ -60,10 +58,6 @@ abstract class BaseRefreshViewModel<T> : BaseViewModel() {
      */
     open fun postStopLoadMoreWithNoMoreDataEvent() {
         mUIChangeRefreshLiveData.stopLoadMoreWithNoMoreDataEvent.call()
-    }
-
-    open fun getList(): MutableList<T>? {
-        return mList.value
     }
 
     abstract fun refreshData()

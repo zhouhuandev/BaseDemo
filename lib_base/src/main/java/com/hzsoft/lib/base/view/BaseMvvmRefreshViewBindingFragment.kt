@@ -12,7 +12,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @author zhouhuan
  * @time 2022/3/17
  */
-abstract class BaseMvvmRefreshViewBindingFragment<T, V : ViewBinding, VM : BaseRefreshViewModel<T>> :
+abstract class BaseMvvmRefreshViewBindingFragment<V : ViewBinding, VM : BaseRefreshViewModel> :
     BaseMvvmViewBindingFragment<V, VM>(),
     BaseRefreshView {
 

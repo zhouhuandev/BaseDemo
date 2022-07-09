@@ -3,6 +3,7 @@ package com.hzsoft.lib.base.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +44,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     protected lateinit var mContext: Context
 
-    protected lateinit var mActivity: AppCompatActivity
+    protected var mActivity: AppCompatActivity ? = null
     protected lateinit var mView: View
 
     protected var mTxtTitle: TextView? = null
@@ -51,17 +52,17 @@ abstract class BaseFragment : Fragment(), BaseView {
     protected var ivToolbarRight: ImageView? = null
     protected var mToolbar: Toolbar? = null
 
-    protected var mNetErrorView: NetErrorView? = null
-    protected var mNoDataView: NoDataView? = null
-    protected var mLoadingInitView: LoadingInitView? = null
-    protected var mLoadingTransView: LoadingTransView? = null
+    private var mNetErrorView: NetErrorView? = null
+    private var mNoDataView: NoDataView? = null
+    private var mLoadingInitView: LoadingInitView? = null
+    private var mLoadingTransView: LoadingTransView? = null
 
-    protected lateinit var mViewStubToolbar: ViewStub
-    protected lateinit var mViewStubContent: ViewStub
-    protected lateinit var mViewStubInitLoading: ViewStub
-    protected lateinit var mViewStubTransLoading: ViewStub
-    protected lateinit var mViewStubNoData: ViewStub
-    protected lateinit var mViewStubError: ViewStub
+    private lateinit var mViewStubToolbar: ViewStub
+    private lateinit var mViewStubContent: ViewStub
+    private lateinit var mViewStubInitLoading: ViewStub
+    private lateinit var mViewStubTransLoading: ViewStub
+    private lateinit var mViewStubNoData: ViewStub
+    private lateinit var mViewStubError: ViewStub
     private var isViewCreated = false
     private var isViewVisable = false
 
@@ -72,14 +73,10 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val currentTimeMillis = System.currentTimeMillis()
+        val startTime = SystemClock.elapsedRealtime()
+        mActivity = activity as AppCompatActivity?
 
-        mActivity = (activity as AppCompatActivity?)!!
-        ARouter.getInstance().inject(this)
-        EventBus.getDefault().register(this)
-        initBundle()
-
-        val totalTime = System.currentTimeMillis() - currentTimeMillis
+        val totalTime = SystemClock.elapsedRealtime() - startTime
         KLog.e(TAG, "onCreate: 当前进入的Fragment: $javaClass 初始化时间:$totalTime ms")
     }
 
@@ -117,6 +114,8 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
+        initBundle()
         initView(mView)
         initListener()
 
@@ -178,7 +177,7 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mActivity.setSupportActionBar(null)
+        mActivity?.setSupportActionBar(null)
     }
 
     override fun onDestroy() {
@@ -192,12 +191,12 @@ abstract class BaseFragment : Fragment(), BaseView {
         tvToolbarRight = view.findViewById(R.id.tv_toolbar_right)
         ivToolbarRight = view.findViewById(R.id.iv_toolbar_right)
         mToolbar?.apply {
-            mActivity.setSupportActionBar(this)
-            mActivity.supportActionBar?.setDisplayShowTitleEnabled(false)
-            setNavigationOnClickListener { mActivity.onBackPressed() }
+            mActivity?.setSupportActionBar(this)
+            mActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
+            setNavigationOnClickListener { mActivity?.onBackPressed() }
             if (enableToolBarLeft()) {
                 //设置是否添加显示NavigationIcon.如果要用
-                mActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                mActivity?.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
                 //设置NavigationIcon的icon.可以是Drawable ,也可以是ResId
                 setNavigationIcon(getToolBarLeftIcon())
             }
@@ -245,6 +244,11 @@ abstract class BaseFragment : Fragment(), BaseView {
     }
 
     /**
+     * 是否打开EventBus
+     */
+    open fun enableEventBus(): Boolean = false
+
+    /**
      * 设置标题右边显示文字
      *
      * @return
@@ -278,6 +282,11 @@ abstract class BaseFragment : Fragment(), BaseView {
         return null
     }
 
+    private fun init() {
+        ARouter.getInstance().inject(this)
+        if (enableEventBus()) EventBus.getDefault().register(this)
+    }
+
     open fun initBundle() {
 
     }
@@ -290,7 +299,7 @@ abstract class BaseFragment : Fragment(), BaseView {
     override fun initListener() {}
 
     override fun finishActivity() {
-        mActivity.finish()
+        mActivity?.finish()
     }
 
     open fun enableToolbar(): Boolean {
@@ -425,7 +434,7 @@ abstract class BaseFragment : Fragment(), BaseView {
      */
     open fun openWithFinish(path: String, block: Postcard.() -> Unit = {}) {
         open(path, block)
-        mActivity.finish()
+        mActivity?.finish()
     }
 
     private var mLastButterKnifeClickTime: Long = 0

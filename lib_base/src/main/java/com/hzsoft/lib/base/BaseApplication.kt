@@ -2,18 +2,15 @@ package com.hzsoft.lib.base
 
 import android.app.Application
 import android.content.Context
-import android.os.Process
-import android.text.TextUtils
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
+import com.hzsoft.lib.base.utils.ProcessUtils
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.log.KLog
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import java.io.BufferedReader
-import java.io.FileReader
 
 /**
  * 初始化应用程序
@@ -21,18 +18,7 @@ import java.io.FileReader
  * @time 2020/11/30 23:04
  */
 open class BaseApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-        if (isMainProcess()) {
-            ThreadUtils.submit { initOnlyMainProcessInLowPriorityThread() }
-            initOnlyMainProcess()
-        }
-        ThreadUtils.submit {
-            initInLowPriorityThread()
-        }
 
-    }
     companion object {
         const val TAG = "BaseApplication"
 
@@ -47,6 +33,18 @@ open class BaseApplication : Application() {
         instance = this
         MultiDex.install(this)
         super.attachBaseContext(base)
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        if (ProcessUtils.isMainProcess == true) {
+            ThreadUtils.submit { initOnlyMainProcessInLowPriorityThread() }
+            initOnlyMainProcess()
+        }
+        ThreadUtils.submit {
+            initInLowPriorityThread()
+        }
+
     }
 
     override fun onTerminate() {
@@ -85,12 +83,6 @@ open class BaseApplication : Application() {
         initSmartRefreshLayout()
     }
 
-    open fun isMainProcess(): Boolean {
-        // 获取当前进程名
-        val processName = getProcessName(Process.myPid())
-        return processName == null || processName.isEmpty() || processName == applicationContext.packageName
-    }
-
     open fun initSmartRefreshLayout() {
         //全局设置默认的 Header
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
@@ -103,26 +95,5 @@ open class BaseApplication : Application() {
             ClassicsFooter(context)
                 .setDrawableSize(20F)
         }
-    }
-
-    /**
-     * 获取进程号对应的进程名
-     *
-     * @param pid 进程号
-     * @return 进程名
-     */
-    open fun getProcessName(pid: Int): String? {
-        try {
-            BufferedReader(FileReader("/proc/$pid/cmdline")).use { reader ->
-                var processName = reader.readLine()
-                if (!TextUtils.isEmpty(processName)) {
-                    processName = processName.trim { it <= ' ' }
-                }
-                return processName
-            }
-        } catch (e: Exception) {
-            KLog.w(TAG, "获取当前进程名称", e)
-        }
-        return null
     }
 }

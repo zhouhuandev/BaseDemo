@@ -11,7 +11,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @author zhouhuan
  * @time 2022/3/17
  */
-abstract class BaseMvvmRefreshViewBindingActivity<T, V : ViewBinding, VM : BaseRefreshViewModel<T>> :
+abstract class BaseMvvmRefreshViewBindingActivity<V : ViewBinding, VM : BaseRefreshViewModel> :
     BaseMvvmViewBindingActivity<V, VM>(),
     BaseRefreshView {
 
