@@ -62,7 +62,7 @@ Gitee: https://gitee.com/zhouhuandev/BaseDemo
 
 - [演示视频传送门](https://raw.githubusercontent.com/zhouhuandev/BaseDemo/mvvm%2Bdatabinding/image/1637675109209180.mp4)
 
-## 主要功能
+## 项目功能
 
 ### 项目架构
 
@@ -429,6 +429,12 @@ abstract class BaseMvvmRefreshDataBindingFragment<T, V : ViewDataBinding, VM : B
     open fun enableAllowFullScreen(): Boolean {
         return false
     }
+```
+
+- 支持是否打开EventBus
+
+```kotlin
+    open fun enableEventBus(): Boolean = false
 ```
 
 - 支持显示无数据
