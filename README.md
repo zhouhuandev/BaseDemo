@@ -757,6 +757,7 @@ Blog : "https://blog.csdn.net/youxun1312"
 - 2022.01.14 优化`ViewBinding` & `DataBinding`、新增部分拓展函数
 - 2022.05.21 重构依赖架构，修复 Binding 问题
 - 2022.07.09 优化基类&刷新实体类限制
+- 2022.07.10 重构网络模块，数据仓库下放至单独 `moudle`
 
 ## License
 
