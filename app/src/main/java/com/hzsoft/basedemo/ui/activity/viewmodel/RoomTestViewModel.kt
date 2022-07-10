@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseRefreshViewModel
-import com.hzsoft.lib.net.DataRepository
-import com.hzsoft.lib.net.DataRepositorySource
+import com.hzsoft.lib.net.BaseDataRepository
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 import kotlinx.coroutines.launch
@@ -25,7 +24,7 @@ class RoomTestViewModel(state: SavedStateHandle) :
 
     var showEmpty = ObservableField(false)
 
-    private val dataRepositoryRepository: DataRepositorySource = DataRepository()
+    private val dataRepositoryRepository: BaseDataRepository = BaseDataRepository()
 
     private val userTestRoomLiveDataPrivate = MutableLiveData<Resource<List<UserTestRoom>>>()
     val userTestRoomLiveData: LiveData<Resource<List<UserTestRoom>>> get() = userTestRoomLiveDataPrivate

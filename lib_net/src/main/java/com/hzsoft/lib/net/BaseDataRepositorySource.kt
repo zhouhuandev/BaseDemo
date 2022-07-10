@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
  * @author zhouhuan
  * @time 2020/12/1 0:21
  */
-interface DataRepositorySource {
+interface BaseDataRepositorySource {
     suspend fun requestRecipes(): Flow<Resource<List<Demo>>>
     suspend fun doLogin(): Flow<Resource<String>>
     suspend fun removeUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Int>>

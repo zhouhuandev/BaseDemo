@@ -6,10 +6,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseRefreshViewModel
 import com.hzsoft.lib.domain.entity.Demo
-import com.hzsoft.lib.net.DataRepository
-import com.hzsoft.lib.net.DataRepositorySource
+import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
+import com.hzsoft.lib.net.utils.toJson
+import com.hzsoft.basedemo.repository.HomeDataRepository
 import kotlinx.coroutines.launch
 
 /**
@@ -20,10 +21,11 @@ import kotlinx.coroutines.launch
  * @Date 2020/12/1
  */
 class MainHomeViewModel(state: SavedStateHandle) : BaseRefreshViewModel() {
+    private val TAG = "MainHomeViewModel"
 
     val savedStateHandle = state
 
-    private val dataRepositoryRepository: DataRepositorySource = DataRepository()
+    private val homeDataRepository by lazy { HomeDataRepository() }
 
     private val recipesLiveDataPrivate = MutableLiveData<Resource<List<Demo>>>()
     val recipesLiveData: LiveData<Resource<List<Demo>>> get() = recipesLiveDataPrivate
@@ -33,9 +35,12 @@ class MainHomeViewModel(state: SavedStateHandle) : BaseRefreshViewModel() {
 
     private fun getRecipes() {
         viewModelScope.launch {
-            dataRepositoryRepository.requestRecipes().collect {
+            homeDataRepository.getBeautyStar().collect {
                 recipesLiveDataPrivate.value = it
                 postStopRefreshEvent()
+            }
+            homeDataRepository.requestRecipes().collect {
+                KLog.d(TAG, it.toJson())
             }
         }
     }
