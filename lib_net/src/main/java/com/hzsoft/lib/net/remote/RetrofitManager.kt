@@ -32,6 +32,12 @@ import java.util.concurrent.TimeUnit
  */
 
 class RetrofitManager {
+
+    companion object {
+        @JvmStatic
+        val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { RetrofitManager() }
+    }
+
     private val okHttpBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
     private val retrofit: Retrofit
 
@@ -40,7 +46,7 @@ class RetrofitManager {
             val loggingInterceptor = HttpLoggingInterceptor()
             if (BuildConfig.DEBUG) {
                 loggingInterceptor.apply { level = HttpLoggingInterceptor.Level.BODY }
-            }else{
+            } else {
                 loggingInterceptor.apply { level = HttpLoggingInterceptor.Level.BASIC }
             }
             return loggingInterceptor

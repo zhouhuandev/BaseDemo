@@ -24,7 +24,7 @@ import kotlin.coroutines.CoroutineContext
  */
 class DataRepository constructor(
     private val remoteRepository: RemoteData = RemoteData(
-        RetrofitManager(), NetworkHelper(NetAppContext.getContext())
+        RetrofitManager.instance, NetworkHelper.instance
     ),
     private val localRepository: LocalData = LocalData(),
     private val ioDispatcher: CoroutineContext = Dispatchers.IO
