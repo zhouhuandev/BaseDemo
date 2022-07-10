@@ -8,6 +8,6 @@ import com.hzsoft.lib.net.dto.Resource
  * @author zhouhuan
  * @time 2020/12/1 0:06
  */
-internal interface RemoteDataSource {
+internal interface BaseRemoteDataSource {
     suspend fun requestRecipes(): Resource<List<Demo>>
 }

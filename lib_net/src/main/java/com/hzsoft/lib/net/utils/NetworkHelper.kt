@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.ConnectivityManager.TYPE_MOBILE
 import android.net.ConnectivityManager.TYPE_WIFI
 import android.net.NetworkInfo
+import com.hzsoft.lib.net.config.NetAppContext
 
 /**
  * 检测当前请求的网络状态信息
@@ -12,6 +13,11 @@ import android.net.NetworkInfo
  * @time 2020/12/2 21:08
  */
 class NetworkHelper constructor(val context: Context) : NetworkConnectivity {
+
+    companion object {
+        @JvmStatic
+        val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { NetworkHelper(NetAppContext.getContext()) }
+    }
 
     override fun isConnected(): Boolean {
         val info = getNetworkInfo()
