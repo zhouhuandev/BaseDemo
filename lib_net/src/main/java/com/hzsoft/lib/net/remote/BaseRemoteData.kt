@@ -12,6 +12,7 @@ import com.hzsoft.lib.net.error.mapper.ErrorManager
 import com.hzsoft.lib.net.error.mapper.ErrorMapper
 import com.hzsoft.lib.net.remote.service.RecipesService
 import com.hzsoft.lib.net.utils.NetworkConnectivity
+import com.hzsoft.lib.net.utils.NetworkHelper
 import retrofit2.Response
 import java.io.IOException
 
@@ -21,25 +22,22 @@ import java.io.IOException
  * @author zhouhuan
  * @time 2020/12/1 0:08
  */
-class RemoteData
+open class BaseRemoteData
 constructor(
-    private val retrofitManager: RetrofitManager,
-    private val networkConnectivity: NetworkConnectivity
-) : RemoteDataSource {
-    private val errorManager by lazy { ErrorManager(ErrorMapper()) }
+    protected val retrofitManager: RetrofitManager = RetrofitManager.instance,
+    private val networkConnectivity: NetworkConnectivity = NetworkHelper.instance
+) : BaseRemoteDataSource {
+    private val errorManager by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { ErrorManager(ErrorMapper()) }
+    private val recipesService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { retrofitManager.create<RecipesService>() }
 
     override suspend fun requestRecipes(): Resource<List<Demo>> {
-        //创建接口服务
-        val recipesService = retrofitManager.create<RecipesService>()
-
         return dealDataWhen(processCall(recipesService::fetchRecipes))
     }
-
 
     /**
      * 数据结构体的返回处理
      */
-    private suspend fun processCall(responseCall: suspend () -> Response<*>): Any? {
+    protected suspend fun processCall(responseCall: suspend () -> Response<*>): Any? {
         if (!networkConnectivity.isConnected()) {
             //若当前客户端未打开数据连接开关
             return showToast(NOT_NETWORD)
@@ -79,7 +77,7 @@ constructor(
     /**
      * 处理相应结果
      */
-    private inline fun <reified T> dealDataWhen(any: Any?): Resource<T> {
+    protected inline fun <reified T> dealDataWhen(any: Any?): Resource<T> {
         return when (any) {
             is BaseResponse<*> -> {
                 Resource.Success(data = toAs(if (any.data != null) any.data else null))
@@ -93,7 +91,7 @@ constructor(
     /**
      * 类型转换
      */
-    private inline fun <reified T> toAs(obj: Any?): T {
+    protected inline fun <reified T> toAs(obj: Any?): T {
         return obj as T
     }
 
