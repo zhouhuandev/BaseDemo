@@ -71,6 +71,9 @@ abstract class BaseMvvmRefreshDataBindingActivity<V : ViewDataBinding, VM : Base
         mViewModel.mUIChangeRefreshLiveData.stopLoadMoreLiveEvent.observe(this) {
             stopLoadMore(it)
         }
+        mViewModel.mUIChangeRefreshLiveData.stopLoadMoreWithNoMoreDataEvent.observe(this) {
+            stopLoadMoreWithNoMoreData()
+        }
     }
 
     override fun enableRefresh(b: Boolean) {
@@ -99,6 +102,10 @@ abstract class BaseMvvmRefreshDataBindingActivity<V : ViewDataBinding, VM : Base
 
     override fun stopLoadMore(boolean: Boolean) {
         mRefreshLayout.finishLoadMore(boolean)
+    }
+
+    override fun stopLoadMoreWithNoMoreData() {
+        mRefreshLayout.finishLoadMoreWithNoMoreData()
     }
 
 }

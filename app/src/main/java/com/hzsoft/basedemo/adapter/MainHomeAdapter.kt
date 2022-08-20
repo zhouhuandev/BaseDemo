@@ -30,7 +30,7 @@ class MainHomeAdapter :
             }
 
             rlRecipeItem.setOnClickListener {
-                "您点击了${this@MainHomeAdapter.getItemPosition(item)}".showToast()
+                "您点击了${holder.absoluteAdapterPosition}".showToast()
             }
         }
     }

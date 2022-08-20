@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lib_base_module">lib_base_module</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_mine">Mine</string>
+</resources>

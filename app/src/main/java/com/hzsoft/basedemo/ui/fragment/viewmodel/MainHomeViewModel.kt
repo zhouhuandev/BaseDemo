@@ -33,11 +33,21 @@ class MainHomeViewModel(state: SavedStateHandle) : BaseRefreshViewModel() {
     private val userTestRoomLiveDataPrivate = MutableLiveData<Resource<List<UserTestRoom>>>()
     val userTestRoomLiveData: LiveData<Resource<List<UserTestRoom>>> get() = userTestRoomLiveDataPrivate
 
-    private fun getRecipes() {
+    var itemCount = 0
+
+    private fun getRecipes(isRefresh: Boolean) {
         viewModelScope.launch {
             homeDataRepository.getBeautyStar().collect {
                 recipesLiveDataPrivate.value = it
-                postStopRefreshEvent()
+                if (isRefresh) {
+                    postStopRefreshEvent()
+                } else {
+                    postStopLoadMoreEvent()
+                }
+                if (itemCount > 50) {
+                    postShowToastViewEvent("数据全部加载完毕")
+                    postStopLoadMoreWithNoMoreDataEvent()
+                }
             }
             homeDataRepository.requestRecipes().collect {
                 KLog.d(TAG, it.toJson())
@@ -46,11 +56,11 @@ class MainHomeViewModel(state: SavedStateHandle) : BaseRefreshViewModel() {
     }
 
     override fun refreshData() {
-        getRecipes()
+        getRecipes(true)
     }
 
     override fun loadMore() {
-
+        getRecipes(false)
     }
 
 }

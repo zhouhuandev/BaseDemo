@@ -33,10 +33,6 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
 
     override fun onBindLayout(): Int = R.layout.fragment_me_main
 
-    override fun onBindingClass(): Class<FragmentMeMainBinding> {
-        return FragmentMeMainBinding::class.java
-    }
-
     override fun initView(mView: View) {
         val config = ImagePickerHelper.with(ImagePickerHelper.Config())
             .setWeChat(true)
@@ -67,7 +63,7 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
 
     override fun enableToolbar(): Boolean = true
 
-    override fun getTootBarTitle(): String = "Me"
+    override fun getTootBarTitle(): String = getString(R.string.title_mine)
 
     override fun onClick(v: View?) {
         if (beFastClick()) {
@@ -110,10 +106,6 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
                 RoomTestActivity.start(mContext)
             }
         }
-    }
-
-    override fun onBindViewModel(): Class<MainMeViewModel> {
-        return MainMeViewModel::class.java
     }
 
     override fun initViewObservable() {

@@ -1,11 +1,10 @@
 package com.hzsoft.lib.base.view
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel
+import com.hzsoft.lib.base.utils.ReflectUtils
 import com.hzsoft.lib.base.utils.ext.view.showToast
-import com.hzsoft.lib.log.KLog.v
 
 /**
  * Describe:
@@ -27,7 +26,10 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
     /**
      * 绑定 ViewModel
      */
-    abstract fun onBindViewModel(): Class<VM>
+    open fun onBindViewModel(): Class<VM> {
+        return ReflectUtils.getActualTypeArgument(0, javaClass) as? Class<VM>
+            ?: throw IllegalArgumentException("找不到 ViewModelClass 实例，建议重写该方法")
+    }
 
     /**
      * 放置 观察者对象

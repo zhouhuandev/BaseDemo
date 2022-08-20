@@ -2,7 +2,7 @@ package com.hzsoft.lib.base.view.databinding
 
 import android.view.View
 import android.view.ViewStub
-import androidx.activity.ComponentActivity
+import androidx.core.app.ComponentActivity
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -16,7 +16,7 @@ import java.lang.IllegalArgumentException
  * @author zhouhuan
  * @time 2022/1/13
  */
-class ActivityViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
+class ActivityViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val layoutRes: Int = 0) :
     ActivityBindingHolder<T> {
 
     private val _bindingHolder = ViewDataBindingHolder<T>()
@@ -38,7 +38,7 @@ class ActivityViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val 
             }
     }
 
-    override fun ComponentActivity.inflate(
+    override fun ComponentActivity.inflateBinding(
         viewStub: ViewStub?,
         onClear: ((binding: T) -> Unit)?,
         init: (binding: T) -> Unit
@@ -90,5 +90,5 @@ class ActivityViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val 
  * ```
  */
 @Suppress("FunctionName") // delegate ActivityBindingHolder implements
-fun <T : ViewDataBinding> ActivityBinding(@LayoutRes layoutRes: Int = 0): ActivityBindingHolder<T> =
+inline fun <reified T : ViewDataBinding> ActivityBinding(@LayoutRes layoutRes: Int = 0): ActivityBindingHolder<T> =
     ActivityViewDataBindingHolder(layoutRes)

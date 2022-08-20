@@ -21,7 +21,7 @@ class FragmentViewBindingHolder<T : ViewBinding> : FragmentViewBinding<T> {
 
     private val _bindingHolder = IViewBindingHolder.Holder<T>()
 
-    override fun Fragment.inflate(
+    override fun Fragment.inflateBinding(
         inflate: () -> T,
         onClear: ((binding: T) -> Unit)?,
         init: ((binding: T) -> Unit)?
@@ -31,7 +31,7 @@ class FragmentViewBindingHolder<T : ViewBinding> : FragmentViewBinding<T> {
         }.root
     }
 
-    override fun Fragment.inflate(
+    override fun Fragment.inflateBinding(
         viewStub: ViewStub,
         bindingClass: Class<T>,
         onClear: ((binding: T) -> Unit)?,
@@ -102,5 +102,5 @@ class FragmentViewBindingHolder<T : ViewBinding> : FragmentViewBinding<T> {
  * ```
  */
 @Suppress("FunctionName") // delegate FragmentViewBindingHolder implementation
-fun <T : ViewBinding> FragmentBinding(): FragmentViewBinding<T> =
+inline fun <reified T : ViewBinding> FragmentBinding(): FragmentViewBinding<T> =
     FragmentViewBindingHolder()

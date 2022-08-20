@@ -33,10 +33,6 @@ class SaveStateTestActivity :
 
     override fun onBindLayout(): Int = R.layout.activity_save_state_test
 
-    override fun onBindingClass(): Class<ActivitySaveStateTestBinding> {
-        return ActivitySaveStateTestBinding::class.java
-    }
-
     override fun initView() {
         requireBinding().left.setOnClickListener {
             ++countLeft
@@ -58,9 +54,6 @@ class SaveStateTestActivity :
         requireBinding().textView2.text = "会重置：%s".format(countLeft)
         requireBinding().textView3.text = "不会重置：%s".format(mViewModel.getCount())
     }
-
-    override fun onBindViewModel(): Class<SaveStateTestViewModel> =
-        SaveStateTestViewModel::class.java
 
     override fun initViewObservable() {
 
