@@ -1,18 +1,15 @@
 package com.hzsoft.basedemo.ui.activity
 
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.alibaba.android.arouter.facade.annotation.Autowired
-import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.entity.MainChannel
 import com.hzsoft.basedemo.ui.fragment.MainHomeFragment
 import com.hzsoft.basedemo.ui.fragment.MainMeFragment
+import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.lib.base.view.BaseActivity
 import com.hzsoft.lib.common.utils.ext.getCompatColor
 import com.hzsoft.lib.common.widget.TabBarBean
 import com.hzsoft.lib.common.widget.TabBarView
-import com.hzsoft.module.main.entity.MainChannel
 
 /**
  * Describe:
@@ -30,8 +27,8 @@ class MainActivity : BaseActivity() {
     override fun onBindLayout(): Int = R.layout.activity_main_index
 
     override fun initView() {
-        mHomeFragment = mHomeProvider?.mainHomeFragment
-        mMeFragment = mMeProvider?.mainMeFragment
+        mHomeFragment = MainHomeFragment.newsInstance()
+        mMeFragment = MainMeFragment.newsInstance()
     }
 
     override fun initData() {

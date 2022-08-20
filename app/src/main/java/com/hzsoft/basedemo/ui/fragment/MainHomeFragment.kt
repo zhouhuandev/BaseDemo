@@ -1,12 +1,12 @@
 package com.hzsoft.basedemo.ui.fragment
 
 import android.view.View
+import android.view.animation.AnimationUtils
 import com.hzsoft.basedemo.BR
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.adapter.MainHomeAdapter
 import com.hzsoft.basedemo.databinding.FragmentHomeMainBinding
 import com.hzsoft.basedemo.ui.fragment.viewmodel.MainHomeViewModel
-import android.view.animation.AnimationUtils
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
@@ -16,11 +16,6 @@ import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.utils.ext.launch
 import com.hzsoft.lib.net.utils.ext.observe
-import com.hzsoft.module.home.BR
-import com.hzsoft.module.home.R
-import com.hzsoft.module.home.adapter.MainHomeAdapter
-import com.hzsoft.module.home.databinding.FragmentHomeMainBinding
-import com.hzsoft.module.home.viewmodel.MainHomeViewModel
 import kotlin.random.Random
 
 /**
