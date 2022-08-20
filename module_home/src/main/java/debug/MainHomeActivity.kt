@@ -30,8 +30,6 @@ class MainHomeActivity :
         return arrayListOf(BR.viewModel to mViewModel)
     }
 
-    override fun onBindViewModel(): Class<MainHomeViewModel> = MainHomeViewModel::class.java
-
     override fun initViewObservable() {
         observe(mViewModel.recipesLiveData, ::handleRecipesList)
     }

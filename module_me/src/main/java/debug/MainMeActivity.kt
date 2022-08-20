@@ -26,10 +26,6 @@ class MainMeActivity : BaseMvvmViewBindingActivity<FragmentMeMainBinding, MainMe
 
     override fun onBindLayout(): Int = R.layout.fragment_me_main
 
-    override fun onBindingClass(): Class<FragmentMeMainBinding> {
-        return FragmentMeMainBinding::class.java
-    }
-
     override fun initView() {
         val config = ImagePickerHelper.with(ImagePickerHelper.Config())
             .setWeChat(true)
@@ -103,10 +99,6 @@ class MainMeActivity : BaseMvvmViewBindingActivity<FragmentMeMainBinding, MainMe
                 RoomTestActivity.start(mContext)
             }
         }
-    }
-
-    override fun onBindViewModel(): Class<MainMeViewModel> {
-        return MainMeViewModel::class.java
     }
 
     override fun initViewObservable() {

@@ -1,9 +1,7 @@
 package com.hzsoft.module.home.fragment
 
 import android.view.View
-import com.hzsoft.module.home.adapter.MainHomeAdapter
 import com.hzsoft.lib.base.utils.ThreadUtils
-import com.hzsoft.lib.base.utils.ToastUtil
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
 import com.hzsoft.lib.common.utils.EnvironmentUtil
 import com.hzsoft.lib.domain.entity.Demo
@@ -13,6 +11,7 @@ import com.hzsoft.lib.net.utils.ext.launch
 import com.hzsoft.lib.net.utils.ext.observe
 import com.hzsoft.module.home.BR
 import com.hzsoft.module.home.R
+import com.hzsoft.module.home.adapter.MainHomeAdapter
 import com.hzsoft.module.home.databinding.FragmentHomeMainBinding
 import com.hzsoft.module.home.viewmodel.MainHomeViewModel
 
@@ -37,8 +36,6 @@ class MainHomeFragment :
     override fun onBindVariableId(): MutableList<Pair<Int, Any>> {
         return arrayListOf(BR.viewModel to mViewModel)
     }
-
-    override fun onBindViewModel(): Class<MainHomeViewModel> = MainHomeViewModel::class.java
 
     override fun initViewObservable() {
         observe(mViewModel.recipesLiveData, ::handleRecipesList)

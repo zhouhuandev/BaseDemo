@@ -3,8 +3,9 @@ package com.hzsoft.lib.base.view
 import android.view.ViewStub
 import androidx.databinding.ViewDataBinding
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel
-import com.hzsoft.lib.base.view.databinding.FragmentBinding
+import com.hzsoft.lib.base.utils.ReflectUtils
 import com.hzsoft.lib.base.view.databinding.FragmentBindingHolder
+import com.hzsoft.lib.base.view.databinding.FragmentViewDataBindingHolder
 
 /**
  * Describe:
@@ -14,17 +15,22 @@ import com.hzsoft.lib.base.view.databinding.FragmentBindingHolder
  * @Date 2020/12/17
  */
 abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewModel> :
-    BaseMvvmFragment<VM>(), FragmentBindingHolder<V> by FragmentBinding() {
+    BaseMvvmFragment<VM>(), FragmentBindingHolder<V> by FragmentViewDataBindingHolder() {
 
     override fun initContentView(mViewStubContent: ViewStub) {
         with(mViewStubContent) {
             layoutResource = onBindLayout()
-            inflate(this) { binding ->
+            inflateBinding(viewStub = this) { binding ->
                 onBindVariableId().forEach { pair ->
                     binding.setVariable(pair.first, pair.second)
                 }
             }
         }
+    }
+
+    override fun onBindViewModel(): Class<VM> {
+        return ReflectUtils.getActualTypeArgument(1, this.javaClass) as? Class<VM>
+            ?: throw IllegalArgumentException("找不到 ViewModelClass 实例，建议重写该方法")
     }
 
     abstract fun onBindVariableId(): MutableList<Pair<Int, Any>>

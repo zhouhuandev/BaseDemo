@@ -152,9 +152,6 @@ class RoomTestActivity :
         return arrayListOf(BR.viewModel to mViewModel)
     }
 
-    override fun onBindViewModel(): Class<RoomTestViewModel> =
-        RoomTestViewModel::class.java
-
     override fun initViewObservable() {
         observe(mViewModel.userTestRoomLiveData, ::handleUserTestRoomList)
     }
