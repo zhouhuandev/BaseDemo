@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringDef
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -231,7 +232,9 @@ data class TabBarBean(
         val text: String,
         val iconPath: String? = null,
         val selectedIconPath: String? = null,
+        @DrawableRes
         val iconId: Int = 0,
+        @DrawableRes
         val selectedIconId: Int = 0
     )
 }
