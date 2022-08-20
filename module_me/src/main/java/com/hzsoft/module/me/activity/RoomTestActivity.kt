@@ -2,6 +2,7 @@ package com.hzsoft.module.me.activity
 
 import android.content.Context
 import android.view.View
+import android.view.animation.AnimationUtils
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hzsoft.lib.base.module.constons.ARouteConstants
@@ -39,24 +40,31 @@ class RoomTestActivity :
     }
 
     private val image = listOf(
-        "https://img2.baidu.com/it/u=2237039644,3735368368&fm=26&fmt=auto",
-        "https://img1.baidu.com/it/u=3303981320,1355171730&fm=26&fmt=auto",
-        "https://img2.baidu.com/it/u=1429175118,2649084526&fm=26&fmt=auto",
-        "https://img0.baidu.com/it/u=964231911,1680605089&fm=26&fmt=auto",
-        "https://img1.baidu.com/it/u=765403172,907191121&fm=26&fmt=auto",
-        "https://img2.baidu.com/it/u=1960058469,2576593478&fm=26&fmt=auto",
-        "https://img2.baidu.com/it/u=2906052251,1830965798&fm=26&fmt=auto",
-        "https://img2.baidu.com/it/u=304846655,1860504905&fm=26&fmt=auto",
-        "https://img0.baidu.com/it/u=246253048,2961273437&fm=26&fmt=auto",
-        "https://img2.baidu.com/it/u=2285567582,1185119578&fm=26&fmt=auto",
-        "https://img2.baidu.com/it/u=1915681330,636879278&fm=26&fmt=auto",
-        "https://img2.baidu.com/it/u=1406994547,3978776803&fm=26&fmt=auto",
-        "https://img2.baidu.com/it/u=395719964,2145680590&fm=26&fmt=auto",
-        "https://img1.baidu.com/it/u=138114168,3056449395&fm=26&fmt=auto",
-        "https://img0.baidu.com/it/u=3829295089,224674855&fm=26&fmt=auto",
-        "https://img0.baidu.com/it/u=225238437,3015521060&fm=26&fmt=auto",
-        "https://img0.baidu.com/it/u=659615361,2427857441&fm=26&fmt=auto",
-        "https://img0.baidu.com/it/u=3465878675,3814859588&fm=26&fmt=auto",
+        "https://img1.baidu.com/it/u=3179708835,3698124440&fm=253&fmt=auto&app=138&f=JPEG?w=300&h=300",
+        "https://img0.baidu.com/it/u=2471949583,3673126699&fm=253&fmt=auto&app=120&f=JPEG?w=640&h=640",
+        "https://img2.baidu.com/it/u=2816231141,758525652&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400",
+        "https://img0.baidu.com/it/u=2091479077,2764156209&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400",
+        "https://img0.baidu.com/it/u=1352764236,394136942&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400",
+        "https://img2.baidu.com/it/u=3667472213,444327283&fm=253&fmt=auto&app=138&f=JPEG?w=502&h=500",
+        "https://img2.baidu.com/it/u=2260667029,973961386&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+        "https://img1.baidu.com/it/u=3963690806,2679586746&fm=253&fmt=auto&app=138&f=JPEG?w=440&h=440",
+        "https://img0.baidu.com/it/u=1125089834,1274132805&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800",
+        "https://img2.baidu.com/it/u=4005667788,1674871828&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+
+        "https://img1.baidu.com/it/u=419279256,2658411497&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+        "https://img1.baidu.com/it/u=939040886,184290657&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360",
+        "https://img1.baidu.com/it/u=3486047981,4277840304&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400",
+        "https://img0.baidu.com/it/u=3467758223,1877547427&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+        "https://img0.baidu.com/it/u=3047251996,1492990240&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+        "https://img0.baidu.com/it/u=4138593849,3244966158&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+        "https://img0.baidu.com/it/u=676478628,2285505817&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+        "https://img1.baidu.com/it/u=1780714482,544116432&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=800",
+        "https://img2.baidu.com/it/u=3751284523,2644256892&fm=253&fmt=auto&app=138&f=JPEG?w=300&h=300",
+        "https://img2.baidu.com/it/u=1613844048,2554101245&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+
+        "https://img1.baidu.com/it/u=3865475840,2267602486&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
+        "https://img1.baidu.com/it/u=2813198016,1637799007&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360",
+        "https://img1.baidu.com/it/u=2157898634,3153346870&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
     )
 
     private val firstName = listOf(
@@ -169,6 +177,9 @@ class RoomTestActivity :
                     age = Random.nextInt(IntRange(18, 50))
                 )
                 mViewModel.insertUserTestRoom(userTestRoom)
+                mAdapter.addData(0, userTestRoom)
+                // 滚动回第一个位置
+                requireBinding().mRecyclerView.scrollToPosition(0)
             }
             R.id.selectUser -> {
                 onRefreshEvent()
@@ -211,5 +222,11 @@ class RoomTestActivity :
     private fun bindListData2(userTestRoom: ArrayList<UserTestRoom>) {
         mAdapter.setNewInstance(userTestRoom)
         mViewModel.showEmpty.set(userTestRoom.isEmpty())
+        // 执行列表动画
+        requireBinding().mRecyclerView.apply {
+            layoutAnimation =
+                AnimationUtils.loadLayoutAnimation(mContext, R.anim.layout_fall_down)
+            scheduleLayoutAnimation()
+        }
     }
 }
