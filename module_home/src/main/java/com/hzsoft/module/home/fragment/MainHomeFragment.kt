@@ -1,6 +1,7 @@
 package com.hzsoft.module.home.fragment
 
 import android.view.View
+import android.view.animation.AnimationUtils
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
@@ -95,8 +96,20 @@ class MainHomeFragment :
 
     private fun bindListData(recipes: ArrayList<Demo>) {
         if (isRefresh) {
-            mViewModel.itemCount = recipes.size
-            mAdapter.setNewInstance(recipes)
+            val first = Random.nextInt(0, recipes.size / 2)
+            val second = Random.nextInt(recipes.size / 2, recipes.size)
+            val cache = ArrayList<Demo>()
+            for (i in first.coerceAtMost(second)..first.coerceAtLeast(second)) {
+                cache.add(recipes[i])
+            }
+            mViewModel.itemCount = cache.size
+            mAdapter.setNewInstance(cache)
+            // 执行列表动画
+            requireBinding().mRecyclerView.apply {
+                layoutAnimation =
+                    AnimationUtils.loadLayoutAnimation(mContext, R.anim.layout_fall_down)
+                scheduleLayoutAnimation()
+            }
         } else {
             val first = Random.nextInt(0, recipes.size)
             val second = Random.nextInt(0, recipes.size)
@@ -107,6 +120,12 @@ class MainHomeFragment :
             mViewModel.itemCount += cache.size
             mAdapter.addData(cache)
             "加载了${cache.size}条数据".showToast()
+            // 执行列表动画
+            requireBinding().mRecyclerView.apply {
+                layoutAnimation =
+                    AnimationUtils.loadLayoutAnimation(mContext, R.anim.layout_from_right)
+                scheduleLayoutAnimation()
+            }
         }
     }
 }
