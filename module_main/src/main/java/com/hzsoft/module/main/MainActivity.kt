@@ -54,7 +54,7 @@ class MainActivity : BaseActivity() {
                 items = arrayListOf(
                     TabBarBean.ItemBean(
                         id = ARouteConstants.Main.HOME_MAIN,
-                        text = "首页",
+                        text = getString(R.string.title_home),
                         iconId = R.mipmap.tabbar_icon_home_normal,
                         selectedIconId = R.mipmap.tabbar_icon_home_selected,
                         iconPath = "",
@@ -63,7 +63,7 @@ class MainActivity : BaseActivity() {
                     ),
                     TabBarBean.ItemBean(
                         id = ARouteConstants.Me.ME_MAIN,
-                        text = "我的",
+                        text = getString(R.string.title_mine),
                         iconId = R.mipmap.tabbar_icon_me_normal,
                         selectedIconId = R.mipmap.tabbar_icon_me_selected,
                         iconPath = "",

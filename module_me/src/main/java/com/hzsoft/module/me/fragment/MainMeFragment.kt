@@ -63,7 +63,7 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
 
     override fun enableToolbar(): Boolean = true
 
-    override fun getTootBarTitle(): String = "Me"
+    override fun getTootBarTitle(): String = getString(R.string.title_mine)
 
     override fun onClick(v: View?) {
         if (beFastClick()) {
