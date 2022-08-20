@@ -68,6 +68,9 @@ abstract class BaseMvvmRefreshViewBindingFragment<V : ViewBinding, VM : BaseRefr
         mViewModel.mUIChangeRefreshLiveData.stopLoadMoreLiveEvent.observe(this) {
             stopLoadMore(it)
         }
+        mViewModel.mUIChangeRefreshLiveData.stopLoadMoreWithNoMoreDataEvent.observe(this) {
+            stopLoadMoreWithNoMoreData()
+        }
     }
 
 
@@ -97,6 +100,10 @@ abstract class BaseMvvmRefreshViewBindingFragment<V : ViewBinding, VM : BaseRefr
 
     override fun stopLoadMore(boolean: Boolean) {
         mRefreshLayout.finishLoadMore(boolean)
+    }
+
+    override fun stopLoadMoreWithNoMoreData() {
+        mRefreshLayout.finishLoadMoreWithNoMoreData()
     }
 
 }
