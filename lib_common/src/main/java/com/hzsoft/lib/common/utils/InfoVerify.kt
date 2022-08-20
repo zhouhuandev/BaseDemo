@@ -72,4 +72,8 @@ object InfoVerify {
         val isNum = pattern.matcher(str)
         return isNum.matches()
     }
+
+    fun isUrl(url: String?): Boolean {
+        return url?.matches("[a-zA-z]+://[^\\s]*".toRegex()) ?: false
+    }
 }

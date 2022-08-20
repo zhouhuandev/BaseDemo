@@ -2,11 +2,13 @@ package com.hzsoft.module.main
 
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Autowired
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.lib.base.module.provider.IHomeProvider
 import com.hzsoft.lib.base.module.provider.IMeProvider
 import com.hzsoft.lib.base.view.BaseActivity
+import com.hzsoft.lib.common.utils.ext.getCompatColor
+import com.hzsoft.lib.common.widget.TabBarBean
+import com.hzsoft.lib.common.widget.TabBarView
 import com.hzsoft.module.main.entity.MainChannel
 
 /**
@@ -35,13 +37,6 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         mHomeFragment = mHomeProvider?.mainHomeFragment
         mMeFragment = mMeProvider?.mainMeFragment
-
-        mCurrFragment = mHomeFragment
-        if (mHomeFragment != null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frame_content, mHomeFragment as Fragment, MainChannel.HOME.description)
-                .commit()
-        }
     }
 
     override fun initData() {
@@ -49,30 +44,66 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initListener() {
-        findViewById<BottomNavigationView>(R.id.navigation).setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_home -> {
+        val tabBarView = findViewById<TabBarView>(R.id.tab_bar_view)
+        tabBarView.setTabs(
+            TabBarBean(
+                color = mContext.getCompatColor(R.color.color_92969e),
+                selectedColor = mContext.getCompatColor(R.color.color_191f2b),
+                backgroundColor = mContext.getCompatColor(R.color.white),
+                borderStyle = TabBarView.TAB_BAR_BORDER_STYLE_WHITE,
+                items = arrayListOf(
+                    TabBarBean.ItemBean(
+                        id = ARouteConstants.Main.HOME_MAIN,
+                        text = "首页",
+                        iconId = R.mipmap.tabbar_icon_home_normal,
+                        selectedIconId = R.mipmap.tabbar_icon_home_selected,
+                        iconPath = "",
+                        selectedIconPath = "",
+                        isCdn = false
+                    ),
+                    TabBarBean.ItemBean(
+                        id = ARouteConstants.Me.ME_MAIN,
+                        text = "我的",
+                        iconId = R.mipmap.tabbar_icon_me_normal,
+                        selectedIconId = R.mipmap.tabbar_icon_me_selected,
+                        iconPath = "",
+                        selectedIconPath = "",
+                        isCdn = false
+                    ),
+                ),
+            )
+        ) {
+            when (it.id) {
+                ARouteConstants.Main.HOME_MAIN -> {
                     switchContent(mCurrFragment, mHomeFragment, MainChannel.HOME.description)
                     mCurrFragment = mHomeFragment
                 }
-                R.id.navigation_me -> {
+                ARouteConstants.Me.ME_MAIN -> {
                     switchContent(mCurrFragment, mMeFragment, MainChannel.ME.description)
                     mCurrFragment = mMeFragment
                 }
             }
-            return@setOnNavigationItemSelectedListener true
         }
     }
 
     private fun switchContent(from: Fragment?, to: Fragment?, tag: String) {
-        if (from == null || to == null) {
-            return
-        }
         val beginTransaction = supportFragmentManager.beginTransaction()
-        if (!to.isAdded) {
-            beginTransaction.hide(from).add(R.id.frame_content, to, tag).commit()
+        if (to?.isAdded != true) {
+            beginTransaction.apply {
+                from?.let {
+                    hide(from)
+                }
+                to?.let {
+                    add(R.id.frame_content, to, tag).commit()
+                }
+            }
         } else {
-            beginTransaction.hide(from).show(to).commit()
+            beginTransaction.apply {
+                from?.let {
+                    hide(from)
+                }
+                show(to).commit()
+            }
         }
     }
 

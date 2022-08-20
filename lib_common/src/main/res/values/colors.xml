@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="transparent">#00000000</color>
+    <color name="color_191f2b">#191f2b</color>
+    <color name="color_FF4A1A">#FF4A1A</color>
+    <color name="color_92969e">#92969e</color>
+    <color name="default_tab_bar_title_white_color">@color/white</color>
+    <color name="default_tab_bar_title_black_color">@color/color_191f2b</color>
 </resources>
