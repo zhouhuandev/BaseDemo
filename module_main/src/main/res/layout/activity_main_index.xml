@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground">
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/frame_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/navigation"
-        android:layout_marginBottom="8dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
+    <com.hzsoft.lib.common.widget.TabBarView
+        android:id="@+id/tab_bar_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:itemIconTint="@color/color_state_menu_navi"
-        app:itemTextColor="@color/color_state_menu_navi"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_navigation" />
-</RelativeLayout>
+        android:layout_height="@dimen/dp_57" />
+</androidx.appcompat.widget.LinearLayoutCompat>

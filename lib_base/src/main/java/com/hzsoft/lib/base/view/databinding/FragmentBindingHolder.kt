@@ -23,7 +23,7 @@ interface FragmentBindingHolder<T : ViewDataBinding> : IViewBindingHolder<T> {
         block: (binding: T) -> Unit
     ): View
 
-    fun Fragment.inflate(
+    fun Fragment.inflateBinding(
         inflater: LayoutInflater,
         root: ViewGroup?,
         attachToRoot: Boolean = false,
@@ -33,7 +33,7 @@ interface FragmentBindingHolder<T : ViewDataBinding> : IViewBindingHolder<T> {
 
     fun inflateBinding(inflated: View, init: (binding: T) -> Unit)
 
-    fun Fragment.inflate(
+    fun Fragment.inflateBinding(
         viewStub: ViewStub? = null,
         onClear: ((binding: T) -> Unit)? = null,
         init: (binding: T) -> Unit

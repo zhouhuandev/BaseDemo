@@ -54,6 +54,11 @@ interface BaseRefreshView {
     fun stopLoadMore(boolean: Boolean)
 
     /**
+     * 停止加载加载更多没有更多数据
+     */
+    fun stopLoadMoreWithNoMoreData()
+
+    /**
      * 自动加载数据
      */
     fun autoLoadData()

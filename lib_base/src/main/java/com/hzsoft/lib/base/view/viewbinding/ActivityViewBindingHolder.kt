@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewStub
-import androidx.activity.ComponentActivity
+import androidx.core.app.ComponentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
 
@@ -22,7 +22,7 @@ class ActivityViewBindingHolder<T : ViewBinding> : ActivityViewBinding<T> {
 
     private val _bindingHolder = IViewBindingHolder.Holder<T>()
 
-    override fun ComponentActivity.inflate(
+    override fun ComponentActivity.inflateBinding(
         inflate: () -> T,
         isRoot: Boolean?,
         onClear: ((T) -> Unit)?,
@@ -37,7 +37,7 @@ class ActivityViewBindingHolder<T : ViewBinding> : ActivityViewBinding<T> {
             }
     }
 
-    override fun ComponentActivity.inflate(
+    override fun ComponentActivity.inflateBinding(
         bindingClass: Class<T>,
         onClear: ((T) -> Unit)?,
         init: ((T) -> Unit)?
@@ -58,7 +58,7 @@ class ActivityViewBindingHolder<T : ViewBinding> : ActivityViewBinding<T> {
         }
     }
 
-    override fun ComponentActivity.inflate(
+    override fun ComponentActivity.inflateBinding(
         viewStub: ViewStub,
         bindingClass: Class<T>,
         onClear: ((T) -> Unit)?,
@@ -135,5 +135,5 @@ class ActivityViewBindingHolder<T : ViewBinding> : ActivityViewBinding<T> {
  * ```
  */
 @Suppress("FunctionName") // delegate ActivityViewBindingHolder implementation
-fun <T : ViewBinding> ActivityBinding(): ActivityViewBinding<T> =
+inline fun <reified T : ViewBinding> ActivityBinding(): ActivityViewBinding<T> =
     ActivityViewBindingHolder()

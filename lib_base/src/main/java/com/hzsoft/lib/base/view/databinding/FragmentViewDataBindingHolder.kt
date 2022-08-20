@@ -18,7 +18,7 @@ import java.lang.IllegalArgumentException
  * @author zhouhuan
  * @time 2022/1/13
  */
-class FragmentViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
+class FragmentViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val layoutRes: Int = 0) :
     FragmentBindingHolder<T> {
 
     private val _bindingHolder = ViewDataBindingHolder<T>()
@@ -37,7 +37,7 @@ class FragmentViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val 
             }.root
     }
 
-    override fun Fragment.inflate(
+    override fun Fragment.inflateBinding(
         inflater: LayoutInflater,
         root: ViewGroup?,
         attachToRoot: Boolean,
@@ -62,7 +62,7 @@ class FragmentViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val 
             }
     }
 
-    override fun Fragment.inflate(
+    override fun Fragment.inflateBinding(
         viewStub: ViewStub?,
         onClear: ((binding: T) -> Unit)?,
         init: (binding: T) -> Unit
@@ -112,5 +112,5 @@ class FragmentViewDataBindingHolder<T : ViewDataBinding>(@LayoutRes private val 
  * ```
  */
 @Suppress("FunctionName") // delegate FragmentBindingHolder create
-fun <T : ViewDataBinding> FragmentBinding(@LayoutRes layoutRes: Int = 0): FragmentBindingHolder<T> =
+inline fun <reified T : ViewDataBinding> FragmentBinding(@LayoutRes layoutRes: Int = 0): FragmentBindingHolder<T> =
     FragmentViewDataBindingHolder(layoutRes)

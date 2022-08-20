@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_tab_icon"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_centerHorizontal="true"
+        tools:src="@mipmap/ic_launcher"
+        tools:ignore="ContentDescription" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tab_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_tab_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_4"
+        android:textColor="@color/color_191f2b"
+        android:textSize="@dimen/sp_10"
+        tools:text="首页" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_red"
+        android:layout_width="@dimen/dp_9"
+        android:layout_height="@dimen/dp_9"
+        android:layout_marginStart="@dimen/dp_m_5"
+        android:layout_toEndOf="@id/iv_tab_icon"
+        android:src="@drawable/shape_tab_red"
+        android:translationZ="@dimen/dp_2"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

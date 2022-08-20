@@ -3,6 +3,8 @@ package com.hzsoft.lib.base.utils
 import android.text.TextUtils
 import java.lang.Exception
 import java.lang.reflect.Method
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 import java.util.concurrent.ConcurrentHashMap
 
 object ReflectUtils {
@@ -178,5 +180,30 @@ object ReflectUtils {
             }
         }
         return true
+    }
+
+
+    /**
+     * 获取第i个泛型的类型
+     */
+    @JvmStatic
+    fun getActualTypeArgument(i: Int, clazz: Class<*>?): Class<*>? {
+        // 由于本类是抽象类，所以this 一定是其子类的实例化对象
+        val targetClazz: Class<*> = clazz ?: this.javaClass
+        // 定义返回的class
+        var entityClass: Class<*>? = null
+        // 利用反射机制的获取其泛化的超类，实际上也就是带有具体的S 和A的类型的超类
+        val genericSuperclass = targetClazz.genericSuperclass
+        // 如果本类实现了参数化接口
+        if (genericSuperclass is ParameterizedType) {
+            // 获取所有的参数化的类型
+            val actualTypeArguments: Array<Type>? = genericSuperclass.actualTypeArguments
+            actualTypeArguments?.let { actualType ->
+                if (actualType.size > i) {
+                    entityClass = actualTypeArguments[i] as Class<*>
+                }
+            }
+        }
+        return entityClass
     }
 }
