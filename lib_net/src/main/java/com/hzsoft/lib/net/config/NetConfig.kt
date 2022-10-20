@@ -119,13 +119,4 @@ class NetConfig private constructor(builder: Builder) {
 
         open fun build(): NetConfig = NetConfig(this)
     }
-
-    init {
-        baseUrl = builder.baseUrl
-        defaultTimeout = builder.defaultTimeout
-        heads = builder.heads
-        interceptors = builder.interceptors
-        networkInterceptors = builder.networkInterceptors
-        enableHttps = builder.enableHttps
-    }
 }

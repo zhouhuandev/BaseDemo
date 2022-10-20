@@ -35,7 +35,7 @@ val View.visible: Boolean get() = visibility == View.VISIBLE
  * View set visible or gone
  * @param visible {@code true} visible {@false} gone
  */
-fun View.gone(visible: Boolean) {
+fun View.toVisibleOrGone(visible: Boolean) {
     if (visible) toVisible() else toGone()
 }
 
@@ -43,7 +43,7 @@ fun View.gone(visible: Boolean) {
  * View set visible or invisible
  * @param visible {@code true} visible {@false} invisible
  */
-fun View.visible(visible: Boolean) {
+fun View.toVisibleOrInvisible(visible: Boolean) {
     if (visible) toVisible() else toInvisible()
 }
 
