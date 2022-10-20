@@ -19,7 +19,7 @@ import com.hzsoft.lib.common.utils.InfoVerify
 import com.hzsoft.lib.common.utils.VibrateTool
 import com.hzsoft.lib.common.utils.ext.getCompatColor
 import com.hzsoft.lib.common.utils.ext.loadImgFile
-import com.hzsoft.lib.common.utils.ext.view.gone
+import com.hzsoft.lib.common.utils.ext.view.toVisibleOrGone
 import com.hzsoft.lib.log.KLog
 import kotlinx.coroutines.*
 import java.io.File
@@ -175,7 +175,7 @@ class TabBarItemView(
     }
 
     fun setUnreadVisible(visible: Boolean) {
-        ivRed.gone(visible)
+        ivRed.toVisibleOrGone(visible)
     }
 
     fun setTabItem(
