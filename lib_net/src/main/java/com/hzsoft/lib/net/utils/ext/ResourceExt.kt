@@ -1,6 +1,8 @@
 package com.hzsoft.lib.net.utils.ext
 
+import android.util.Log
 import com.hzsoft.lib.log.KLog
+import com.hzsoft.lib.net.BuildConfig
 import com.hzsoft.lib.net.dto.Resource
 
 /**
@@ -27,7 +29,15 @@ fun <T> Resource<T>.launch(
         is Resource.Success -> success(data)
         is Resource.Loading -> loading?.invoke()
         else -> {
-            this.errorCode.let { KLog.e("Resource", "--------->$it") }
+            if (BuildConfig.DEBUG) {
+                KLog.e(
+                    "Resource", "---------> errorCode: $errorCode " + Log.getStackTraceString(
+                        Throwable("Just print")
+                    )
+                )
+            } else {
+                KLog.e("Resource", "---------> errorCode: $errorCode")
+            }
             fail?.let { it(errorCode) }
         }
     }

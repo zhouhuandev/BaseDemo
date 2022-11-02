@@ -1,6 +1,7 @@
 package com.hzsoft.lib.net.remote
 
 import android.text.TextUtils
+import android.util.Log
 import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.domain.base.BaseResponse
 import com.hzsoft.lib.domain.entity.Demo
@@ -67,9 +68,11 @@ constructor(
              */
             if (BuildConfig.DEBUG) {
                 e.message?.showToast()
-                KLog.e("RemoteData", e)
+                KLog.e(TAG, Log.getStackTraceString(e))
+                NETWORD_ERROR
+            } else {
+                showToast(NETWORD_ERROR)
             }
-            showToast(NETWORD_ERROR)
         }
     }
 
@@ -80,6 +83,9 @@ constructor(
         return when (any) {
             is BaseResponse<*> -> {
                 Resource.Success(data = toAs(if (any.data != null) any.data else null))
+            }
+            is Int -> {
+                Resource.DataError(any)
             }
             else -> {
                 Resource.DataError(UNKNOWN)
@@ -101,5 +107,9 @@ constructor(
         if (!TextUtils.isEmpty(msg)) msg?.showToast()
         else errorManager.getError(code).description.showToast()
         return code
+    }
+
+    companion object {
+        private const val TAG = "BaseRemoteData"
     }
 }

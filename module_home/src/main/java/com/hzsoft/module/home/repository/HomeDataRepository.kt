@@ -3,9 +3,8 @@ package com.hzsoft.module.home.repository
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.BaseDataRepository
 import com.hzsoft.lib.net.dto.Resource
-import com.hzsoft.lib.net.error.UNKNOWN
 import com.hzsoft.module.home.repository.remote.HomeRemoteData
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
 
 /**
  *
@@ -25,7 +24,7 @@ class HomeDataRepository : BaseDataRepository(), HomeDataRepositorySource {
                 if (beautyStar.isSuccess() || requestRecipes.isSuccess()) {
                     Resource.Success(arrayListOf<Demo>())
                 } else {
-                    Resource.DataError(UNKNOWN)
+                    Resource.DataError((beautyStar.errorCode + requestRecipes.errorCode) / 2)
                 }
             if (beautyStar.isSuccess() && beautyStar.data?.isNotEmpty() == true) {
                 beautyStar.data?.let {
