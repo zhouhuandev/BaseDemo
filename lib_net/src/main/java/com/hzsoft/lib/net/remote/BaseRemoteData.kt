@@ -14,7 +14,6 @@ import com.hzsoft.lib.net.remote.service.RecipesService
 import com.hzsoft.lib.net.utils.NetworkConnectivity
 import com.hzsoft.lib.net.utils.NetworkHelper
 import retrofit2.Response
-import java.io.IOException
 
 
 /**
@@ -57,7 +56,7 @@ constructor(
                     else -> showToast(UNKNOWN)
                 }
             }
-        } catch (e: IOException) {
+        } catch (e: Throwable) {
             /**
              * Kotlin 协程异常处理
              * 使用协程及挂在函数请求，Retrofit 默认会使用 [retrofit2.HttpServiceMethod.SuspendForResponse] 处理请求，
