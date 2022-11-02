@@ -1,9 +1,8 @@
-package com.hzsoft.module.home.repository
+package com.hzsoft.basedemo.repository
 
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.BaseDataRepository
 import com.hzsoft.lib.net.dto.Resource
-import com.hzsoft.lib.net.error.UNKNOWN
 import com.hzsoft.basedemo.repository.remote.HomeRemoteData
 import kotlinx.coroutines.flow.*
 
