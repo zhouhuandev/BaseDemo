@@ -21,6 +21,7 @@ abstract class BaseMvvmDataBindingActivity<V : ViewDataBinding, VM : BaseViewMod
         with(mViewStubContent) {
             layoutResource = onBindLayout()
             inflateBinding(viewStub = this) { binding ->
+                binding.lifecycleOwner = this@BaseMvvmDataBindingActivity
                 onBindVariableId().forEach { pair ->
                     binding.setVariable(pair.first, pair.second)
                 }
