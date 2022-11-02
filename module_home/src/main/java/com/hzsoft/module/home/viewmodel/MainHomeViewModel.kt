@@ -37,8 +37,11 @@ class MainHomeViewModel(state: SavedStateHandle) : BaseRefreshViewModel() {
 
     private fun getRecipes(isRefresh: Boolean) {
         viewModelScope.launch {
+            // 合并请求结果示例
             homeDataRepository.getBeautyStar().collect {
-                recipesLiveDataPrivate.value = it
+                // setValue() 只能在主线程中调用，postValue() 可以在任何线程中调用
+                // recipesLiveDataPrivate.value = it
+                recipesLiveDataPrivate.postValue(it)
                 if (isRefresh) {
                     postStopRefreshEvent()
                 } else {
@@ -49,9 +52,10 @@ class MainHomeViewModel(state: SavedStateHandle) : BaseRefreshViewModel() {
                     postStopLoadMoreWithNoMoreDataEvent()
                 }
             }
-            homeDataRepository.requestRecipes().collect {
+            // 单个请求示例
+            /*homeDataRepository.requestRecipes().collect {
                 KLog.d(TAG, it.toJson())
-            }
+            }*/
         }
     }
 

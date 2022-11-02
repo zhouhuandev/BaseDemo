@@ -1,7 +1,6 @@
 package com.hzsoft.lib.base.utils
 
 import android.app.Application
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
@@ -14,16 +13,21 @@ import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import com.hzsoft.lib.base.BuildConfig
 import com.hzsoft.lib.base.R
-
+import com.hzsoft.lib.log.KLog
+import java.lang.ref.WeakReference
 
 /**
- * 吐司工具类
+ * 线程安全吐司工具类
  * @author zhouhuan
  * @time 2020/11/30 23:19
  */
 object ToastUtil {
 
+    private const val TAG = "ToastUtil"
+
     private var mHandler: Handler? = null
+
+    private val cacheToastPool = mutableMapOf<String, WeakReference<Toast?>>()
 
     private var mContext: Application? = null
         get() {
@@ -81,12 +85,34 @@ object ToastUtil {
      */
     @JvmStatic
     fun showToast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
-        runOnMainLooper {
-            buildToastView(
-                message = message,
-                duration = duration,
-                isNormal = true
-            ).show()
+        try {
+            if (isMainThread()) {
+                makeToast(message, duration)
+                return
+            }
+            runOnMainLooper {
+                makeToast(message, duration)
+            }
+        } catch (e: Throwable) {
+            KLog.e(TAG, "Looper exception", e)
+        }
+    }
+
+    private fun makeToast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+        var toast = cacheToastPool["showToast"]
+        if (toast?.get() == null) {
+            toast = WeakReference(
+                buildToastView(
+                    message = message,
+                    duration = duration,
+                    isNormal = true
+                )
+            )
+            cacheToastPool["showToast"] = toast
+        }
+        toast.get()?.run {
+            setText(message)
+            show()
         }
     }
 
@@ -124,11 +150,34 @@ object ToastUtil {
      */
     @JvmStatic
     fun showToastCenter(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
-        runOnMainLooper {
-            buildToastView(
-                message = message,
-                duration = duration
-            ).show()
+        try {
+            if (isMainThread()) {
+                makeToastCenter(message, duration)
+                return
+            }
+            runOnMainLooper {
+                makeToastCenter(message, duration)
+            }
+        } catch (e: Throwable) {
+            KLog.e(TAG, "Looper exception", e)
+        }
+    }
+
+    private fun makeToastCenter(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+        var toast = cacheToastPool["showToastCenter"]
+        if (toast?.get() == null) {
+            toast = WeakReference(
+                buildToastView(
+                    message = message,
+                    duration = duration
+                )
+            )
+            cacheToastPool["showToastCenter"] = toast
+        }
+        toast.get()?.run {
+            @Suppress("deprecation")
+            view?.findViewById<TextView>(R.id.toast_text)?.text = message
+            show()
         }
     }
 
@@ -155,6 +204,7 @@ object ToastUtil {
                 val inflate = LayoutInflater.from(mContext)
                     .inflate(R.layout.view_toast, LinearLayout(mContext), true)
                 inflate.findViewById<TextView>(R.id.toast_text).text = message
+                @Suppress("deprecation")
                 toast.view = inflate
                 toast.duration = duration
                 toast.setGravity(Gravity.CENTER, 0, 0)
@@ -169,7 +219,11 @@ object ToastUtil {
         if (mHandler == null) {
             mHandler = Handler(Looper.getMainLooper())
         }
-        mHandler!!.post(runnable)
+        mHandler?.post(runnable)
+    }
+
+    private fun isMainThread(): Boolean {
+        return Looper.getMainLooper() == Looper.myLooper()
     }
 
     /**
@@ -205,12 +259,12 @@ object ToastUtil {
         duration: Int = Snackbar.LENGTH_SHORT,
         block: (() -> Unit)? = null
     ) {
-        val snackbar = Snackbar.make(view, resid, duration)
+        val snackBar = Snackbar.make(view, resid, duration)
         if (actionText != null && block != null) {
-            snackbar.setAction(actionText) {
+            snackBar.setAction(actionText) {
                 block()
             }
         }
-        snackbar.show()
+        snackBar.show()
     }
 }
