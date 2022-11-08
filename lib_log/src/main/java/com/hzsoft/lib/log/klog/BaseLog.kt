@@ -1,4 +1,4 @@
-package com.hzsoft.lib.base.utils.log.klog
+package com.hzsoft.lib.log.klog
 
 import android.util.Log
 

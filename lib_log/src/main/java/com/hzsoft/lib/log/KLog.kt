@@ -2,10 +2,10 @@ package com.hzsoft.lib.log
 
 import android.text.TextUtils
 
-import com.hzsoft.lib.base.utils.log.klog.BaseLog
-import com.hzsoft.lib.base.utils.log.klog.FileLog
-import com.hzsoft.lib.base.utils.log.klog.JsonLog
-import com.hzsoft.lib.base.utils.log.klog.XmlLog
+import com.hzsoft.lib.log.klog.BaseLog
+import com.hzsoft.lib.log.klog.FileLog
+import com.hzsoft.lib.log.klog.JsonLog
+import com.hzsoft.lib.log.klog.XmlLog
 
 import java.io.File
 import java.io.PrintWriter
