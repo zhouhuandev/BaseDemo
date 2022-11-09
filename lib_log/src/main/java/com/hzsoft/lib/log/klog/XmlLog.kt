@@ -1,8 +1,8 @@
-package com.hzsoft.lib.base.utils.log.klog
+package com.hzsoft.lib.log.klog
 
 import android.util.Log
 import com.hzsoft.lib.log.KLog
-import com.hzsoft.lib.base.utils.log.KLogUtil
+import com.hzsoft.lib.log.KLogUtil
 import java.io.StringReader
 import java.io.StringWriter
 import javax.xml.transform.OutputKeys
