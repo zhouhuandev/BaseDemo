@@ -1,11 +1,12 @@
 package com.hzsoft.lib.log
 
 import android.text.TextUtils
+import android.util.Log
 
-import com.hzsoft.lib.base.utils.log.klog.BaseLog
-import com.hzsoft.lib.base.utils.log.klog.FileLog
-import com.hzsoft.lib.base.utils.log.klog.JsonLog
-import com.hzsoft.lib.base.utils.log.klog.XmlLog
+import com.hzsoft.lib.log.klog.BaseLog
+import com.hzsoft.lib.log.klog.FileLog
+import com.hzsoft.lib.log.klog.JsonLog
+import com.hzsoft.lib.log.klog.XmlLog
 
 import java.io.File
 import java.io.PrintWriter
@@ -270,7 +271,9 @@ object KLog {
         val tag = contents[0]
         val msg = contents[1]
         val headString = contents[2]
-        BaseLog.printDefault(D, tag, headString + msg)
+        if (BuildConfig.DEBUG || Log.isLoggable(tag, Log.DEBUG)) {
+            BaseLog.printDefault(D, tag, headString + msg)
+        }
     }
 
 
