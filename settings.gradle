@@ -1,3 +1,22 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url "https://www.jitpack.io" }
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "BaseDemo"
 include ':lib_log'
 include ':lib_domain'
 include ':lib_image_picker'

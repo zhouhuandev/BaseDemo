@@ -55,7 +55,7 @@ android {
         variant.outputs.each { output ->
             if ("release" == buildType) {
                 if (output.outputFileName.endsWith('.apk')) {
-                    output.outputFileName = "${versionName}\\${appName}_${versionCode}_V${versionName}_${outputTime}.apk"
+                    output.outputFileName = "${appName}_${versionCode}_V${versionName}_${outputTime}.apk"
                 }
             } else {
                 if (output.outputFileName.endsWith('.apk')) {
