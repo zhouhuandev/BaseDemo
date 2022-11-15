@@ -25,4 +25,3 @@ include ':lib_common'
 include ':lib_base_module'
 include ':lib_base'
 include ':app'
-rootProject.name = "BaseDemo"
