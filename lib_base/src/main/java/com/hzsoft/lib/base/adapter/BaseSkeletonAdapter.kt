@@ -30,7 +30,7 @@ abstract class BaseSkeletonAdapter<E, VH : BaseViewHolder>(
         recyclerView: RecyclerView,
         @LayoutRes layoutId: Int, itemCount: Int
     ) {
-        super.recyclerView = recyclerView
+        onAttachedToRecyclerView(recyclerView)
         skeletonScreen = Skeleton.bind(recyclerView) //设置实际adapter
             .adapter(this) //是否开启动画
             .shimmer(true) //shimmer的倾斜角度 闪过去得阴影
@@ -48,14 +48,22 @@ abstract class BaseSkeletonAdapter<E, VH : BaseViewHolder>(
         hideSkeleton()
     }
 
-    override fun setNewData(data: MutableList<E>?) {
-        super.setNewData(data)
+    override fun setList(list: Collection<E>?) {
+        super.setList(list)
         hideSkeleton()
     }
 
+    @Deprecated(
+        "Please use setNewInstance(), This method will be removed in the next version",
+        replaceWith = ReplaceWith("setNewInstance(data)")
+    )
+    override fun setNewData(data: MutableList<E>?) {
+        setNewInstance(data)
+    }
+
+    @Deprecated("Please use setData()", replaceWith = ReplaceWith("setList(newData)"))
     override fun replaceData(newData: Collection<E>) {
-        super.replaceData(newData)
-        hideSkeleton()
+        setList(newData)
     }
 
     open fun hideSkeleton() {

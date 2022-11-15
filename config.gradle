@@ -1,10 +1,10 @@
 ext {
     // 构建版本
     kotlinVersion = getProperty('kotlin.version')
-    compileVersion = 31
-    buildToolsVersion = "30.0.2"
-    minSdkVersion = 21
-    targetVersion = 31
+    compileVersion = 33
+    buildToolsVersion = "30.0.3"
+    minSdkVersion = 23
+    targetVersion = 33
     // 生成APK版本
     versionCode = 2
     versionName = "1.0.2"
@@ -18,24 +18,11 @@ ext {
                     libs.androidx.core,
                     libs.androidx.appcompat,
                     libs.androidx.multidex,
-                    libs.androidx.recyclerview,
                     libs.androidx.activity.ktx,
                     libs.androidx.fragment.ktx,
-                    libs.androidx.lifecycle.runtime,
-                    libs.androidx.lifecycle.runtime_ktx,
-                    libs.androidx.lifecycle.common_java8,
-                    libs.androidx.lifecycle.viewmodel,
-                    libs.androidx.lifecycle.viewmodel_ktx,
-                    libs.androidx.lifecycle.viewmodel_savedstate,
-                    libs.androidx.lifecycle.livedata_ktx,
                     libs.smart.layout_kernel,
                     libs.smart.header_classics,
-                    libs.smart.header_radar,
-                    libs.smart.header_falsify,
-                    libs.smart.header_material,
-                    libs.smart.header_two_level,
                     libs.smart.footer_classics,
-                    libs.smart.footer_ball,
                     libs.BaseAdapterHelper,
                     libs.skeleton,
                     libs.shimmerlayout,
@@ -43,11 +30,7 @@ ext {
             ],
             implementations: [],
             kapt           : [],
-            compile        : [
-                    libs.androidx.databinding.runtime,
-                    libs.androidx.databinding.adapters,
-                    libs.androidx.viewbinding,
-            ],
+            compile        : [],
             testImpl       : [
                     libs.junit,
             ],
@@ -88,7 +71,6 @@ ext {
     imagePickerDepends = [
             api            : [
                     libs.androidx.appcompat,
-                    libs.androidx.recyclerview,
                     libs.google.material,
                     libs.glide.core,
             ],
@@ -103,6 +85,7 @@ ext {
     netDepends = [
             api            : [
                     libs.kotlin.coroutines,
+                    libs.retrofit2.retrofit2,
                     libs.retrofit2.converter_gson,
                     libs.retrofit2.logging_interceptor,
                     libs.androidx.room.core,
