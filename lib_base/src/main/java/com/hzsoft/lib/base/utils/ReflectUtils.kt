@@ -184,10 +184,10 @@ object ReflectUtils {
 
 
     /**
-     * 获取第i个泛型的类型
+     * 获取某基类的子类的泛型
      */
     @JvmStatic
-    fun getActualTypeArgument(i: Int, clazz: Class<*>?): Class<*>? {
+    fun getActualTypeArgument(targetGenericClazz: Class<*>, clazz: Class<*>?): Class<*>? {
         // 由于本类是抽象类，所以this 一定是其子类的实例化对象
         val targetClazz: Class<*> = clazz ?: this.javaClass
         // 定义返回的class
@@ -199,8 +199,12 @@ object ReflectUtils {
             // 获取所有的参数化的类型
             val actualTypeArguments: Array<Type>? = genericSuperclass.actualTypeArguments
             actualTypeArguments?.let { actualType ->
-                if (actualType.size > i) {
-                    entityClass = actualTypeArguments[i] as Class<*>
+                for (type in actualType) {
+                    val anyClass = type as? Class<*>
+                    if (anyClass != null && targetGenericClazz.isAssignableFrom(anyClass)) {
+                        entityClass = anyClass
+                        break
+                    }
                 }
             }
         }

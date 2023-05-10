@@ -2,6 +2,7 @@ package com.hzsoft.lib.base.view
 
 import android.view.ViewStub
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel
 import com.hzsoft.lib.base.utils.ReflectUtils
 import com.hzsoft.lib.base.view.databinding.ActivityBindingHolder
@@ -30,7 +31,7 @@ abstract class BaseMvvmDataBindingActivity<V : ViewDataBinding, VM : BaseViewMod
     }
 
     override fun onBindViewModel(): Class<VM> {
-        return ReflectUtils.getActualTypeArgument(1, this.javaClass) as? Class<VM>
+        return ReflectUtils.getActualTypeArgument(ViewModel::class.java, this.javaClass) as? Class<VM>
             ?: throw IllegalArgumentException("找不到 ViewModelClass 实例，建议重写该方法")
     }
 
