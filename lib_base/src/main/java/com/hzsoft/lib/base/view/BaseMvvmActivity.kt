@@ -1,6 +1,7 @@
 package com.hzsoft.lib.base.view
 
 import android.os.Bundle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel
 import com.hzsoft.lib.base.utils.ReflectUtils
@@ -27,7 +28,7 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
      * 绑定 ViewModel
      */
     open fun onBindViewModel(): Class<VM> {
-        return ReflectUtils.getActualTypeArgument(0, javaClass) as? Class<VM>
+        return ReflectUtils.getActualTypeArgument(ViewModel::class.java, javaClass) as? Class<VM>
             ?: throw IllegalArgumentException("找不到 ViewModelClass 实例，建议重写该方法")
     }
 
