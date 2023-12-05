@@ -4,14 +4,13 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.utils.ext.view.showToast
-import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
+import com.hzsoft.lib.base.view.BaseMvvmRefreshViewBindingFragment
 import com.hzsoft.lib.common.utils.EnvironmentUtil
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.utils.ext.launch
 import com.hzsoft.lib.net.utils.ext.observe
-import com.hzsoft.module.home.BR
 import com.hzsoft.module.home.R
 import com.hzsoft.module.home.adapter.MainHomeAdapter
 import com.hzsoft.module.home.databinding.FragmentHomeMainBinding
@@ -26,7 +25,7 @@ import kotlin.random.Random
  * @Date 2020/12/3
  */
 class MainHomeFragment :
-    BaseMvvmRefreshDataBindingFragment<FragmentHomeMainBinding, MainHomeViewModel>() {
+    BaseMvvmRefreshViewBindingFragment<FragmentHomeMainBinding, MainHomeViewModel>() {
 
     companion object {
         fun newsInstance(): MainHomeFragment {
@@ -35,10 +34,6 @@ class MainHomeFragment :
     }
 
     private lateinit var mAdapter: MainHomeAdapter
-
-    override fun onBindVariableId(): MutableList<Pair<Int, Any>> {
-        return arrayListOf(BR.viewModel to mViewModel)
-    }
 
     override fun initViewObservable() {
         observe(mViewModel.recipesLiveData, ::handleRecipesList)
@@ -50,7 +45,7 @@ class MainHomeFragment :
         mAdapter = MainHomeAdapter()
         mAdapter.bindSkeletonScreen(
             requireBinding().mRecyclerView,
-            com.hzsoft.lib.base.R.layout.skeleton_default_service_item,
+            R.layout.skeleton_default_service_item,
             8
         )
     }

@@ -1,6 +1,5 @@
 package com.hzsoft.module.me.activity
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -21,8 +20,6 @@ class RoomTestViewModel(state: SavedStateHandle) :
     BaseRefreshViewModel() {
 
     private val savedStateHandle = state
-
-    var showEmpty = ObservableField(false)
 
     private val dataRepositoryRepository: BaseDataRepository = BaseDataRepository()
 

@@ -8,14 +8,13 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseFragment
-import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingActivity
+import com.hzsoft.lib.base.view.BaseMvvmRefreshViewBindingActivity
 import com.hzsoft.lib.common.utils.VibrateTool
 import com.hzsoft.lib.common.widget.CommonDialogFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.utils.ext.observe
-import com.hzsoft.module.me.BR
 import com.hzsoft.module.me.R
 import com.hzsoft.module.me.adapter.RoomTestAdapter
 import com.hzsoft.module.me.databinding.ActivityRoomTestBinding
@@ -29,8 +28,7 @@ import kotlin.random.nextInt
  * @time 2021/11/23
  */
 @Route(path = ARouteConstants.Me.ME_ROOT_TEST, name = "Room测试")
-class RoomTestActivity :
-    BaseMvvmRefreshDataBindingActivity<ActivityRoomTestBinding, RoomTestViewModel>() {
+class RoomTestActivity : BaseMvvmRefreshViewBindingActivity<ActivityRoomTestBinding, RoomTestViewModel>() {
 
     companion object {
         fun start(context: Context) {
@@ -156,10 +154,6 @@ class RoomTestActivity :
         onRefreshEvent()
     }
 
-    override fun onBindVariableId(): MutableList<Pair<Int, Any>> {
-        return arrayListOf(BR.viewModel to mViewModel)
-    }
-
     override fun initViewObservable() {
         observe(mViewModel.userTestRoomLiveData, ::handleUserTestRoomList)
     }
@@ -181,6 +175,7 @@ class RoomTestActivity :
                 // 滚动回第一个位置
                 requireBinding().mRecyclerView.scrollToPosition(0)
             }
+
             R.id.selectUser -> {
                 onRefreshEvent()
             }
@@ -215,13 +210,13 @@ class RoomTestActivity :
             is Resource.DataError -> {
                 status.errorCode.let { KLog.e(BaseFragment.TAG, "--------->$it") }
             }
+
             else -> {}
         }
     }
 
     private fun bindListData2(userTestRoom: ArrayList<UserTestRoom>) {
         mAdapter.setNewInstance(userTestRoom)
-        mViewModel.showEmpty.set(userTestRoom.isEmpty())
         // 执行列表动画
         requireBinding().mRecyclerView.apply {
             layoutAnimation =
