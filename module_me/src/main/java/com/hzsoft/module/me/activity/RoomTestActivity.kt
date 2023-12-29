@@ -160,6 +160,10 @@ class RoomTestActivity :
         return arrayListOf(BR.viewModel to mViewModel)
     }
 
+    override fun ActivityRoomTestBinding.onClear() {
+
+    }
+
     override fun initViewObservable() {
         observe(mViewModel.userTestRoomLiveData, ::handleUserTestRoomList)
     }

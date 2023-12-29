@@ -30,6 +30,10 @@ class MainHomeActivity :
         return arrayListOf(BR.viewModel to mViewModel)
     }
 
+    override fun FragmentHomeMainBinding.onClear() {
+
+    }
+
     override fun initViewObservable() {
         observe(mViewModel.recipesLiveData, ::handleRecipesList)
     }

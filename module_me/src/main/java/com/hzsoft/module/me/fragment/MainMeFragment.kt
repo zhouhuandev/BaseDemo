@@ -108,6 +108,10 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
         }
     }
 
+    override fun FragmentMeMainBinding.onClear() {
+
+    }
+
     override fun initViewObservable() {
 
     }
