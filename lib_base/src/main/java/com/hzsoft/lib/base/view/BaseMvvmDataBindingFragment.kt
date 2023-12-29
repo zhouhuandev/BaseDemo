@@ -21,7 +21,7 @@ abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewMod
     override fun initContentView(mViewStubContent: ViewStub) {
         with(mViewStubContent) {
             layoutResource = onBindLayout()
-            inflateBinding(viewStub = this) { binding ->
+            inflateBinding(viewStub = this, onClear = { binding -> binding.onClear() }) { binding ->
                 binding.lifecycleOwner = this@BaseMvvmDataBindingFragment
                 onBindVariableId().forEach { pair ->
                     binding.setVariable(pair.first, pair.second)
@@ -36,4 +36,6 @@ abstract class BaseMvvmDataBindingFragment<V : ViewDataBinding, VM : BaseViewMod
     }
 
     abstract fun onBindVariableId(): MutableList<Pair<Int, Any>>
+
+    abstract fun V.onClear()
 }

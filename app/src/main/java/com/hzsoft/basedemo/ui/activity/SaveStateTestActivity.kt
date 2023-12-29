@@ -55,6 +55,10 @@ class SaveStateTestActivity :
         requireBinding().textView3.text = "不会重置：%s".format(mViewModel.getCount())
     }
 
+    override fun ActivitySaveStateTestBinding.onClear() {
+
+    }
+
     override fun initViewObservable() {
 
     }
