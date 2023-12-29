@@ -101,6 +101,10 @@ class MainMeActivity : BaseMvvmViewBindingActivity<FragmentMeMainBinding, MainMe
         }
     }
 
+    override fun FragmentMeMainBinding.onClear() {
+
+    }
+
     override fun initViewObservable() {
 
     }

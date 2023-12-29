@@ -20,7 +20,11 @@ abstract class BaseMvvmViewBindingActivity<V : ViewBinding, VM : BaseViewModel> 
     override fun initContentView(mViewStubContent: ViewStub) {
         with(mViewStubContent) {
             layoutResource = onBindLayout()
-            inflateBinding(this, onBindingClass())
+            inflateBinding(
+                viewStub = this,
+                bindingClass = onBindingClass(),
+                onClear = { binding -> binding.onClear() }
+            )
         }
     }
 
@@ -33,4 +37,6 @@ abstract class BaseMvvmViewBindingActivity<V : ViewBinding, VM : BaseViewModel> 
         return ReflectUtils.getActualTypeArgument(ViewBinding::class.java, this.javaClass) as? Class<V>
             ?: throw IllegalArgumentException("找不到 BindingClass 实例，建议重写该方法")
     }
+
+    abstract fun V.onClear()
 }
