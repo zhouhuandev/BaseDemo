@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.hzsoft.lib.base.view.BaseMvvmViewBindingActivity
 import com.hzsoft.module.me.R
+import com.hzsoft.module.me.activity.viewmodel.SaveStateTestViewModel
 import com.hzsoft.module.me.databinding.ActivitySaveStateTestBinding
 
 /**

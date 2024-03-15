@@ -1,4 +1,4 @@
-package com.hzsoft.module.me.activity
+package com.hzsoft.module.me.activity.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseViewModel

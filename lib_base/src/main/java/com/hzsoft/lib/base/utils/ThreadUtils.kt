@@ -3,7 +3,7 @@ package com.hzsoft.lib.base.utils
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import com.hzsoft.lib.base.utils.ToastUtil.showToast
+import com.hzsoft.lib.base.utils.ToastUtils.showToast
 import java.util.concurrent.*
 
 /**

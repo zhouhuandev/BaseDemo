@@ -3,7 +3,7 @@ package com.hzsoft.lib.base.utils.ext.view
 import android.view.View
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
-import com.hzsoft.lib.base.utils.ToastUtil
+import com.hzsoft.lib.base.utils.ToastUtils
 
 /**
  * Describe:
@@ -19,7 +19,7 @@ import com.hzsoft.lib.base.utils.ToastUtil
  * "This is Toast".showToast(context,Toast.LENGTH_SHORT)
  */
 fun String.showToast(duration: Int = Toast.LENGTH_SHORT) {
-    ToastUtil.showToastCenter(this, duration)
+    ToastUtils.showToastCenter(this, duration)
 }
 
 /**
@@ -27,7 +27,7 @@ fun String.showToast(duration: Int = Toast.LENGTH_SHORT) {
  * "This is Toast".showToast(context,Toast.LENGTH_SHORT)
  */
 fun Int.showToast(duration: Int = Toast.LENGTH_SHORT) {
-    ToastUtil.showToastCenter(this, duration)
+    ToastUtils.showToastCenter(this, duration)
 }
 
 /**
@@ -42,7 +42,7 @@ fun View.showSnackbar(
     duration: Int = Snackbar.LENGTH_SHORT,
     block: (() -> Unit)? = null
 ) {
-    ToastUtil.showSnackbar(this, text, actionText, duration, block)
+    ToastUtils.showSnackbar(this, text, actionText, duration, block)
 }
 
 /**
@@ -57,5 +57,5 @@ fun View.showSnackbar(
     duration: Int = Snackbar.LENGTH_SHORT,
     block: (() -> Unit)? = null
 ) {
-    ToastUtil.showSnackbar(this, resid, actionText, duration, block)
+    ToastUtils.showSnackbar(this, resid, actionText, duration, block)
 }

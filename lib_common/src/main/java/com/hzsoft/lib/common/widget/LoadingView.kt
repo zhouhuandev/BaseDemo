@@ -7,7 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import com.hzsoft.lib.common.utils.DisplayUtil.dip2px
+import com.hzsoft.lib.common.utils.DisplayUtils.dip2px
 import kotlin.jvm.JvmOverloads
 
 /**

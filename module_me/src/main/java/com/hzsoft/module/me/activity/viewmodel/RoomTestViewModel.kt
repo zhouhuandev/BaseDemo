@@ -1,4 +1,4 @@
-package com.hzsoft.module.me.activity
+package com.hzsoft.module.me.activity.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -9,6 +9,7 @@ import com.hzsoft.lib.base.mvvm.viewmodel.BaseRefreshViewModel
 import com.hzsoft.lib.net.BaseDataRepository
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -52,6 +53,9 @@ class RoomTestViewModel(state: SavedStateHandle) :
                 userTestRoomLiveDataPrivate.value = it
                 postStopRefreshEvent()
             }
+            // 多服务请求示例
+            dataRepositoryRepository.requestRecipesByMain().collect()
+            dataRepositoryRepository.requestRecipesByEdith().collect()
         }
     }
 

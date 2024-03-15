@@ -6,10 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.hzsoft.lib.base.mvvm.viewmodel.BaseRefreshViewModel
 import com.hzsoft.lib.domain.entity.Demo
-import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
-import com.hzsoft.lib.net.utils.toJson
 import com.hzsoft.module.home.repository.HomeDataRepository
 import kotlinx.coroutines.launch
 

@@ -9,7 +9,7 @@ import android.os.Build
  * @author zhouhuan
  * @time 2020/11/30 23:15
  */
-object SdkVersionUtil {
+object SdkVersionUtils {
 
     /**
      * hasForyo

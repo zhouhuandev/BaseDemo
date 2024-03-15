@@ -4,10 +4,10 @@ import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.net.dto.Resource
 
 /**
- * 服务端所有提供数据方法
+ * Main 服务（域名）提供的请求接口
  * @author zhouhuan
  * @time 2020/12/1 0:06
  */
-internal interface BaseRemoteDataSource {
-    suspend fun requestRecipes(): Resource<List<Demo>>
+interface IMainRemoteData {
+    suspend fun requestRecipes(): Resource<List<Demo>?>
 }

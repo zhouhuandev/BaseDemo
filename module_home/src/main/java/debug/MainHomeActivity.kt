@@ -3,7 +3,7 @@ package debug
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseFragment
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingActivity
-import com.hzsoft.lib.common.utils.EnvironmentUtil
+import com.hzsoft.lib.common.utils.EnvironmentUtils
 import com.hzsoft.lib.domain.entity.Demo
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
@@ -51,7 +51,7 @@ class MainHomeActivity :
 
     override fun initData() {
         onRefreshEvent()
-        KLog.d(BaseFragment.TAG, EnvironmentUtil.Storage.getCachePath(mContext))
+        KLog.d(BaseFragment.TAG, EnvironmentUtils.Storage.getCachePath(mContext))
     }
 
     var firstLoad = true

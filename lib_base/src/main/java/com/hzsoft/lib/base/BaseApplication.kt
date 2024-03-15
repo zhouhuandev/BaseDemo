@@ -6,7 +6,7 @@ import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hzsoft.lib.base.utils.ProcessUtils
 import com.hzsoft.lib.base.utils.ThreadUtils
-import com.hzsoft.lib.base.utils.ToastUtil
+import com.hzsoft.lib.base.utils.ToastUtils
 import com.hzsoft.lib.log.KLog
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -62,7 +62,7 @@ open class BaseApplication : Application() {
      */
     protected open fun initOnlyMainProcess() {
         KLog.init(BuildConfig.IS_DEBUG)
-        ToastUtil.init(this)
+        ToastUtils.init(this)
 
         if (BuildConfig.IS_DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog()     // 打印日志

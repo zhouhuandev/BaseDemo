@@ -17,6 +17,7 @@ class ARouteConstants {
         companion object {
             const val ME_MAIN = "/me/main"
             const val ME_ROOT_TEST = "/me/room_test"
+            const val ME_MORE_REQUEST_SERVER = "/me/more_request_server"
         }
     }
 }

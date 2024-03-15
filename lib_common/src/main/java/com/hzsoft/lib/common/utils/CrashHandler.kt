@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Looper
 import android.util.Log
-import com.hzsoft.lib.base.utils.ToastUtil
+import com.hzsoft.lib.base.utils.ToastUtils
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -59,7 +59,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
         } else {
             // MobclickAgent.reportError(context, ex);
             // 退出程序
-            ToastUtil.showToast("发生异常，已重启应用")
+            ToastUtils.showToast("发生异常，已重启应用")
             // EnvironmentUtil.openApp(mContext, SplashActivity.class.getName());
             // Intent intent = new Intent(Intent.ACTION_MAIN);
             // intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -96,7 +96,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
                 // Toast 显示需要出现在一个线程的消息队列中
                 Looper.prepare()
 
-                ToastUtil.showToast("程序异常，请重启应用")
+                ToastUtils.showToast("程序异常，请重启应用")
                 Looper.loop()
                 // 程序出现异常，下次程序进入默认值更改为我的主页
                 // SaveSharedPreference.setSharedPreferenceInt(mContext,
@@ -184,7 +184,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
             val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
             val fileName = "crash-$timestamp$CRASH_REPORTER_EXTENSION"
             // 保存文件
-            val directory = File(EnvironmentUtil.Storage.getExternalCacheDir(mContext!!), "logs")
+            val directory = File(EnvironmentUtils.Storage.getExternalCacheDir(mContext!!), "logs")
             if (!directory.exists()) {
                 directory.mkdirs()
             }

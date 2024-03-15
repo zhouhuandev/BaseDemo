@@ -10,7 +10,7 @@ import java.util.*
  * @author zhouhuan
  * @time 2020/11/30 23:09
  */
-object DateUtil {
+object DateUtils {
     /**
      * 获取当前时间的位置：一天24小时以半小时为单位划分为48个单元格
      * @return
@@ -62,16 +62,16 @@ object DateUtil {
     private fun getSimpleDateFormat(type: FormatType): SimpleDateFormat {
         val sdf: SimpleDateFormat
         when (type) {
-            DateUtil.FormatType.yyyy -> sdf = SimpleDateFormat("yyyy")
-            DateUtil.FormatType.yyyyMM -> sdf = SimpleDateFormat("yyyy-MM")
-            DateUtil.FormatType.yyyyMMdd -> sdf = SimpleDateFormat("yyyy-MM-dd")
-            DateUtil.FormatType.yyyyMMddHHmm -> sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
-            DateUtil.FormatType.yyyyMMddHHmmss -> sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            DateUtil.FormatType.MMdd -> sdf = SimpleDateFormat("MM-dd")
-            DateUtil.FormatType.HHmm -> sdf = SimpleDateFormat("HH:mm")
-            DateUtil.FormatType.MM -> sdf = SimpleDateFormat("MM")
-            DateUtil.FormatType.dd -> sdf = SimpleDateFormat("dd")
-            DateUtil.FormatType.MMddHHmm -> sdf = SimpleDateFormat("MM-dd HH:mm")
+            DateUtils.FormatType.yyyy -> sdf = SimpleDateFormat("yyyy")
+            DateUtils.FormatType.yyyyMM -> sdf = SimpleDateFormat("yyyy-MM")
+            DateUtils.FormatType.yyyyMMdd -> sdf = SimpleDateFormat("yyyy-MM-dd")
+            DateUtils.FormatType.yyyyMMddHHmm -> sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            DateUtils.FormatType.yyyyMMddHHmmss -> sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            DateUtils.FormatType.MMdd -> sdf = SimpleDateFormat("MM-dd")
+            DateUtils.FormatType.HHmm -> sdf = SimpleDateFormat("HH:mm")
+            DateUtils.FormatType.MM -> sdf = SimpleDateFormat("MM")
+            DateUtils.FormatType.dd -> sdf = SimpleDateFormat("dd")
+            DateUtils.FormatType.MMddHHmm -> sdf = SimpleDateFormat("MM-dd HH:mm")
             else -> sdf = SimpleDateFormat("yyyy-MM-dd")
         }
         return sdf

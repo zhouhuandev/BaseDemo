@@ -9,6 +9,9 @@
         <activity
             android:name=".activity.RoomTestActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.MoreRequestServerActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

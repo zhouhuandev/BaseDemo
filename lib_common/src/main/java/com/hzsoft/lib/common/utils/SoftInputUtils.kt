@@ -11,7 +11,7 @@ import android.view.inputmethod.InputMethodManager
  * @author zhouhuan
  * @time 2020/11/30 23:18
  */
-object SoftInputUtil {
+object SoftInputUtils {
 
     /**
      * 显示软键盘

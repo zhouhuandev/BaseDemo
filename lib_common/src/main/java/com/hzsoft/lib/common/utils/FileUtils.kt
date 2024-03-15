@@ -24,7 +24,7 @@ import java.util.regex.Pattern
  * @author zhouhuan
  * @time 2020/11/30 23:12
  */
-object FileUtil {
+object FileUtils {
 
     private const val TAG: String = "FileUtil"
 
@@ -43,7 +43,7 @@ object FileUtil {
             val storagePath = getStoragePath(BaseApplication.getContext(), true)
             if (!TextUtils.isEmpty(storagePath)) {
                 return storagePath.also {
-                    FileUtil.storagePath = it
+                    FileUtils.storagePath = it
                 }
             }
         }
