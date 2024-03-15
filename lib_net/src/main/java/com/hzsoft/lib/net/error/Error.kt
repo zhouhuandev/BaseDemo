@@ -63,7 +63,7 @@ const val PARSE_ERROR = 1001
  * SSL_ERROR
  * 网络错误
  */
-const val NETWORD_ERROR = 1002
+const val NETWORK_ERROR = 1002
 
 /**
  * 协议出错
@@ -88,4 +88,4 @@ const val NULL_DATA = 1007
 /**
  * 当前没有开启网络
  */
-const val NOT_NETWORD = 1008
+const val NOT_NETWORK = 1008

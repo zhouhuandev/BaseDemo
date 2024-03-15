@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.hzsoft.module.me.activity.RoomTestViewModel" />
+            type="com.hzsoft.module.me.activity.viewmodel.RoomTestViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

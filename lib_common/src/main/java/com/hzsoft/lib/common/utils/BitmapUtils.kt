@@ -31,7 +31,7 @@ import java.net.URL
  * @author zhouhuan
  * @time 2020/11/30 23:09
  */
-object BitmapUtil {
+object BitmapUtils {
     /**
      * 截取竖scrollview的屏幕
      *
@@ -90,14 +90,14 @@ object BitmapUtil {
         val textPaint = Paint()
         textPaint.isAntiAlias = true
         textPaint.color = Color.WHITE
-        textPaint.textSize = DisplayUtil.sp2px(16f).toFloat()
+        textPaint.textSize = DisplayUtils.sp2px(16f).toFloat()
         // 文本的宽高
         val fm = textPaint.fontMetrics
         val textWidth = textPaint.measureText(titleStr)
         val textHeight = Math.ceil((fm.descent - fm.ascent).toDouble()).toFloat()
 
         // 标题栏的高度
-        val titleHeight = DisplayUtil.dip2px(40f)
+        val titleHeight = DisplayUtils.dip2px(40f)
         // 先生成标题栏的bitmap,因为根据当前设备制作的标题栏要进行720P的压缩
         var titleBitmap = Bitmap.createBitmap(bitmap!!.width, titleHeight, Bitmap.Config.RGB_565)
         val titleCanvas = Canvas(titleBitmap)
@@ -420,7 +420,7 @@ object BitmapUtil {
      */
     fun getImageSize(url: String): IntArray {
         val size = intArrayOf(0, 0)
-        if (FileUtil.isImageFile(url)) {
+        if (FileUtils.isImageFile(url)) {
             val options = BitmapFactory.Options()
             // 设置为true,表示解析Bitmap对象，该对象不占内存
             options.inJustDecodeBounds = true

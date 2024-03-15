@@ -2,11 +2,12 @@ package com.hzsoft.module.me.fragment
 
 import android.view.View
 import com.google.gson.Gson
-import com.hzsoft.lib.base.utils.ToastUtil
+import com.hzsoft.lib.base.utils.ToastUtils
 import com.hzsoft.lib.base.utils.ext.view.showToast
 import com.hzsoft.lib.base.view.BaseMvvmViewBindingFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.module.me.R
+import com.hzsoft.module.me.activity.MoreRequestServerActivity
 import com.hzsoft.module.me.activity.RoomTestActivity
 import com.hzsoft.module.me.activity.SaveStateTestActivity
 import com.hzsoft.module.me.databinding.FragmentMeMainBinding
@@ -59,6 +60,7 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
         requireBinding().button2.setOnClickListener(this::onClick)
         requireBinding().button3.setOnClickListener(this::onClick)
         requireBinding().button4.setOnClickListener(this::onClick)
+        requireBinding().button5.setOnClickListener(this::onClick)
     }
 
     override fun enableToolbar(): Boolean = true
@@ -97,13 +99,16 @@ class MainMeFragment : BaseMvvmViewBindingFragment<FragmentMeMainBinding, MainMe
             R.id.button_3 -> {
                 val trim = requireBinding().editText.text.toString().trim()
                 if (trim.isBlank()) {
-                    ToastUtil.showToastCenter("输入内容不能为空")
+                    ToastUtils.showToastCenter("输入内容不能为空")
                     return
                 }
                 SaveStateTestActivity.start(mContext, trim)
             }
             R.id.button_4 -> {
                 RoomTestActivity.start(mContext)
+            }
+            R.id.button_5 -> {
+                MoreRequestServerActivity.start(mContext)
             }
         }
     }

@@ -46,7 +46,7 @@ import java.io.InputStreamReader
  * @author zhouhuan
  * @time 2020/11/30 23:10
  */
-class EnvironmentUtil {
+class EnvironmentUtils {
 
     /**
      * 当前app的是否在运行
@@ -102,7 +102,7 @@ class EnvironmentUtil {
          */
         fun getExternalCacheDir(context: Context): File? {
             var file: File? = null
-            if (SdkVersionUtil.hasFroyo()) {
+            if (SdkVersionUtils.hasFroyo()) {
                 file = context.externalCacheDir
             }
 

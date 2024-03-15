@@ -11,7 +11,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import com.hzsoft.lib.common.R
-import com.hzsoft.lib.common.utils.DisplayUtil
+import com.hzsoft.lib.common.utils.DisplayUtils
 
 /**
  * 旋转进度的dialog
@@ -28,7 +28,7 @@ class RotateProgressDialog : androidx.fragment.app.DialogFragment() {
         super.onStart()
         val dialog = dialog
         if (dialog != null) {
-            dialog.window!!.setLayout(DisplayUtil.dip2px(100f), DisplayUtil.dip2px(100f))
+            dialog.window!!.setLayout(DisplayUtils.dip2px(100f), DisplayUtils.dip2px(100f))
             dialog.setCancelable(false)
             dialog.setCanceledOnTouchOutside(false)
         }

@@ -10,5 +10,5 @@ import com.hzsoft.lib.net.dto.Resource
  * @since 2022/7/10 11:53
  */
 interface HomeDataSource {
-    suspend fun getBeautyStar(): Resource<List<Demo>>
+    suspend fun getBeautyStar(): Resource<List<Demo>?>
 }

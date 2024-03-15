@@ -17,6 +17,7 @@ import com.hzsoft.lib.net.local.entity.UserTestRoom
 import com.hzsoft.lib.net.utils.ext.observe
 import com.hzsoft.module.me.BR
 import com.hzsoft.module.me.R
+import com.hzsoft.module.me.activity.viewmodel.RoomTestViewModel
 import com.hzsoft.module.me.adapter.RoomTestAdapter
 import com.hzsoft.module.me.databinding.ActivityRoomTestBinding
 import kotlin.random.Random

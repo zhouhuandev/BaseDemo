@@ -21,7 +21,7 @@ import java.lang.ref.WeakReference
  * @author zhouhuan
  * @time 2020/11/30 23:19
  */
-object ToastUtil {
+object ToastUtils {
 
     private const val TAG = "ToastUtil"
 

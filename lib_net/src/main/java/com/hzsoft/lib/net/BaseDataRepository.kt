@@ -1,10 +1,16 @@
 package com.hzsoft.lib.net
 
 import com.hzsoft.lib.domain.entity.Demo
+import com.hzsoft.lib.net.config.URL_EDITH
+import com.hzsoft.lib.net.config.URL_MAIN
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.LocalData
 import com.hzsoft.lib.net.local.entity.UserTestRoom
-import com.hzsoft.lib.net.remote.BaseRemoteData
+import com.hzsoft.lib.net.remote.IEdithRemoteData
+import com.hzsoft.lib.net.remote.IMainRemoteData
+import com.hzsoft.lib.net.remote.remotedata.EdithRemoteData
+import com.hzsoft.lib.net.remote.remotedata.MainRemoteData
+import com.hzsoft.lib.net.remote.network.RetrofitManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -19,36 +25,44 @@ import kotlin.coroutines.CoroutineContext
  * @author zhouhuan
  * @time 2020/12/1 0:21
  */
-open class BaseDataRepository constructor(
-    private val commonRemoteRepository: BaseRemoteData = BaseRemoteData(),
-    private val commonLocalRepository: LocalData = LocalData(),
-    protected val ioDispatcher: CoroutineContext = Dispatchers.IO
-) :
-    BaseDataRepositorySource {
+open class BaseDataRepository : BaseDataRepositorySource {
 
-    override suspend fun requestRecipes(): Flow<Resource<List<Demo>>> {
-        return dealDataFlow { commonRemoteRepository.requestRecipes() }
+    protected val mMainRemote: IMainRemoteData by lazy {
+        MainRemoteData(RetrofitManager.getInstance(URL_MAIN))
+    }
+    protected val mEdithRemote: IEdithRemoteData by lazy {
+        EdithRemoteData(RetrofitManager.getInstance(URL_EDITH))
+    }
+    private val mCommonLocalRepository: LocalData = LocalData()
+    protected val mIoDispatcher: CoroutineContext = Dispatchers.IO
+
+    override suspend fun requestRecipesByMain(): Flow<Resource<List<Demo>?>> {
+        return dealDataFlow { mMainRemote.requestRecipes() }
+    }
+
+    override suspend fun requestRecipesByEdith(): Flow<Resource<List<Demo>?>> {
+        return dealDataFlow { mEdithRemote.requestRecipes() }
     }
 
     override suspend fun doLogin(): Flow<Resource<String>> {
-        return dealDataFlow { commonLocalRepository.doLogin() }
+        return dealDataFlow { mCommonLocalRepository.doLogin() }
     }
 
     override suspend fun removeUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Int>> {
-        return dealDataFlow { commonLocalRepository.removeUserTestRoom(userTestRoom) }
+        return dealDataFlow { mCommonLocalRepository.removeUserTestRoom(userTestRoom) }
     }
 
     override suspend fun insertUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Long>> {
-        return dealDataFlow { commonLocalRepository.insertUserTestRoom(userTestRoom) }
+        return dealDataFlow { mCommonLocalRepository.insertUserTestRoom(userTestRoom) }
     }
 
     override suspend fun getAllUserTestRoom(): Flow<Resource<List<UserTestRoom>>> {
-        return dealDataFlow { commonLocalRepository.getUserTestRoom() }
+        return dealDataFlow { mCommonLocalRepository.getUserTestRoom() }
     }
 
     protected inline fun <reified T> dealDataFlow(crossinline block: suspend () -> T): Flow<T> {
         return flow {
             emit(block.invoke())
-        }.flowOn(ioDispatcher)
+        }.flowOn(mIoDispatcher)
     }
 }
