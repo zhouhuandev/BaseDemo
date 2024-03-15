@@ -53,9 +53,6 @@ class RoomTestViewModel(state: SavedStateHandle) :
                 userTestRoomLiveDataPrivate.value = it
                 postStopRefreshEvent()
             }
-            // 多服务请求示例
-            dataRepositoryRepository.requestRecipesByMain().collect()
-            dataRepositoryRepository.requestRecipesByEdith().collect()
         }
     }
 
