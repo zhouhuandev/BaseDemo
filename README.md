@@ -760,6 +760,7 @@ Blog : "https://blog.csdn.net/youxun1312"
 - 2022.07.10 重构网络模块，数据仓库下放至单独 `moudle`
 - 2022.08.20 重构 TabBar 支持加载网络图标，优化实例，修复已知问题
 - 2023.12.29 优化使用 ViewBinding 时，无法在 onDestroy 中无法使用 requireBinding() 操作 View 对象的问题
+- 2024.03.15 重构网络请求，支持多域名多服务发起请求
 
 ## License
 
