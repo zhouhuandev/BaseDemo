@@ -27,10 +27,10 @@ class ErrorMapper constructor() : ErrorMapperInterface {
             Pair(INTERNAL_SERVER_ERROR, getErrorString(R.string.INTERNAL_SERVER_ERROR)),
             Pair(SERVICE_UNAVAILABLE, getErrorString(R.string.SERVICE_UNAVAILABLE)),
             Pair(PARSE_ERROR, getErrorString(R.string.PARSE_ERROR)),
-            Pair(NETWORD_ERROR, getErrorString(R.string.NETWORD_ERROR)),
+            Pair(NETWORK_ERROR, getErrorString(R.string.NETWORD_ERROR)),
             Pair(TIMEOUT_ERROR, getErrorString(R.string.TIMEOUT_ERROR)),
             Pair(NULL_DATA, getErrorString(R.string.NULL_DATA)),
-            Pair(NOT_NETWORD, getErrorString(R.string.NOT_NETWORD)),
+            Pair(NOT_NETWORK, getErrorString(R.string.NOT_NETWORD)),
             Pair(UNKNOWN, getErrorString(R.string.TIMEOUT_ERROR))
         ).withDefault { getErrorString(R.string.TIMEOUT_ERROR) }
 }

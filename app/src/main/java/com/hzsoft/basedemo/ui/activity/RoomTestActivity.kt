@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.animation.AnimationUtils
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.hzsoft.basedemo.BR
 import com.hzsoft.basedemo.R
 import com.hzsoft.basedemo.adapter.RoomTestAdapter
 import com.hzsoft.basedemo.databinding.ActivityRoomTestBinding
 import com.hzsoft.basedemo.ui.activity.viewmodel.RoomTestViewModel
+import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.view.BaseFragment
 import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingActivity

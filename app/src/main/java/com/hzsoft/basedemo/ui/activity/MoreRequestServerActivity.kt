@@ -1,57 +1,80 @@
-package com.hzsoft.basedemo.ui.fragment
+package com.hzsoft.basedemo.ui.activity
 
-import android.view.View
+import android.content.Context
+import android.content.Intent
 import android.view.animation.AnimationUtils
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hzsoft.basedemo.BR
 import com.hzsoft.basedemo.R
-import com.hzsoft.basedemo.adapter.MainHomeAdapter
-import com.hzsoft.basedemo.databinding.FragmentHomeMainBinding
+import com.hzsoft.basedemo.adapter.MoreRequestDemoAdapter
+import com.hzsoft.basedemo.databinding.ActivityMoreRequestServerBinding
+import com.hzsoft.basedemo.ui.activity.viewmodel.MoreRequestServerViewModel
+import com.hzsoft.lib.base.module.constons.ARouteConstants
 import com.hzsoft.lib.base.utils.ThreadUtils
 import com.hzsoft.lib.base.utils.ext.view.showToast
-import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingFragment
-import com.hzsoft.lib.common.utils.EnvironmentUtils
+import com.hzsoft.lib.base.view.BaseMvvmRefreshDataBindingActivity
 import com.hzsoft.lib.domain.entity.Demo
-import com.hzsoft.lib.log.KLog
-import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.utils.ext.launch
-import com.hzsoft.lib.net.utils.ext.observe
-import com.hzsoft.basedemo.ui.fragment.viewmodel.MainHomeViewModel
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 /**
- * Describe:
- * 首页
  *
- * @author zhouhuan
- * @Date 2020/12/3
+ *
+ * @author <a href="mailto:zhouhuandev@gmail.com" rel="nofollow">zhouhuan</a>
+ * @since 2024/3/15 13:06
  */
-class MainHomeFragment :
-    BaseMvvmRefreshDataBindingFragment<FragmentHomeMainBinding, MainHomeViewModel>() {
+class MoreRequestServerActivity :
+    BaseMvvmRefreshDataBindingActivity<ActivityMoreRequestServerBinding, MoreRequestServerViewModel>() {
 
     companion object {
-        fun newsInstance(): MainHomeFragment {
-            return MainHomeFragment()
+        fun start(context: Context) {
+            context.startActivity(Intent(context, MoreRequestServerActivity::class.java))
         }
     }
 
-    private lateinit var mAdapter: MainHomeAdapter
+    private lateinit var mAdapter: MoreRequestDemoAdapter
+
+    override fun getTootBarTitle(): String = "多域名请求示例"
+
+    override fun enableToolBarLeft(): Boolean = true
+
+    override fun onBindRefreshLayout(): Int = R.id.mRefreshLayout
+
+    override fun enableRefresh(): Boolean = true
+
+    override fun enableLoadMore(): Boolean = true
 
     override fun onBindVariableId(): MutableList<Pair<Int, Any>> {
         return arrayListOf(BR.viewModel to mViewModel)
     }
 
-    override fun FragmentHomeMainBinding.onClear() {
+    override fun ActivityMoreRequestServerBinding.onClear() {
 
     }
 
     override fun initViewObservable() {
-        observe(mViewModel.recipesLiveData, ::handleRecipesList)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mViewModel.recipesFlow.collect { resource ->
+                    resource.launch {
+                        it?.apply {
+                            bindListData(recipes = ArrayList(this))
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    override fun onBindLayout(): Int = R.layout.fragment_home_main
+    override fun onBindLayout(): Int = R.layout.activity_more_request_server
 
-    override fun initView(mView: View) {
-        mAdapter = MainHomeAdapter()
+    override fun initView() {
+        mAdapter = MoreRequestDemoAdapter()
         mAdapter.bindSkeletonScreen(
             requireBinding().mRecyclerView,
             com.hzsoft.lib.base.R.layout.skeleton_default_service_item,
@@ -61,10 +84,9 @@ class MainHomeFragment :
 
     override fun initData() {
         onRefreshEvent()
-        KLog.d(TAG, EnvironmentUtils.Storage.getCachePath(mContext))
     }
 
-    var firstLoad = true
+    private var firstLoad = true
 
     override fun onRefreshEvent() {
         // 为了展示骨架屏
@@ -78,24 +100,6 @@ class MainHomeFragment :
 
     override fun onLoadMoreEvent() {
         mViewModel.loadMore()
-    }
-
-    override fun onBindRefreshLayout(): Int = R.id.mRefreshLayout
-
-    override fun enableRefresh(): Boolean = true
-
-    override fun enableLoadMore(): Boolean = true
-
-    override fun enableToolbar(): Boolean = true
-
-    override fun getTootBarTitle(): String = getString(R.string.title_home)
-
-    private fun handleRecipesList(resource: Resource<List<Demo>>) {
-        resource.launch {
-            it?.apply {
-                bindListData(recipes = ArrayList(this))
-            }
-        }
     }
 
     private fun bindListData(recipes: ArrayList<Demo>) {

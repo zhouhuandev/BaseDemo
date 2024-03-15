@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import com.hzsoft.lib.base.R
 import com.hzsoft.lib.base.event.common.BaseFragmentEvent
 import com.hzsoft.lib.base.mvvm.view.BaseView
-import com.hzsoft.lib.base.utils.NetUtil
+import com.hzsoft.lib.base.utils.NetUtils
 import com.hzsoft.lib.base.widget.LoadingInitView
 import com.hzsoft.lib.base.widget.LoadingTransView
 import com.hzsoft.lib.base.widget.NetErrorView
@@ -357,7 +357,7 @@ abstract class BaseFragment : Fragment(), BaseView {
             val view = mViewStubError.inflate()
             mNetErrorView = view.findViewById(R.id.view_net_error)
             mNetErrorView?.setOnClickListener(View.OnClickListener {
-                if (!NetUtil.checkNetToast()) {
+                if (!NetUtils.checkNetToast()) {
                     return@OnClickListener
                 }
                 hideNetWorkErrView()

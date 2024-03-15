@@ -20,13 +20,13 @@ val File.canListFiles: Boolean
  * Total size (include all subFile)
  */
 val File.totalSize: Long
-    get() = if (isFile) length() else FileUtil.getFolderSize(this)
+    get() = if (isFile) length() else FileUtils.getFolderSize(this)
 
 /**
  * Formatted total size (include all subFile)
  */
 val File.formatSize: String
-    get() = FileUtil.getFormatFileSize(totalSize)
+    get() = FileUtils.getFormatFileSize(totalSize)
 
 /**
  * Return file's mimeType, such as "png"
@@ -43,7 +43,7 @@ fun File.listFiles(
     isRecursive: Boolean = false,
     filter: ((file: File) -> Boolean)? = null
 ): Array<out File> {
-    val fileList = if (!isRecursive) listFiles() else FileUtil.getAllSubFile(this)
+    val fileList = if (!isRecursive) listFiles() else FileUtils.getAllSubFile(this)
     var result: Array<File> = arrayOf()
     return if (filter == null) fileList
     else {
@@ -96,8 +96,8 @@ fun File.moveToWithProgress(
     func: ((file: File, i: Int) -> Unit)? = null
 ) {
 
-    if (isDirectory) FileUtil.copyFolder(this, File(destFolder, name), overwrite, func)
-    else FileUtil.copyFile(this, File(destFolder, name), overwrite, func)
+    if (isDirectory) FileUtils.copyFolder(this, File(destFolder, name), overwrite, func)
+    else FileUtils.copyFile(this, File(destFolder, name), overwrite, func)
 
     if (!reserve) deleteRecursively()
 }
@@ -113,4 +113,4 @@ fun File.rename(newFile: File) =
 /**
  * Convert the file to Base64
  */
-fun File.encodeBase64File() = FileUtil.encodeBase64File(this)
+fun File.encodeBase64File() = FileUtils.encodeBase64File(this)

@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import com.hzsoft.lib.base.utils.ProcessUtils
 import com.hzsoft.lib.base.utils.ThreadUtils
-import com.hzsoft.lib.base.utils.ToastUtil
+import com.hzsoft.lib.base.utils.ToastUtils
 import com.hzsoft.lib.log.KLog
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -61,7 +61,7 @@ open class BaseApplication : Application() {
      */
     protected open fun initOnlyMainProcess() {
         KLog.init(BuildConfig.IS_DEBUG)
-        ToastUtil.init(this)
+        ToastUtils.init(this)
     }
 
     /**

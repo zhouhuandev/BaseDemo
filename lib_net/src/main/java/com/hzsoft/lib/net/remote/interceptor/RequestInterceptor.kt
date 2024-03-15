@@ -4,6 +4,8 @@ import android.util.Log
 import com.hzsoft.lib.net.config.NetConfig
 import com.hzsoft.lib.net.config.contentType
 import com.hzsoft.lib.net.config.contentTypeValue
+import com.hzsoft.lib.net.config.getConfigForDomain
+import com.hzsoft.lib.net.utils.UrlUtils
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -41,10 +43,13 @@ class RequestInterceptor : Interceptor {
         )
 
         //设置请求头
-        val heads = NetConfig.getHeads()
-        if (heads.isNotEmpty()) {
-            for (head in heads) {
-                newRequestBuilder.addHeader(head.key, head.value.toString())
+        val corsUrl = UrlUtils.getCORSUrl(url)
+        corsUrl?.let {
+            val heads = getConfigForDomain(it)?.heads
+            if (!heads.isNullOrEmpty()) {
+                for (head in heads) {
+                    newRequestBuilder.addHeader(head.key, head.value.toString())
+                }
             }
         }
 

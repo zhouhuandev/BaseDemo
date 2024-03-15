@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.hzsoft.lib.common.R
-import com.hzsoft.lib.common.utils.DisplayUtil
+import com.hzsoft.lib.common.utils.DisplayUtils
 import com.hzsoft.lib.log.KLog
 
 /**
@@ -71,7 +71,7 @@ class CommonDialogFragment : DialogFragment() {
         super.onStart()
         dialog?.window?.apply {
             setLayout(
-                resources.displayMetrics.widthPixels - DisplayUtil.dip2px(40f) * 2,
+                resources.displayMetrics.widthPixels - DisplayUtils.dip2px(40f) * 2,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

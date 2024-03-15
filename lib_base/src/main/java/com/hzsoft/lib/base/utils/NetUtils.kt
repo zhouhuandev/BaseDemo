@@ -11,7 +11,7 @@ import com.hzsoft.lib.base.BaseApplication
  * @author zhouhuan
  * @time 2020/11/30 23:14
  */
-object NetUtil {
+object NetUtils {
 
     @JvmStatic
     fun checkNet(): Boolean {
@@ -23,7 +23,7 @@ object NetUtil {
     fun checkNetToast(): Boolean {
         val isNet = checkNet()
         if (!isNet) {
-            ToastUtil.showToast("网络不给力哦！")
+            ToastUtils.showToast("网络不给力哦！")
         }
         return isNet
     }

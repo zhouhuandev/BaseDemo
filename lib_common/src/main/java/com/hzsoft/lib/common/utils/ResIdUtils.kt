@@ -8,7 +8,7 @@ import android.content.Context
  * @author zhouhuan
  * @time 2020/11/30 23:14
  */
-object ResIdUtil {
+object ResIdUtils {
 
 
     /**

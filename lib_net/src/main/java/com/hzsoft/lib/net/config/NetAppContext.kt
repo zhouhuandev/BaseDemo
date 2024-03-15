@@ -1,24 +1,24 @@
-    package com.hzsoft.lib.net.config
+package com.hzsoft.lib.net.config
 
-    import android.content.Context
-    import java.lang.ref.WeakReference
+import android.app.Application
+import android.content.Context
+
+/**
+ * Describe:
+ * <p>网络架构工具上下文</p>
+ *
+ * @author zhouhuan
+ * @Date 2020/12/1
+ */
+object NetAppContext {
+    private var mApplication: Application? = null
 
     /**
-     * Describe:
-     * <p>网络架构工具上下文</p>
-     *
-     * @author zhouhuan
-     * @Date 2020/12/1
+     * 初始化工具上下文
      */
-    object NetAppContext {
-        private var mContext: WeakReference<Context>? = null
-
-        /**
-         * 初始化工具上下文
-         */
-        fun init(context: Context) {
-            this.mContext = WeakReference(context.applicationContext)
-        }
-
-        fun getContext(): Context = mContext?.get() ?: throw NullPointerException("Net Not init")
+    fun init(application: Application) {
+        this.mApplication = application
     }
+
+    fun getContext(): Context = mApplication?.applicationContext ?: throw NullPointerException("Net Not init")
+}

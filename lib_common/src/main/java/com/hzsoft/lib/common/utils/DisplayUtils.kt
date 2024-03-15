@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference
  * @author zhouhuan
  * @time 2020/11/30 23:09
  */
-object DisplayUtil {
+object DisplayUtils {
     private val context = WeakReference(BaseApplication.instance.applicationContext)
 
     /**

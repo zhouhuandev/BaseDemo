@@ -13,7 +13,7 @@ import androidx.annotation.StringDef
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.tabs.TabLayout
-import com.hzsoft.lib.base.utils.ToastUtil
+import com.hzsoft.lib.base.utils.ToastUtils
 import com.hzsoft.lib.common.R
 import com.hzsoft.lib.common.utils.InfoVerify
 import com.hzsoft.lib.common.utils.VibrateTool
@@ -134,7 +134,7 @@ class TabBarView(context: Context, attrs: AttributeSet?) : RelativeLayout(contex
         tabBarConfig.run {
             items.also { tabs ->
                 if (tabs.size !in 2..5) {
-                    ToastUtil.showToastCenter("Tab bar view numbers is between 2 and 5")
+                    ToastUtils.showToastCenter("Tab bar view numbers is between 2 and 5")
                     KLog.e(TAG, "[TabBarView]: Tab bar view is between 2 and 5")
                     return
                 }

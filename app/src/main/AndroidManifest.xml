@@ -29,6 +29,9 @@
         <activity
             android:name=".ui.activity.SaveStateTestActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activity.MoreRequestServerActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

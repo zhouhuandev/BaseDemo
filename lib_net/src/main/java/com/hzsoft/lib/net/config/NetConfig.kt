@@ -1,6 +1,5 @@
 package com.hzsoft.lib.net.config
 
-import android.content.Context
 import okhttp3.Interceptor
 
 /**
@@ -10,79 +9,15 @@ import okhttp3.Interceptor
  * @author zhouhuan
  * @Date 2020/12/1
  */
-class NetConfig private constructor(builder: Builder) {
-
-    init {
-        baseUrl = builder.baseUrl
-        defaultTimeout = builder.defaultTimeout
-        mToken = builder.mToken
-        interceptors = builder.interceptors
-        networkInterceptors = builder.networkInterceptors
-        heads = builder.heads
-        enableHttps = builder.enableHttps
-    }
-
-    companion object {
-        /**
-         * baseUrl
-         */
-        private var baseUrl: String = "";
-
-        fun getBaseUrl(): String = baseUrl
-
-        /**
-         * 连接超时
-         */
-        private var defaultTimeout: Int = 0;
-
-        fun getDefaultTimeout(): Int = defaultTimeout
-
-        /**
-         * token
-         */
-        private var mToken: String = "";
-
-        fun getToken(): String = mToken
-
-        /**
-         * 设置拦截器
-         */
-        private var interceptors = ArrayList<Interceptor>()
-
-        fun getInterceptors(): List<Interceptor> = interceptors
-
-        /**
-         * 设置拦截器
-         */
-        private var networkInterceptors = ArrayList<Interceptor>()
-
-        fun getNetworkInterceptors(): List<Interceptor> = networkInterceptors
-
-        /**
-         * 添加头消息，也可以在自己的拦截器中添加，就不用设置这个了
-         */
-        private var heads = HashMap<String, Any>()
-
-        fun getHeads(): Map<String, Any> = heads
-
-        /**
-         * 启用https
-         */
-        private var enableHttps: Boolean = false
-
-        fun isEnableHttps(): Boolean = enableHttps
-    }
-
-    /**
-     * 初始化上下文
-     */
-    fun initContext(context: Context) {
-        NetAppContext.init(context)
-    }
+class NetConfig private constructor() {
 
     open class Builder {
         internal var baseUrl: String = ""
-        internal var defaultTimeout: Int = 6_000
+        internal var defaultTimeout: Long = 6_000
+        internal var connectTimeout: Long = defaultTimeout
+        internal var readTimeout: Long = defaultTimeout
+        internal var writeTimeout: Long = defaultTimeout
+        internal var retryOnConnectionFailure: Boolean = true
         internal var mToken: String = "";
         internal var interceptors = ArrayList<Interceptor>()
         internal var networkInterceptors = ArrayList<Interceptor>()
@@ -93,8 +28,20 @@ class NetConfig private constructor(builder: Builder) {
             this.baseUrl = baseUrl
         }
 
-        open fun setDefaultTimeout(defaultTimeout: Int): Builder = apply {
+        open fun setDefaultTimeout(defaultTimeout: Long): Builder = apply {
             this.defaultTimeout = defaultTimeout
+        }
+
+        open fun setConnectTimeout(connectTimeout: Long): Builder = apply {
+            this.connectTimeout = connectTimeout
+        }
+
+        open fun setReadTimeout(readTimeout: Long): Builder = apply {
+            this.readTimeout = readTimeout
+        }
+
+        open fun setWriteTimeout(writeTimeout: Long): Builder = apply {
+            this.writeTimeout = writeTimeout
         }
 
         open fun setToken(token: String): Builder = apply {
@@ -116,7 +63,5 @@ class NetConfig private constructor(builder: Builder) {
         open fun enableHttps(enableHttps: Boolean): Builder = apply {
             this.enableHttps = enableHttps
         }
-
-        open fun build(): NetConfig = NetConfig(this)
     }
 }
