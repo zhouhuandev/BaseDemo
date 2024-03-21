@@ -17,6 +17,13 @@ class LocalData constructor() {
         return Resource.Success(appDatabase.userTestRoomDao().loadAllUserTestRooms())
     }
 
+    fun getUserTestRoom(pageSize: Int, pageNumber: Int): Resource<List<UserTestRoom>> {
+        val offset = calculateOffset(pageSize, pageNumber)
+        return Resource.Success(
+            appDatabase.userTestRoomDao().loadUserTestRoomsPaged(pageSize, offset)
+        )
+    }
+
     fun insertUserTestRoom(userTestRoom: UserTestRoom): Resource<Long> {
         return Resource.Success(
             appDatabase.userTestRoomDao().insertUserTestRoom(userTestRoom = userTestRoom)
@@ -29,5 +36,16 @@ class LocalData constructor() {
 
     fun removeUserTestRoom(userTestRoom: UserTestRoom): Resource<Int> {
         return Resource.Success(appDatabase.userTestRoomDao().deleteUserTestRoom(userTestRoom))
+    }
+
+
+    /**
+     * 计算页数偏移量
+     * @param [pageSize] 页面大小
+     * @param [pageNumber] 页码
+     * @return [Int] 偏移量
+     */
+    private fun calculateOffset(pageSize: Int, pageNumber: Int): Int {
+        return pageSize * (pageNumber - 1)
     }
 }

@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="更新"
+            android:text="全部数据"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/sp_12"
             app:layout_constraintEnd_toEndOf="parent"

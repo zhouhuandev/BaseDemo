@@ -16,6 +16,7 @@ interface BaseDataRepositorySource {
     suspend fun requestRecipesByEdith(): Flow<Resource<List<Demo>?>>
     suspend fun doLogin(): Flow<Resource<String>>
     suspend fun removeUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Int>>
-    suspend fun insertUserTestRoom(userTestRoom: UserTestRoom):Flow<Resource<Long>>
+    suspend fun insertUserTestRoom(userTestRoom: UserTestRoom): Flow<Resource<Long>>
     suspend fun getAllUserTestRoom(): Flow<Resource<List<UserTestRoom>>>
+    suspend fun getUserTestRoom(pageSize: Int, pageNumber: Int): Flow<Resource<List<UserTestRoom>>>
 }
