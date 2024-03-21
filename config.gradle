@@ -96,7 +96,13 @@ ext {
                     libs.androidx.room.room_compiler,
             ],
             compile        : [],
-            testImpl       : [],
+            testImpl       : [
+                    libs.junit,
+            ],
+            androidTestImpl: [
+                    libs.androidJunit,
+                    libs.androidEspressoCore,
+            ],
     ]
 
     // module.build.gradle

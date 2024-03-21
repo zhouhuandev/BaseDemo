@@ -1,9 +1,9 @@
 ext {
     libs = [
-            kotlin           : [
+            kotlin             : [
                     coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${getProperty('kotlin.coroutines')}",
             ],
-            androidx         : [
+            androidx           : [
                     core     : "androidx.core:core-ktx:${kotlinVersion}",
                     appcompat: 'androidx.appcompat:appcompat:1.5.1',
                     multidex : "androidx.multidex:multidex:2.0.1",
@@ -21,31 +21,31 @@ ext {
                             room_ktx     : "androidx.room:room-ktx:2.4.3",
                     ]
             ],
-            google           : [
+            google             : [
                     material: 'com.google.android.material:material:1.7.0',
                     gson    : 'com.google.code.gson:gson:2.10'
             ],
-            retrofit2        : [
+            retrofit2          : [
                     retrofit2          : "com.squareup.retrofit2:retrofit:${getProperty('retrofit2.version')}",
                     converter_moshi    : "com.squareup.retrofit2:converter-moshi:${getProperty('retrofit2.version')}",
                     converter_gson     : "com.squareup.retrofit2:converter-gson:${getProperty('retrofit2.version')}",
                     logging_interceptor: 'com.squareup.okhttp3:logging-interceptor:4.9.0',
             ],
-            glide            : [
+            glide              : [
                     "core"           : "com.github.bumptech.glide:glide:${getProperty('glide.version')}",
                     "compiler"       : "com.github.bumptech.glide:compiler:${getProperty('glide.version')}",
                     // glide高斯模糊
                     "transformations": "jp.wasabeef:glide-transformations:4.3.0"
             ],
-            arouter          : [
+            arouter            : [
                     "core"    : "com.alibaba:arouter-api:${getProperty('arouter.version')}",
                     "compiler": "com.alibaba:arouter-compiler:${getProperty('arouter.version')}",
             ],
-            moshi            : [
+            moshi              : [
                     "core"          : "com.squareup.moshi:moshi-kotlin:${getProperty('moshi.version')}",
                     "kotlin_codegen": "com.squareup.moshi:moshi-kotlin-codegen:${getProperty('moshi.version')}",
             ],
-            smart            : [
+            smart              : [
                     "layout_kernel"   : "io.github.scwang90:refresh-layout-kernel:${getProperty('smart.version')}",
                     "header_classics" : "io.github.scwang90:refresh-header-classics:${getProperty('smart.version')}",
                     "header_radar"    : "io.github.scwang90:refresh-header-radar:${getProperty('smart.version')}",
@@ -55,13 +55,15 @@ ext {
                     "footer_classics" : "io.github.scwang90:refresh-footer-classics:${getProperty('smart.version')}",
                     "footer_ball"     : "io.github.scwang90:refresh-footer-ball:${getProperty('smart.version')}",
             ],
-            BaseAdapterHelper: "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11",
+            BaseAdapterHelper  : "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11",
             // 骨架屏
-            skeleton         : "com.ethanhua:skeleton:1.1.2",
+            skeleton           : "com.ethanhua:skeleton:1.1.2",
             // 动画的实现
-            shimmerlayout    : "io.supercharge:shimmerlayout:2.1.0",
-            eventbus         : "org.greenrobot:eventbus:3.3.1",
-            leakcanary       : "com.squareup.leakcanary:leakcanary-android:2.10",
-            junit            : "junit:junit:4.13.2",
+            shimmerlayout      : "io.supercharge:shimmerlayout:2.1.0",
+            eventbus           : "org.greenrobot:eventbus:3.3.1",
+            leakcanary         : "com.squareup.leakcanary:leakcanary-android:2.10",
+            junit              : "junit:junit:4.13.2",
+            androidJunit       : "androidx.test.ext:junit:1.1.5",
+            androidEspressoCore: "androidx.test.espresso:espresso-core:3.5.1",
     ]
 }

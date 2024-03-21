@@ -25,6 +25,9 @@ interface UserTestRoomDao {
     @Query("SELECT * FROM USERTESTROOM WHERE AGE > :age")
     fun loadUserTestRoomOlderThan(age: Int): List<UserTestRoom>
 
+    @Query("SELECT * FROM USERTESTROOM ORDER BY id DESC LIMIT :pageSize OFFSET :offset")
+    fun loadUserTestRoomsPaged(pageSize: Int, offset: Int): List<UserTestRoom>
+
     @Delete
     fun deleteUserTestRoom(deleteUserTestRoom: UserTestRoom): Int
 
