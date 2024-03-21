@@ -12,6 +12,7 @@ import com.hzsoft.lib.net.remote.remotedata.EdithRemoteData
 import com.hzsoft.lib.net.remote.remotedata.MainRemoteData
 import com.hzsoft.lib.net.remote.network.RetrofitManager
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -58,6 +59,17 @@ open class BaseDataRepository : BaseDataRepositorySource {
 
     override suspend fun getAllUserTestRoom(): Flow<Resource<List<UserTestRoom>>> {
         return dealDataFlow { mCommonLocalRepository.getUserTestRoom() }
+    }
+
+    override suspend fun getUserTestRoom(
+        pageSize: Int,
+        pageNumber: Int
+    ): Flow<Resource<List<UserTestRoom>>> {
+        return flow<Resource<List<UserTestRoom>>> {
+            emit(Resource.Loading())
+            delay((50..100).random().toLong())
+            emit(mCommonLocalRepository.getUserTestRoom(pageSize, pageNumber))
+        }.flowOn(mIoDispatcher)
     }
 
     protected inline fun <reified T> dealDataFlow(crossinline block: suspend () -> T): Flow<T> {

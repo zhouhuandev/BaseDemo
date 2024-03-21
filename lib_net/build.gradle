@@ -11,15 +11,17 @@ dependencies {
     api project(':lib_domain')
 
     def Depends = [
-            apis               : rootProject.ext.netDepends.api,
-            implementations    : rootProject.ext.netDepends.implementations,
-            kapt               : rootProject.ext.netDepends.kapt,
-            compileOnly        : rootProject.ext.netDepends.compile,
-            testImplementations: rootProject.ext.netDepends.testImpl,
+            apis                     : rootProject.ext.netDepends.api,
+            implementations          : rootProject.ext.netDepends.implementations,
+            kapt                     : rootProject.ext.netDepends.kapt,
+            compileOnly              : rootProject.ext.netDepends.compile,
+            testImplementations      : rootProject.ext.netDepends.testImpl,
+            androidTestImplementation: rootProject.ext.netDepends.androidTestImpl,
     ]
     Depends.apis.each { api it }
     Depends.implementations.each { implementation it }
     Depends.kapt.each { kapt it }
     Depends.compileOnly.each { compileOnly it }
     Depends.testImplementations.each { testImplementation it }
+    Depends.androidTestImplementation.each { androidTestImplementation it }
 }

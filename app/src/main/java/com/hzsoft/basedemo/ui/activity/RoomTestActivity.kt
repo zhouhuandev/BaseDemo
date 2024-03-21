@@ -19,6 +19,7 @@ import com.hzsoft.lib.common.widget.CommonDialogFragment
 import com.hzsoft.lib.log.KLog
 import com.hzsoft.lib.net.dto.Resource
 import com.hzsoft.lib.net.local.entity.UserTestRoom
+import com.hzsoft.lib.net.utils.ext.launch
 import com.hzsoft.lib.net.utils.ext.observe
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -117,7 +118,7 @@ class RoomTestActivity :
             com.hzsoft.lib.base.R.layout.skeleton_default_service_item,
             8
         )
-        mAdapter.setOnItemLongClickListener { _, _, position ->
+        mAdapter.setOnItemLongClickListener { adapter, _, position ->
             VibrateTool.vibrateOnce(100)
             CommonDialogFragment.Builder()
                 .setTitle("温馨提示")
@@ -136,6 +137,7 @@ class RoomTestActivity :
 
                     override fun onRightBtnClick(view: View) {
                         mViewModel.deleteUserTestRoom(mAdapter.getItem(position))
+                        adapter.removeAt(position)
                     }
                 })
                 .build()
@@ -165,6 +167,7 @@ class RoomTestActivity :
 
     override fun initViewObservable() {
         observe(mViewModel.userTestRoomLiveData, ::handleUserTestRoomList)
+        observe(mViewModel.insertUser, ::handleUserTestRoom)
     }
 
     override fun onClick(v: View?) {
@@ -185,7 +188,8 @@ class RoomTestActivity :
                 requireBinding().mRecyclerView.scrollToPosition(0)
             }
             R.id.selectUser -> {
-                onRefreshEvent()
+                isRefresh = true
+                mViewModel.getUserTestRoom()
             }
         }
     }
@@ -210,7 +214,7 @@ class RoomTestActivity :
 
     override fun enableRefresh(): Boolean = true
 
-    override fun enableLoadMore(): Boolean = false
+    override fun enableLoadMore(): Boolean = true
 
     private fun handleUserTestRoomList(status: Resource<List<UserTestRoom>>) {
         when (status) {
@@ -222,14 +226,30 @@ class RoomTestActivity :
         }
     }
 
+    private fun handleUserTestRoom(status: Resource<UserTestRoom>) {
+        status.launch {
+            mAdapter.notifyItemChanged(0)
+        }
+    }
+
     private fun bindListData2(userTestRoom: ArrayList<UserTestRoom>) {
-        mAdapter.setNewInstance(userTestRoom)
-        mViewModel.showEmpty.set(userTestRoom.isEmpty())
-        // 执行列表动画
-        requireBinding().mRecyclerView.apply {
-            layoutAnimation =
-                AnimationUtils.loadLayoutAnimation(mContext, R.anim.layout_fall_down)
-            scheduleLayoutAnimation()
+        if (isRefresh) {
+            mViewModel.saveUpdateUserTestRoomData(true, userTestRoom)
+            mAdapter.setNewInstance(mViewModel.items)
+            // 执行列表动画
+            requireBinding().mRecyclerView.apply {
+                layoutAnimation =
+                    AnimationUtils.loadLayoutAnimation(mContext, R.anim.layout_fall_down)
+                scheduleLayoutAnimation()
+            }
+        } else {
+            // val oldItems = ArrayList(mViewModel.items)
+            // mViewModel.saveUpdateUserTestRoomData(false, userTestRoom)
+            // val newItems = ArrayList(mViewModel.items)
+            // val calculateDiff =
+            //     DiffUtil.calculateDiff(RoomTestAdapter.RoomTestDiffCalculator(oldItems, newItems))
+            // calculateDiff.dispatchUpdatesTo(mAdapter)
+            mAdapter.addData(userTestRoom)
         }
     }
 }
