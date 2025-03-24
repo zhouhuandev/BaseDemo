@@ -25,6 +25,7 @@ open class ModuleApplication : BaseApplication() {
                 setHeads(hashMapOf("test" to "localhost_101"))
             })
             addConfig(URL_EDITH, NetConfig.Builder().apply {
+                enableHttps(true)
                 setDefaultTimeout(6_000)
                 setHeads(hashMapOf("test" to "localhost_102"))
             })
