@@ -11,6 +11,6 @@ import retrofit2.http.GET
  * @time 2020/11/30
  */
 interface RecipesService : BaseApiService {
-    @GET("recipes.json")
+    @GET("res/demo/recipes.json")
     suspend fun fetchRecipes(): Response<BaseResponse<List<Demo>>>
 }

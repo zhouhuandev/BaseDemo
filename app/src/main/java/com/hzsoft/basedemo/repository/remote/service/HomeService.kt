@@ -13,6 +13,6 @@ import retrofit2.http.GET
  * @since 2022/7/10 11:50
  */
 interface HomeService : BaseApiService {
-    @GET("beauty_star.json")
+    @GET("res/demo/beauty_star.json")
     suspend fun getBeautyStar(): Response<BaseResponse<List<Demo>>>
 }
